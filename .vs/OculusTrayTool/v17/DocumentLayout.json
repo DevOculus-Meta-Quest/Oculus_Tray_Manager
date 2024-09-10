@@ -1,0 +1,36 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "I:\\GITHUB\\Oculus-Tray-Manager\\DNSSpy\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{470231CD-D37B-472E-A81F-8E948365E978}|OculusTrayTool\\OculusTrayTool.csproj|i:\\github\\oculus-tray-manager\\dnsspy\\oculustraytool\\frmabout.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{470231CD-D37B-472E-A81F-8E948365E978}|OculusTrayTool\\OculusTrayTool.csproj|solutionrelative:oculustraytool\\frmabout.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "frmAbout.cs [Design]",
+              "DocumentMoniker": "I:\\GITHUB\\Oculus-Tray-Manager\\DNSSpy\\OculusTrayTool\\frmAbout.cs",
+              "RelativeDocumentMoniker": "OculusTrayTool\\frmAbout.cs",
+              "ToolTip": "I:\\GITHUB\\Oculus-Tray-Manager\\DNSSpy\\OculusTrayTool\\frmAbout.cs [Design]",
+              "RelativeToolTip": "OculusTrayTool\\frmAbout.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-10T18:43:55.533Z",
+              "EditorCaption": " [Design]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
