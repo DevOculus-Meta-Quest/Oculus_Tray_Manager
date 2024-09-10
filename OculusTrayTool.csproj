@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: C:\Program Files (x86)\Oculus Tray Tool\OculusTrayTool.exe-->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E4424B67-090A-4372-9294-994159F642AF}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>OculusTrayTool</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <ApplicationVersion>0.87.8.0</ApplicationVersion>
+    <FileAlignment>512</FileAlignment>
+    <RootNamespace>OculusTrayTool</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CoreAudio">
+      <HintPath>lib\CoreAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Speech" />
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.Win32.TaskScheduler">
+      <HintPath>lib\Microsoft.Win32.TaskScheduler.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DirectInput">
+      <HintPath>lib\SharpDX.DirectInput.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>lib\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Management.Automation" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UACHelper">
+      <HintPath>lib\UACHelper.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AirLink.cs" />
+    <Compile Include="AudioSwitcher.cs" />
+    <Compile Include="CenterForms.cs" />
+    <Compile Include="CheckConnection.cs" />
+    <Compile Include="CheckUpdate.cs" />
+    <Compile Include="CueToolStripTextBox.cs" />
+    <Compile Include="ListViewColumnSorter.cs" />
+    <Compile Include="MyCustomToolStripControlHost.cs" />
+    <Compile Include="TextProgressBar.cs" />
+    <Compile Include="ToolStripCheckBox.cs" />
+    <Compile Include="ToolStripSpringTextBox.cs" />
+    <Compile Include="FileDownloader.cs" />
+    <Compile Include="FileDownloadProgressChangedEventArgs.cs" />
+    <Compile Include="FileDownloadErrorEventArgs.cs" />
+    <Compile Include="FileDownloadEventArgs.cs" />
+    <Compile Include="DownloadFileNode.cs" />
+    <Compile Include="frmAddCustomVoice.cs" />
+    <Compile Include="frmAddVoiceProfile.cs" />
+    <Compile Include="frmCreateEditProfile.cs" />
+    <Compile Include="frmDonate.cs" />
+    <Compile Include="DotNetBarTabcontrol.cs" />
+    <Compile Include="frmDownloading.cs" />
+    <Compile Include="frmEditAllSelected.cs" />
+    <Compile Include="frmEditVoiceCommand.cs" />
+    <Compile Include="frmHomeless.cs" />
+    <Compile Include="frmHotKeys.cs" />
+    <Compile Include="FrmIgnoredApps.cs" />
+    <Compile Include="frmImportSteamApps.cs" />
+    <Compile Include="frmMicNotDefaultWarning.cs" />
+    <Compile Include="frmProcessing.cs" />
+    <Compile Include="GetConfig.cs" />
+    <Compile Include="GetControllers.cs" />
+    <Compile Include="GetDevices.cs" />
+    <Compile Include="GetDotNetVersion.cs" />
+    <Compile Include="GetGames.cs" />
+    <Compile Include="Globals.cs" />
+    <Compile Include="HomeToTray.cs" />
+    <Compile Include="frmHomeTrayToast.cs" />
+    <Compile Include="frmLibrary.cs" />
+    <Compile Include="frmLaunchOptions.cs" />
+    <Compile Include="KeyboardHook.cs" />
+    <Compile Include="KillRunningApp.cs" />
+    <Compile Include="ParentProcessUtilities.cs" />
+    <Compile Include="frmLinkPresets.cs" />
+    <Compile Include="MathTools.cs" />
+    <Compile Include="MigrateSettings.cs" />
+    <Compile Include="MinMaxApp.cs" />
+    <Compile Include="SteamLaunchType.cs" />
+    <Compile Include="Oculus.cs" />
+    <Compile Include="PlatformType.cs" />
+    <Compile Include="OculusNode.cs" />
+    <Compile Include="OculusPath.cs" />
+    <Compile Include="OTTDB.cs" />
+    <Compile Include="frmProperties.cs" />
+    <Compile Include="frmRemoveProgress.cs" />
+    <Compile Include="Packages.cs" />
+    <Compile Include="Resizer.cs" />
+    <Compile Include="Resolution.cs" />
+    <Compile Include="ScrollListener.cs" />
+    <Compile Include="frmSetLibraryPath.cs" />
+    <Compile Include="frmStartupType.cs" />
+    <Compile Include="frmStillRunningToast.cs" />
+    <Compile Include="frmUpdateToast.cs" />
+    <Compile Include="CreateTask.cs" />
+    <Compile Include="FrmMain.cs" />
+    <Compile Include="frmLoading.cs" />
+    <Compile Include="LVsort.cs" />
+    <Compile Include="PowerPlans.cs" />
+    <Compile Include="frmAbout.cs" />
+    <Compile Include="RiftDefault.cs" />
+    <Compile Include="RunCommand.cs" />
+    <Compile Include="Log.cs" />
+    <Compile Include="frmProfiles.cs" />
+    <Compile Include="FrmSetFallback.cs" />
+    <Compile Include="frmSSChanged.cs" />
+    <Compile Include="Steam.cs" />
+    <Compile Include="ACFReader.cs" />
+    <Compile Include="DataDownloadEventArgs.cs" />
+    <Compile Include="SteamNode.cs" />
+    <Compile Include="SteamScreenshotNode.cs" />
+    <Compile Include="VoiceCommands.cs" />
+    <Compile Include="frmVoiceSettings.cs" />
+    <Compile Include="Win32.cs" />
+    <Compile Include="My\MyApplication.cs" />
+    <Compile Include="My\MyComputer.cs" />
+    <Compile Include="My\MyProject.cs" />
+    <Compile Include="My\MySettings.cs" />
+    <Compile Include="My\MySettingsProperty.cs" />
+    <Compile Include="My\Resources\Resources.cs" />
+    <Compile Include="MyNameSpace\DBLayoutPanel.cs" />
+    <Compile Include="CoreAudioApi\Interfaces\IPolicyConfig.cs" />
+    <Compile Include="CoreAudioApi\Interfaces\IPolicyConfig10.cs" />
+    <Compile Include="PolicyClient\_PolicyConfigClient.cs" />
+    <Compile Include="PolicyClient\PolicyConfigClient.cs" />
+    <Compile Include="ResChanger\Pointl.cs" />
+    <Compile Include="ResChanger\Devmode.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="app.manifest" />
+    <EmbeddedResource Include="frmAbout.resx" />
+    <EmbeddedResource Include="frmAddCustomVoice.resx" />
+    <EmbeddedResource Include="frmAddVoiceProfile.resx" />
+    <EmbeddedResource Include="frmCreateEditProfile.resx" />
+    <EmbeddedResource Include="frmDonate.resx" />
+    <EmbeddedResource Include="frmDownloading.resx" />
+    <EmbeddedResource Include="frmEditAllSelected.resx" />
+    <EmbeddedResource Include="frmEditVoiceCommand.resx" />
+    <EmbeddedResource Include="frmHomeless.resx" />
+    <EmbeddedResource Include="frmHomeTrayToast.resx" />
+    <EmbeddedResource Include="frmHotKeys.resx" />
+    <EmbeddedResource Include="FrmIgnoredApps.resx" />
+    <EmbeddedResource Include="frmImportSteamApps.resx" />
+    <EmbeddedResource Include="frmLaunchOptions.resx" />
+    <EmbeddedResource Include="frmLibrary.resx" />
+    <EmbeddedResource Include="frmLinkPresets.resx" />
+    <EmbeddedResource Include="frmLoading.resx" />
+    <EmbeddedResource Include="FrmMain.resx" />
+    <EmbeddedResource Include="frmMicNotDefaultWarning.resx" />
+    <EmbeddedResource Include="frmProcessing.resx" />
+    <EmbeddedResource Include="frmProfiles.resx" />
+    <EmbeddedResource Include="frmProperties.resx" />
+    <EmbeddedResource Include="frmRemoveProgress.resx" />
+    <EmbeddedResource Include="FrmSetFallback.resx" />
+    <EmbeddedResource Include="frmSetLibraryPath.resx" />
+    <EmbeddedResource Include="frmSSChanged.resx" />
+    <EmbeddedResource Include="frmStartupType.resx" />
+    <EmbeddedResource Include="frmStillRunningToast.resx" />
+    <EmbeddedResource Include="frmUpdateToast.resx" />
+    <EmbeddedResource Include="frmVoiceSettings.resx" />
+    <EmbeddedResource Include="Resources.resx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
