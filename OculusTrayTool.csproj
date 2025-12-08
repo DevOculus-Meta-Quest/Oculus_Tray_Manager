@@ -7,7 +7,7 @@
     <ProjectGuid>{DA117AB4-2D28-4C3B-BAFB-CE19C8E6B285}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AssemblyName>OculusTrayTool</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <ApplicationVersion>0.87.8.0</ApplicationVersion>
     <RootNamespace>OculusTrayTool</RootNamespace>
     <RootNamespace>OculusTrayTool</RootNamespace>
