@@ -236,6 +236,8 @@ namespace OculusTrayTool
 
     private void SetFallback_Load(object sender, EventArgs e)
     {
+      GetDevices.GetAllAudioDevices();
+      GetDevices.GetAllMicDevices();
       GetConfig.IsReading = true;
       this.ComboBox1.SelectedIndex = MySettingsProperty.Settings.SetRiftAudioDefault;
       this.ComboBox2.SelectedIndex = MySettingsProperty.Settings.SetRiftMicDefault;

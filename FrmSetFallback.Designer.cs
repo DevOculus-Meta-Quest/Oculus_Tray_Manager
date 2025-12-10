@@ -346,7 +346,10 @@ protected override void Dispose(bool disposing)
       this.GroupBox1.ResumeLayout(false);
       this.GroupBox1.PerformLayout();
       this.ResumeLayout(false);
-    
+      
+      this.Button1.Click += new EventHandler(this.Button1_Click);
+      this.Button2.Click += new EventHandler(this.Button2_Click);
+      this.Button3.Click += new EventHandler(this.Button3_Click);
     }
 
         #endregion

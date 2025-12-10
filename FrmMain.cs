@@ -1147,7 +1147,7 @@ namespace OculusTrayTool
     private void ComboPowerPlanExit_SelectedIndexChanged(object sender, EventArgs e) { }
     private void BtnConfigureAudio_Click(object sender, EventArgs e)
     {
-        new FrmSetFallback().ShowDialog();
+        MyProject.Forms.FrmSetFallback.ShowDialog();
     }
     private void ComboApplyPlan_SelectedIndexChanged(object sender, EventArgs e) { }
     private void Button9_Click(object sender, EventArgs e) { }
@@ -1178,7 +1178,11 @@ namespace OculusTrayTool
     private void OpenLogToolStripMenuItem_Click(object sender, EventArgs e) { }
     private void BtnLibrary_Click(object sender, EventArgs e)
     {
-        new frmLibrary().ShowDialog();
+        try {
+            MyProject.Forms.frmLibrary.ShowDialog();
+        } catch (Exception ex) {
+            MessageBox.Show("Error opening Game Library: " + ex.ToString());
+        }
     }
     private void PowerPlanTimer_Tick(object sender, EventArgs e) { }
     private void ComboBox3_KeyPress(object sender, KeyPressEventArgs e) { }

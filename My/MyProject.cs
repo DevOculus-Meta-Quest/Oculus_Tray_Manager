@@ -114,6 +114,25 @@ namespace OculusTrayTool.My
       }
       private frmMicNotDefaultWarning m_frmMicNotDefaultWarning;
 
+      public FrmSetFallback FrmSetFallback
+      {
+          [DebuggerHidden]
+          get
+          {
+              this.m_FrmSetFallback = MyForms.Create__Instance__<FrmSetFallback>(this.m_FrmSetFallback);
+              return this.m_FrmSetFallback;
+          }
+          [DebuggerHidden]
+          set
+          {
+              if (value == this.m_FrmSetFallback) return;
+              if (value != null) throw new ArgumentException("Property can only be set to Nothing");
+              this.Dispose__Instance__<FrmSetFallback>(ref this.m_FrmSetFallback);
+          }
+      }
+      private FrmSetFallback m_FrmSetFallback;
+
+
 
       [DebuggerHidden]
       private static T Create__Instance__<T>(T Instance) where T : Form, new()

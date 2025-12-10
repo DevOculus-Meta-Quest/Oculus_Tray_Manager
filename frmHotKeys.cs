@@ -60,6 +60,7 @@ namespace OculusTrayTool
 
     private void Button1_Click(object sender, EventArgs e)
     {
+      MessageBox.Show("HotKeys OK Clicked");
       string str = "";
       int num = checked (this.ListView1.Items.Count - 1);
       int index = 0;
