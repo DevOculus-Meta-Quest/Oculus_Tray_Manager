@@ -411,11 +411,11 @@ namespace OculusTrayTool
         MyProject.Forms.frmCreateEditProfile.NumericUpDown1.Value = 5M;
         MyProject.Forms.frmCreateEditProfile.NumericUpDown2.Value = 5M;
         MyProject.Forms.frmCreateEditProfile.ComboMirror.SelectedIndex = 0;
-        MyProject.Forms.frmCreateEditProfile.ComboAGPS.Text = MyProject.Forms.FrmMain.ComboBox5.Text;
-        MyProject.Forms.frmCreateEditProfile.NumericUpDown3.Value = MyProject.Forms.FrmMain.NumericFOVh.Value;
-        MyProject.Forms.frmCreateEditProfile.NumericUpDown4.Value = MyProject.Forms.FrmMain.NumericFOVv.Value;
-        MyProject.Forms.frmCreateEditProfile.ComboBox8.Text = MyProject.Forms.FrmMain.ComboBox8.Text;
-        MyProject.Forms.frmCreateEditProfile.ComboBox9.Text = MyProject.Forms.FrmMain.ComboBox9.Text;
+        MyProject.Forms.frmCreateEditProfile.ComboAGPS.Text = FrmMain.fmain.ComboBox5.Text;
+        MyProject.Forms.frmCreateEditProfile.NumericUpDown3.Value = FrmMain.fmain.NumericFOVh.Value;
+        MyProject.Forms.frmCreateEditProfile.NumericUpDown4.Value = FrmMain.fmain.NumericFOVv.Value;
+        MyProject.Forms.frmCreateEditProfile.ComboBox8.Text = FrmMain.fmain.ComboBox8.Text;
+        MyProject.Forms.frmCreateEditProfile.ComboBox9.Text = FrmMain.fmain.ComboBox9.Text;
         MyProject.Forms.frmCreateEditProfile.ComboBoxEnabled.Text = "Yes";
           foreach (KeyValuePair<string, string> game in MyProject.Forms.frmProfiles.GameList)
             MyProject.Forms.frmCreateEditProfile.ComboBox1.Items.Add((object) new frmCreateEditProfile.GameItem(game.Key, game.Value));

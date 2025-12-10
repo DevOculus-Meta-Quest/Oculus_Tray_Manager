@@ -68,10 +68,10 @@ namespace OculusTrayTool
       try
       {
         PowerPlans.IDs.Clear();
-        MyProject.Forms.FrmMain.ComboPowerPlanStart.Items.Clear();
-        MyProject.Forms.FrmMain.ComboPowerPlanExit.Items.Clear();
-        MyProject.Forms.FrmMain.ComboPowerPlanStart.Items.Add((object) "Not Used");
-        MyProject.Forms.FrmMain.ComboPowerPlanExit.Items.Add((object) "Not Used");
+        FrmMain.fmain.ComboPowerPlanStart.Items.Clear();
+        FrmMain.fmain.ComboPowerPlanExit.Items.Clear();
+        FrmMain.fmain.ComboPowerPlanStart.Items.Add((object) "Not Used");
+        FrmMain.fmain.ComboPowerPlanExit.Items.Add((object) "Not Used");
         ManagementObjectSearcher managementObjectSearcher = new ManagementObjectSearcher("root\\cimv2\\power", "SELECT * FROM Win32_PowerPlan");
         foreach (ManagementObject managementObject in managementObjectSearcher.Get())
         {
@@ -79,8 +79,8 @@ namespace OculusTrayTool
           string str = managementObject["InstanceID"].ToString().Replace("Microsoft:PowerPlan\\", "");
           if (!PowerPlans.IDs.ContainsKey(lower))
             PowerPlans.IDs.Add(lower, str);
-          MyProject.Forms.FrmMain.ComboPowerPlanStart.Items.Add((object) managementObject["ElementName"].ToString());
-          MyProject.Forms.FrmMain.ComboPowerPlanExit.Items.Add((object) managementObject["ElementName"].ToString());
+          FrmMain.fmain.ComboPowerPlanStart.Items.Add((object) managementObject["ElementName"].ToString());
+          FrmMain.fmain.ComboPowerPlanExit.Items.Add((object) managementObject["ElementName"].ToString());
           if (Globals.dbg)
             Log.WriteToLog("Added Power Plan '" + managementObject["ElementName"].ToString() + "' to list");
         }

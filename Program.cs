@@ -16,13 +16,22 @@ namespace OculusTrayTool
             // We need to resolve how to access the main form. 
             // For now, let's instantiate it directly, assuming FrmMain exists.
             // We might need to setup the 'My.Forms' singleton replacement here if we want to keep that pattern.
-            try
+            bool createdNew;
+            using (System.Threading.Mutex mutex = new System.Threading.Mutex(true, "Local\\OculusTrayTool_SingleInstance", out createdNew))
             {
-                Application.Run(new FrmMain());
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Critical error at startup: " + ex.ToString(), "Oculus Tray Tool Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (!createdNew)
+                {
+                    MessageBox.Show("Oculus Tray Tool is already running!", "Oculus Tray Tool", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+                try
+                {
+                    Application.Run(new FrmMain());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Critical error at startup: " + ex.ToString(), "Oculus Tray Tool Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
     }

@@ -206,12 +206,12 @@ namespace OculusTrayTool
         this.Cursor = Cursors.Default;
       }
       OTTDB.GetProfiles();
-      if (MyProject.Forms.FrmMain.HomeIsRunning | MySettingsProperty.Settings.StartAppwatcherOnStart)
+      if (FrmMain.fmain.HomeIsRunning | MySettingsProperty.Settings.StartAppwatcherOnStart)
       {
         if (OTTDB.numWMI > 0)
-          MyProject.Forms.FrmMain.CreateWatcher();
+          FrmMain.fmain.CreateWatcher();
         if (OTTDB.numTimer > 0)
-          MyProject.Forms.FrmMain.pTimer.Start();
+          FrmMain.fmain.pTimer.Start();
       }
       this.ComboBox1.Items.Remove(RuntimeHelpers.GetObjectValue(this.ComboBox1.SelectedItem));
       this.ComboBox1.Text = "- Select Game -";
@@ -260,7 +260,7 @@ namespace OculusTrayTool
           openFileDialog.InitialDirectory = Path.GetDirectoryName(this.TextBoxPath.Text);
       }
       else
-        openFileDialog.InitialDirectory = MyProject.Forms.FrmMain.OculusPath;
+        openFileDialog.InitialDirectory = FrmMain.fmain.OculusPath;
       openFileDialog.Filter = "Executable files (*.exe)|*.exe";
       if (openFileDialog.ShowDialog() != DialogResult.OK)
         return;

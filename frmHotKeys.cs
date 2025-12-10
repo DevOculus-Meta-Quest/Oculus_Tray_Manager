@@ -99,6 +99,7 @@ namespace OculusTrayTool
       }
       MySettingsProperty.Settings.HotKeyCombos = str.TrimEnd(';');
       MySettingsProperty.Settings.Save();
+      this.Close();
     }
 
     private void ListView1_MouseMove(object sender, MouseEventArgs e)

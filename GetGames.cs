@@ -44,9 +44,9 @@ namespace OculusTrayTool
               if (Globals.dbg)
                 Log.WriteToLog("GetSteamGames: Name: " + steamNode.Name + " Executable: " + Path.GetFileName(steamNode.Executable.Replace("/", "\\")) + " Full path: " + steamNode.LibraryFolder + "\\steamapps\\common\\" + steamNode.InstallDir + "\\" + steamNode.Executable.Replace("/", "\\"));
               string key = steamNode.LibraryFolder + "\\steamapps\\common\\" + steamNode.InstallDir + "\\" + steamNode.Executable.Replace("/", "\\");
-              if (!MyProject.Forms.FrmMain.AllAppsList.ContainsKey(key))
+              if (!FrmMain.fmain.AllAppsList.ContainsKey(key))
               {
-                MyProject.Forms.FrmMain.AllAppsList.Add(key, steamNode.Name);
+                FrmMain.fmain.AllAppsList.Add(key, steamNode.Name);
                 MyProject.Forms.frmProfiles.GameList.Add(steamNode.Name, key);
                 if (Globals.dbg)
                   Log.WriteToLog("GetSteamGames: All Apps List: Added Steam App '" + steamNode.Name + "' with path '" + key + "'");
@@ -67,6 +67,8 @@ namespace OculusTrayTool
         }
         
         Log.WriteToLog("Found " + GetGames.steamGameList.Count.ToString() + " Steam VR Apps");
+        // TEMP DEBUG
+        // MessageBox.Show("Found " + GetGames.steamGameList.Count.ToString() + " Steam VR Apps. Added to GameList.", "GetSteamGames Debug");
         
         foreach (string steamGame in GetGames.steamGameList)
              Log.WriteToLog("Steam VR App '" + steamGame.ToString() + "' added to available games list");
