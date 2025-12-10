@@ -614,9 +614,7 @@ protected override void Dispose(bool disposing)
       this.Controls.Add((Control) this.Label10);
       this.Controls.Add((Control) this.PictureBox11);
       this.Controls.Add((Control) this.ComboBox8);
-      this.Controls.Add((Control) this.Label29);
       this.Controls.Add((Control) this.ComboBoxEnabled);
-      this.Controls.Add((Control) this.Label28);
       this.Controls.Add((Control) this.PictureBox9);
       this.Controls.Add((Control) this.Button3);
       this.Controls.Add((Control) this.PictureBox5);
@@ -632,7 +630,6 @@ protected override void Dispose(bool disposing)
       this.Controls.Add((Control) this.PictureBox6);
       this.Controls.Add((Control) this.Label6);
       this.Controls.Add((Control) this.NumericUpDown1);
-      this.Controls.Add((Control) this.ComboBox7);
       this.Controls.Add((Control) this.Button2);
       this.Controls.Add((Control) this.Button1);
       this.Controls.Add((Control) this.TextDisplayName);
@@ -651,7 +648,7 @@ protected override void Dispose(bool disposing)
       this.Controls.Add((Control) this.Label2);
       this.Controls.Add((Control) this.Label1);
       this.FormBorderStyle = FormBorderStyle.FixedSingle;
-      this.Icon = (Icon) componentResourceManager.GetObject("$this.Icon");
+      this.Icon = (Icon) resources.GetObject("$this.Icon");
       this.MaximizeBox = false;
       this.MinimizeBox = false;
       this.Name = nameof (frmCreateEditProfile);
