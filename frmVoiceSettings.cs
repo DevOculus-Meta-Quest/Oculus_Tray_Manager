@@ -127,6 +127,32 @@ namespace OculusTrayTool
         this.Location = MySettings.Default.VoiceWindowLocation;
       else
         this.StartPosition = FormStartPosition.CenterParent;
+
+      // Populate Checkboxes from Settings
+      GetConfig.IsReading = true; // Prevent event handlers from triggering logic during load
+      try
+      {
+          this.TrackBar1.Value = MySettingsProperty.Settings.Confidence;
+          this.LabelConfidencePercent.Text = MySettingsProperty.Settings.Confidence.ToString() + "%";
+          this.CheckBox1.Checked = MySettingsProperty.Settings.VoiceActivationVoiceContinous;
+          this.CheckBox2.Checked = MySettingsProperty.Settings.VoiceActivationVoiceRepeated;
+          this.CheckBox3.Checked = MySettingsProperty.Settings.VoiceActivationKeyContinous;
+          this.CheckBox4.Checked = MySettingsProperty.Settings.VoiceActivationKeyPush;
+          this.CheckBox5.Checked = MySettingsProperty.Settings.JoystickActivationKeyContinous;
+          this.CheckBox6.Checked = MySettingsProperty.Settings.JoystickActivationKeyPush;
+          this.CheckBox7.Checked = MySettingsProperty.Settings.DisableVoiceControlAudioFeedback;
+
+          // Trigger logic to enable/disable dependent controls without saving settings
+          if (this.CheckBox3.Checked) this.CheckBox3_CheckedChanged(null, null);
+          if (this.CheckBox4.Checked) this.CheckBox4_CheckedChanged(null, null);
+          if (this.CheckBox5.Checked) this.CheckBox5_CheckedChanged(null, null);
+          if (this.CheckBox6.Checked) this.CheckBox6_CheckedChanged(null, null);
+      }
+      finally
+      {
+          GetConfig.IsReading = false;
+      }
+
       if (GetControllers.ControllersFound)
         return;
       GetControllers.GetAllControllers();

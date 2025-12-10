@@ -597,7 +597,29 @@ protected override void Dispose(bool disposing)
       this.DbLayoutPanel1.ResumeLayout(false);
       this.DbLayoutPanel1.PerformLayout();
       this.ResumeLayout(false);
+      this.ResumeLayout(false);
       this.PerformLayout();
+      this.Button1.Click += new System.EventHandler(this.Button1_Click);
+      this.Button2.Click += new System.EventHandler(this.Button2_Click);
+      this.Button3.Click += new System.EventHandler(this.Button3_Click);
+      this.ListView1.DrawColumnHeader += new System.Windows.Forms.DrawListViewColumnHeaderEventHandler(this.ListView1_DrawColumnHeader);
+      this.ListView1.DrawItem += new System.Windows.Forms.DrawListViewItemEventHandler(this.ListView1_DrawItem);
+      this.ListView1.DrawSubItem += new System.Windows.Forms.DrawListViewSubItemEventHandler(this.ListView1_DrawSubItem);
+      this.ListView1.MouseHover += new System.EventHandler(this.ListView1_MouseHover);
+      this.ListView1.Click += new System.EventHandler(this.ListView1_Click);
+      this.ListView1.DoubleClick += new System.EventHandler(this.ListView1_DoubleClick);
+      this.ListView1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ListView1_MouseMove);
+      this.ContextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.ContextMenuStrip1_Opening);
+      this.ContextMenuStrip1.MouseLeave += new System.EventHandler(this.ContextMenuStrip1_MouseLeave);
+      this.ToolStripMenuItem3.Click += new System.EventHandler(this.ToolStripMenuItem3_Click);
+      this.ToolStripMenuItem4.Click += new System.EventHandler(this.ToolStripMenuItem4_Click);
+      this.ToolStripMenuItem5.Click += new System.EventHandler(this.ToolStripMenuItem5_Click);
+      this.ToolStripMenuItem6.Click += new System.EventHandler(this.ToolStripMenuItem6_Click);
+      this.LaunchAppToolStripMenuItem.Click += new System.EventHandler(this.LaunchAppToolStripMenuItem_Click);
+      this.LaunchAppWithOptionsToolStripMenuItem.Click += new System.EventHandler(this.LaunchAppWithOptionsToolStripMenuItem_Click);
+      this.RemoveAllSelectedProfilesToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuItem5_Click);
+      this.CheckVoiceConfirm.CheckedChanged += new System.EventHandler(this.CheckVoiceConfirm_CheckedChanged);
+      this.ComboResolution.SelectedIndexChanged += new System.EventHandler(this.ComboResolution_SelectedIndexChanged);
     
     }
 

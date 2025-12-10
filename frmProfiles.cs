@@ -200,7 +200,26 @@ namespace OculusTrayTool
       }
       this.ListView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
       this.ListView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+      
+      // Populate Checkbox from Settings
+      GetConfig.IsReading = true;
+      try
+      {
+          this.CheckVoiceConfirm.Checked = MySettingsProperty.Settings.VoiceConfirmProfile;
+          if (!string.IsNullOrEmpty(MySettingsProperty.Settings.DesktopResolution))
+          {
+               this.ComboResolution.SelectedItem = MySettingsProperty.Settings.DesktopResolution;
+               if (this.ComboResolution.SelectedIndex == -1) this.ComboResolution.Text = MySettingsProperty.Settings.DesktopResolution;
+          }
+      }
+      finally
+      {
+          GetConfig.IsReading = false;
+      }
+
       this.Show();
+      // Populate Profile List
+      OTTDB.GetProfiles();
       this.ComboResolution.Focus();
     }
 
