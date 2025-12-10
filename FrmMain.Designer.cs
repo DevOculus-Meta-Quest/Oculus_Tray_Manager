@@ -1157,6 +1157,7 @@ protected override void Dispose(bool disposing)
       this.BtnConfigureAudio.TabIndex = 29;
       this.BtnConfigureAudio.Text = "Configure";
       this.BtnConfigureAudio.UseVisualStyleBackColor = true;
+
       this.Label14.AutoSize = true;
       this.Label14.Dock = DockStyle.Fill;
       this.Label14.ImageAlign = ContentAlignment.MiddleRight;
@@ -1182,6 +1183,7 @@ protected override void Dispose(bool disposing)
       this.BtnConfigureHotKeys.TabIndex = 31;
       this.BtnConfigureHotKeys.Text = "Configure";
       this.BtnConfigureHotKeys.UseVisualStyleBackColor = true;
+
       this.TrackBar1.Dock = DockStyle.Fill;
       this.TrackBar1.Location = new Point(4, 335);
       this.TrackBar1.Maximum = 12;
@@ -2124,6 +2126,7 @@ protected override void Dispose(bool disposing)
       this.BtnSteamImport.Click += new EventHandler(this.BtnSteamImport_Click);
       this.NotifyIcon3.MouseDown += new MouseEventHandler(this.NotifyIcon3_MouseDown);
       this.BtnConfigureHotKeys.Click += new EventHandler(this.BtnConfigureHotKeys_Click);
+
       this.ClearLogToolStripMenuItem.Click += new EventHandler(this.ClearLogToolStripMenuItem_Click);
       this.OpenLogToolStripMenuItem.Click += new EventHandler(this.OpenLogToolStripMenuItem_Click);
       this.BtnLibrary.Click += new EventHandler(this.BtnLibrary_Click);

@@ -23,6 +23,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Linq;
 using System.Data;
+
 using System.Runtime.CompilerServices;
 using System.Management;
 using System.Globalization;
@@ -1029,8 +1030,43 @@ namespace OculusTrayTool
 
     private void CheckWarnings() { }
     private void CheckOculusService() { }
-    internal void StartOVR() { Log.WriteToLog("StartOVR stub called"); }
-    internal void StopOVR() { Log.WriteToLog("StopOVR stub called"); }
+    internal void StartOVR()
+    {
+        try
+        {
+            ServiceController sc = new ServiceController("OVRService");
+            if (sc.Status != ServiceControllerStatus.Running)
+            {
+                sc.Start();
+                sc.WaitForStatus(ServiceControllerStatus.Running, TimeSpan.FromSeconds(30));
+                Log.WriteToLog("OVRService Started");
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("Error starting Oculus Service: " + ex.Message);
+            Log.WriteToLog("Error starting Oculus Service: " + ex.ToString());
+        }
+    }
+
+    internal void StopOVR()
+    {
+        try
+        {
+            ServiceController sc = new ServiceController("OVRService");
+            if (sc.Status != ServiceControllerStatus.Stopped)
+            {
+                sc.Stop();
+                sc.WaitForStatus(ServiceControllerStatus.Stopped, TimeSpan.FromSeconds(30));
+                Log.WriteToLog("OVRService Stopped");
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("Error stopping Oculus Service: " + ex.Message);
+            Log.WriteToLog("Error stopping Oculus Service: " + ex.ToString());
+        }
+    }
     internal void ApplyAswTick(object sender, ElapsedEventArgs e) { Log.WriteToLog("ApplyAswTick stub called"); }
     internal void ApplyCpuPrioTick(object sender, ElapsedEventArgs e) { Log.WriteToLog("ApplyCpuPrioTick stub called"); }
     internal void AppWork(object sender, DoWorkEventArgs e) { Log.WriteToLog("AppWork stub called"); }
@@ -1041,14 +1077,25 @@ namespace OculusTrayTool
     // Event Handlers
     private void CheckStartWindows_CheckedChanged(object sender, EventArgs e) { }
     private void NotifyIcon1_DoubleClick(object sender, EventArgs e) { }
-    private void ButtonStartOVR_Click(object sender, EventArgs e) { }
+    private void ButtonStartOVR_Click(object sender, EventArgs e)
+    {
+        StartOVR();
+    }
     private void ToolStripMenuItem1_Click(object sender, EventArgs e) { }
     private void ToolStripMenuItem2_Click(object sender, EventArgs e) { }
-    private void ButtonStopOVR_Click(object sender, EventArgs e) { }
+    private void ButtonStopOVR_Click(object sender, EventArgs e)
+    {
+        StopOVR();
+    }
     private void CheckStartService_CheckedChanged(object sender, EventArgs e) { }
     private void CheckLaunchHome_CheckedChanged(object sender, EventArgs e) { }
     private void CheckStopService_CheckedChanged(object sender, EventArgs e) { }
-    private void ButtonRestartOVR_Click(object sender, EventArgs e) { }
+    private void ButtonRestartOVR_Click(object sender, EventArgs e)
+    {
+        StopOVR();
+        Thread.Sleep(1000);
+        StartOVR();
+    }
     private void CheckLaunchHomeTool_CheckedChanged(object sender, EventArgs e) { }
     private void CheckCloseHome_CheckedChanged(object sender, EventArgs e) { }
     private void CheckBoxAltTab_CheckedChanged(object sender, EventArgs e) { }
@@ -1056,14 +1103,31 @@ namespace OculusTrayTool
     private void OculusHomeWatcher_Tick(object sender, EventArgs e) { }
     private void ToolStripMenuItem3_Click(object sender, EventArgs e) { }
     private void CheckSpoofCPU_CheckedChanged(object sender, EventArgs e) { }
-    private void ToolStripStartOVR_Click(object sender, EventArgs e) { }
-    private void ToolStripMenuItem5_Click(object sender, EventArgs e) { }
-    private void ToolStripMenuItem6_Click(object sender, EventArgs e) { }
+    private void ToolStripStartOVR_Click(object sender, EventArgs e)
+    {
+        StartOVR();
+    }
+    private void ToolStripMenuItem5_Click(object sender, EventArgs e)
+    {
+        StopOVR();
+    }
+    private void ToolStripMenuItem6_Click(object sender, EventArgs e)
+    {
+        StopOVR();
+        Thread.Sleep(1000);
+        StartOVR();
+    }
     private void ToolStripMenuItem4_Click(object sender, EventArgs e) { }
     private void DotNetBarTabcontrol1_SelectedIndexChanged(object sender, EventArgs e) { }
-    private void BtnVoice_Click(object sender, EventArgs e) { }
+    private void BtnVoice_Click(object sender, EventArgs e)
+    {
+        new frmVoiceSettings().ShowDialog();
+    }
     private void ComboSSstart_SelectedIndexChanged(object sender, EventArgs e) { }
-    private void BtnProfiles_Click(object sender, EventArgs e) { }
+    private void BtnProfiles_Click(object sender, EventArgs e)
+    {
+        new frmProfiles().ShowDialog();
+    }
     private void ComboVoice_SelectedIndexChanged(object sender, EventArgs e) { }
     private void HotKeysCheckBox_CheckedChanged(object sender, EventArgs e) { }
     private void ComboUSBsusp_SelectedIndexChanged(object sender, EventArgs e) { }
@@ -1081,7 +1145,10 @@ namespace OculusTrayTool
     private void Button5_Click(object sender, EventArgs e) { }
     private void CheckSensorPower_CheckedChanged(object sender, EventArgs e) { }
     private void ComboPowerPlanExit_SelectedIndexChanged(object sender, EventArgs e) { }
-    private void BtnConfigureAudio_Click(object sender, EventArgs e) { }
+    private void BtnConfigureAudio_Click(object sender, EventArgs e)
+    {
+        new FrmSetFallback().ShowDialog();
+    }
     private void ComboApplyPlan_SelectedIndexChanged(object sender, EventArgs e) { }
     private void Button9_Click(object sender, EventArgs e) { }
     private void Button8_Click(object sender, EventArgs e) { }
@@ -1089,18 +1156,30 @@ namespace OculusTrayTool
     private void CheckBoxCheckForUpdates_CheckedChanged(object sender, EventArgs e) { }
     private void Button2_Click(object sender, EventArgs e) { }
     private void ComboHomless_SelectedIndexChanged(object sender, EventArgs e) { }
-    private void BtnHomless_Click(object sender, EventArgs e) { }
+    private void BtnHomless_Click(object sender, EventArgs e)
+    {
+        new frmHomeless().ShowDialog();
+    }
     private void UpdateTimer_Tick(object sender, EventArgs e) { }
     private void ToolStripMenuShowHome_Click(object sender, EventArgs e) { }
     private void ComboVisualHUD_SelectedIndexChanged(object sender, EventArgs e) { }
     private void ComboMirrorHome_SelectedIndexChanged(object sender, EventArgs e) { }
     private void CheckRestartSleep_CheckedChanged(object sender, EventArgs e) { }
-    private void BtnSteamImport_Click(object sender, EventArgs e) { }
+    private void BtnSteamImport_Click(object sender, EventArgs e)
+    {
+        new frmImportSteamApps().ShowDialog();
+    }
     private void NotifyIcon3_MouseDown(object sender, MouseEventArgs e) { }
-    private void BtnConfigureHotKeys_Click(object sender, EventArgs e) { }
+    private void BtnConfigureHotKeys_Click(object sender, EventArgs e)
+    {
+        new frmHotKeys().ShowDialog();
+    }
     private void ClearLogToolStripMenuItem_Click(object sender, EventArgs e) { }
     private void OpenLogToolStripMenuItem_Click(object sender, EventArgs e) { }
-    private void BtnLibrary_Click(object sender, EventArgs e) { }
+    private void BtnLibrary_Click(object sender, EventArgs e)
+    {
+        new frmLibrary().ShowDialog();
+    }
     private void PowerPlanTimer_Tick(object sender, EventArgs e) { }
     private void ComboBox3_KeyPress(object sender, KeyPressEventArgs e) { }
     private void ComboBox4_SelectedIndexChanged(object sender, EventArgs e) { }
