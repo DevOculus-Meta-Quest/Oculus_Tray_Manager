@@ -14,17 +14,17 @@ using System.Windows.Forms;
 namespace OculusTrayTool
 {
   [DesignerGenerated]
-  public class CueToolStripTextBox : ToolStripTextBox
+  public partial class CueToolStripTextBox : ToolStripTextBox
   {
-    private IContainer components;
+    
     private static uint ECM_FIRST = 5376;
     private static uint EM_SETCUEBANNER = checked ((uint) ((long) CueToolStripTextBox.ECM_FIRST + 1L));
     private string m_cueText;
     private bool m_showCueTextWithFocus;
 
-    private void InitializeComponent() => this.components = (IContainer) new System.ComponentModel.Container();
+    
 
-    public CueToolStripTextBox()
+    public CueToolStripTextBox() : base("defaultName")
     {
       this.components = (IContainer) null;
       this.m_cueText = string.Empty;
@@ -45,12 +45,7 @@ namespace OculusTrayTool
       this.Control.HandleCreated += new EventHandler(this.OnControlHandleCreated);
     }
 
-    protected override void Dispose(bool disposing)
-    {
-      if (disposing && this.Control != null)
-        this.Control.HandleCreated -= new EventHandler(this.OnControlHandleCreated);
-      base.Dispose(disposing);
-    }
+    
 
     public void OnControlHandleCreated(object sender, EventArgs e) => this.UpdateCue();
 

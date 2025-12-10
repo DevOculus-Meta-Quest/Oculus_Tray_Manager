@@ -20,294 +20,31 @@ using System.Windows.Forms;
 namespace OculusTrayTool
 {
   [DesignerGenerated]
-  public class frmHomeless : Form
+  public partial class frmHomeless : Form
   {
-    private IContainer components;
+    
 
     public frmHomeless() => this.InitializeComponent();
 
-    [DebuggerNonUserCode]
-    protected override void Dispose(bool disposing)
-    {
-      try
-      {
-        if (!disposing || this.components == null)
-          return;
-        this.components.Dispose();
-      }
-      finally
-      {
-        base.Dispose(disposing);
-      }
-    }
+    
 
-    [DebuggerStepThrough]
-    private void InitializeComponent()
-    {
-      this.GroupBox1 = new GroupBox();
-      this.BtnBrowseMusic = new Button();
-      this.TextBox1 = new TextBox();
-      this.BtnColor = new Button();
-      this.ComboMusic = new ComboBox();
-      this.NumericVolume = new NumericUpDown();
-      this.Label3 = new Label();
-      this.Label2 = new Label();
-      this.Label1 = new Label();
-      this.Button1 = new Button();
-      this.Button2 = new Button();
-      this.ColorDialog1 = new ColorDialog();
-      this.CheckBox1 = new CheckBox();
-      this.GroupBox1.SuspendLayout();
-      this.NumericVolume.BeginInit();
-      this.SuspendLayout();
-      this.GroupBox1.Controls.Add((Control) this.CheckBox1);
-      this.GroupBox1.Controls.Add((Control) this.BtnBrowseMusic);
-      this.GroupBox1.Controls.Add((Control) this.TextBox1);
-      this.GroupBox1.Controls.Add((Control) this.BtnColor);
-      this.GroupBox1.Controls.Add((Control) this.ComboMusic);
-      this.GroupBox1.Controls.Add((Control) this.NumericVolume);
-      this.GroupBox1.Controls.Add((Control) this.Label3);
-      this.GroupBox1.Controls.Add((Control) this.Label2);
-      this.GroupBox1.Controls.Add((Control) this.Label1);
-      this.GroupBox1.ForeColor = Color.DodgerBlue;
-      this.GroupBox1.Location = new Point(12, 12);
-      this.GroupBox1.Name = "GroupBox1";
-      this.GroupBox1.Size = new Size(348, 133);
-      this.GroupBox1.TabIndex = 0;
-      this.GroupBox1.TabStop = false;
-      this.BtnBrowseMusic.FlatStyle = FlatStyle.Flat;
-      this.BtnBrowseMusic.Font = new Font("Microsoft Sans Serif", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
-      this.BtnBrowseMusic.Location = new Point(258, 44);
-      this.BtnBrowseMusic.Name = "BtnBrowseMusic";
-      this.BtnBrowseMusic.Size = new Size(71, 23);
-      this.BtnBrowseMusic.TabIndex = 8;
-      this.BtnBrowseMusic.Text = "Add More";
-      this.BtnBrowseMusic.UseVisualStyleBackColor = true;
-      this.TextBox1.Location = new Point(131, 17);
-      this.TextBox1.Name = "TextBox1";
-      this.TextBox1.ReadOnly = true;
-      this.TextBox1.Size = new Size(121, 20);
-      this.TextBox1.TabIndex = 7;
-      this.BtnColor.FlatStyle = FlatStyle.Flat;
-      this.BtnColor.Font = new Font("Microsoft Sans Serif", 8.25f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
-      this.BtnColor.Location = new Point(258, 15);
-      this.BtnColor.Name = "BtnColor";
-      this.BtnColor.Size = new Size(71, 23);
-      this.BtnColor.TabIndex = 6;
-      this.BtnColor.Text = "Pick color";
-      this.BtnColor.UseVisualStyleBackColor = true;
-      this.ComboMusic.BackColor = Color.AliceBlue;
-      this.ComboMusic.DropDownStyle = ComboBoxStyle.DropDownList;
-      this.ComboMusic.DropDownWidth = 200;
-      this.ComboMusic.FlatStyle = FlatStyle.Popup;
-      this.ComboMusic.FormattingEnabled = true;
-      this.ComboMusic.Items.AddRange(new object[1]
-      {
-        (object) "None"
-      });
-      this.ComboMusic.Location = new Point(131, 46);
-      this.ComboMusic.Name = "ComboMusic";
-      this.ComboMusic.Size = new Size(121, 21);
-      this.ComboMusic.Sorted = true;
-      this.ComboMusic.TabIndex = 4;
-      this.NumericVolume.Location = new Point(132, 79);
-      this.NumericVolume.Name = "NumericVolume";
-      this.NumericVolume.Size = new Size(120, 20);
-      this.NumericVolume.TabIndex = 3;
-      this.Label3.AutoSize = true;
-      this.Label3.Font = new Font("Microsoft Sans Serif", 9f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
-      this.Label3.Location = new Point(16, 81);
-      this.Label3.Name = "Label3";
-      this.Label3.Size = new Size(103, 15);
-      this.Label3.TabIndex = 2;
-      this.Label3.Text = "Music volume %: ";
-      this.Label2.AutoSize = true;
-      this.Label2.Font = new Font("Microsoft Sans Serif", 9f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
-      this.Label2.Location = new Point(15, 49);
-      this.Label2.Name = "Label2";
-      this.Label2.Size = new Size(112, 15);
-      this.Label2.TabIndex = 1;
-      this.Label2.Text = "Background music:";
-      this.Label1.AutoSize = true;
-      this.Label1.Font = new Font("Microsoft Sans Serif", 9f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
-      this.Label1.Location = new Point(16, 20);
-      this.Label1.Name = "Label1";
-      this.Label1.Size = new Size(109, 15);
-      this.Label1.TabIndex = 0;
-      this.Label1.Text = "Background color: ";
-      this.Button1.FlatStyle = FlatStyle.Flat;
-      this.Button1.Font = new Font("Microsoft Sans Serif", 9f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
-      this.Button1.ForeColor = Color.DodgerBlue;
-      this.Button1.Location = new Point(12, 151);
-      this.Button1.Name = "Button1";
-      this.Button1.Size = new Size(55, 25);
-      this.Button1.TabIndex = 1;
-      this.Button1.Text = "Cancel";
-      this.Button1.UseVisualStyleBackColor = true;
-      this.Button2.FlatStyle = FlatStyle.Flat;
-      this.Button2.Font = new Font("Microsoft Sans Serif", 9f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
-      this.Button2.ForeColor = Color.DodgerBlue;
-      this.Button2.Location = new Point(305, 151);
-      this.Button2.Name = "Button2";
-      this.Button2.Size = new Size(55, 25);
-      this.Button2.TabIndex = 2;
-      this.Button2.Text = "OK";
-      this.Button2.UseVisualStyleBackColor = true;
-      this.ColorDialog1.FullOpen = true;
-      this.CheckBox1.AutoSize = true;
-      this.CheckBox1.Location = new Point(16, 105);
-      this.CheckBox1.Name = "CheckBox1";
-      this.CheckBox1.RightToLeft = RightToLeft.Yes;
-      this.CheckBox1.Size = new Size(130, 17);
-      this.CheckBox1.TabIndex = 9;
-      this.CheckBox1.Text = "   :Automatically patch";
-      this.CheckBox1.UseVisualStyleBackColor = true;
-      this.AutoScaleDimensions = new SizeF(6f, 13f);
-      this.AutoScaleMode = AutoScaleMode.Font;
-      this.BackColor = Color.White;
-      this.ClientSize = new Size(368, 183);
-      this.ControlBox = false;
-      this.Controls.Add((Control) this.Button2);
-      this.Controls.Add((Control) this.Button1);
-      this.Controls.Add((Control) this.GroupBox1);
-      this.FormBorderStyle = FormBorderStyle.FixedSingle;
-      this.Name = nameof (frmHomeless);
-      this.StartPosition = FormStartPosition.CenterParent;
-      this.Text = "Configure Oculus Homeless";
-      this.GroupBox1.ResumeLayout(false);
-      this.GroupBox1.PerformLayout();
-      this.NumericVolume.EndInit();
-      this.ResumeLayout(false);
-    }
 
-    [field: AccessedThroughProperty("GroupBox1")]
-    internal virtual GroupBox GroupBox1 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
+    
 
-    private ComboBox _ComboMusic;
-    internal virtual ComboBox ComboMusic
-    {
-      get => this._ComboMusic;
-      [MethodImpl(MethodImplOptions.Synchronized)] set
-      {
-        EventHandler eventHandler = new EventHandler(this.ComboMusic_SelectedIndexChanged);
-        ComboBox comboMusic1 = this._ComboMusic;
-        if (comboMusic1 != null)
-          comboMusic1.SelectedIndexChanged -= eventHandler;
-        this._ComboMusic = value;
-        ComboBox comboMusic2 = this._ComboMusic;
-        if (comboMusic2 == null)
-          return;
-        comboMusic2.SelectedIndexChanged += eventHandler;
-      }
-    }
+    
 
-    [field: AccessedThroughProperty("NumericVolume")]
-    internal virtual NumericUpDown NumericVolume { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
+    
 
-    [field: AccessedThroughProperty("Label3")]
-    internal virtual Label Label3 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
+    
 
-    [field: AccessedThroughProperty("Label2")]
-    internal virtual Label Label2 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-    [field: AccessedThroughProperty("Label1")]
-    internal virtual Label Label1 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
 
-    private Button _Button1;
-    internal virtual Button Button1
-    {
-      get => this._Button1;
-      [MethodImpl(MethodImplOptions.Synchronized)] set
-      {
-        EventHandler eventHandler = new EventHandler(this.Button1_Click);
-        Button button1_1 = this._Button1;
-        if (button1_1 != null)
-          button1_1.Click -= eventHandler;
-        this._Button1 = value;
-        Button button1_2 = this._Button1;
-        if (button1_2 == null)
-          return;
-        button1_2.Click += eventHandler;
-      }
-    }
+    
 
-    private Button _Button2;
-    internal virtual Button Button2
-    {
-      get => this._Button2;
-      [MethodImpl(MethodImplOptions.Synchronized)] set
-      {
-        EventHandler eventHandler = new EventHandler(this.Button2_Click);
-        Button button2_1 = this._Button2;
-        if (button2_1 != null)
-          button2_1.Click -= eventHandler;
-        this._Button2 = value;
-        Button button2_2 = this._Button2;
-        if (button2_2 == null)
-          return;
-        button2_2.Click += eventHandler;
-      }
-    }
 
-    [field: AccessedThroughProperty("ColorDialog1")]
-    internal virtual ColorDialog ColorDialog1 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
+    
 
-    private Button _BtnColor;
-    internal virtual Button BtnColor
-    {
-      get => this._BtnColor;
-      [MethodImpl(MethodImplOptions.Synchronized)] set
-      {
-        EventHandler eventHandler = new EventHandler(this.Button3_Click);
-        Button btnColor1 = this._BtnColor;
-        if (btnColor1 != null)
-          btnColor1.Click -= eventHandler;
-        this._BtnColor = value;
-        Button btnColor2 = this._BtnColor;
-        if (btnColor2 == null)
-          return;
-        btnColor2.Click += eventHandler;
-      }
-    }
 
-    [field: AccessedThroughProperty("TextBox1")]
-    internal virtual TextBox TextBox1 { get; [MethodImpl(MethodImplOptions.Synchronized)] set; }
-
-    private Button _BtnBrowseMusic;
-    internal virtual Button BtnBrowseMusic
-    {
-      get => this._BtnBrowseMusic;
-      [MethodImpl(MethodImplOptions.Synchronized)] set
-      {
-        EventHandler eventHandler = new EventHandler(this.BtnBrowseMusic_Click);
-        Button btnBrowseMusic1 = this._BtnBrowseMusic;
-        if (btnBrowseMusic1 != null)
-          btnBrowseMusic1.Click -= eventHandler;
-        this._BtnBrowseMusic = value;
-        Button btnBrowseMusic2 = this._BtnBrowseMusic;
-        if (btnBrowseMusic2 == null)
-          return;
-        btnBrowseMusic2.Click += eventHandler;
-      }
-    }
-
-    private CheckBox _CheckBox1;
-    internal virtual CheckBox CheckBox1
-    {
-      get => this._CheckBox1;
-      [MethodImpl(MethodImplOptions.Synchronized)] set
-      {
-        EventHandler eventHandler = new EventHandler(this.CheckBox1_CheckedChanged);
-        CheckBox checkBox1_1 = this._CheckBox1;
-        if (checkBox1_1 != null)
-          checkBox1_1.CheckedChanged -= eventHandler;
-        this._CheckBox1 = value;
-        CheckBox checkBox1_2 = this._CheckBox1;
-        if (checkBox1_2 == null)
-          return;
-        checkBox1_2.CheckedChanged += eventHandler;
-      }
-    }
 
     private void Button1_Click(object sender, EventArgs e) => this.Close();
 

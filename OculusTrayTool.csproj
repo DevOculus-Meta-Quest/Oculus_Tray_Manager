@@ -1,6 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <!--Project was exported from assembly: C:\Program Files (x86)\Oculus Tray Tool\OculusTrayTool.exe-->
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0" DefaultTargets="Build">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -11,7 +10,7 @@
     <ApplicationVersion>0.87.8.0</ApplicationVersion>
     <RootNamespace>OculusTrayTool</RootNamespace>
     <RootNamespace>OculusTrayTool</RootNamespace>
-    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+    <GenerateResourceUsePreserializedResources>false</GenerateResourceUsePreserializedResources>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -40,14 +39,12 @@
       <HintPath>lib\CoreAudio.dll</HintPath>
     </Reference>
     <Reference Include="System.Speech" />
-
     <Reference Include="Microsoft.Win32.TaskScheduler">
       <HintPath>lib\Microsoft.Win32.TaskScheduler.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
-
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -64,21 +61,6 @@
     <Reference Include="UACHelper">
       <HintPath>lib\UACHelper.dll</HintPath>
     </Reference>
-    <Reference Include="System.Resources.Extensions">
-      <HintPath>packages\System.Resources.Extensions.4.6.0\lib\netstandard2.0\System.Resources.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe">
-      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Memory">
-      <HintPath>packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Buffers">
-      <HintPath>packages\System.Buffers.4.5.1\lib\netstandard2.0\System.Buffers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Numerics.Vectors">
-      <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AirLink.cs" />
@@ -88,31 +70,67 @@
     <Compile Include="Program.cs" />
     <Compile Include="CheckConnection.cs" />
     <Compile Include="CheckUpdate.cs" />
-    <Compile Include="CueToolStripTextBox.cs" />
+    <Compile Include="CueToolStripTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ListViewColumnSorter.cs" />
-    <Compile Include="MyCustomToolStripControlHost.cs" />
-    <Compile Include="TextProgressBar.cs" />
-    <Compile Include="ToolStripCheckBox.cs" />
+    <Compile Include="MyCustomToolStripControlHost.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TextProgressBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ToolStripCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ToolStripSpringTextBox.cs" />
     <Compile Include="FileDownloader.cs" />
     <Compile Include="FileDownloadProgressChangedEventArgs.cs" />
     <Compile Include="FileDownloadErrorEventArgs.cs" />
     <Compile Include="FileDownloadEventArgs.cs" />
     <Compile Include="DownloadFileNode.cs" />
-    <Compile Include="frmAddCustomVoice.cs" />
-    <Compile Include="frmAddVoiceProfile.cs" />
-    <Compile Include="frmCreateEditProfile.cs" />
-    <Compile Include="frmDonate.cs" />
-    <Compile Include="DotNetBarTabcontrol.cs" />
-    <Compile Include="frmDownloading.cs" />
-    <Compile Include="frmEditAllSelected.cs" />
-    <Compile Include="frmEditVoiceCommand.cs" />
-    <Compile Include="frmHomeless.cs" />
-    <Compile Include="frmHotKeys.cs" />
-    <Compile Include="FrmIgnoredApps.cs" />
-    <Compile Include="frmImportSteamApps.cs" />
-    <Compile Include="frmMicNotDefaultWarning.cs" />
-    <Compile Include="frmProcessing.cs" />
+    <Compile Include="frmAddCustomVoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddVoiceProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCreateEditProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDonate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DotNetBarTabcontrol.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="frmDownloading.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEditAllSelected.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEditVoiceCommand.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmHomeless.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmHotKeys.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmIgnoredApps.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmImportSteamApps.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMicNotDefaultWarning.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProcessing.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="GetConfig.cs" />
     <Compile Include="GetControllers.cs" />
     <Compile Include="GetDevices.cs" />
@@ -120,13 +138,21 @@
     <Compile Include="GetGames.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="HomeToTray.cs" />
-    <Compile Include="frmHomeTrayToast.cs" />
-    <Compile Include="frmLibrary.cs" />
-    <Compile Include="frmLaunchOptions.cs" />
+    <Compile Include="frmHomeTrayToast.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLibrary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLaunchOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="KeyboardHook.cs" />
     <Compile Include="KillRunningApp.cs" />
     <Compile Include="ParentProcessUtilities.cs" />
-    <Compile Include="frmLinkPresets.cs" />
+    <Compile Include="frmLinkPresets.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MathTools.cs" />
     <Compile Include="MigrateSettings.cs" />
     <Compile Include="MinMaxApp.cs" />
@@ -136,43 +162,73 @@
     <Compile Include="OculusNode.cs" />
     <Compile Include="OculusPath.cs" />
     <Compile Include="OTTDB.cs" />
-    <Compile Include="frmProperties.cs" />
-    <Compile Include="frmRemoveProgress.cs" />
+    <Compile Include="frmProperties.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRemoveProgress.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Packages.cs" />
     <Compile Include="Resizer.cs" />
     <Compile Include="Resolution.cs" />
     <Compile Include="ScrollListener.cs" />
-    <Compile Include="frmSetLibraryPath.cs" />
-    <Compile Include="frmStartupType.cs" />
-    <Compile Include="frmStillRunningToast.cs" />
-    <Compile Include="frmUpdateToast.cs" />
+    <Compile Include="frmSetLibraryPath.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmStartupType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmStillRunningToast.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUpdateToast.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CreateTask.cs" />
-    <Compile Include="FrmMain.cs" />
-    <Compile Include="FrmMain_Methods.cs" />
-    <Compile Include="frmLoading.cs" />
+    <Compile Include="FrmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMain_Methods.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLoading.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="LVsort.cs" />
     <Compile Include="PowerPlans.cs" />
-    <Compile Include="frmAbout.cs" />
+    <Compile Include="frmAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="RiftDefault.cs" />
     <Compile Include="RunCommand.cs" />
     <Compile Include="Log.cs" />
-    <Compile Include="frmProfiles.cs" />
-    <Compile Include="FrmSetFallback.cs" />
-    <Compile Include="frmSSChanged.cs" />
+    <Compile Include="frmProfiles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSetFallback.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSSChanged.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Steam.cs" />
     <Compile Include="ACFReader.cs" />
     <Compile Include="DataDownloadEventArgs.cs" />
     <Compile Include="SteamNode.cs" />
     <Compile Include="SteamScreenshotNode.cs" />
     <Compile Include="VoiceCommands.cs" />
-    <Compile Include="frmVoiceSettings.cs" />
+    <Compile Include="frmVoiceSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Win32.cs" />
     <Compile Include="My\MyComputer.cs" />
     <Compile Include="My\MyProject.cs" />
     <Compile Include="My\MySettings.cs" />
     <Compile Include="My\MySettingsProperty.cs" />
     <Compile Include="My\Resources\Resources.cs" />
-    <Compile Include="MyNameSpace\DBLayoutPanel.cs" />
+    <Compile Include="MyNameSpace\DBLayoutPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CoreAudioApi\Interfaces\IPolicyConfig.cs" />
     <Compile Include="CoreAudioApi\Interfaces\IPolicyConfig10.cs" />
     <Compile Include="PolicyClient\_PolicyConfigClient.cs" />
@@ -180,6 +236,102 @@
     <Compile Include="ResChanger\Pointl.cs" />
     <Compile Include="ResChanger\Devmode.cs" />
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="CueToolStripTextBox.Designer.cs">
+      <DependentUpon>CueToolStripTextBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAbout.Designer.cs">
+      <DependentUpon>frmAbout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAddCustomVoice.Designer.cs">
+      <DependentUpon>frmAddCustomVoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAddVoiceProfile.Designer.cs">
+      <DependentUpon>frmAddVoiceProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCreateEditProfile.Designer.cs">
+      <DependentUpon>frmCreateEditProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDonate.Designer.cs">
+      <DependentUpon>frmDonate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDownloading.Designer.cs">
+      <DependentUpon>frmDownloading.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEditAllSelected.Designer.cs">
+      <DependentUpon>frmEditAllSelected.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEditVoiceCommand.Designer.cs">
+      <DependentUpon>frmEditVoiceCommand.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmHomeless.Designer.cs">
+      <DependentUpon>frmHomeless.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmHomeTrayToast.Designer.cs">
+      <DependentUpon>frmHomeTrayToast.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmHotKeys.Designer.cs">
+      <DependentUpon>frmHotKeys.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmIgnoredApps.Designer.cs">
+      <DependentUpon>FrmIgnoredApps.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmImportSteamApps.Designer.cs">
+      <DependentUpon>frmImportSteamApps.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLaunchOptions.Designer.cs">
+      <DependentUpon>frmLaunchOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLibrary.Designer.cs">
+      <DependentUpon>frmLibrary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLinkPresets.Designer.cs">
+      <DependentUpon>frmLinkPresets.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLoading.Designer.cs">
+      <DependentUpon>frmLoading.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmMain.Designer.cs">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMicNotDefaultWarning.Designer.cs">
+      <DependentUpon>frmMicNotDefaultWarning.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmProcessing.Designer.cs">
+      <DependentUpon>frmProcessing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmProfiles.Designer.cs">
+      <DependentUpon>frmProfiles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmProperties.Designer.cs">
+      <DependentUpon>frmProperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRemoveProgress.Designer.cs">
+      <DependentUpon>frmRemoveProgress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSetFallback.Designer.cs">
+      <DependentUpon>FrmSetFallback.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSetLibraryPath.Designer.cs">
+      <DependentUpon>frmSetLibraryPath.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSSChanged.Designer.cs">
+      <DependentUpon>frmSSChanged.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmStartupType.Designer.cs">
+      <DependentUpon>frmStartupType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmStillRunningToast.Designer.cs">
+      <DependentUpon>frmStillRunningToast.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmUpdateToast.Designer.cs">
+      <DependentUpon>frmUpdateToast.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmVoiceSettings.Designer.cs">
+      <DependentUpon>frmVoiceSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolStripSpringTextBox.Designer.cs">
+      <DependentUpon>ToolStripSpringTextBox.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="app.manifest" />

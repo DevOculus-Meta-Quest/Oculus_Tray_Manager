@@ -22,13 +22,13 @@ namespace OculusTrayTool.My.Resources
   [DebuggerNonUserCode]
   [CompilerGenerated]
   [HideModuleName]
-  internal sealed class Resources
+  public sealed class Resources
   {
     private static ResourceManager resourceMan;
     private static CultureInfo resourceCulture;
 
     [EditorBrowsable(EditorBrowsableState.Advanced)]
-    internal static ResourceManager ResourceManager
+    public static ResourceManager ResourceManager
     {
       get
       {
@@ -39,13 +39,13 @@ namespace OculusTrayTool.My.Resources
     }
 
     [EditorBrowsable(EditorBrowsableState.Advanced)]
-    internal static CultureInfo Culture
+    public static CultureInfo Culture
     {
       get => OculusTrayTool.My.Resources.Resources.resourceCulture;
       set => OculusTrayTool.My.Resources.Resources.resourceCulture = value;
     }
 
-    internal static Bitmap App_Blue_16
+    public static Bitmap App_Blue_16
     {
       get
       {
@@ -53,7 +53,7 @@ namespace OculusTrayTool.My.Resources
       }
     }
 
-    internal static Bitmap App_Blue_256
+    public static Bitmap App_Blue_256
     {
       get
       {
@@ -61,7 +61,7 @@ namespace OculusTrayTool.My.Resources
       }
     }
 
-    internal static Bitmap App_Blue_32
+    public static Bitmap App_Blue_32
     {
       get
       {
@@ -69,7 +69,7 @@ namespace OculusTrayTool.My.Resources
       }
     }
 
-    internal static Bitmap close_16
+    public static Bitmap close_16
     {
       get
       {
@@ -77,7 +77,7 @@ namespace OculusTrayTool.My.Resources
       }
     }
 
-    internal static Bitmap Icon_Delete
+    public static Bitmap Icon_Delete
     {
       get
       {
@@ -85,7 +85,7 @@ namespace OculusTrayTool.My.Resources
       }
     }
 
-    internal static Bitmap Icon_Edit
+    public static Bitmap Icon_Edit
     {
       get
       {
@@ -93,7 +93,7 @@ namespace OculusTrayTool.My.Resources
       }
     }
 
-    internal static Bitmap Icon_Exit
+    public static Bitmap Icon_Exit
     {
       get
       {
@@ -101,7 +101,7 @@ namespace OculusTrayTool.My.Resources
       }
     }
 
-    internal static Bitmap Icon_Help
+    public static Bitmap Icon_Help
     {
       get
       {
@@ -109,7 +109,7 @@ namespace OculusTrayTool.My.Resources
       }
     }
 
-    internal static Bitmap Icon_Service_Startup2
+    public static Bitmap Icon_Service_Startup2
     {
       get
       {
@@ -117,7 +117,7 @@ namespace OculusTrayTool.My.Resources
       }
     }
 
-    internal static Bitmap Icon_View
+    public static Bitmap Icon_View
     {
       get
       {
@@ -125,7 +125,7 @@ namespace OculusTrayTool.My.Resources
       }
     }
 
-    internal static Bitmap paypal
+    public static Bitmap paypal
     {
       get
       {
@@ -133,7 +133,7 @@ namespace OculusTrayTool.My.Resources
       }
     }
 
-    internal static Bitmap play
+    public static Bitmap play
     {
       get
       {
@@ -141,7 +141,7 @@ namespace OculusTrayTool.My.Resources
       }
     }
 
-    internal static Bitmap play2
+    public static Bitmap play2
     {
       get
       {
@@ -149,7 +149,7 @@ namespace OculusTrayTool.My.Resources
       }
     }
 
-    internal static Bitmap refresh_16
+    public static Bitmap refresh_16
     {
       get
       {
@@ -157,7 +157,7 @@ namespace OculusTrayTool.My.Resources
       }
     }
 
-    internal static Bitmap removed_app
+    public static Bitmap removed_app
     {
       get
       {
@@ -165,7 +165,7 @@ namespace OculusTrayTool.My.Resources
       }
     }
 
-    internal static Bitmap Service_Restart
+    public static Bitmap Service_Restart
     {
       get
       {
@@ -173,7 +173,7 @@ namespace OculusTrayTool.My.Resources
       }
     }
 
-    internal static Bitmap Service_Start
+    public static Bitmap Service_Start
     {
       get
       {
@@ -181,7 +181,7 @@ namespace OculusTrayTool.My.Resources
       }
     }
 
-    internal static Bitmap Service_Stop
+    public static Bitmap Service_Stop
     {
       get
       {
@@ -189,7 +189,7 @@ namespace OculusTrayTool.My.Resources
       }
     }
 
-    internal static Bitmap Untitled
+    public static Bitmap Untitled
     {
       get
       {
@@ -197,7 +197,7 @@ namespace OculusTrayTool.My.Resources
       }
     }
 
-    internal static Bitmap Untitled1
+    public static Bitmap Untitled1
     {
       get
       {
@@ -205,7 +205,7 @@ namespace OculusTrayTool.My.Resources
       }
     }
 
-    internal static Bitmap Untitled2
+    public static Bitmap Untitled2
     {
       get
       {
@@ -213,7 +213,7 @@ namespace OculusTrayTool.My.Resources
       }
     }
 
-    internal static Bitmap Very_Basic_Not_Listen_icon
+    public static Bitmap Very_Basic_Not_Listen_icon
     {
       get
       {
