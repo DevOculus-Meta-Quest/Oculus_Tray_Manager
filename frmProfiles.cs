@@ -400,6 +400,10 @@ namespace OculusTrayTool
       try
       {
         MyProject.Forms.frmCreateEditProfile.ComboBox1.Items.Clear();
+
+        // TEMP DEBUG
+        MessageBox.Show("ShowCreate: Populating list. GameList count: " + MyProject.Forms.frmProfiles.GameList.Count.ToString(), "frmProfiles Debug");
+
         MyProject.Forms.frmCreateEditProfile.TextDisplayName.Visible = false;
         MyProject.Forms.frmCreateEditProfile.ComboBox1.Visible = true;
         MyProject.Forms.frmCreateEditProfile.ComboBox1.DisplayMember = "Name";

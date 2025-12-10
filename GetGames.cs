@@ -68,7 +68,7 @@ namespace OculusTrayTool
         
         Log.WriteToLog("Found " + GetGames.steamGameList.Count.ToString() + " Steam VR Apps");
         // TEMP DEBUG
-        // MessageBox.Show("Found " + GetGames.steamGameList.Count.ToString() + " Steam VR Apps. Added to GameList.", "GetSteamGames Debug");
+        MessageBox.Show("Found " + GetGames.steamGameList.Count.ToString() + " Steam VR Apps. Added to GameList.", "GetSteamGames Debug");
         
         foreach (string steamGame in GetGames.steamGameList)
              Log.WriteToLog("Steam VR App '" + steamGame.ToString() + "' added to available games list");
