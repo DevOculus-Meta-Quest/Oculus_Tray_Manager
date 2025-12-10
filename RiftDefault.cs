@@ -1,4 +1,3 @@
-﻿// Decompiled with JetBrains decompiler
 
 using CoreAudio;
 using Microsoft.VisualBasic.CompilerServices;

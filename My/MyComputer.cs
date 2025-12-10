@@ -1,4 +1,3 @@
-﻿// Decompiled with JetBrains decompiler
 
 using Microsoft.VisualBasic.Devices;
 using System.CodeDom.Compiler;

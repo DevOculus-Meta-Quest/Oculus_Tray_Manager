@@ -1,4 +1,3 @@
-﻿// Decompiled with JetBrains decompiler
 
 using System.Speech.Recognition;
 

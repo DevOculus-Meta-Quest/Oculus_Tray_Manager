@@ -1,4 +1,4 @@
-﻿using System.Windows.Forms.Layout;
+using System.Windows.Forms.Layout;
 
 using Microsoft.VisualBasic.CompilerServices;
 using System;

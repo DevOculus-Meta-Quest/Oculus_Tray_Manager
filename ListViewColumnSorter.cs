@@ -1,4 +1,3 @@
-﻿// Decompiled with JetBrains decompiler
 
 using System.Collections;
 using System.Windows.Forms;

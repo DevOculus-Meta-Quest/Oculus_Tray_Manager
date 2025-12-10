@@ -1,4 +1,3 @@
-﻿// Decompiled with JetBrains decompiler
 
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.CompilerServices;

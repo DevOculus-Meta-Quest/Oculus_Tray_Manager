@@ -1,4 +1,4 @@
-﻿using OculusTrayTool.MyNameSpace;
+using OculusTrayTool.MyNameSpace;
 using System;
 using System.ComponentModel;
 using System.Drawing;

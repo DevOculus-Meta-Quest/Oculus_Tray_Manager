@@ -1,4 +1,3 @@
-﻿// Decompiled with JetBrains decompiler
 
 using OculusTrayTool.My;
 using System;

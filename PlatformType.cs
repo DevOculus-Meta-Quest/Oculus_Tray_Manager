@@ -1,4 +1,3 @@
-﻿// Decompiled with JetBrains decompiler
 
 #nullable disable
 namespace OculusTrayTool

@@ -1,4 +1,3 @@
-﻿// Decompiled with JetBrains decompiler
 
 using Microsoft.VisualBasic.CompilerServices;
 using Microsoft.Win32.TaskScheduler;
