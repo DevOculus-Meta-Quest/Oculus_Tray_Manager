@@ -417,7 +417,7 @@ namespace OculusTrayTool
         MyProject.Forms.frmCreateEditProfile.ComboBox8.Text = MyProject.Forms.FrmMain.ComboBox8.Text;
         MyProject.Forms.frmCreateEditProfile.ComboBox9.Text = MyProject.Forms.FrmMain.ComboBox9.Text;
         MyProject.Forms.frmCreateEditProfile.ComboBoxEnabled.Text = "Yes";
-          foreach (KeyValuePair<string, string> game in this.GameList)
+          foreach (KeyValuePair<string, string> game in MyProject.Forms.frmProfiles.GameList)
             MyProject.Forms.frmCreateEditProfile.ComboBox1.Items.Add((object) new frmCreateEditProfile.GameItem(game.Key, game.Value));
         if (MyProject.Forms.frmCreateEditProfile.ComboBox1.Items.Count > 0)
           MyProject.Forms.frmCreateEditProfile.ComboBox1.Items.Add((object) "- All Games & Apps -");
