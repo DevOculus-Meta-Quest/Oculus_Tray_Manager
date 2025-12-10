@@ -15,14 +15,12 @@ namespace OculusTrayTool
 
     public static void GetAllControllers()
     {
-        // SharpDX missing. Stubbed.
         Log.WriteToLog("GetAllControllers: Functionality disabled due to missing SharpDX.dll dependency.");
         ControllersFound = false;
     }
 
     public static void SelectController()
     {
-        // SharpDX missing. Stubbed.
     }
 
     public static void CaptureSelectedButton()

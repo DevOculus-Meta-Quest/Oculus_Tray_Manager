@@ -1,8 +1,4 @@
 ﻿// Decompiled with JetBrains decompiler
-// Type: OculusTrayTool.AirLink
-// Assembly: OculusTrayTool, Version=0.87.8.0, Culture=neutral, PublicKeyToken=null
-// MVID: E8946A27-16D6-4BF6-9D7B-70CB25A977E0
-// Assembly location: C:\Program Files (x86)\Oculus Tray Tool\OculusTrayTool.exe
 
     using System;
     using System.Diagnostics;
@@ -164,11 +160,6 @@
                     using (Process process = Process.Start(startInfo))
                     {
                         process.WaitForExit();
-                        // We don't really rely on the return value in current usage, 
-                        // but to simulate 'count' we could check for success?
-                        // Original code returned invoke().Count.
-                        // For now returning 1 on success (exit code 0) might be enough if it was used, 
-                        // but it seems unused.
                         if (process.ExitCode == 0) num = 1; 
                     }
                 }

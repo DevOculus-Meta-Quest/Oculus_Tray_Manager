@@ -1,8 +1,4 @@
 ﻿// Decompiled with JetBrains decompiler
-// Type: OculusTrayTool.Oculus
-// Assembly: OculusTrayTool, Version=0.87.8.0, Culture=neutral, PublicKeyToken=null
-// MVID: E8946A27-16D6-4BF6-9D7B-70CB25A977E0
-// Assembly location: C:\Program Files (x86)\Oculus Tray Tool\OculusTrayTool.exe
 
 using Microsoft.VisualBasic.CompilerServices;
 using Microsoft.Win32;
@@ -117,16 +113,12 @@ namespace OculusTrayTool
                string pathVal = Conversions.ToString(libKey?.GetValue("Path"));
                if (!string.IsNullOrEmpty(pathVal))
                {
-                 // Extract the path suffix starting with the GUID-like part?
-                 // Original: oldValue = str2.Substring(str2.LastIndexOf("}")).TrimStart('}')
-                 // This logic seems specific to how Oculus stores paths in registry with volume GUIDs
                  int lastBrace = pathVal.LastIndexOf("}");
                  if (lastBrace >= 0)
                  {
                      string pathSuffix = pathVal.Substring(lastBrace).TrimStart('}');
                      string volumeDeviceID = pathVal.Replace(pathSuffix, "") + "\\";
                      
-                     // Helper function or inline WMI search? Inline for now matching original structure
                      using (ManagementObjectSearcher searcher = new ManagementObjectSearcher("Select * from Win32_Volume"))
                      {
                          foreach (ManagementObject obj in searcher.Get())

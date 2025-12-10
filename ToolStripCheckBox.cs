@@ -1,8 +1,4 @@
 ﻿// Decompiled with JetBrains decompiler
-// Type: OculusTrayTool.ToolStripCheckBox
-// Assembly: OculusTrayTool, Version=0.87.8.0, Culture=neutral, PublicKeyToken=null
-// MVID: E8946A27-16D6-4BF6-9D7B-70CB25A977E0
-// Assembly location: C:\Program Files (x86)\Oculus Tray Tool\OculusTrayTool.exe
 
 using System;
 using System.Drawing;
@@ -45,7 +41,6 @@ namespace OculusTrayTool
 
     private void OnCheckedChanged(object sender, EventArgs e)
     {
-      // ISSUE: reference to a compiler-generated field
       EventHandler checkedChangedEvent = this.CheckedChanged;
       if (checkedChangedEvent == null)
         return;

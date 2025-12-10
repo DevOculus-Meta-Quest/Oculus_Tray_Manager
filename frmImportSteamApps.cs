@@ -1,8 +1,4 @@
 ﻿// Decompiled with JetBrains decompiler
-// Type: OculusTrayTool.frmImportSteamApps
-// Assembly: OculusTrayTool, Version=0.87.8.0, Culture=neutral, PublicKeyToken=null
-// MVID: E8946A27-16D6-4BF6-9D7B-70CB25A977E0
-// Assembly location: C:\Program Files (x86)\Oculus Tray Tool\OculusTrayTool.exe
 
 using Microsoft.VisualBasic.CompilerServices;
 using OculusTrayTool.My;
@@ -277,9 +273,6 @@ namespace OculusTrayTool
         worker.WorkerReportsProgress = false;
         worker.DoWork += (sender, e) =>
         {
-             // TODO: Restore import logic. Assuming it involves looping through steamList and importing.
-             // Globals.steam or Globals.oculus might have methods.
-             // For now, doing nothing to allow compilation.
              System.Threading.Thread.Sleep(500); 
         };
         worker.RunWorkerCompleted += (sender, e) =>
@@ -338,13 +331,11 @@ namespace OculusTrayTool
         
         worker.DoWork += (sender, e) =>
         {
-             // TODO: Restore download logic.
              System.Threading.Thread.Sleep(500);
         };
         worker.RunWorkerCompleted += (sender, e) =>
         {
              processingForm.Close();
-             // TODO: Check result
         };
         worker.RunWorkerAsync();
         processingForm.ShowDialog(this);
@@ -429,7 +420,6 @@ namespace OculusTrayTool
         {
           DialogResult result = (DialogResult)control.Invoke( new Func<DialogResult>(() => 
           {
-              // Prompt user?
               return MessageBox.Show("Are you sure you want to remove " + steamNode.Name + "?", "Remove App", MessageBoxButtons.YesNo);
           }));
 
@@ -454,7 +444,6 @@ namespace OculusTrayTool
             }
             finally
             {
-              // loop clean
             }
             try
             {
@@ -470,7 +459,6 @@ namespace OculusTrayTool
             }
             finally
             {
-              // loop clean
             }
           }
         }

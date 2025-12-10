@@ -1,14 +1,8 @@
 ﻿// Decompiled with JetBrains decompiler
-// Type: OculusTrayTool.FrmMain
-// Assembly: OculusTrayTool, Version=0.87.8.0, Culture=neutral, PublicKeyToken=null
-// MVID: E8946A27-16D6-4BF6-9D7B-70CB25A977E0
-// Assembly location: C:\Program Files (x86)\Oculus Tray Tool\OculusTrayTool.exe
 
 using CoreAudio;
 using System.Speech.Recognition;
-// using static OculusTrayTool.Interaction;
 
-// #nullable disable
 using System.Timers;
 using Newtonsoft.Json.Linq;
 using OculusTrayTool.My;
@@ -37,7 +31,6 @@ using Microsoft.VisualBasic;
 using Microsoft.Win32;
 
 
-// #nullable disable
 namespace OculusTrayTool
 {
   public partial class FrmMain : Form
@@ -129,7 +122,6 @@ namespace OculusTrayTool
     private ManagementEventWatcher _MinimizeHomeWatcher;
     private KeyboardHook _kbHook;
     private CheckBox _CheckStopServiceHome;
-    // Backing fields for properties with event logic
     private CheckBox _CheckLocalDebug;
     private ComboBox _ComboSSstart;
     private Button _Button1, _Button2, _Button4, _Button5, _Button11, _BtnProfiles, _BtnHomless, _BtnRemoveAllProfiles, _BtnVoice, _ButtonRestartOVR, _ButtonStartOVR, _ButtonStopOVR, _Button10, _Button12, _Button3, _Button6, _Button9, _Button8, _BtnSteamImport, _BtnConfigureHotKeys, _BtnConfigureAudio, _BtnLibrary;
@@ -480,7 +472,6 @@ namespace OculusTrayTool
                 foreach (string oculusSoftwarePath in this.OculusSoftwarePaths)
                 {
                   Log.WriteToLog("Oculus Library path: " + oculusSoftwarePath.TrimEnd('\\'));
-                  // ISSUE: variable of a compiler-generated type
                   MySettings settings;
                   (settings = OculusTrayTool.My.MySettings.Default).LibraryPath = settings.LibraryPath + oculusSoftwarePath + ",";
                   OculusTrayTool.My.MySettings.Default.Save();
@@ -906,7 +897,6 @@ namespace OculusTrayTool
       try
       {
         this.Hide();
-        // return; // Removed unreachable return or kept it? Logic implies hide then done.
       }
       catch (Exception ex)
       {
@@ -1005,24 +995,20 @@ namespace OculusTrayTool
     public delegate void SetToolTipDelegate(string text, Control crtl);
     private void Watcher_EventArrived(object sender, EventArrivedEventArgs e)
     {
-        // TODO: Implement Watcher_EventArrived logic
     }
 
 
 
     private void kbHook_KeyDown(Keys Key)
     {
-        // TODO: Implement kbHook_KeyDown logic
     }
 
     private void kbHook_KeyUp(Keys Key)
     {
-        // TODO: Implement kbHook_KeyUp logic
     }
 
     private void Form1_Resize(object sender, EventArgs e)
     {
-        // TODO: Implement Form1_Resize logic
     }
 
     private string GetSteamPath() { return ""; }
@@ -1074,7 +1060,6 @@ namespace OculusTrayTool
     private void EnableShowHomeMenu() { }
     private void DisableShowHomeMenu() { }
     
-    // Event Handlers
     private void CheckStartWindows_CheckedChanged(object sender, EventArgs e) { }
     private void NotifyIcon1_DoubleClick(object sender, EventArgs e) { }
     private void ButtonStartOVR_Click(object sender, EventArgs e)
@@ -1203,7 +1188,6 @@ namespace OculusTrayTool
 
     private string SplitToolTip(string tip)
     {
-        // TODO: Implement SplitToolTip logic
         return tip;
     }
     private string GenerateSHA256Hash(string filename)
@@ -1236,7 +1220,6 @@ namespace OculusTrayTool
     {
         this.NotificationTimer.Stop();
         this._NotifyIcon1.Visible = false;
-        // Logic to hide toast/notification?
     }
 
 
@@ -1251,7 +1234,6 @@ namespace OculusTrayTool
       this.ToolTip1.SetToolTip(control, text);
     }
 
-    // Added methods to resolve compilation errors
     private void CheckStartWithWindowsLogic()
     {
          try {
@@ -1290,7 +1272,6 @@ namespace OculusTrayTool
     {
         Log.WriteToLog("ShowUpdateToast stub called");
         try {
-            // if (OculusTrayTool.My.MySettings.Default.ShowUpdateToast)
             {
                  MyProject.Forms.frmUpdateToast.ShowDialog();
             }

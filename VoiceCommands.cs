@@ -1,8 +1,4 @@
 ﻿// Decompiled with JetBrains decompiler
-// Type: OculusTrayTool.VoiceCommands
-// Assembly: OculusTrayTool, Version=0.87.8.0, Culture=neutral, PublicKeyToken=null
-// MVID: E8946A27-16D6-4BF6-9D7B-70CB25A977E0
-// Assembly location: C:\Program Files (x86)\Oculus Tray Tool\OculusTrayTool.exe
 
 using CoreAudio;
 using System.Speech.Recognition;
@@ -197,9 +193,7 @@ namespace OculusTrayTool
 
     public static void sRecognize_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
     {
-        // Placeholder for main voice command recognition logic
         if (Globals.dbg) Log.WriteToLog("Main Voice Command Recognized: " + e.Result.Text);
-        // Implement logic to parse commands like "Enable ASW", "Launch Steam", etc.
     }
 
     public static void StopListening()

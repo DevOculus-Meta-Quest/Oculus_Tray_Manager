@@ -1,8 +1,4 @@
 ﻿// Decompiled with JetBrains decompiler
-// Type: OculusTrayTool.CueToolStripTextBox
-// Assembly: OculusTrayTool, Version=0.87.8.0, Culture=neutral, PublicKeyToken=null
-// MVID: E8946A27-16D6-4BF6-9D7B-70CB25A977E0
-// Assembly location: C:\Program Files (x86)\Oculus Tray Tool\OculusTrayTool.exe
 
 using Microsoft.VisualBasic.CompilerServices;
 using System;
@@ -80,7 +76,6 @@ namespace OculusTrayTool
     [EditorBrowsable(EditorBrowsableState.Advanced)]
     protected virtual void OnCueTextChanged(EventArgs e)
     {
-      // ISSUE: reference to a compiler-generated field
       EventHandler textChangedEvent = this.CueTextChanged;
       if (textChangedEvent == null)
         return;
@@ -109,7 +104,6 @@ namespace OculusTrayTool
     [EditorBrowsable(EditorBrowsableState.Advanced)]
     protected virtual void OnShowCueTextWithFocusChanged(EventArgs e)
     {
-      // ISSUE: reference to a compiler-generated field
       EventHandler focusChangedEvent = this.ShowCueTextWithFocusChanged;
       if (focusChangedEvent == null)
         return;

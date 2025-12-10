@@ -17,14 +17,12 @@ namespace OculusTrayTool
         {
             private T GetForm<T>() where T : Form, new()
             {
-                // Return open form or create new one
                 var form = Application.OpenForms.OfType<T>().FirstOrDefault();
                 if (form == null || form.IsDisposed)
                     return new T();
                 return form;
             }
 
-            // Add all forms seen in FrmMain
             public FrmMain FrmMain => GetForm<FrmMain>();
             public frmLibrary frmLibrary => GetForm<frmLibrary>();
             public frmVoiceSettings frmVoiceSettings => GetForm<frmVoiceSettings>();

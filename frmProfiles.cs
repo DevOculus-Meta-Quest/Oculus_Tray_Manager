@@ -1,8 +1,4 @@
 ﻿// Decompiled with JetBrains decompiler
-// Type: OculusTrayTool.frmProfiles
-// Assembly: OculusTrayTool, Version=0.87.8.0, Culture=neutral, PublicKeyToken=null
-// MVID: E8946A27-16D6-4BF6-9D7B-70CB25A977E0
-// Assembly location: C:\Program Files (x86)\Oculus Tray Tool\OculusTrayTool.exe
 
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.CompilerServices;
@@ -201,7 +197,6 @@ namespace OculusTrayTool
       this.ListView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
       this.ListView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
       
-      // Populate Checkbox from Settings
       GetConfig.IsReading = true;
       try
       {
@@ -218,7 +213,6 @@ namespace OculusTrayTool
       }
 
       this.Show();
-      // Populate Profile List
       OTTDB.GetProfiles();
       this.ComboResolution.Focus();
     }
@@ -401,7 +395,6 @@ namespace OculusTrayTool
       {
         MyProject.Forms.frmCreateEditProfile.ComboBox1.Items.Clear();
 
-        // TEMP DEBUG
         MessageBox.Show("ShowCreate: Populating list. GameList count: " + MyProject.Forms.frmProfiles.GameList.Count.ToString(), "frmProfiles Debug");
 
         MyProject.Forms.frmCreateEditProfile.TextDisplayName.Visible = false;

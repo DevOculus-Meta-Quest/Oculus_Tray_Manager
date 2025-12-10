@@ -1,8 +1,4 @@
 ﻿// Decompiled with JetBrains decompiler
-// Type: OculusTrayTool.frmVoiceSettings
-// Assembly: OculusTrayTool, Version=0.87.8.0, Culture=neutral, PublicKeyToken=null
-// MVID: E8946A27-16D6-4BF6-9D7B-70CB25A977E0
-// Assembly location: C:\Program Files (x86)\Oculus Tray Tool\OculusTrayTool.exe
 
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.CompilerServices;
@@ -105,7 +101,6 @@ namespace OculusTrayTool
         this.VoicechangeMade = false;
         MyProject.Forms.FrmMain.AddToListboxAndScroll("Restarting voice recognition");
         VoiceCommands.StopListening();
-        // VoiceCommands.DisableVoice();
         VoiceCommands.StartStopBuilder();
       }
       this.Close();
@@ -128,7 +123,6 @@ namespace OculusTrayTool
       else
         this.StartPosition = FormStartPosition.CenterParent;
 
-      // Populate Checkboxes from Settings
       GetConfig.IsReading = true; // Prevent event handlers from triggering logic during load
       try
       {
@@ -142,7 +136,6 @@ namespace OculusTrayTool
           this.CheckBox6.Checked = MySettingsProperty.Settings.JoystickActivationKeyPush;
           this.CheckBox7.Checked = MySettingsProperty.Settings.DisableVoiceControlAudioFeedback;
 
-          // Trigger logic to enable/disable dependent controls without saving settings
           if (this.CheckBox3.Checked) this.CheckBox3_CheckedChanged(null, null);
           if (this.CheckBox4.Checked) this.CheckBox4_CheckedChanged(null, null);
           if (this.CheckBox5.Checked) this.CheckBox5_CheckedChanged(null, null);

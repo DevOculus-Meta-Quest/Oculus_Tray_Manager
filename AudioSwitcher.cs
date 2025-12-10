@@ -82,23 +82,9 @@ namespace OculusTrayTool
 
         public static void SetDefaultAudioDeviceOnStart(bool confirm)
         {
-             // Mirrors logic for Rift/Fallback based on settings or args?
-             // Actually, the name implies setting "Start" device?
-             // Or setting Default Audio Device when the tool *Starts*?
-             // Usage in FrmMain suggests it might set Rift or Fallback based on config.
-             // But existing calls are AudioSwitcher.SetDefaultAudioDeviceOnStart(false);
-             // Let's assume it sets Rift if configured?
-             // FrmMain.cs 2065: AudioSwitcher.SetFallbackAudioDevice();
-             // FrmMain.cs 673: AudioSwitcher.SetDefaultAudioDeviceOnStart(false);
              
-             // I'll check "SetRiftDefaultAudioDevice" in RiftDefault.cs.
-             // Maybe this is just a wrapper?
              
-             // Inspecting FrmMain.cs usage logic:
-             // if (SetRiftAudioDefault == 0) -> SetDefaultAudioDeviceOnStart
              
-             // For now, I'll implement it as setting Rift Default (since Fallback is separate).
-             // Wait, if confirm is true, maybe play sound?
              
             try
             {
@@ -112,8 +98,6 @@ namespace OculusTrayTool
                     
                     if (confirm)
                     {
-                         // Play confirmation sound?
-                         // My.MyComputer.Audio.Play(...);
                     }
                 }
             }
@@ -125,19 +109,10 @@ namespace OculusTrayTool
 
         public static void SetDefaultAudioCommDeviceOnStart()
         {
-             // Similar logic for Rift Comm
              try
             {
                 string guid = My.MySettings.Default.RiftAudioGuid; // Or separate Comm guid?
-                // Checking settings names... MySettings.Default.RiftAudioGuid is used in RiftDefault.cs
-                // Is there a RiftCommAudioGuid?
-                // I'll guess it uses the same device for Comm usually, or maybe no specific setting?
-                // RiftDefault.cs doesn't show Comm method.
-                // But FrmMain calls SetDefaultAudioCommDeviceOnStart.
                 
-                // Let's assume RiftAudioGuid for now or check if there is a RiftAudioCommGuid.
-                // I'll look at MySettings property usage in FrmMain again if I can.
-                // or just use RiftAudioGuid for eCommunications.
                 
                 if (!string.IsNullOrEmpty(guid))
                 {
@@ -154,7 +129,6 @@ namespace OculusTrayTool
 
         public static void SetDefaultMicCommDeviceOnStart()
         {
-             // Assume Rift Mic for Comm
              try
             {
                  string guid = My.MySettings.Default.RiftMicGuid;

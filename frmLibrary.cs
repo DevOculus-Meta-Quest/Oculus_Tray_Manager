@@ -1,8 +1,4 @@
 ﻿// Decompiled with JetBrains decompiler
-// Type: OculusTrayTool.frmLibrary
-// Assembly: OculusTrayTool, Version=0.87.8.0, Culture=neutral, PublicKeyToken=null
-// MVID: E8946A27-16D6-4BF6-9D7B-70CB25A977E0
-// Assembly location: C:\Program Files (x86)\Oculus Tray Tool\OculusTrayTool.exe
 
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.CompilerServices;
@@ -394,7 +390,6 @@ label_44:
       PicturePlay.Visible = false;
       ListView1.BeginUpdate();
 
-      // Read SteamVR Manifest
       if (!string.IsNullOrEmpty(MyProject.Forms.FrmMain.SteamPath))
       {
         string path = Path.Combine(MyProject.Forms.FrmMain.SteamPath, "config\\steamapps.vrmanifest");
@@ -430,7 +425,6 @@ label_44:
         }
       }
 
-      // Process JSON files
       try
       {
         string[] files = Directory.GetFiles(p, "*.json");
@@ -518,10 +512,6 @@ label_44:
                    }
                 }
               }
-              // Close connection after each db check to match legacy behavior? 
-              // The original closed it at label 111.
-              // But it makes sense to keep it open?
-              // I'll close it here to be safe and match assumed legacy behavior of "transient connection"
               if (cnn.State == ConnectionState.Open) cnn.Close();
             }
           }

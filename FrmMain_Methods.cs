@@ -7,18 +7,14 @@ namespace OculusTrayTool
 {
     public partial class FrmMain
     {
-        // Ensuring ListBox1 exists if not already defined
-        // public System.Windows.Forms.ListBox ListBox1; // Commented out to avoid conflict if it exists privately
 
         public void LoadVoiceSettings()
         {
-            // Stub implementation
             if (Globals.dbg) Log.WriteToLog("LoadVoiceSettings called");
         }
 
         public string GetCurrentResolution()
         {
-            // Stub implementation
             return "1920x1080"; 
         }
 
@@ -40,22 +36,18 @@ namespace OculusTrayTool
 
         public void OnTimerProfile(object sender, System.Timers.ElapsedEventArgs e)
         {
-            // Stub
         }
 
         public void InstallHomeless()
         {
-             // Stub
         }
 
         public void PowerModeChanged(object sender, PowerModeChangedEventArgs e)
         {
-             // Stub
         }
 
          public void GetOculusLinkValues()
         {
-             // Stub
         }
     }
 }

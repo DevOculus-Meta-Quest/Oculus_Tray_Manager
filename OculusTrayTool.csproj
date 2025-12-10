@@ -83,7 +83,9 @@
     <Compile Include="ToolStripCheckBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ToolStripSpringTextBox.cs" />
+    <Compile Include="ToolStripSpringTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="FileDownloader.cs" />
     <Compile Include="FileDownloadProgressChangedEventArgs.cs" />
     <Compile Include="FileDownloadErrorEventArgs.cs" />
