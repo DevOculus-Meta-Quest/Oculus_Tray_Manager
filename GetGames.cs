@@ -345,8 +345,7 @@ namespace OculusTrayTool
           SQLiteCommand sqLiteCommand = new SQLiteCommand(connection);
           string[] files = Directory.GetFiles(p, "*.mini");
           Log.WriteToLog("Found " + files.Length + " mini files to process.");
-          int index = 0;
-          while (index < files.Length)
+          for (int index = 0; index < files.Length; index++)
           {
             string str4 = files[index];
             Log.WriteToLog("GetFiles: Processing " + Path.GetFileName(str4));
@@ -495,7 +494,7 @@ namespace OculusTrayTool
               ProjectData.ClearProjectError();
               continue;
             }
-            checked { ++index; }
+
           }
           sqLiteCommand.Dispose();
           connection.Close();

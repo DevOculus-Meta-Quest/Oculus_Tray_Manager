@@ -573,7 +573,7 @@ namespace OculusTrayTool
           Directory.CreateDirectory(str1);
           Globals.steam = new Steam(str1);
           Globals.oculus = new Oculus(str1, Globals.steam);
-          this.GetSteamPath();
+          this.SteamPath = this.GetSteamPath();
           this.GetSteamVR();
           if (string.Compare(this.SteamPath, "", StringComparison.Ordinal) != 0)
           {
