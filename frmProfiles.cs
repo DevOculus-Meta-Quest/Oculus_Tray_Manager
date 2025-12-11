@@ -28,7 +28,7 @@ namespace OculusTrayTool
     private int sortColumn;
     private string ProfileToFind;
     public int selectedItem;
-    public Dictionary<string, string> GameList;
+
     private CheckBox cck;
 
 
@@ -40,7 +40,7 @@ namespace OculusTrayTool
       this.Load += this.scan_Load;
       this.rs = new Resizer();
       this.sortColumn = -1;
-      this.GameList = new Dictionary<string, string>();
+      // this.GameList = new Dictionary<string, string>();
       this.InitializeComponent();
     }
 
@@ -413,8 +413,8 @@ namespace OculusTrayTool
         MyProject.Forms.frmCreateEditProfile.ComboBox8.Text = FrmMain.fmain.ComboBox8.Text;
         MyProject.Forms.frmCreateEditProfile.ComboBox9.Text = FrmMain.fmain.ComboBox9.Text;
         MyProject.Forms.frmCreateEditProfile.ComboBoxEnabled.Text = "Yes";
-          Log.WriteToLog("ShowCreate: GameList count = " + MyProject.Forms.frmProfiles.GameList.Count);
-          foreach (KeyValuePair<string, string> game in MyProject.Forms.frmProfiles.GameList)
+          Log.WriteToLog("ShowCreate: GameList count = " + GetGames.GameList.Count);
+          foreach (KeyValuePair<string, string> game in GetGames.GameList)
           {
              // Log.WriteToLog("Adding game: " + game.Key);
              MyProject.Forms.frmCreateEditProfile.ComboBox1.Items.Add((object) new frmCreateEditProfile.GameItem(game.Key, game.Value));

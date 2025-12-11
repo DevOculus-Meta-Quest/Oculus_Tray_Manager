@@ -80,7 +80,11 @@ namespace OculusTrayTool
             Log.WriteToLog("Added Power Plan '" + managementObject["ElementName"].ToString() + "' to list");
         }
         if (!Globals.dbg)
-          return;
+        {
+             // Log counts even if not dbg, for diagnosis
+             Log.WriteToLog("GetPowerPlans: Found " + PowerPlans.IDs.Count + " plans. Added to dropdowns.");
+        }
+           return;
         Log.WriteToLog("Exiting GetPowerPlans");
       }
       catch (Exception ex)

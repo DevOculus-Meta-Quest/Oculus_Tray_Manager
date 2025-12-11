@@ -18,6 +18,7 @@ namespace OculusTrayTool
     public static Dictionary<string, string> manifesDictionary = new Dictionary<string, string>();
     public static Dictionary<string, string> assetPaths = new Dictionary<string, string>();
     public static List<string> steamGameList = new List<string>();
+    public static Dictionary<string, string> GameList = new Dictionary<string, string>();
 
     public static void GetSteamGames()
     {
@@ -25,9 +26,14 @@ namespace OculusTrayTool
       {
         if (Globals.dbg)
           Log.WriteToLog("Updating list of Steam games..");
+        Log.WriteToLog("GetSteamGames: Start. dbg=" + Globals.dbg);
         List<SteamNode> steamList = (List<SteamNode>) null;
         if (!Globals.oculus.TryRefresh() || !Globals.steam.TryRefresh() || !Globals.steam.TryGetVRManifest(ref steamList))
-          return;
+        {
+           Log.WriteToLog("GetSteamGames: Failed to refresh or get manifest.");
+           return;
+        }
+        Log.WriteToLog("GetSteamGames: Found " + steamList.Count + " steam items.");
         if (!Globals.steam.TryGetAppInfo(steamList, true, true))
           return;
         try
@@ -42,9 +48,13 @@ namespace OculusTrayTool
               if (!FrmMain.fmain.AllAppsList.ContainsKey(key))
               {
                 FrmMain.fmain.AllAppsList.Add(key, steamNode.Name);
-                MyProject.Forms.frmProfiles.GameList.Add(steamNode.Name, key);
                 if (Globals.dbg)
                   Log.WriteToLog("GetSteamGames: All Apps List: Added Steam App '" + steamNode.Name + "' with path '" + key + "'");
+              }
+              if (!GameList.ContainsKey(steamNode.Name))
+              {
+                 GameList.Add(steamNode.Name, key);
+                 // Log.WriteToLog("GetSteamGames: Added to GameList: " + steamNode.Name);
               }
               if (!GetGames.steamGameList.Contains(steamNode.Name))
               {
@@ -265,11 +275,11 @@ namespace OculusTrayTool
       {
         if (Globals.dbg)
           Log.WriteToLog("AddThirdPartyGameToList: Game is not hidden");
-        if (!MyProject.Forms.frmProfiles.GameList.ContainsKey(DisplayName))
+        if (!GameList.ContainsKey(DisplayName))
         {
           if (!FrmMain.fmain.profilePaths.ContainsKey(completePath))
           {
-            MyProject.Forms.frmProfiles.GameList.Add(DisplayName, completePath);
+            GameList.Add(DisplayName, completePath);
             Log.WriteToLog("Third-Party App '" + DisplayName + "' added to available games list");
           }
           else
@@ -307,7 +317,8 @@ namespace OculusTrayTool
 
     public static void GetFiles(string p)
     {
-      try
+       Log.WriteToLog("GetFiles: Looking for files in " + p);
+       try
       {
         SQLiteConnection connection = new SQLiteConnection();
         string[] strArray = OculusTrayTool.My.MySettings.Default.LibraryPath.Split(',');
@@ -444,11 +455,11 @@ namespace OculusTrayTool
                         }
                         if (!OTTDB.CheckHiddenApp(launchfile, str11, "Both"))
                         {
-                          if (!MyProject.Forms.frmProfiles.GameList.ContainsKey(str11))
+                          if (!GameList.ContainsKey(str11))
                           {
                             if (!FrmMain.fmain.profilePaths.ContainsKey(str6))
                             {
-                              MyProject.Forms.frmProfiles.GameList.Add(str11, str6);
+                              GameList.Add(str11, str6);
                               Log.WriteToLog("Oculus Store App '" + str11 + "' added to available games list");
                             }
                             else

@@ -744,7 +744,7 @@ label_44:
         }
       }
       MyProject.Forms.frmCreateEditProfile.ComboBox1.Items.Clear();
-      MyProject.Forms.frmProfiles.GameList.Clear();
+      GetGames.GameList.Clear();
       if (Directory.Exists(MyProject.Forms.FrmMain.OculusPath.TrimEnd('\\') + "\\Manifests"))
         GetGames.GetFiles(MyProject.Forms.FrmMain.OculusPath.TrimEnd('\\') + "\\Manifests");
       if (Directory.Exists(MyProject.Forms.FrmMain.OculusPath.TrimEnd('\\') + "\\Software\\Manifests"))

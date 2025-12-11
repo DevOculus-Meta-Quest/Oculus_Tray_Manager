@@ -555,11 +555,11 @@ namespace OculusTrayTool
               string str12 = Conversions.ToString(sqLiteDataReader[16]);
               if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(str12, "No", false) == 0)
                 checked { ++num; }
-                foreach (KeyValuePair<string, string> game in MyProject.Forms.frmProfiles.GameList)
+                foreach (KeyValuePair<string, string> game in GetGames.GameList)
                 {
                   if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(game.Value, str3, false) == 0)
                   {
-                    MyProject.Forms.frmProfiles.GameList.Remove(game.Key);
+                    GetGames.GameList.Remove(game.Key);
                     break;
                   }
                 }
