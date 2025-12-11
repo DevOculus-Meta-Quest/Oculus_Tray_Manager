@@ -297,6 +297,7 @@ namespace OculusTrayTool
         VoiceCommands.Initialize();
         if (Globals.dbg)
           Log.WriteToLog("Checking Administrator privileges");
+        Log.WriteToLog("Form1_Load: fmain is " + (fmain == null ? "null" : "set") + ", matching this: " + (fmain == this));
         this.isElevated = new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
         if (!this.isElevated)
         {

@@ -59,7 +59,7 @@ namespace OculusTrayTool
     {
       if (Globals.dbg)
         Log.WriteToLog("Entering GetPowerPlans");
-      Log.WriteToLog("Getting list of available Power Plans");
+      Log.WriteToLog("Getting list of available Power Plans. FrmMain.fmain is " + (FrmMain.fmain == null ? "null" : "set"));
       try
       {
         PowerPlans.IDs.Clear();
