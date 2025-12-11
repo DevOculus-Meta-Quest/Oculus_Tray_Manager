@@ -87,6 +87,7 @@ namespace OculusTrayTool
       for (int index = 0; index < files.Length; index++)
       {
         string str2 = files[index];
+        Log.WriteToLog("GetThirdPartyApps: Processing " + str2);
         try
         {
           if (!str2.Contains("_assets.json"))
@@ -343,10 +344,12 @@ namespace OculusTrayTool
           Log.WriteToLog("Parsing Manifests in " + p);
           SQLiteCommand sqLiteCommand = new SQLiteCommand(connection);
           string[] files = Directory.GetFiles(p, "*.mini");
+          Log.WriteToLog("Found " + files.Length + " mini files to process.");
           int index = 0;
           while (index < files.Length)
           {
             string str4 = files[index];
+            Log.WriteToLog("GetFiles: Processing " + Path.GetFileName(str4));
             try
             {
               if (!FrmMain.fmain.includedApps.Contains(str4) && FrmMain.fmain.ignoredApps.Contains(str4.Replace(".mini", "")))
