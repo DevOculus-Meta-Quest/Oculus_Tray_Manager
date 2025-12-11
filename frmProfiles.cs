@@ -398,8 +398,8 @@ namespace OculusTrayTool
 
         MyProject.Forms.frmCreateEditProfile.TextDisplayName.Visible = false;
         MyProject.Forms.frmCreateEditProfile.ComboBox1.Visible = true;
-        MyProject.Forms.frmCreateEditProfile.ComboBox1.DisplayMember = "Name";
-        MyProject.Forms.frmCreateEditProfile.ComboBox1.ValueMember = "Info";
+        // MyProject.Forms.frmCreateEditProfile.ComboBox1.DisplayMember = "Name";
+        // MyProject.Forms.frmCreateEditProfile.ComboBox1.ValueMember = "Info";
         MyProject.Forms.frmCreateEditProfile.ComboSS.Text = MyProject.Forms.FrmMain.ComboSSstart.Text;
         MyProject.Forms.frmCreateEditProfile.ComboASW.Text = MyProject.Forms.FrmMain.ComboBox1.Text;
         MyProject.Forms.frmCreateEditProfile.ComboCPU.SelectedIndex = 0;
@@ -413,14 +413,56 @@ namespace OculusTrayTool
         MyProject.Forms.frmCreateEditProfile.ComboBox8.Text = FrmMain.fmain.ComboBox8.Text;
         MyProject.Forms.frmCreateEditProfile.ComboBox9.Text = FrmMain.fmain.ComboBox9.Text;
         MyProject.Forms.frmCreateEditProfile.ComboBoxEnabled.Text = "Yes";
-          Log.WriteToLog("ShowCreate: GameList count = " + GetGames.GameList.Count);
+        MyProject.Forms.frmCreateEditProfile.ComboBoxEnabled.Text = "Yes";
+        
+        // Fix: Repopulate if empty
+        if (GetGames.GameList.Count == 0)
+        {
+            Log.WriteToLog("ShowCreate: GameList is empty, repopulating...");
+            
+            try 
+            {
+                GetGames.GetSteamGames();
+
+                string mainPath = MyProject.Forms.FrmMain.OculusPath.TrimEnd('\\');
+                if (Directory.Exists(mainPath + "\\Manifests"))
+                     GetGames.GetFiles(mainPath + "\\Manifests");
+                if (Directory.Exists(mainPath + "\\Software\\Manifests"))
+                     GetGames.GetFiles(mainPath + "\\Software\\Manifests");
+                
+                if (Operators.CompareString(MySettingsProperty.Settings.LibraryPath, "", false) != 0)
+                {
+                    string[] strArray = Strings.Split(MySettingsProperty.Settings.LibraryPath, ",");
+                    foreach (string str in strArray)
+                    {
+                       if (Directory.Exists(str.TrimEnd('\\') + "\\Manifests"))
+                         GetGames.GetFiles(str.TrimEnd('\\') + "\\Manifests");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.WriteToLog("ShowCreate Repopulate Error: " + ex.Message);
+            }
+        }
+
+        Log.WriteToLog("ShowCreate: GameList count = " + GetGames.GameList.Count);
           foreach (KeyValuePair<string, string> game in GetGames.GameList)
           {
              // Log.WriteToLog("Adding game: " + game.Key);
              MyProject.Forms.frmCreateEditProfile.ComboBox1.Items.Add((object) new frmCreateEditProfile.GameItem(game.Key, game.Value));
           }
         if (MyProject.Forms.frmCreateEditProfile.ComboBox1.Items.Count > 0)
+        {
           MyProject.Forms.frmCreateEditProfile.ComboBox1.Items.Add((object) "- All Games & Apps -");
+          MyProject.Forms.frmCreateEditProfile.ComboBox1.SelectedIndex = 0; // Fix: Auto-select first item
+        }
+        
+        // Debug Verification
+        MessageBox.Show("GameList Count: " + MyProject.Forms.frmCreateEditProfile.ComboBox1.Items.Count + 
+                        "\nSelectedIndex: " + MyProject.Forms.frmCreateEditProfile.ComboBox1.SelectedIndex + 
+                        "\nGameList from Log: " + GetGames.GameList.Count, "Debug UI State");
+                        
         int num = (int) MyProject.Forms.frmCreateEditProfile.ShowDialog();
       }
       catch (Exception ex)

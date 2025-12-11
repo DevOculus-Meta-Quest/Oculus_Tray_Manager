@@ -19,6 +19,7 @@ namespace OculusTrayTool
     public static Dictionary<string, string> assetPaths = new Dictionary<string, string>();
     public static List<string> steamGameList = new List<string>();
     public static Dictionary<string, string> GameList = new Dictionary<string, string>();
+    private static readonly object _lock = new object();
 
     public static void GetSteamGames()
     {
@@ -43,24 +44,28 @@ namespace OculusTrayTool
             if (steamNode.Executable != null)
             {
               if (Globals.dbg)
-                Log.WriteToLog("GetSteamGames: Name: " + steamNode.Name + " Executable: " + Path.GetFileName(steamNode.Executable.Replace("/", "\\")) + " Full path: " + steamNode.LibraryFolder + "\\steamapps\\common\\" + steamNode.InstallDir + "\\" + steamNode.Executable.Replace("/", "\\"));
+                 Log.WriteToLog("GetSteamGames: Name: " + steamNode.Name + " Executable: " + Path.GetFileName(steamNode.Executable.Replace("/", "\\")) + " Full path: " + steamNode.LibraryFolder + "\\steamapps\\common\\" + steamNode.InstallDir + "\\" + steamNode.Executable.Replace("/", "\\"));
               string key = steamNode.LibraryFolder + "\\steamapps\\common\\" + steamNode.InstallDir + "\\" + steamNode.Executable.Replace("/", "\\");
-              if (!FrmMain.fmain.AllAppsList.ContainsKey(key))
+              
+              lock(_lock)
               {
-                FrmMain.fmain.AllAppsList.Add(key, steamNode.Name);
-                if (Globals.dbg)
-                  Log.WriteToLog("GetSteamGames: All Apps List: Added Steam App '" + steamNode.Name + "' with path '" + key + "'");
-              }
-              if (!GameList.ContainsKey(steamNode.Name))
-              {
-                 GameList.Add(steamNode.Name, key);
-                 // Log.WriteToLog("GetSteamGames: Added to GameList: " + steamNode.Name);
-              }
-              if (!GetGames.steamGameList.Contains(steamNode.Name))
-              {
-                GetGames.steamGameList.Add(steamNode.Name);
-                if (Globals.dbg)
-                  Log.WriteToLog("GetSteamGames: Steam Game List: Added Steam App '" + steamNode.Name + "'");
+                  if (!FrmMain.fmain.AllAppsList.ContainsKey(key))
+                  {
+                    FrmMain.fmain.AllAppsList.Add(key, steamNode.Name);
+                    if (Globals.dbg)
+                      Log.WriteToLog("GetSteamGames: All Apps List: Added Steam App '" + steamNode.Name + "' with path '" + key + "'");
+                  }
+                  if (!GameList.ContainsKey(steamNode.Name))
+                  {
+                     GameList.Add(steamNode.Name, key);
+                     // Log.WriteToLog("GetSteamGames: Added to GameList: " + steamNode.Name);
+                  }
+                  if (!GetGames.steamGameList.Contains(steamNode.Name))
+                  {
+                    GetGames.steamGameList.Add(steamNode.Name);
+                    if (Globals.dbg)
+                      Log.WriteToLog("GetSteamGames: Steam Game List: Added Steam App '" + steamNode.Name + "'");
+                  }
               }
             }
           }
@@ -263,11 +268,14 @@ namespace OculusTrayTool
       string completePath,
       string canonName)
     {
-      if (!FrmMain.fmain.AllAppsList.ContainsKey(completePath))
+      lock(_lock)
       {
-        FrmMain.fmain.AllAppsList.Add(completePath, DisplayName);
-        if (Globals.dbg)
-          Log.WriteToLog("AddThirdPartyGameToList: All Apps List: Added Steam App '" + DisplayName + "' with path '" + completePath + "'");
+          if (!FrmMain.fmain.AllAppsList.ContainsKey(completePath))
+          {
+            FrmMain.fmain.AllAppsList.Add(completePath, DisplayName);
+            if (Globals.dbg)
+              Log.WriteToLog("AddThirdPartyGameToList: All Apps List: Added Steam App '" + DisplayName + "' with path '" + completePath + "'");
+          }
       }
       if (Globals.dbg)
         Log.WriteToLog("AddThirdPartyGameToList: Game found, checking for hidden attribute");
@@ -275,35 +283,38 @@ namespace OculusTrayTool
       {
         if (Globals.dbg)
           Log.WriteToLog("AddThirdPartyGameToList: Game is not hidden");
-        if (!GameList.ContainsKey(DisplayName))
-        {
-          if (!FrmMain.fmain.profilePaths.ContainsKey(completePath))
+      lock(_lock)
+      {
+          if (!GameList.ContainsKey(DisplayName))
           {
-            GameList.Add(DisplayName, completePath);
-            Log.WriteToLog("Third-Party App '" + DisplayName + "' added to available games list");
+            if (!FrmMain.fmain.profilePaths.ContainsKey(completePath))
+            {
+              GameList.Add(DisplayName, completePath);
+              Log.WriteToLog("Third-Party App '" + DisplayName + "' added to available games list");
+            }
+            else
+              Log.WriteToLog("Third-Party App '" + DisplayName + "' has a profile, NOT added");
           }
-          else
-            Log.WriteToLog("Third-Party App '" + DisplayName + "' has a profile, NOT added");
-        }
-        if (!GetGames.manifesDictionary.ContainsKey(DisplayName))
-          GetGames.manifesDictionary.Add(DisplayName, manifest);
-        if (File.Exists(assetPath + "\\" + canonName + "_assets\\cover_landscape_image.jpg"))
-        {
-          if (GetGames.assetPaths.ContainsKey(DisplayName))
-            return;
-          GetGames.assetPaths.Add(DisplayName, assetPath + "\\" + canonName + "_assets");
-          if (Globals.dbg)
-            Log.WriteToLog("Added " + assetPath + "\\" + canonName + "_assets as asset path for '" + DisplayName + "'");
-        }
-        else if (File.Exists(otherAssetPath + "\\" + canonName + "_assets\\cover_landscape_image.jpg"))
-        {
-          if (!GetGames.assetPaths.ContainsKey(DisplayName))
+          if (!GetGames.manifesDictionary.ContainsKey(DisplayName))
+            GetGames.manifesDictionary.Add(DisplayName, manifest);
+          if (File.Exists(assetPath + "\\" + canonName + "_assets\\cover_landscape_image.jpg"))
           {
-            GetGames.assetPaths.Add(DisplayName, otherAssetPath + "\\" + canonName + "_assets");
+            if (GetGames.assetPaths.ContainsKey(DisplayName))
+              return;
+            GetGames.assetPaths.Add(DisplayName, assetPath + "\\" + canonName + "_assets");
             if (Globals.dbg)
-              Log.WriteToLog("Added " + otherAssetPath + "\\" + canonName + "_assets as asset path for '" + DisplayName + "'");
+              Log.WriteToLog("Added " + assetPath + "\\" + canonName + "_assets as asset path for '" + DisplayName + "'");
           }
-        }
+          else if (File.Exists(otherAssetPath + "\\" + canonName + "_assets\\cover_landscape_image.jpg"))
+          {
+            if (!GetGames.assetPaths.ContainsKey(DisplayName))
+            {
+              GetGames.assetPaths.Add(DisplayName, otherAssetPath + "\\" + canonName + "_assets");
+              if (Globals.dbg)
+                Log.WriteToLog("Added " + otherAssetPath + "\\" + canonName + "_assets as asset path for '" + DisplayName + "'");
+            }
+          }
+      }
         else
         {
           Log.WriteToLog("AddThirdPartyGameToList(): Warning: Could not find asset path for '" + DisplayName + "' in ");
@@ -455,36 +466,41 @@ namespace OculusTrayTool
                         }
                         if (!OTTDB.CheckHiddenApp(launchfile, str11, "Both"))
                         {
-                          if (!GameList.ContainsKey(str11))
+                          lock(_lock)
                           {
-                            if (!FrmMain.fmain.profilePaths.ContainsKey(str6))
-                            {
-                              GameList.Add(str11, str6);
-                              Log.WriteToLog("Oculus Store App '" + str11 + "' added to available games list");
-                            }
-                            else
-                              Log.WriteToLog("Oculus Store App '" + str11 + "' has a profile, NOT added");
+                              if (!GameList.ContainsKey(str11))
+                              {
+                                if (!FrmMain.fmain.profilePaths.ContainsKey(str6))
+                                {
+                                  GameList.Add(str11, str6);
+                                  Log.WriteToLog("Oculus Store App '" + str11 + "' added to available games list");
+                                }
+                                else
+                                  Log.WriteToLog("Oculus Store App '" + str11 + "' has a profile, NOT added");
+                              }
+                              if (!GetGames.manifesDictionary.ContainsKey(str11))
+                                GetGames.manifesDictionary.Add(str11, str4);
+                              if (File.Exists(str3 + "\\" + str5 + "_assets\\cover_landscape_image.jpg"))
+                              {
+                                if (!GetGames.assetPaths.ContainsKey(str11))
+                                {
+                                  GetGames.assetPaths.Add(str11, str3 + "\\" + str5 + "_assets");
+                                  if (Globals.dbg)
+                                    Log.WriteToLog("Added " + str3 + "\\" + str5 + "_assets as asset path for '" + str11 + "'");
+                                }
+                              }
+                              else if (File.Exists(str2 + "\\" + str5 + "_assets\\cover_landscape_image.jpg"))
+                              {
+                                if (!GetGames.assetPaths.ContainsKey(str11))
+                                {
+                                  GetGames.assetPaths.Add(str11, str2 + "\\" + str5 + "_assets");
+                                  if (Globals.dbg)
+                                    Log.WriteToLog("Added " + str2 + "\\" + str5 + "_assets as asset path for '" + str11 + "'");
+                                }
+                              }
                           }
-                          if (!GetGames.manifesDictionary.ContainsKey(str11))
-                            GetGames.manifesDictionary.Add(str11, str4);
-                          if (File.Exists(str3 + "\\" + str5 + "_assets\\cover_landscape_image.jpg"))
-                          {
-                            if (!GetGames.assetPaths.ContainsKey(str11))
-                            {
-                              GetGames.assetPaths.Add(str11, str3 + "\\" + str5 + "_assets");
-                              if (Globals.dbg)
-                                Log.WriteToLog("Added " + str3 + "\\" + str5 + "_assets as asset path for '" + str11 + "'");
-                            }
-                          }
-                          else if (File.Exists(str2 + "\\" + str5 + "_assets\\cover_landscape_image.jpg"))
-                          {
-                            if (!GetGames.assetPaths.ContainsKey(str11))
-                            {
-                              GetGames.assetPaths.Add(str11, str2 + "\\" + str5 + "_assets");
-                              if (Globals.dbg)
-                                Log.WriteToLog("Added " + str2 + "\\" + str5 + "_assets as asset path for '" + str11 + "'");
-                            }
-                          }
+                          // Log warning outside lock to keep it short if needed, but safe here too
+                        }
                           else
                           {
                             Log.WriteToLog("GetFiles(): Warning: Could not find asset path for '" + str11 + "' in ");

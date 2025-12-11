@@ -1229,9 +1229,11 @@ protected override void Dispose(bool disposing)
       this.DbLayoutPanel5.Size = new Size(353, 399);
       this.DbLayoutPanel5.TabIndex = 4;
       this.ComboApplyPlan.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      this.ComboApplyPlan.BackColor = System.Drawing.Color.AliceBlue;
+      this.ComboApplyPlan.BackColor = System.Drawing.Color.White;
+      this.ComboApplyPlan.ForeColor = System.Drawing.Color.Black;
+      this.ComboApplyPlan.DrawMode = DrawMode.Normal;
       this.ComboApplyPlan.DropDownStyle = ComboBoxStyle.DropDownList;
-      this.ComboApplyPlan.FlatStyle = FlatStyle.Popup;
+      this.ComboApplyPlan.FlatStyle = FlatStyle.Standard;
       this.ComboApplyPlan.FormattingEnabled = true;
       this.ComboApplyPlan.Items.AddRange(new object[2]
       {
@@ -1251,9 +1253,11 @@ protected override void Dispose(bool disposing)
       this.Label4.Text = "USB Selective Suspend";
       this.Label4.TextAlign = ContentAlignment.MiddleLeft;
       this.ComboPowerPlanExit.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      this.ComboPowerPlanExit.BackColor = System.Drawing.Color.AliceBlue;
+      this.ComboPowerPlanExit.BackColor = System.Drawing.Color.White;
+      this.ComboPowerPlanExit.ForeColor = System.Drawing.Color.Black;
+      this.ComboPowerPlanExit.DrawMode = DrawMode.Normal;
       this.ComboPowerPlanExit.DropDownStyle = ComboBoxStyle.DropDownList;
-      this.ComboPowerPlanExit.FlatStyle = FlatStyle.Popup;
+      this.ComboPowerPlanExit.FlatStyle = FlatStyle.Standard;
       this.ComboPowerPlanExit.FormattingEnabled = true;
       this.ComboPowerPlanExit.Location = new Point(190, 108);
       this.ComboPowerPlanExit.Name = "ComboPowerPlanExit";
@@ -1268,9 +1272,11 @@ protected override void Dispose(bool disposing)
       this.Label2.Text = "Set Power Plan on Start";
       this.Label2.TextAlign = ContentAlignment.MiddleLeft;
       this.ComboPowerPlanStart.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      this.ComboPowerPlanStart.BackColor = System.Drawing.Color.AliceBlue;
+      this.ComboPowerPlanStart.BackColor = System.Drawing.Color.White;
+      this.ComboPowerPlanStart.ForeColor = System.Drawing.Color.Black;
+      this.ComboPowerPlanStart.DrawMode = DrawMode.Normal;
       this.ComboPowerPlanStart.DropDownStyle = ComboBoxStyle.DropDownList;
-      this.ComboPowerPlanStart.FlatStyle = FlatStyle.Popup;
+      this.ComboPowerPlanStart.FlatStyle = FlatStyle.Standard;
       this.ComboPowerPlanStart.FormattingEnabled = true;
       this.ComboPowerPlanStart.Location = new Point(190, 28);
       this.ComboPowerPlanStart.Name = "ComboPowerPlanStart";
@@ -1310,9 +1316,11 @@ protected override void Dispose(bool disposing)
       this.CheckSensorPower.Text = "Disable on start";
       this.CheckSensorPower.UseVisualStyleBackColor = true;
       this.ComboUSBsusp.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      this.ComboUSBsusp.BackColor = System.Drawing.Color.AliceBlue;
+      this.ComboUSBsusp.BackColor = System.Drawing.Color.White;
+      this.ComboUSBsusp.ForeColor = System.Drawing.Color.Black;
+      this.ComboUSBsusp.DrawMode = DrawMode.Normal;
       this.ComboUSBsusp.DropDownStyle = ComboBoxStyle.DropDownList;
-      this.ComboUSBsusp.FlatStyle = FlatStyle.Popup;
+      this.ComboUSBsusp.FlatStyle = FlatStyle.Standard;
       this.ComboUSBsusp.FormattingEnabled = true;
       this.ComboUSBsusp.Items.AddRange(new object[2]
       {

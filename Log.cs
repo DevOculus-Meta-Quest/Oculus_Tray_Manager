@@ -24,7 +24,7 @@ namespace OculusTrayTool
         try
         {
           Monitor.Enter(lockObject, ref lockTaken);
-          using (StreamWriter streamWriter = File.AppendText(Application.StartupPath + "\\ott.log"))
+          using (StreamWriter streamWriter = File.AppendText(Application.StartupPath + "\\ott_debug.log"))
           {
             streamWriter.WriteLine(string.Format("{0}: {1}", (object) DateTime.Now, (object) string.Format(s)));
             streamWriter.Flush();

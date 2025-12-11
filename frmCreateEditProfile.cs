@@ -169,7 +169,7 @@ namespace OculusTrayTool
         while (index <= num1)
         {
           frmCreateEditProfile.GameItem gameItem = (frmCreateEditProfile.GameItem) this.ComboBox1.Items[index];
-          this.TextBoxPath.Text = gameItem.info;
+          this.TextBoxPath.Text = gameItem.Info;
           this.TextDisplayName.Text = gameItem.Name;
           this.pLaunchfile = Path.GetFileName(this.TextBoxPath.Text);
           this.pPath = this.TextBoxPath.Text;
@@ -274,6 +274,12 @@ namespace OculusTrayTool
       this.ToolTip1.SetToolTip((Control) this.PictureBox5, "Determines how OTT should detect this app. WMI is default and has less impact on CPU performace\r\nbut is less accurate in detecting games starts. Might not work for every game.\r\nThe Timer method consumes more CPU bit is a lot more accurate.\r\nUse Timer for the apps that do not work with WMI.");
       this.ToolTip1.SetToolTip((Control) this.PictureBox8, "The path to the executable that OTT should monitor. This is usally correct and should in most\r\ncases not be touched. But in some cases it might be neccessary to modify this\r\nso OTT detects the right process.");
       this.ToolTip1.SetToolTip((Control) this.PictureBox11, "Setting this to a value lower than 1, for example 0.8, will cause a lower FOV in the headset which\r\nwill increase the FPS due to less pixels being drawn.\r\nUsing a value higher than 1 will only affect the Mirror view on your desktop.");
+    
+      // Fix: Ensure something is selected if list is not empty
+      if (this.ComboASW.SelectedIndex == -1 && this.ComboASW.Items.Count > 0)
+      {
+          this.ComboASW.SelectedIndex = 0;
+      }
     }
 
     private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -281,7 +287,7 @@ namespace OculusTrayTool
       if (Operators.CompareString(this.ComboBox1.SelectedItem.ToString(), "- All Games & Apps -", false) != 0)
       {
         frmCreateEditProfile.GameItem selectedItem = (frmCreateEditProfile.GameItem) this.ComboBox1.SelectedItem;
-        this.TextBoxPath.Text = selectedItem.info;
+        this.TextBoxPath.Text = selectedItem.Info;
         this.TextDisplayName.Text = selectedItem.Name;
       }
       else
@@ -312,7 +318,7 @@ namespace OculusTrayTool
         this.mName = name;
       }
 
-      public string info
+      public string Info
       {
         get => this.mInfo;
         set => this.mInfo = value;
@@ -322,6 +328,11 @@ namespace OculusTrayTool
       {
         get => this.mName;
         set => this.mName = value;
+      }
+
+      public override string ToString()
+      {
+          return this.mName;
       }
     }
   }

@@ -84,8 +84,16 @@ namespace OculusTrayTool
              // Log counts even if not dbg, for diagnosis
              Log.WriteToLog("GetPowerPlans: Found " + PowerPlans.IDs.Count + " plans. Added to dropdowns.");
         }
+        
+        // Fix: Auto-select first item ("Not Used") so it's not blank
+        if (FrmMain.fmain.ComboPowerPlanStart.Items.Count > 0 && FrmMain.fmain.ComboPowerPlanStart.SelectedIndex == -1)
+          FrmMain.fmain.ComboPowerPlanStart.SelectedIndex = 0;
+          
+        if (FrmMain.fmain.ComboPowerPlanExit.Items.Count > 0 && FrmMain.fmain.ComboPowerPlanExit.SelectedIndex == -1)
+          FrmMain.fmain.ComboPowerPlanExit.SelectedIndex = 0;
+
            return;
-        Log.WriteToLog("Exiting GetPowerPlans");
+        // Log.WriteToLog("Exiting GetPowerPlans");
       }
       catch (Exception ex)
       {

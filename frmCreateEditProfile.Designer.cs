@@ -97,9 +97,11 @@ protected override void Dispose(bool disposing)
       ((ISupportInitialize) this.PictureBox2).BeginInit();
       ((ISupportInitialize) this.PictureBox1).BeginInit();
       this.SuspendLayout();
-      this.ComboCPU.BackColor = SystemColors.InactiveBorder;
+      this.ComboCPU.BackColor = Color.White;
+      this.ComboCPU.ForeColor = Color.Black;
+      this.ComboCPU.DrawMode = DrawMode.Normal;
       this.ComboCPU.DropDownStyle = ComboBoxStyle.DropDownList;
-      this.ComboCPU.FlatStyle = FlatStyle.Popup;
+      this.ComboCPU.FlatStyle = FlatStyle.Standard;
       this.ComboCPU.Font = new Font("Microsoft Sans Serif", 9f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.ComboCPU.FormattingEnabled = true;
       this.ComboCPU.Items.AddRange(new object[4]
@@ -118,9 +120,11 @@ protected override void Dispose(bool disposing)
       this.TextDisplayName.Name = "TextDisplayName";
       this.TextDisplayName.Size = new Size(208, 21);
       this.TextDisplayName.TabIndex = 17;
-      this.ComboASW.BackColor = SystemColors.InactiveBorder;
+      this.ComboASW.BackColor = Color.White;
+      this.ComboASW.ForeColor = Color.Black;
+      this.ComboASW.DrawMode = DrawMode.Normal;
       this.ComboASW.DropDownStyle = ComboBoxStyle.DropDownList;
-      this.ComboASW.FlatStyle = FlatStyle.Popup;
+      this.ComboASW.FlatStyle = FlatStyle.Standard;
       this.ComboASW.Font = new Font("Microsoft Sans Serif", 9f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.ComboASW.FormattingEnabled = true;
       this.ComboASW.Items.AddRange(new object[7]
@@ -172,9 +176,11 @@ protected override void Dispose(bool disposing)
       this.Label5.Size = new Size(56, 13);
       this.Label5.TabIndex = 24;
       this.Label5.Text = "Detection:";
-      this.ComboMethod.BackColor = SystemColors.InactiveBorder;
+      this.ComboMethod.BackColor = Color.White;
+      this.ComboMethod.ForeColor = Color.Black;
+      this.ComboMethod.DrawMode = DrawMode.Normal;
       this.ComboMethod.DropDownStyle = ComboBoxStyle.DropDownList;
-      this.ComboMethod.FlatStyle = FlatStyle.Popup;
+      this.ComboMethod.FlatStyle = FlatStyle.Standard;
       this.ComboMethod.Font = new Font("Microsoft Sans Serif", 9f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.ComboMethod.FormattingEnabled = true;
       this.ComboMethod.Items.AddRange(new object[2]
@@ -262,9 +268,11 @@ protected override void Dispose(bool disposing)
       this.Label33.TabIndex = 61;
       this.Label33.Text = "Force MipMap Generation";
       this.Label33.TextAlign = ContentAlignment.MiddleLeft;
-      this.ComboBox8.BackColor = Color.AliceBlue;
+      this.ComboBox8.BackColor = Color.White;
+      this.ComboBox8.ForeColor = Color.Black;
+      this.ComboBox8.DrawMode = DrawMode.Normal;
       this.ComboBox8.DropDownStyle = ComboBoxStyle.DropDownList;
-      this.ComboBox8.FlatStyle = FlatStyle.Popup;
+      this.ComboBox8.FlatStyle = FlatStyle.Standard;
       this.ComboBox8.Font = new Font("Microsoft Sans Serif", 9.75f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.ComboBox8.FormattingEnabled = true;
       this.ComboBox8.Items.AddRange(new object[2]
@@ -276,9 +284,11 @@ protected override void Dispose(bool disposing)
       this.ComboBox8.Name = "ComboBox8";
       this.ComboBox8.Size = new Size(162, 24);
       this.ComboBox8.TabIndex = 62;
-      this.ComboBox9.BackColor = Color.AliceBlue;
+      this.ComboBox9.BackColor = Color.White;
+      this.ComboBox9.ForeColor = Color.Black;
+      this.ComboBox9.DrawMode = DrawMode.Normal;
       this.ComboBox9.DropDownStyle = ComboBoxStyle.DropDownList;
-      this.ComboBox9.FlatStyle = FlatStyle.Popup;
+      this.ComboBox9.FlatStyle = FlatStyle.Standard;
       this.ComboBox9.Font = new Font("Microsoft Sans Serif", 9.75f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.ComboBox9.FormattingEnabled = true;
       this.ComboBox9.Items.AddRange(new object[21]
@@ -397,8 +407,10 @@ protected override void Dispose(bool disposing)
       this.Label11.Size = new Size(54, 13);
       this.Label11.TabIndex = 52;
       this.Label11.Text = "Comment:";
-      this.ComboSS.BackColor = SystemColors.InactiveBorder;
-      this.ComboSS.FlatStyle = FlatStyle.Popup;
+      this.ComboSS.BackColor = Color.White;
+      this.ComboSS.ForeColor = Color.Black;
+      this.ComboSS.DrawMode = DrawMode.Normal;
+      this.ComboSS.FlatStyle = FlatStyle.Standard;
       this.ComboSS.Font = new Font("Microsoft Sans Serif", 9f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.ComboSS.FormattingEnabled = true;
       this.ComboSS.Items.AddRange(new object[38]
@@ -455,8 +467,10 @@ protected override void Dispose(bool disposing)
       this.PictureBox10.TabIndex = 46;
       this.PictureBox10.TabStop = false;
       this.ToolTip1.SetToolTip(this.PictureBox10, "Enables or Disables Adaptive GPU Scaling. Setting this to Off might improve the experience in some games.");
-      this.ComboAGPS.BackColor = SystemColors.InactiveBorder;
-      this.ComboAGPS.FlatStyle = FlatStyle.Popup;
+      this.ComboAGPS.BackColor = Color.White;
+      this.ComboAGPS.ForeColor = Color.Black;
+      this.ComboAGPS.DrawMode = DrawMode.Normal;
+      this.ComboAGPS.FlatStyle = FlatStyle.Standard;
       this.ComboAGPS.Font = new Font("Microsoft Sans Serif", 9f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.ComboAGPS.FormattingEnabled = true;
       this.ComboAGPS.Items.AddRange(new object[2]
@@ -482,8 +496,10 @@ protected override void Dispose(bool disposing)
       this.PictureBox9.TabIndex = 43;
       this.PictureBox9.TabStop = false;
       this.ToolTip1.SetToolTip(this.PictureBox9, "Sets the window state of the app when it is launched.");
-      this.ComboMirror.BackColor = SystemColors.InactiveBorder;
-      this.ComboMirror.FlatStyle = FlatStyle.Popup;
+      this.ComboMirror.BackColor = Color.White;
+      this.ComboMirror.ForeColor = Color.Black;
+      this.ComboMirror.DrawMode = DrawMode.Normal;
+      this.ComboMirror.FlatStyle = FlatStyle.Standard;
       this.ComboMirror.Font = new Font("Microsoft Sans Serif", 9f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.ComboMirror.FormattingEnabled = true;
       this.ComboMirror.Items.AddRange(new object[3]
@@ -503,7 +519,9 @@ protected override void Dispose(bool disposing)
       this.Label9.Size = new Size(73, 13);
       this.Label9.TabIndex = 41;
       this.Label9.Text = "Screen Mirror:";
-      this.ComboBox1.BackColor = SystemColors.InactiveBorder;
+      this.ComboBox1.BackColor = Color.White;
+      this.ComboBox1.ForeColor = Color.Black;
+      this.ComboBox1.DrawMode = DrawMode.Normal;
       this.ComboBox1.Font = new Font("Microsoft Sans Serif", 9f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.ComboBox1.FormattingEnabled = true;
       this.ComboBox1.Location = new Point(104, 17);
