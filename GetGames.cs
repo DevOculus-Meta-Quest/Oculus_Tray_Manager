@@ -21,6 +21,14 @@ namespace OculusTrayTool
     public static Dictionary<string, string> GameList = new Dictionary<string, string>();
     private static readonly object _lock = new object();
 
+    public static Dictionary<string, string> GetSafeGameList()
+    {
+        lock (_lock)
+        {
+            return new Dictionary<string, string>(GameList);
+        }
+    }
+
     public static void GetSteamGames()
     {
       try
