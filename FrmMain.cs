@@ -186,6 +186,7 @@ namespace OculusTrayTool
     public FrmMain()
     {
       InitializeComponent();
+      fmain = this;
       this.Load += new EventHandler(this.Form1_Load);
       this.FormClosing += new FormClosingEventHandler(this.frmMain_FormClosing);
       this.Resize += new EventHandler(this.Form1_Resize);
