@@ -447,11 +447,23 @@ namespace OculusTrayTool
         }
 
         Log.WriteToLog("ShowCreate: GameList count = " + GetGames.GameList.Count);
-          foreach (KeyValuePair<string, string> game in GetGames.GameList)
-          {
-             // Log.WriteToLog("Adding game: " + game.Key);
-             MyProject.Forms.frmCreateEditProfile.ComboBox1.Items.Add((object) new frmCreateEditProfile.GameItem(game.Key, game.Value));
-          }
+        
+        Dictionary<string, string> safeGameList;
+        // Create a safe copy of the keys/values to iterate
+        // In C# < 5.0 concurrent dictionary iteration is tricky, but we can just use the lock we added or ToList
+        // Since we can't easily access the private lock from here, we will trust a simple ToList() copy might trigger the same error if race condition exists during copy.
+        // BETTER: Use a try-catch specifically around the loop to log if it breaks.
+        
+        try {
+            foreach (KeyValuePair<string, string> game in new Dictionary<string, string>(GetGames.GameList)) // Clone it
+            {
+                 MyProject.Forms.frmCreateEditProfile.ComboBox1.Items.Add((object) new frmCreateEditProfile.GameItem(game.Key, game.Value));
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.WriteToLog("ShowCreate Loop Error: " + ex.Message);
+        }
         if (MyProject.Forms.frmCreateEditProfile.ComboBox1.Items.Count > 0)
         {
           MyProject.Forms.frmCreateEditProfile.ComboBox1.Items.Add((object) "- All Games & Apps -");

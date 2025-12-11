@@ -314,13 +314,13 @@ namespace OculusTrayTool
                 Log.WriteToLog("Added " + otherAssetPath + "\\" + canonName + "_assets as asset path for '" + DisplayName + "'");
             }
           }
+          else
+          {
+            Log.WriteToLog("AddThirdPartyGameToList(): Warning: Could not find asset path for '" + DisplayName + "' in ");
+            Log.WriteToLog(" -> " + assetPath + "\\" + canonName + "_assets");
+            Log.WriteToLog(" -> " + otherAssetPath + "\\" + canonName + "_assets");
+          }
       }
-        else
-        {
-          Log.WriteToLog("AddThirdPartyGameToList(): Warning: Could not find asset path for '" + DisplayName + "' in ");
-          Log.WriteToLog(" -> " + assetPath + "\\" + canonName + "_assets");
-          Log.WriteToLog(" -> " + otherAssetPath + "\\" + canonName + "_assets");
-        }
       }
       else if (Globals.dbg)
         Log.WriteToLog("AddThirdPartyGameToList: Game is hidden");
@@ -498,16 +498,16 @@ namespace OculusTrayTool
                                     Log.WriteToLog("Added " + str2 + "\\" + str5 + "_assets as asset path for '" + str11 + "'");
                                 }
                               }
+                              else
+                              {
+                                Log.WriteToLog("GetFiles(): Warning: Could not find asset path for '" + str11 + "' in ");
+                                Log.WriteToLog(" -> " + str3 + "\\" + str5 + "_assets");
+                                Log.WriteToLog(" -> " + str2 + "\\" + str5 + "_assets");
+                              }
                           }
                           // Log warning outside lock to keep it short if needed, but safe here too
                         }
-                          else
-                          {
-                            Log.WriteToLog("GetFiles(): Warning: Could not find asset path for '" + str11 + "' in ");
-                            Log.WriteToLog(" -> " + str3 + "\\" + str5 + "_assets");
-                            Log.WriteToLog(" -> " + str2 + "\\" + str5 + "_assets");
-                          }
-                        }
+
                       }
                     }
                   }
