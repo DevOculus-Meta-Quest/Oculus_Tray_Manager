@@ -1110,7 +1110,7 @@ namespace OculusTrayTool
     private void ComboSSstart_SelectedIndexChanged(object sender, EventArgs e) { }
     private void BtnProfiles_Click(object sender, EventArgs e)
     {
-        new frmProfiles().ShowDialog();
+        MyProject.Forms.frmProfiles.ShowDialog();
     }
     private void ComboVoice_SelectedIndexChanged(object sender, EventArgs e) { }
     private void HotKeysCheckBox_CheckedChanged(object sender, EventArgs e) { }
