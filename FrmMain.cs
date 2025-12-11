@@ -1218,7 +1218,8 @@ namespace OculusTrayTool
     private void NotificationTimer_Tick(object sender, EventArgs e)
     {
         this.NotificationTimer.Stop();
-        this._NotifyIcon1.Visible = false;
+        if (this._NotifyIcon1 != null)
+            this._NotifyIcon1.Visible = false;
     }
 
 
