@@ -392,89 +392,90 @@ namespace OculusTrayTool
     {
       try
       {
-        MyProject.Forms.frmCreateEditProfile.ComboBox1.Items.Clear();
-
-
-
-        MyProject.Forms.frmCreateEditProfile.TextDisplayName.Visible = false;
-        MyProject.Forms.frmCreateEditProfile.ComboBox1.Visible = true;
-        // MyProject.Forms.frmCreateEditProfile.ComboBox1.DisplayMember = "Name";
-        // MyProject.Forms.frmCreateEditProfile.ComboBox1.ValueMember = "Info";
-        MyProject.Forms.frmCreateEditProfile.ComboSS.Text = MyProject.Forms.FrmMain.ComboSSstart.Text;
-        MyProject.Forms.frmCreateEditProfile.ComboASW.Text = MyProject.Forms.FrmMain.ComboBox1.Text;
-        MyProject.Forms.frmCreateEditProfile.ComboCPU.SelectedIndex = 0;
-        MyProject.Forms.frmCreateEditProfile.ComboMethod.SelectedIndex = 0;
-        MyProject.Forms.frmCreateEditProfile.NumericUpDown1.Value = 5M;
-        MyProject.Forms.frmCreateEditProfile.NumericUpDown2.Value = 5M;
-        MyProject.Forms.frmCreateEditProfile.ComboMirror.SelectedIndex = 0;
-        MyProject.Forms.frmCreateEditProfile.ComboAGPS.Text = FrmMain.fmain.ComboBox5.Text;
-        MyProject.Forms.frmCreateEditProfile.NumericUpDown3.Value = FrmMain.fmain.NumericFOVh.Value;
-        MyProject.Forms.frmCreateEditProfile.NumericUpDown4.Value = FrmMain.fmain.NumericFOVv.Value;
-        MyProject.Forms.frmCreateEditProfile.ComboBox8.Text = FrmMain.fmain.ComboBox8.Text;
-        MyProject.Forms.frmCreateEditProfile.ComboBox9.Text = FrmMain.fmain.ComboBox9.Text;
-        MyProject.Forms.frmCreateEditProfile.ComboBoxEnabled.Text = "Yes";
-        MyProject.Forms.frmCreateEditProfile.ComboBoxEnabled.Text = "Yes";
-        
-        // Fix: Repopulate if empty
-        if (GetGames.GameList.Count == 0)
+        // Use a local instance to ensure a fresh state and avoid global singleton issues
+        using (frmCreateEditProfile dlg = new frmCreateEditProfile())
         {
-            Log.WriteToLog("ShowCreate: GameList is empty, repopulating...");
+            dlg.ComboBox1.Items.Clear();
+
+            dlg.TextDisplayName.Visible = false;
+            dlg.ComboBox1.Visible = true;
+            
+            // Populate default values from Main Form
+            dlg.ComboSS.Text = MyProject.Forms.FrmMain.ComboSSstart.Text;
+            dlg.ComboASW.Text = MyProject.Forms.FrmMain.ComboBox1.Text;
+            dlg.ComboCPU.SelectedIndex = 0;
+            dlg.ComboMethod.SelectedIndex = 0;
+            dlg.NumericUpDown1.Value = 5M;
+            dlg.NumericUpDown2.Value = 5M;
+            dlg.ComboMirror.SelectedIndex = 0;
+            dlg.ComboAGPS.Text = FrmMain.fmain.ComboBox5.Text;
+            dlg.NumericUpDown3.Value = FrmMain.fmain.NumericFOVh.Value;
+            dlg.NumericUpDown4.Value = FrmMain.fmain.NumericFOVv.Value;
+            dlg.ComboBox8.Text = FrmMain.fmain.ComboBox8.Text;
+            dlg.ComboBox9.Text = FrmMain.fmain.ComboBox9.Text;
+            dlg.ComboBoxEnabled.Text = "Yes";
+
+            // Repopulate logic (if main list is empty, try to fetch)
+            if (GetGames.GameList.Count == 0)
+            {
+                Log.WriteToLog("ShowCreate: GameList is empty, repopulating (on local dlg)...");
+                try 
+                {
+                    GetGames.GetSteamGames();
+                    string mainPath = MyProject.Forms.FrmMain.OculusPath.TrimEnd('\\');
+                    if (Directory.Exists(mainPath + "\\Manifests"))
+                         GetGames.GetFiles(mainPath + "\\Manifests");
+                    if (Directory.Exists(mainPath + "\\Software\\Manifests"))
+                         GetGames.GetFiles(mainPath + "\\Software\\Manifests");
+                    
+                    if (Operators.CompareString(MySettingsProperty.Settings.LibraryPath, "", false) != 0)
+                    {
+                        string[] strArray = Strings.Split(MySettingsProperty.Settings.LibraryPath, ",");
+                        foreach (string str in strArray)
+                        {
+                           if (Directory.Exists(str.TrimEnd('\\') + "\\Manifests"))
+                             GetGames.GetFiles(str.TrimEnd('\\') + "\\Manifests");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.WriteToLog("ShowCreate Repopulate Error: " + ex.Message);
+                }
+            }
+
+            Log.WriteToLog("ShowCreate: GameList count = " + GetGames.GameList.Count);
             
             try 
             {
-                GetGames.GetSteamGames();
-
-                string mainPath = MyProject.Forms.FrmMain.OculusPath.TrimEnd('\\');
-                if (Directory.Exists(mainPath + "\\Manifests"))
-                     GetGames.GetFiles(mainPath + "\\Manifests");
-                if (Directory.Exists(mainPath + "\\Software\\Manifests"))
-                     GetGames.GetFiles(mainPath + "\\Software\\Manifests");
+                Dictionary<string, string> safeList = GetGames.GetSafeGameList();
+                Log.WriteToLog("ShowCreate: SafeList count = " + safeList.Count);
                 
-                if (Operators.CompareString(MySettingsProperty.Settings.LibraryPath, "", false) != 0)
+                foreach (KeyValuePair<string, string> game in safeList)
                 {
-                    string[] strArray = Strings.Split(MySettingsProperty.Settings.LibraryPath, ",");
-                    foreach (string str in strArray)
-                    {
-                       if (Directory.Exists(str.TrimEnd('\\') + "\\Manifests"))
-                         GetGames.GetFiles(str.TrimEnd('\\') + "\\Manifests");
-                    }
+                     // Add to the local dialog's ComboBox
+                     dlg.ComboBox1.Items.Add((object) new frmCreateEditProfile.GameItem(game.Key, game.Value));
                 }
+                Log.WriteToLog("ShowCreate: Added items. Combo count = " + dlg.ComboBox1.Items.Count);
             }
             catch (Exception ex)
             {
-                Log.WriteToLog("ShowCreate Repopulate Error: " + ex.Message);
+                Log.WriteToLog("ShowCreate Loop Error: " + ex.ToString()); 
             }
-        }
 
-        Log.WriteToLog("ShowCreate: GameList count = " + GetGames.GameList.Count);
-        
-        try {
-            Dictionary<string, string> safeList = GetGames.GetSafeGameList();
-            Log.WriteToLog("ShowCreate: SafeList count = " + safeList.Count);
-            
-            foreach (KeyValuePair<string, string> game in safeList)
+            if (dlg.ComboBox1.Items.Count > 0)
             {
-                 // Log.WriteToLog("Adding: " + game.Key);
-                 MyProject.Forms.frmCreateEditProfile.ComboBox1.Items.Add((object) new frmCreateEditProfile.GameItem(game.Key, game.Value));
+              dlg.ComboBox1.Items.Add((object) "- All Games & Apps -");
+              dlg.ComboBox1.SelectedIndex = 0; 
             }
-            Log.WriteToLog("ShowCreate: Added items. Combo count = " + MyProject.Forms.frmCreateEditProfile.ComboBox1.Items.Count);
+            
+            // Debug Verification (Optional, can remove later)
+            // MessageBox.Show("GameList Count: " + dlg.ComboBox1.Items.Count + 
+            //                 "\nSelectedIndex: " + dlg.ComboBox1.SelectedIndex + 
+            //                 "\nGameList from Log: " + GetGames.GameList.Count, "Debug UI State");
+                            
+            int num = (int) dlg.ShowDialog();
         }
-        catch (Exception ex)
-        {
-            Log.WriteToLog("ShowCreate Loop Error: " + ex.ToString()); 
-        }
-        if (MyProject.Forms.frmCreateEditProfile.ComboBox1.Items.Count > 0)
-        {
-          MyProject.Forms.frmCreateEditProfile.ComboBox1.Items.Add((object) "- All Games & Apps -");
-          MyProject.Forms.frmCreateEditProfile.ComboBox1.SelectedIndex = 0; // Fix: Auto-select first item
-        }
-        
-        // Debug Verification
-        MessageBox.Show("GameList Count: " + MyProject.Forms.frmCreateEditProfile.ComboBox1.Items.Count + 
-                        "\nSelectedIndex: " + MyProject.Forms.frmCreateEditProfile.ComboBox1.SelectedIndex + 
-                        "\nGameList from Log: " + GetGames.GameList.Count, "Debug UI State");
-                        
-        int num = (int) MyProject.Forms.frmCreateEditProfile.ShowDialog();
       }
       catch (Exception ex)
       {
@@ -483,6 +484,7 @@ namespace OculusTrayTool
         ProjectData.ClearProjectError();
       }
     }
+
 
     private void ToolStripMenuItem4_Click(object sender, EventArgs e)
     {
