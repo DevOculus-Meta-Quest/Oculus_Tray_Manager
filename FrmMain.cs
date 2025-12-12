@@ -133,7 +133,7 @@ namespace OculusTrayTool
     private System.Windows.Forms.Timer _HometoTrayTimer;
     private System.Windows.Forms.Timer _PowerPlanTimer;
     private System.Windows.Forms.Timer _UpdateTimer;
-    private ComboBox _ComboBox1, _ComboBox2, _ComboBox3, _ComboBox4, _ComboBox5, _ComboBox6, _ComboBox7, _ComboBox8, _ComboBox9, _ComboBox10, _ComboBox11, _ComboMirrorHome, _ComboVisualHUD, _ComboOVRPrio, _ComboHomless, _ComboVoice, _ComboUSBsusp, _ComboPowerPlanStart, _ComboPowerPlanExit, _ComboApplyPlan;
+    private ComboBox _ComboBox1, _ComboBox2, _ComboBox3, _ComboBox4, _ComboBox5, _ComboBox6, _ComboBox7, _ComboBox8, _ComboBox9, _ComboBox10, _ComboBox11, _ComboMirrorHome, _ComboVisualHUD, _ComboOVRPrio, _ComboHomless, _ComboVoice, _ComboUSBsusp/*, _ComboPowerPlanStart, _ComboPowerPlanExit, _ComboApplyPlan*/;
     private Label _Label5, _Label6, _Label7, _Label8, _Label9, _Label13, _Label15, _Label16, _Label17, _Label18, _Label19, _Label29, _Label33, _Label35, _Label36, _Label37, _Label38, _Label39, _Label10, _Label31, _Label30, _Label32, _Label2, _Label22, _Label3, _Label23, _Label4, _LabelVer, _Label12, _LabelDownloadStatus, _Label14, _Label1, _Label11, _Label20, _Label21, _Label34, _Label24, _Label25, _Label26, _Label27, _Label28;
     private PictureBox _PictureBox1, _PictureBox2, _PictureBox3, _PictureBox5, _PictureBox6, _PictureBox4, _PictureBox7, _PictureBox8;
     private ToolStripMenuItem _OpenLogToolStripMenuItem, _ClearLogToolStripMenuItem, _ToolStripMenuItem1, _ToolStripMenuItem2, _ToolStripMenuItem3, _ToolStripMenuItem4, _ToolStripMenuShowHome, _ToolStripStartOVR, _ToolStripStopOVR, _ToolStripRestartOVR;
@@ -456,20 +456,12 @@ namespace OculusTrayTool
           }
           OculusTrayTool.OculusPath.GetOculusPath();
           GetConfig.IsReading = true;
+          
+          
           OTTDB.OpenOttDB();
           PowerPlans.GetPowerPlans();
-          
-          this.ComboPowerPlanStart.Items.Clear();
-          if (PowerPlans.PlanNames != null && PowerPlans.PlanNames.Count > 0)
-          {
-              this.ComboPowerPlanStart.Items.AddRange(PowerPlans.PlanNames.ToArray());
-          }
+          this.RefreshPowerPlanComboboxes();
            
-          this.ComboPowerPlanExit.Items.Clear();
-          if (PowerPlans.PlanNames != null && PowerPlans.PlanNames.Count > 0)
-          {
-              this.ComboPowerPlanExit.Items.AddRange(PowerPlans.PlanNames.ToArray());
-          }
           
           GetConfig.Load();
           if (string.Compare(OculusTrayTool.My.MySettings.Default.LibraryPath, "", StringComparison.Ordinal) == 0 | string.IsNullOrWhiteSpace(OculusTrayTool.My.MySettings.Default.LibraryPath.ToString()))
@@ -1298,5 +1290,30 @@ namespace OculusTrayTool
         }
     }
 
+    
+    private void RefreshPowerPlanComboboxes()
+    {
+        try
+        {
+            if (Globals.dbg)
+                Log.WriteToLog("Refreshing Power Plan comboboxes");
+            this.ComboPowerPlanStart.Items.Clear();
+            this.ComboPowerPlanExit.Items.Clear();
+            if (PowerPlans.PlanNames != null)
+            {
+                foreach (string planName in PowerPlans.PlanNames)
+                {
+                    this.ComboPowerPlanStart.Items.Add(planName);
+                    this.ComboPowerPlanExit.Items.Add(planName);
+                }
+            }
+            if (Globals.dbg)
+                Log.WriteToLog("Power Plan comboboxes populated with " + (PowerPlans.PlanNames != null ? PowerPlans.PlanNames.Count : 0) + " items");
+        }
+        catch (Exception ex)
+        {
+            Log.WriteToLog("Error in RefreshPowerPlanComboboxes: " + ex.Message);
+        }
+    }
 }
 }
