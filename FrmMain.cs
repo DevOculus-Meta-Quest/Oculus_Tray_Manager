@@ -458,6 +458,19 @@ namespace OculusTrayTool
           GetConfig.IsReading = true;
           OTTDB.OpenOttDB();
           PowerPlans.GetPowerPlans();
+          
+          this.ComboPowerPlanStart.Items.Clear();
+          if (PowerPlans.PlanNames != null && PowerPlans.PlanNames.Count > 0)
+          {
+              this.ComboPowerPlanStart.Items.AddRange(PowerPlans.PlanNames.ToArray());
+          }
+           
+          this.ComboPowerPlanExit.Items.Clear();
+          if (PowerPlans.PlanNames != null && PowerPlans.PlanNames.Count > 0)
+          {
+              this.ComboPowerPlanExit.Items.AddRange(PowerPlans.PlanNames.ToArray());
+          }
+          
           GetConfig.Load();
           if (string.Compare(OculusTrayTool.My.MySettings.Default.LibraryPath, "", StringComparison.Ordinal) == 0 | string.IsNullOrWhiteSpace(OculusTrayTool.My.MySettings.Default.LibraryPath.ToString()))
           {
@@ -1117,7 +1130,10 @@ namespace OculusTrayTool
     private void ComboVoice_SelectedIndexChanged(object sender, EventArgs e) { }
     private void HotKeysCheckBox_CheckedChanged(object sender, EventArgs e) { }
     private void ComboUSBsusp_SelectedIndexChanged(object sender, EventArgs e) { }
-    private void ComboPowerPlan_SelectedIndexChanged(object sender, EventArgs e) { }
+        private void ComboPowerPlan_SelectedIndexChanged(object sender, EventArgs e) 
+    { 
+       Log.WriteToLog("DEBUG: ComboPowerPlan_SelectedIndexChanged. Index: " + this.ComboPowerPlanStart.SelectedIndex + " Text: " + this.ComboPowerPlanStart.Text);
+    }
     private void CheckMinimizeOnX_CheckedChanged(object sender, EventArgs e) { }
     private void PictureBox1_Click(object sender, EventArgs e) { }
     private void TrackBar1_Scroll(object sender, EventArgs e) { }

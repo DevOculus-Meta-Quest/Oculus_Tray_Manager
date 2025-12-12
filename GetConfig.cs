@@ -54,19 +54,36 @@ namespace OculusTrayTool
         {
           if (MySettingsProperty.Settings.ApplyPowerPlan == 0)
             PowerPlans.SetActivePowerPlan(MySettingsProperty.Settings.PowerPlanStart);
-          FrmMain.fmain.ComboPowerPlanStart.Text = MySettingsProperty.Settings.PowerPlanStart;
+          
+          // Safe Selection
+          string target = MySettingsProperty.Settings.PowerPlanStart;
+          int idx = FrmMain.fmain.ComboPowerPlanStart.FindStringExact(target);
+          if (idx != -1) FrmMain.fmain.ComboPowerPlanStart.SelectedIndex = idx;
+          else FrmMain.fmain.ComboPowerPlanStart.Text = target; // Fallback
         }
         else if (string.Compare(MySettingsProperty.Settings.PowerPlanStart, "Not Used", StringComparison.OrdinalIgnoreCase) == 0 || string.IsNullOrEmpty(MySettingsProperty.Settings.PowerPlanStart))
         {
-          FrmMain.fmain.ComboPowerPlanStart.Text = "Not Used";
+          int idx = FrmMain.fmain.ComboPowerPlanStart.FindStringExact("Not Used");
+           if (idx != -1) FrmMain.fmain.ComboPowerPlanStart.SelectedIndex = idx;
+           else FrmMain.fmain.ComboPowerPlanStart.Text = "Not Used";
+           
           PowerPlans.GetActivePowerPlan();
         }
         if (Globals.dbg)
           Log.WriteToLog("Reading setting PowerPlanExit");
         if (string.Compare(MySettingsProperty.Settings.PowerPlanExit, "Not Used", StringComparison.OrdinalIgnoreCase) != 0)
-          FrmMain.fmain.ComboPowerPlanExit.Text = MySettingsProperty.Settings.PowerPlanExit;
+        {
+             string target = MySettingsProperty.Settings.PowerPlanExit;
+             int idx = FrmMain.fmain.ComboPowerPlanExit.FindStringExact(target);
+             if (idx != -1) FrmMain.fmain.ComboPowerPlanExit.SelectedIndex = idx;
+             else FrmMain.fmain.ComboPowerPlanExit.Text = target;
+        }
         else if (string.Compare(MySettingsProperty.Settings.PowerPlanExit, "Not Used", StringComparison.OrdinalIgnoreCase) == 0 || string.IsNullOrEmpty(MySettingsProperty.Settings.PowerPlanExit))
-          FrmMain.fmain.ComboPowerPlanExit.Text = "Not Used";
+        {
+             int idx = FrmMain.fmain.ComboPowerPlanExit.FindStringExact("Not Used");
+             if (idx != -1) FrmMain.fmain.ComboPowerPlanExit.SelectedIndex = idx;
+             else FrmMain.fmain.ComboPowerPlanExit.Text = "Not Used";
+        }
         if (Globals.dbg)
           Log.WriteToLog("Reading setting StartHomeDelay");
         OculusTrayTool.GetConfig.StartHomeDelay = MySettingsProperty.Settings.StartHomeDelay;

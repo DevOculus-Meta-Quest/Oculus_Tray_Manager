@@ -19,6 +19,7 @@ namespace OculusTrayTool
     public static string activePlanName;
     public static string ActivePlanID;
     public static Dictionary<string, string> IDs = new Dictionary<string, string>();
+    public static List<string> PlanNames = new List<string>();
     private static readonly object _lock = new object();
     public static string filter;
 
@@ -67,21 +68,18 @@ namespace OculusTrayTool
       {
         lock (_lock)
         {
-            PowerPlans.IDs.Clear();
-            FrmMain.fmain.ComboPowerPlanStart.Items.Clear();
-            FrmMain.fmain.ComboPowerPlanExit.Items.Clear();
-            FrmMain.fmain.ComboPowerPlanStart.Items.Add((object) "Not Used");
-            FrmMain.fmain.ComboPowerPlanExit.Items.Add((object) "Not Used");
+            PowerPlans.PlanNames.Clear();
+            PowerPlans.PlanNames.Add("Not Used");
             ManagementObjectSearcher managementObjectSearcher = new ManagementObjectSearcher("root\\cimv2\\power", "SELECT * FROM Win32_PowerPlan");
             foreach (ManagementObject managementObject in managementObjectSearcher.Get())
             {
               string lower = managementObject["ElementName"].ToString().ToLower();
               string str = managementObject["InstanceID"].ToString().Replace("Microsoft:PowerPlan\\", "");
               if (!PowerPlans.IDs.ContainsKey(lower))
+              {
                 PowerPlans.IDs.Add(lower, str);
-              FrmMain.fmain.ComboPowerPlanStart.Items.Add((object) managementObject["ElementName"].ToString());
-              FrmMain.fmain.ComboPowerPlanExit.Items.Add((object) managementObject["ElementName"].ToString());
-              // if (Globals.dbg) Log.WriteToLog("Added Power Plan '" + managementObject["ElementName"].ToString() + "' to list");
+                PowerPlans.PlanNames.Add(managementObject["ElementName"].ToString());
+              }
             }
     
             // If WMI failed to find any plans, try parsing powercfg /list
@@ -112,8 +110,7 @@ namespace OculusTrayTool
                                  if (!PowerPlans.IDs.ContainsKey(lowerName))
                                  {
                                      PowerPlans.IDs.Add(lowerName, guid);
-                                     FrmMain.fmain.ComboPowerPlanStart.Items.Add((object) name);
-                                     FrmMain.fmain.ComboPowerPlanExit.Items.Add((object) name);
+                                     PowerPlans.PlanNames.Add(name);
                                  }
                              }
                          }
@@ -125,11 +122,11 @@ namespace OculusTrayTool
                  }
             }
             
-             // Fix: Auto-select first item ("Not Used") so it's not blank
-            if (FrmMain.fmain.ComboPowerPlanStart.Items.Count > 0 && FrmMain.fmain.ComboPowerPlanStart.SelectedIndex == -1)
-              FrmMain.fmain.ComboPowerPlanStart.SelectedIndex = 0;
-            if (FrmMain.fmain.ComboPowerPlanExit.Items.Count > 0 && FrmMain.fmain.ComboPowerPlanExit.SelectedIndex == -1)
-              FrmMain.fmain.ComboPowerPlanExit.SelectedIndex = 0;
+             // Fix: Auto-select logic moved to FrmMain
+            // if (FrmMain.fmain.ComboPowerPlanStart.Items.Count > 0 && FrmMain.fmain.ComboPowerPlanStart.SelectedIndex == -1)
+            //   FrmMain.fmain.ComboPowerPlanStart.SelectedIndex = 0;
+            // if (FrmMain.fmain.ComboPowerPlanExit.Items.Count > 0 && FrmMain.fmain.ComboPowerPlanExit.SelectedIndex == -1)
+            //   FrmMain.fmain.ComboPowerPlanExit.SelectedIndex = 0;
               
             Log.WriteToLog("GetPowerPlans: Found " + PowerPlans.IDs.Count + " plans.");
         }
