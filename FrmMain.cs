@@ -1281,5 +1281,6 @@ namespace OculusTrayTool
             Log.WriteToLog("ShowUpdateToast error: " + ex.Message);
         }
     }
+
 }
 }

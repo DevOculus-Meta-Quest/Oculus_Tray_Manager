@@ -2,11 +2,13 @@
 using Microsoft.VisualBasic.CompilerServices;
 using OculusTrayTool.My;
 using System;
+using System.Drawing;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Management;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 #nullable disable
 namespace OculusTrayTool
@@ -17,6 +19,7 @@ namespace OculusTrayTool
     public static string activePlanName;
     public static string ActivePlanID;
     public static Dictionary<string, string> IDs = new Dictionary<string, string>();
+    private static readonly object _lock = new object();
     public static string filter;
 
     public static void GetActivePowerPlan()
@@ -59,41 +62,78 @@ namespace OculusTrayTool
     {
       if (Globals.dbg)
         Log.WriteToLog("Entering GetPowerPlans");
-      Log.WriteToLog("Getting list of available Power Plans. FrmMain.fmain is " + (FrmMain.fmain == null ? "null" : "set"));
+      Log.WriteToLog("Getting list of available Power Plans.");
       try
       {
-        PowerPlans.IDs.Clear();
-        FrmMain.fmain.ComboPowerPlanStart.Items.Clear();
-        FrmMain.fmain.ComboPowerPlanExit.Items.Clear();
-        FrmMain.fmain.ComboPowerPlanStart.Items.Add((object) "Not Used");
-        FrmMain.fmain.ComboPowerPlanExit.Items.Add((object) "Not Used");
-        ManagementObjectSearcher managementObjectSearcher = new ManagementObjectSearcher("root\\cimv2\\power", "SELECT * FROM Win32_PowerPlan");
-        foreach (ManagementObject managementObject in managementObjectSearcher.Get())
+        lock (_lock)
         {
-          string lower = managementObject["ElementName"].ToString().ToLower();
-          string str = managementObject["InstanceID"].ToString().Replace("Microsoft:PowerPlan\\", "");
-          if (!PowerPlans.IDs.ContainsKey(lower))
-            PowerPlans.IDs.Add(lower, str);
-          FrmMain.fmain.ComboPowerPlanStart.Items.Add((object) managementObject["ElementName"].ToString());
-          FrmMain.fmain.ComboPowerPlanExit.Items.Add((object) managementObject["ElementName"].ToString());
-          if (Globals.dbg)
-            Log.WriteToLog("Added Power Plan '" + managementObject["ElementName"].ToString() + "' to list");
+            PowerPlans.IDs.Clear();
+            FrmMain.fmain.ComboPowerPlanStart.Items.Clear();
+            FrmMain.fmain.ComboPowerPlanExit.Items.Clear();
+            FrmMain.fmain.ComboPowerPlanStart.Items.Add((object) "Not Used");
+            FrmMain.fmain.ComboPowerPlanExit.Items.Add((object) "Not Used");
+            ManagementObjectSearcher managementObjectSearcher = new ManagementObjectSearcher("root\\cimv2\\power", "SELECT * FROM Win32_PowerPlan");
+            foreach (ManagementObject managementObject in managementObjectSearcher.Get())
+            {
+              string lower = managementObject["ElementName"].ToString().ToLower();
+              string str = managementObject["InstanceID"].ToString().Replace("Microsoft:PowerPlan\\", "");
+              if (!PowerPlans.IDs.ContainsKey(lower))
+                PowerPlans.IDs.Add(lower, str);
+              FrmMain.fmain.ComboPowerPlanStart.Items.Add((object) managementObject["ElementName"].ToString());
+              FrmMain.fmain.ComboPowerPlanExit.Items.Add((object) managementObject["ElementName"].ToString());
+              // if (Globals.dbg) Log.WriteToLog("Added Power Plan '" + managementObject["ElementName"].ToString() + "' to list");
+            }
+    
+            // If WMI failed to find any plans, try parsing powercfg /list
+            if (PowerPlans.IDs.Count == 0)
+            {
+                 Log.WriteToLog("GetPowerPlans: WMI found no plans. Trying powercfg /list fallback...");
+                 try 
+                 {
+                     ProcessStartInfo psi = new ProcessStartInfo("powercfg", "/list");
+                     psi.RedirectStandardOutput = true;
+                     psi.UseShellExecute = false;
+                     psi.CreateNoWindow = true;
+                     
+                     using (Process p = Process.Start(psi))
+                     {
+                         string output = p.StandardOutput.ReadToEnd();
+                         p.WaitForExit();
+                         
+                         Regex r = new Regex(@"Power Scheme GUID:\s+([0-9a-fA-F\-]+)\s+\((.+)\)");
+                         foreach (Match m in r.Matches(output))
+                         {
+                             if (m.Success)
+                             {
+                                 string guid = m.Groups[1].Value;
+                                 string name = m.Groups[2].Value;
+                                 string lowerName = name.ToLower();
+                                 
+                                 if (!PowerPlans.IDs.ContainsKey(lowerName))
+                                 {
+                                     PowerPlans.IDs.Add(lowerName, guid);
+                                     FrmMain.fmain.ComboPowerPlanStart.Items.Add((object) name);
+                                     FrmMain.fmain.ComboPowerPlanExit.Items.Add((object) name);
+                                 }
+                             }
+                         }
+                     }
+                 }
+                 catch (Exception exFallback)
+                 {
+                     Log.WriteToLog("GetPowerPlans Fallback Error: " + exFallback.Message);
+                 }
+            }
+            
+             // Fix: Auto-select first item ("Not Used") so it's not blank
+            if (FrmMain.fmain.ComboPowerPlanStart.Items.Count > 0 && FrmMain.fmain.ComboPowerPlanStart.SelectedIndex == -1)
+              FrmMain.fmain.ComboPowerPlanStart.SelectedIndex = 0;
+            if (FrmMain.fmain.ComboPowerPlanExit.Items.Count > 0 && FrmMain.fmain.ComboPowerPlanExit.SelectedIndex == -1)
+              FrmMain.fmain.ComboPowerPlanExit.SelectedIndex = 0;
+              
+            Log.WriteToLog("GetPowerPlans: Found " + PowerPlans.IDs.Count + " plans.");
         }
-        if (!Globals.dbg)
-        {
-             // Log counts even if not dbg, for diagnosis
-             Log.WriteToLog("GetPowerPlans: Found " + PowerPlans.IDs.Count + " plans. Added to dropdowns.");
-        }
-        
-        // Fix: Auto-select first item ("Not Used") so it's not blank
-        if (FrmMain.fmain.ComboPowerPlanStart.Items.Count > 0 && FrmMain.fmain.ComboPowerPlanStart.SelectedIndex == -1)
-          FrmMain.fmain.ComboPowerPlanStart.SelectedIndex = 0;
-          
-        if (FrmMain.fmain.ComboPowerPlanExit.Items.Count > 0 && FrmMain.fmain.ComboPowerPlanExit.SelectedIndex == -1)
-          FrmMain.fmain.ComboPowerPlanExit.SelectedIndex = 0;
-
-           return;
-        // Log.WriteToLog("Exiting GetPowerPlans");
+        return;
       }
       catch (Exception ex)
       {
@@ -111,9 +151,9 @@ namespace OculusTrayTool
     {
       if (Operators.CompareString(PowerPlans.activePlanName, (string) null, false) == 0)
       {
-        if (!MyProject.Forms.FrmMain.ComboUSBsusp.Items.Contains((object) "Not Available"))
-          MyProject.Forms.FrmMain.ComboUSBsusp.Items.Add((object) "Not Available");
-        MyProject.Forms.FrmMain.ComboUSBsusp.SelectedIndex = 2;
+        if (!FrmMain.fmain.ComboUSBsusp.Items.Contains((object) "Not Available"))
+          FrmMain.fmain.ComboUSBsusp.Items.Add((object) "Not Available");
+        FrmMain.fmain.ComboUSBsusp.SelectedIndex = 2;
         Log.WriteToLog("Could not determine active power plan, exiting");
       }
       else
@@ -129,20 +169,20 @@ namespace OculusTrayTool
               {
                 if (Operators.ConditionalCompareObjectEqual(managementObject.GetPropertyValue("SettingIndexValue"), (object) 1, false))
                 {
-                  MyProject.Forms.FrmMain.ComboUSBsusp.Text = "Enabled";
+                  FrmMain.fmain.ComboUSBsusp.Text = "Enabled";
                   Log.WriteToLog("Current Power Plan '" + PowerPlans.activePlanName + "' has USB Selective Suspend Enabled");
                   FrmMain.fmain.AddToListboxAndScroll("Current Power Plan '" + PowerPlans.activePlanName + "' has USB Selective Suspend Enabled");
                 }
                 else
                 {
-                  MyProject.Forms.FrmMain.ComboUSBsusp.Text = "Disabled";
+                  FrmMain.fmain.ComboUSBsusp.Text = "Disabled";
                   Log.WriteToLog("Current Power Plan '" + PowerPlans.activePlanName + "' has USB Selective Suspend Disabled");
                   FrmMain.fmain.AddToListboxAndScroll("Current Power Plan '" + PowerPlans.activePlanName + "' has USB Selective Suspend Disabled");
                 }
               }
               if (change)
               {
-                if (Operators.CompareString(MyProject.Forms.FrmMain.ComboUSBsusp.Text, "Disabled", false) == 0)
+                if (Operators.CompareString(FrmMain.fmain.ComboUSBsusp.Text, "Disabled", false) == 0)
                 {
                   Log.WriteToLog("Changing USB Selective Suspend for " + PowerPlans.activePlanName + " to Disabled");
                   managementObject.SetPropertyValue("SettingIndexValue", (object) 0);
@@ -208,8 +248,12 @@ namespace OculusTrayTool
             {
               Log.WriteToLog("Set Powerplan failed, trying alternate method...");
               string str = "";
-              if (PowerPlans.IDs.TryGetValue(name.ToLower(), out str))
-                RunCommand.Run_PowerCFG(name, str.Replace("{", "").Replace("}", ""));
+              lock (_lock)
+              {
+                   bool found = PowerPlans.IDs.TryGetValue(name.ToLower(), out str);
+                   if (found)
+                    RunCommand.Run_PowerCFG(name, str.Replace("{", "").Replace("}", ""));
+              }
             }
             catch (Exception ex2)
             {
@@ -285,20 +329,20 @@ namespace OculusTrayTool
                   }
                   else
                   {
-                    if (MyProject.Forms.FrmMain.isElevated)
+                    if (FrmMain.fmain.isElevated)
                     {
                       FrmMain.fmain.AddToListboxAndScroll(keyValuePair.Value + " has Power Management Enabled, right-click to Disable");
-                      MyProject.Forms.FrmMain.ToolStripMenuItem4.Enabled = true;
-                      MyProject.Forms.FrmMain.ToolStripMenuItem4.Visible = true;
+                      FrmMain.fmain.ToolStripMenuItem4.Enabled = true;
+                      FrmMain.fmain.ToolStripMenuItem4.Visible = true;
                     }
                     else
                     {
                       FrmMain.fmain.AddToListboxAndScroll(keyValuePair.Value + " has Power Management Enabled. Cannot change, not running as Administrator");
-                      MyProject.Forms.FrmMain.ToolStripMenuItem4.Enabled = false;
-                      MyProject.Forms.FrmMain.ToolStripMenuItem4.Visible = false;
+                      FrmMain.fmain.ToolStripMenuItem4.Enabled = false;
+                      FrmMain.fmain.ToolStripMenuItem4.Visible = false;
                     }
-                    MyProject.Forms.FrmMain.ListBox1.TopIndex = checked (MyProject.Forms.FrmMain.ListBox1.Items.Count - 1);
-                    MyProject.Forms.FrmMain.hasWarning = true;
+                    FrmMain.fmain.ListBox1.TopIndex = checked (FrmMain.fmain.ListBox1.Items.Count - 1);
+                    FrmMain.fmain.hasWarning = true;
                   }
                 }
               }
@@ -307,8 +351,8 @@ namespace OculusTrayTool
         }
         if (!flag)
         {
-          MyProject.Forms.FrmMain.ToolStripMenuItem4.Enabled = false;
-          MyProject.Forms.FrmMain.ToolStripMenuItem4.Visible = false;
+          FrmMain.fmain.ToolStripMenuItem4.Enabled = false;
+          FrmMain.fmain.ToolStripMenuItem4.Visible = false;
         }
         if (!Globals.dbg)
           return;
@@ -319,7 +363,7 @@ namespace OculusTrayTool
         ProjectData.SetProjectError(ex);
         Exception e = ex;
         FrmMain.fmain.AddToListboxAndScroll("* Exception in CheckPowerState(): " + e.Message);
-        MyProject.Forms.FrmMain.hasWarning = true;
+        FrmMain.fmain.hasWarning = true;
         StackTrace stackTrace = new StackTrace(e, true);
         Log.WriteToLog(e.ToString() + stackTrace.ToString());
         ProjectData.ClearProjectError();
