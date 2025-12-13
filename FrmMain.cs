@@ -1321,7 +1321,8 @@ namespace OculusTrayTool
             // 1. Recreate ComboPowerPlanStart (Cell 1, 0)
             if (this.ComboPowerPlanStart != null)
             {
-                parentPanel.Controls.Remove(this.ComboPowerPlanStart);
+                if (parentPanel.Controls.Contains(this.ComboPowerPlanStart))
+                    parentPanel.Controls.Remove(this.ComboPowerPlanStart);
                 this.ComboPowerPlanStart.Dispose();
             }
 
@@ -1330,21 +1331,25 @@ namespace OculusTrayTool
             this.ComboPowerPlanStart.DropDownStyle = ComboBoxStyle.DropDownList;
             this.ComboPowerPlanStart.BackColor = System.Drawing.Color.White;
             this.ComboPowerPlanStart.ForeColor = System.Drawing.Color.Black;
-            this.ComboPowerPlanStart.FlatStyle = FlatStyle.Standard; // Ensure standard rendering
+            this.ComboPowerPlanStart.FlatStyle = FlatStyle.Standard; 
             this.ComboPowerPlanStart.FormattingEnabled = true;
             this.ComboPowerPlanStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25f, System.Drawing.FontStyle.Regular);
             this.ComboPowerPlanStart.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             this.ComboPowerPlanStart.Height = 21;
-            // Wire up event
             this.ComboPowerPlanStart.SelectedIndexChanged += new EventHandler(this.ComboPowerPlan_SelectedIndexChanged);
             
-            parentPanel.Controls.Add(this.ComboPowerPlanStart, 1, 0);
+            // Explicitly Add and Position
+            parentPanel.Controls.Add(this.ComboPowerPlanStart); // Add first
+            parentPanel.SetCellPosition(this.ComboPowerPlanStart, new TableLayoutPanelCellPosition(1, 0)); // Col 1, Row 0
+            
+            Log.WriteToLog("ReplaceCorruptedControls: Placed ComboPowerPlanStart at Col 1, Row 0");
 
 
             // 2. Recreate ComboPowerPlanExit (Cell 1, 1)
             if (this.ComboPowerPlanExit != null)
             {
-                parentPanel.Controls.Remove(this.ComboPowerPlanExit);
+                 if (parentPanel.Controls.Contains(this.ComboPowerPlanExit))
+                    parentPanel.Controls.Remove(this.ComboPowerPlanExit);
                 this.ComboPowerPlanExit.Dispose();
             }
 
@@ -1358,10 +1363,13 @@ namespace OculusTrayTool
             this.ComboPowerPlanExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25f, System.Drawing.FontStyle.Regular);
             this.ComboPowerPlanExit.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             this.ComboPowerPlanExit.Height = 21;
-            // Wire up event
             this.ComboPowerPlanExit.SelectedIndexChanged += new EventHandler(this.ComboPowerPlan_SelectedIndexChanged);
 
-            parentPanel.Controls.Add(this.ComboPowerPlanExit, 1, 1);
+            // Explicitly Add and Position
+            parentPanel.Controls.Add(this.ComboPowerPlanExit);
+            parentPanel.SetCellPosition(this.ComboPowerPlanExit, new TableLayoutPanelCellPosition(1, 1)); // Col 1, Row 1
+            
+            Log.WriteToLog("ReplaceCorruptedControls: Placed ComboPowerPlanExit at Col 1, Row 1");
 
             _controlsReplaced = true;
             Log.WriteToLog("ReplaceCorruptedControls: Successfully replaced controls.");
