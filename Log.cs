@@ -35,6 +35,12 @@ namespace OculusTrayTool
           if (lockTaken)
             Monitor.Exit(lockObject);
         }
+        
+        // Write to UI outside lock
+        if (MyProject.Forms.FrmMain != null && FrmMain.fmain != null)
+        {
+             try { FrmMain.fmain.AddToListboxAndScroll(s); } catch {}
+        }
       }
       catch (Exception ex)
       {
