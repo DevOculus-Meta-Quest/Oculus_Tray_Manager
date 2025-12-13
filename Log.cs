@@ -37,7 +37,7 @@ namespace OculusTrayTool
         }
         
         // Write to UI outside lock
-        if (MyProject.Forms.FrmMain != null && FrmMain.fmain != null)
+        if (FrmMain.fmain != null)
         {
              try { FrmMain.fmain.AddToListboxAndScroll(s); } catch {}
         }

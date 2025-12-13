@@ -293,6 +293,9 @@ namespace OculusTrayTool
           Log.WriteToLog(":: Debug is ON ::");
         }
         Log.WriteToLog("Starting up...");
+        // Direct UI test
+        this.AddToListboxAndScroll("--- TEST LOG ENTRY TO UI ---");
+        
         Log.WriteToLog("Version: " + Assembly.GetExecutingAssembly().GetName().Version.ToString());
         VoiceCommands.Initialize();
         if (Globals.dbg)
@@ -975,14 +978,23 @@ namespace OculusTrayTool
 
     public void AddToListboxAndScroll(string text)
     {
+       // Diagnostic Trace
+       try {
+           using (StreamWriter sw = File.AppendText(Application.StartupPath + "\\ott_trace.log")) {
+               sw.WriteLine("AddToListbox: '" + text + "' | Visible: " + this.ListBox1.Visible + " | Count: " + this.ListBox1.Items.Count + " | Parent: " + (this.ListBox1.Parent?.Name ?? "null"));
+           }
+       } catch {}
+      
       if (this.ListBox1.InvokeRequired)
       {
         this.Invoke((Delegate) new FrmMain.AddToListboxAndScrollDelegate(this.AddToListboxAndScroll), (object) text);
       }
       else
       {
+        this.ListBox1.Visible = true; // FORCE VISIBLE
         this.ListBox1.Items.Add((object) text);
         this.ListBox1.TopIndex = checked (this.ListBox1.Items.Count - 1);
+        this.ListBox1.Refresh();
       }
     }
 
