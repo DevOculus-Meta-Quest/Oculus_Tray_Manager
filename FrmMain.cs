@@ -1435,6 +1435,9 @@ namespace OculusTrayTool
 
             // --- GAME SETTINGS REPLACEMENT ---
             ReplaceGameSettingsControls();
+            
+            // --- QUEST LINK REPLACEMENT ---
+            ReplaceQuestLinkControls();
 
             Log.WriteToLog("ReplaceCorruptedControls: Successfully replaced controls.");
             _controlsReplaced = true;
@@ -1580,6 +1583,122 @@ namespace OculusTrayTool
         catch (Exception ex)
         {
             Log.WriteToLog("ReplaceGameSettingsControls Error: " + ex.Message);
+        }
+    }
+
+    private void ReplaceQuestLinkControls()
+    {
+        try
+        {
+            TableLayoutPanel settingsPanel = null;
+
+            // Local helper to recursively find the label
+            Label FindLabelByText(Control parent, string text)
+            {
+                foreach (Control c in parent.Controls)
+                {
+                    if (c is Label lbl && lbl.Text.Contains(text)) return lbl;
+                    if (c.HasChildren)
+                    {
+                        Label found = FindLabelByText(c, text);
+                        if (found != null) return found;
+                    }
+                }
+                return null;
+            }
+
+            // "Distortion Curvature" is unique to Quest Link tab
+            Label targetLabel = FindLabelByText(this, "Distortion Curvature");
+            if (targetLabel != null && targetLabel.Parent is TableLayoutPanel)
+            {
+                settingsPanel = (TableLayoutPanel)targetLabel.Parent;
+            }
+
+            if (settingsPanel == null)
+            {
+                Log.WriteToLog("ReplaceQuestLinkControls: ERROR - Could not find Quest Link panel!");
+                return;
+            }
+           
+            Log.WriteToLog("ReplaceQuestLinkControls: Found panel " + settingsPanel.Name + " with " + settingsPanel.Controls.Count + " controls.");
+
+            int GetRowForLabel(string labelText)
+            {
+                foreach (Control c in settingsPanel.Controls)
+                {
+                    if (c is Label lbl && lbl.Text != null && lbl.Text.IndexOf(labelText, StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        var pos = settingsPanel.GetPositionFromControl(c);
+                        Log.WriteToLog("ReplaceQuestLinkControls: Mapped '" + labelText + "' to Row " + pos.Row);
+                        return pos.Row;
+                    }
+                }
+                Log.WriteToLog("ReplaceQuestLinkControls: WARNING - Could not find label containing '" + labelText + "'");
+                return -1;
+            }
+
+            void ReplaceCombo(string labelText, string name, string[] items, string defaultVal)
+            {
+                int row = GetRowForLabel(labelText);
+                if (row == -1) return; // Skip if label not found
+
+                // Remove existing control at (Column 1, Row)
+                for (int i = settingsPanel.Controls.Count - 1; i >= 0; i--)
+                {
+                    Control ctrl = settingsPanel.Controls[i];
+                    TableLayoutPanelCellPosition pos = settingsPanel.GetPositionFromControl(ctrl);
+                    if (pos.Column == 1 && pos.Row == row)
+                    {
+                        settingsPanel.Controls.Remove(ctrl);
+                        ctrl.Dispose();
+                    }
+                }
+
+                ComboBox box = new ComboBox();
+                box.Name = name;
+                box.DropDownStyle = ComboBoxStyle.DropDownList;
+                box.BackColor = Color.White;
+                box.ForeColor = Color.Black;
+                box.FlatStyle = FlatStyle.Standard;
+                box.Font = new Font("Microsoft Sans Serif", 8.25f);
+                box.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+                box.Margin = new Padding(3, 0, 3, 0); // Tweak margin to match if needed
+                box.Height = 21;
+                
+                if (items != null) box.Items.AddRange(items);
+                if (defaultVal != null) 
+                {
+                    int idx = box.FindStringExact(defaultVal);
+                    if (idx != -1) box.SelectedIndex = idx;
+                    else box.Text = defaultVal;
+                }
+                
+                settingsPanel.Controls.Add(box, 1, row);
+            }
+            
+            // 1. Distortion Curvature: Default, Low, High
+            ReplaceCombo("Distortion Curvature", "ComboLinkDistortion", new string[] { "Default", "Low", "High" }, "Default");
+
+            // 2. Encode Resolution
+            ReplaceCombo("Encode Resolution", "ComboLinkResolution", new string[] { "0", "1832", "2048", "2352", "2784", "3648", "3664" }, "0"); 
+
+            // 3. Encode Bitrate
+            ReplaceCombo("Encode Bitrate", "ComboLinkBitrate", new string[] { "0", "100", "150", "200", "250", "300", "350", "400", "500" }, "0");
+
+            // 4. Encode Dynamic Bitrate
+            ReplaceCombo("Encode Dynamic Bitrate", "ComboLinkDynamicBitrate", new string[] { "Default", "Enabled", "Disabled" }, "Default");
+
+            // 5. Dynamic Bitrate Max
+            ReplaceCombo("Dynamic Bitrate Max", "ComboLinkDynamicBitrateMax", new string[] { "0", "100", "150", "200" }, "0");
+
+            // 6. Sharpening
+            ReplaceCombo("Sharpening", "ComboLinkSharpening", new string[] { "Auto", "Normal", "Quality" }, "Auto");
+
+            Log.WriteToLog("ReplaceQuestLinkControls: Populated Quest Link defaults.");
+        }
+        catch (Exception ex)
+        {
+            Log.WriteToLog("ReplaceQuestLinkControls Error: " + ex.Message);
         }
     }
 
