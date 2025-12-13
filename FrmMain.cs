@@ -1296,7 +1296,7 @@ namespace OculusTrayTool
         {
             if (Globals.dbg)
                 Log.WriteToLog("Form1_Shown: Refreshing Power Plan Comboboxes");
-            this.LoadPowerPlansDirectly();
+             // Removed redundant call as it is called in Form1_Load
         }
 
     private void LoadPowerPlansDirectly()
@@ -1342,32 +1342,11 @@ namespace OculusTrayTool
 
             Log.WriteToLog("LoadPowerPlansDirectly: Populated " + this.ComboPowerPlanStart.Items.Count + " items.");
             
-            // Force visual properties to ensure visibility
-            System.Drawing.Font fixedFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25f, System.Drawing.FontStyle.Regular);
-            
-            this.ComboPowerPlanStart.Font = fixedFont;
-            this.ComboPowerPlanStart.ForeColor = System.Drawing.Color.Black;
-            this.ComboPowerPlanStart.BackColor = System.Drawing.Color.White;
-            this.ComboPowerPlanStart.DrawMode = DrawMode.Normal;
-            this.ComboPowerPlanStart.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.ComboPowerPlanStart.IntegralHeight = false; // Sometimes helps with sizing issues
-
-            this.ComboPowerPlanExit.Font = fixedFont;
-            this.ComboPowerPlanExit.ForeColor = System.Drawing.Color.Black;
-            this.ComboPowerPlanExit.BackColor = System.Drawing.Color.White;
-            this.ComboPowerPlanExit.DrawMode = DrawMode.Normal;
-            this.ComboPowerPlanExit.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.ComboPowerPlanExit.IntegralHeight = false;
-
             if (this.ComboPowerPlanStart.Items.Count > 0)
                 this.ComboPowerPlanStart.SelectedIndex = 0;
 
             if (this.ComboPowerPlanExit.Items.Count > 0)
                 this.ComboPowerPlanExit.SelectedIndex = 0;
-
-            this.ComboPowerPlanStart.Refresh();
-            this.ComboPowerPlanExit.Refresh();
-            Log.WriteToLog("LoadPowerPlansDirectly: Applied visual overrides.");
         }
         catch (Exception ex)
         {
