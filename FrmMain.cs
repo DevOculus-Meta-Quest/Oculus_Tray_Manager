@@ -1441,10 +1441,97 @@ namespace OculusTrayTool
 
             Log.WriteToLog("ReplaceCorruptedControls: Successfully replaced controls.");
             _controlsReplaced = true;
+            
+            // --- FIX RESET BUTTON ---
+            // Wire up "Reset all to default" (Button4) to our new logic
+            try 
+            {
+                if (this.Button4 != null)
+                {
+                    // Remove existing handler(s) to prevent crash
+                    this.Button4.Click -= this.Button4_Click;
+                    // Attach new handler
+                    this.Button4.Click += (s, e) => ResetDefaults();
+                    Log.WriteToLog("ReplaceCorruptedControls: Wired up Reset button.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.WriteToLog("ReplaceCorruptedControls: Warning - Could not wire Reset button: " + ex.Message);
+            }
         }
         catch (Exception ex)
         {
             Log.WriteToLog("ReplaceCorruptedControls FATAL ERROR: " + ex.ToString());
+        }
+    }
+
+    private void ResetDefaults()
+    {
+        try
+        {
+            Log.WriteToLog("ResetDefaults: Resetting all settings to defaults...");
+
+            // Helper to set ComboBox value
+            void SetCombo(Control container, string name, string val)
+            {
+                Control[] found = container.Controls.Find(name, true);
+                if (found.Length > 0 && found[0] is ComboBox box)
+                {
+                    int idx = box.FindStringExact(val);
+                    if (idx != -1) box.SelectedIndex = idx;
+                    else box.Text = val;
+                }
+            }
+
+            // 1. Game Settings
+            Control[] gsPanels = this.Controls.Find("DbLayoutPanel5", true); // "Settings" panel
+            if (gsPanels.Length > 0)
+            {
+                 // Defaults based on "Default" or "0"
+                 SetCombo(gsPanels[0], "ComboSSstart", "0.0"); // Super Sampling
+                 SetCombo(gsPanels[0], "ComboBox1", "Auto"); // ASW
+                 SetCombo(gsPanels[0], "ComboBox2", "Default"); // Adaptive GPU
+                 SetCombo(gsPanels[0], "ComboVoice", "Disabled");
+                 SetCombo(gsPanels[0], "ComboHomless", "Disabled");
+                 SetCombo(gsPanels[0], "ComboMirrorHome", "Disabled");
+                 SetCombo(gsPanels[0], "ComboVisualHUD", "None");
+                 SetCombo(gsPanels[0], "ComboOVRPrio", "Normal");
+                 SetCombo(gsPanels[0], "ComboBox8", "False"); // Force MipMap
+                 SetCombo(gsPanels[0], "ComboBox9", "0"); // Offset MipMap
+            }
+
+            // 2. Quest Link
+            // We need to find the Quest Link panel again. 
+            // Reuse the label finding logic or cache the panel? 
+            // Caching is risky if controls are recreated. Let's find by unique label again.
+            Label FindLabel(Control parent, string text)
+            {
+                foreach (Control c in parent.Controls)
+                {
+                    if (c is Label lbl && lbl.Text.Contains(text)) return lbl;
+                    if (c.HasChildren) { var f = FindLabel(c, text); if (f!=null) return f; }
+                }
+                return null;
+            }
+            Label qLabel = FindLabel(this, "Distortion Curvature");
+            if (qLabel != null && qLabel.Parent != null)
+            {
+                 Control qPanel = qLabel.Parent;
+                 SetCombo(qPanel, "ComboLinkDistortion", "Default");
+                 SetCombo(qPanel, "ComboLinkResolution", "0");
+                 SetCombo(qPanel, "ComboLinkBitrate", "0");
+                 SetCombo(qPanel, "ComboLinkDynamicBitrate", "Default");
+                 SetCombo(qPanel, "ComboLinkDynamicBitrateMax", "0");
+                 SetCombo(qPanel, "ComboLinkSharpening", "Auto");
+            }
+            
+            MessageBox.Show("All settings have been reset to default.", "Reset Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        catch (Exception ex)
+        {
+            Log.WriteToLog("ResetDefaults Error: " + ex.Message);
+            MessageBox.Show("Error resetting defaults: " + ex.Message);
         }
     }
 
@@ -1548,7 +1635,7 @@ namespace OculusTrayTool
             
             // 1. Super Sampling
              string[] ssItems = new string[] { "0.0", "1.0", "1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.7", "1.8", "1.9", "2.0", "2.5" };
-             ReplaceCombo("Super Sampling", "ComboSSstart", ssItems, "1.3");
+             ReplaceCombo("Super Sampling", "ComboSSstart", ssItems, "0.0");
              
              // 2. ASW Mode
              string[] aswItems = new string[] { "Auto", "Off", "45 Hz", "30 Hz", "18 Hz", "45 Hz forced", "Adaptive" };
