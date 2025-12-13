@@ -978,24 +978,26 @@ namespace OculusTrayTool
 
     public void AddToListboxAndScroll(string text)
     {
-       // Diagnostic Trace
-       try {
-           using (StreamWriter sw = File.AppendText(Application.StartupPath + "\\ott_trace.log")) {
-               sw.WriteLine("AddToListbox: '" + text + "' | Visible: " + this.ListBox1.Visible + " | Count: " + this.ListBox1.Items.Count + " | Parent: " + (this.ListBox1.Parent?.Name ?? "null"));
-           }
-       } catch {}
-      
-      if (this.ListBox1.InvokeRequired)
-      {
-        this.Invoke((Delegate) new FrmMain.AddToListboxAndScrollDelegate(this.AddToListboxAndScroll), (object) text);
-      }
-      else
-      {
-        this.ListBox1.Visible = true; // FORCE VISIBLE
-        this.ListBox1.Items.Add((object) text);
-        this.ListBox1.TopIndex = checked (this.ListBox1.Items.Count - 1);
-        this.ListBox1.Refresh();
-      }
+       // Use replacement control if available, otherwise fallback to designer control (for safety)
+       ListBox targetList = _logListBox != null ? _logListBox : this.ListBox1;
+       
+       if (targetList == null) return; // Should not happen
+
+       if (targetList.InvokeRequired)
+       {
+           this.Invoke((Delegate) new FrmMain.AddToListboxAndScrollDelegate(this.AddToListboxAndScroll), (object) text);
+       }
+       else
+       {
+           // Explicit visibility force for new control too
+           if (!targetList.Visible) targetList.Visible = true;
+           
+           targetList.Items.Add((object) text);
+           targetList.TopIndex = checked (targetList.Items.Count - 1);
+           
+           // Refresh to be sure
+           targetList.Refresh();
+       }
     }
 
     public delegate void AddToListboxAndScrollDelegate(string text);
@@ -1420,30 +1422,66 @@ namespace OculusTrayTool
             this.ComboUSBsusp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25f, System.Drawing.FontStyle.Regular);
             this.ComboUSBsusp.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             this.ComboUSBsusp.Height = 21;
-            // Populate Items
             this.ComboUSBsusp.Items.AddRange(new object[] { "Disabled", "Enabled" });
             this.ComboUSBsusp.SelectedIndex = 0; // Default: Disabled
-            // Note: Assuming SelectedIndexChanged handler name based on convention or need to find it? 
-            // The logs/grep didn't show it, but Designer often has one. I'll search for it or just not bind if not sure.
-            // Wait, I saw "ComboPowerPlan_SelectedIndexChanged" used for general plans.
-            // I should verify the event handler for USB Susp.
-            // But to be safe, I will NOT bind the event yet if I don't know it, OR I'll assume standard naming `ComboUSBsusp_SelectedIndexChanged`.
-            // Let's check Designer content I read earlier.
-            // It didn't show ComboUSBsusp event in the snippet I viewed (lines 1580-1700 showed ComboApplyPlan and ComboPowerPlanExit).
-            // Actually, I should probably check the event handler name first to be safe.
-            // BUT, for now, I will proceed with standard logic and if I miss the specific handler, the UI will just be visual for now.
-            // However, the user wants "populated", so this is the priority.
+            this.ComboUSBsusp.SelectedIndexChanged += new EventHandler(this.ComboUSBsusp_SelectedIndexChanged); // Presumed handler
             
             parentPanel.Controls.Add(this.ComboUSBsusp, 1, 3);
             Log.WriteToLog("ReplaceCorruptedControls: Placed fresh ComboUSBsusp at Col 1, Row 3");
 
-            _controlsReplaced = true;
-            Log.WriteToLog("ReplaceCorruptedControls: Successfully replaced controls.");
+            // --- LOG WINDOW REPLACEMENT ---
+            ReplaceLogControl();
 
+            Log.WriteToLog("ReplaceCorruptedControls: Successfully replaced controls.");
+            _controlsReplaced = true;
         }
         catch (Exception ex)
         {
-            Log.WriteToLog("ReplaceCorruptedControls Error: " + ex.Message);
+            Log.WriteToLog("ReplaceCorruptedControls FATAL ERROR: " + ex.ToString());
+        }
+    }
+
+    private ListBox _logListBox; // Replacement for corrupted ListBox1
+
+    private void ReplaceLogControl()
+    {
+        try 
+        {
+            // Find GroupBox3 (Log Container)
+            Control[] found = this.Controls.Find("GroupBox3", true);
+            if (found.Length == 0) 
+            {
+                Log.WriteToLog("ReplaceLogControl: ERROR - GroupBox3 not found!");
+                return;
+            }
+            GroupBox container = (GroupBox)found[0];
+            
+            // Clear existing corrupted controls
+            container.Controls.Clear();
+            
+            // Create fresh ListBox
+            _logListBox = new ListBox();
+            _logListBox.Name = "ListBox1_Replacement";
+            _logListBox.Dock = DockStyle.Fill;
+            _logListBox.BorderStyle = BorderStyle.None;
+            _logListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular);
+            _logListBox.ForeColor = System.Drawing.Color.DodgerBlue;
+            _logListBox.BackColor = System.Drawing.Color.White;
+            _logListBox.FormattingEnabled = true;
+            _logListBox.HorizontalScrollbar = true;
+            _logListBox.ItemHeight = 15;
+            
+            container.Controls.Add(_logListBox);
+            
+            // Explicitly show
+            _logListBox.Visible = true;
+            _logListBox.BringToFront();
+
+            Log.WriteToLog("ReplaceLogControl: Replaced Log ListBox successfully.");
+        }
+        catch (Exception ex)
+        {
+            Log.WriteToLog("ReplaceLogControl ERROR: " + ex.Message);
         }
     }
 
