@@ -1299,6 +1299,80 @@ namespace OculusTrayTool
              // Removed redundant call as it is called in Form1_Load
         }
 
+    private bool _controlsReplaced = false;
+
+    private void ReplaceCorruptedControls()
+    {
+        if (_controlsReplaced) return;
+        
+        try
+        {
+            Log.WriteToLog("ReplaceCorruptedControls: Starting programmatic replacement of Power Plan comboboxes.");
+            
+            // Find the parent container (DbLayoutPanel5)
+            Control[] foundControls = this.Controls.Find("DbLayoutPanel5", true);
+            if (foundControls.Length == 0)
+            {
+                Log.WriteToLog("ReplaceCorruptedControls: ERROR - DbLayoutPanel5 not found!");
+                return;
+            }
+            TableLayoutPanel parentPanel = (TableLayoutPanel)foundControls[0];
+
+            // 1. Recreate ComboPowerPlanStart (Cell 1, 0)
+            if (this.ComboPowerPlanStart != null)
+            {
+                parentPanel.Controls.Remove(this.ComboPowerPlanStart);
+                this.ComboPowerPlanStart.Dispose();
+            }
+
+            this.ComboPowerPlanStart = new ComboBox();
+            this.ComboPowerPlanStart.Name = "ComboPowerPlanStart";
+            this.ComboPowerPlanStart.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.ComboPowerPlanStart.BackColor = System.Drawing.Color.White;
+            this.ComboPowerPlanStart.ForeColor = System.Drawing.Color.Black;
+            this.ComboPowerPlanStart.FlatStyle = FlatStyle.Standard; // Ensure standard rendering
+            this.ComboPowerPlanStart.FormattingEnabled = true;
+            this.ComboPowerPlanStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25f, System.Drawing.FontStyle.Regular);
+            this.ComboPowerPlanStart.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            this.ComboPowerPlanStart.Height = 21;
+            // Wire up event
+            this.ComboPowerPlanStart.SelectedIndexChanged += new EventHandler(this.ComboPowerPlan_SelectedIndexChanged);
+            
+            parentPanel.Controls.Add(this.ComboPowerPlanStart, 1, 0);
+
+
+            // 2. Recreate ComboPowerPlanExit (Cell 1, 1)
+            if (this.ComboPowerPlanExit != null)
+            {
+                parentPanel.Controls.Remove(this.ComboPowerPlanExit);
+                this.ComboPowerPlanExit.Dispose();
+            }
+
+            this.ComboPowerPlanExit = new ComboBox();
+            this.ComboPowerPlanExit.Name = "ComboPowerPlanExit";
+            this.ComboPowerPlanExit.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.ComboPowerPlanExit.BackColor = System.Drawing.Color.White;
+            this.ComboPowerPlanExit.ForeColor = System.Drawing.Color.Black;
+            this.ComboPowerPlanExit.FlatStyle = FlatStyle.Standard;
+            this.ComboPowerPlanExit.FormattingEnabled = true;
+            this.ComboPowerPlanExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25f, System.Drawing.FontStyle.Regular);
+            this.ComboPowerPlanExit.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            this.ComboPowerPlanExit.Height = 21;
+            // Wire up event
+            this.ComboPowerPlanExit.SelectedIndexChanged += new EventHandler(this.ComboPowerPlan_SelectedIndexChanged);
+
+            parentPanel.Controls.Add(this.ComboPowerPlanExit, 1, 1);
+
+            _controlsReplaced = true;
+            Log.WriteToLog("ReplaceCorruptedControls: Successfully replaced controls.");
+
+        }
+        catch (Exception ex)
+        {
+            Log.WriteToLog("ReplaceCorruptedControls Error: " + ex.Message);
+        }
+    }
+
     private void LoadPowerPlansDirectly()
     {
         try
@@ -1308,6 +1382,9 @@ namespace OculusTrayTool
                 this.Invoke(new MethodInvoker(this.LoadPowerPlansDirectly));
                 return;
             }
+
+            // Ensure we are working with fresh, non-corrupted controls
+            ReplaceCorruptedControls();
 
             Log.WriteToLog("LoadPowerPlansDirectly: Starting direct population from PowerPlans.PlanNames.");
 
