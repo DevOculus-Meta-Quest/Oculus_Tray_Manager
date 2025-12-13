@@ -1309,39 +1309,34 @@ namespace OculusTrayTool
                 return;
             }
 
-            Log.WriteToLog("LoadPowerPlansDirectly: Starting direct population.");
+            Log.WriteToLog("LoadPowerPlansDirectly: Starting direct population from PowerPlans.PlanNames.");
 
-            this.ComboPowerPlanStart.DataSource = null;
-            this.ComboPowerPlanExit.DataSource = null;
-
+            // Clear existing items
             this.ComboPowerPlanStart.Items.Clear();
             this.ComboPowerPlanExit.Items.Clear();
 
-            // Always add "Not Used"
-            this.ComboPowerPlanStart.Items.Add("Not Used");
-            this.ComboPowerPlanExit.Items.Add("Not Used");
-
-            try 
+            // Add items from the PowerPlans.PlanNames list that was populated by PowerPlans.GetPowerPlans()
+            if (PowerPlans.PlanNames != null && PowerPlans.PlanNames.Count > 0)
             {
-                ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\cimv2\\power", "SELECT * FROM Win32_PowerPlan");
-                foreach (ManagementObject obj in searcher.Get())
+                foreach (string planName in PowerPlans.PlanNames)
                 {
-                    string planName = obj["ElementName"].ToString();
-                     // Avoid duplicates if "Not Used" is somehow returned
-                    if (!this.ComboPowerPlanStart.Items.Contains(planName))
-                    {
-                        this.ComboPowerPlanStart.Items.Add(planName);
-                        this.ComboPowerPlanExit.Items.Add(planName);
-                    }
+                    this.ComboPowerPlanStart.Items.Add(planName);
+                    this.ComboPowerPlanExit.Items.Add(planName);
+                    Log.WriteToLog("Added power plan: " + planName);
                 }
             }
-            catch (Exception wmiEx)
+            else
             {
-                Log.WriteToLog("LoadPowerPlansDirectly WMI Error: " + wmiEx.Message);
+                Log.WriteToLog("LoadPowerPlansDirectly: PowerPlans.PlanNames is empty or null, falling back to " + ((char)34) + "Not Used" + ((char)34) + ".");
+                
+                // Fallback to "Not Used" if no plans found
+                this.ComboPowerPlanStart.Items.Add("Not Used");
+                this.ComboPowerPlanExit.Items.Add("Not Used");
             }
 
-            Log.WriteToLog("LoadPowerPlansDirectly: Populated " + this.ComboPowerPlanStart.Items.Count + " items.");
+            Log.WriteToLog("LoadPowerPlansDirectly: Populated " + this.ComboPowerPlanStart.Items.Count + " items in ComboPowerPlanStart and " + this.ComboPowerPlanExit.Items.Count + " items in ComboPowerPlanExit.");
             
+            // Set default selections
             if (this.ComboPowerPlanStart.Items.Count > 0)
                 this.ComboPowerPlanStart.SelectedIndex = 0;
 
