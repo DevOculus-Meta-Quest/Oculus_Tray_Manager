@@ -1433,11 +1433,153 @@ namespace OculusTrayTool
             ReplaceLogControl();
 
 
+            // --- GAME SETTINGS REPLACEMENT ---
+            ReplaceGameSettingsControls();
+
+            Log.WriteToLog("ReplaceCorruptedControls: Successfully replaced controls.");
             _controlsReplaced = true;
         }
         catch (Exception ex)
         {
             Log.WriteToLog("ReplaceCorruptedControls FATAL ERROR: " + ex.ToString());
+        }
+    }
+
+    private void ReplaceGameSettingsControls()
+    {
+        try
+        {
+            // Robust Discovery: Find the panel by looking for the unique Label "Default Super Sampling"
+            TableLayoutPanel settingsPanel = null;
+
+            // Local helper to recursively find the label
+            Label FindLabelByText(Control parent, string text)
+            {
+                foreach (Control c in parent.Controls)
+                {
+                    if (c is Label lbl && lbl.Text.Contains(text)) return lbl;
+                    if (c.HasChildren)
+                    {
+                        Label found = FindLabelByText(c, text);
+                        if (found != null) return found;
+                    }
+                }
+                return null;
+            }
+
+            Label targetLabel = FindLabelByText(this, "Default Super Sampling");
+            if (targetLabel != null && targetLabel.Parent is TableLayoutPanel)
+            {
+                settingsPanel = (TableLayoutPanel)targetLabel.Parent;
+            }
+
+            if (settingsPanel == null)
+            {
+                Log.WriteToLog("ReplaceGameSettingsControls: ERROR - Could not find 'Default Super Sampling' label or its parent panel!");
+                // Fallback attempt: DbLayoutPanel1?
+                 Control[] found = this.Controls.Find("DbLayoutPanel1", true);
+                 if (found.Length > 0) settingsPanel = (TableLayoutPanel)found[0];
+            }
+
+            if (settingsPanel == null) {
+                 Log.WriteToLog("ReplaceGameSettingsControls: FATAL - Settings Panel NOT FOUND.");
+                 return;
+            }
+           
+            Log.WriteToLog("ReplaceGameSettingsControls: Found panel " + settingsPanel.Name + " with " + settingsPanel.Controls.Count + " controls.");
+
+            // Helper to find row by label text
+            int GetRowForLabel(string labelText)
+            {
+                foreach (Control c in settingsPanel.Controls)
+                {
+                    if (c is Label lbl && lbl.Text != null && lbl.Text.IndexOf(labelText, StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        var pos = settingsPanel.GetPositionFromControl(c);
+                        Log.WriteToLog("ReplaceGameSettingsControls: Mapped '" + labelText + "' to Row " + pos.Row);
+                        return pos.Row;
+                    }
+                }
+                Log.WriteToLog("ReplaceGameSettingsControls: WARNING - Could not find label containing '" + labelText + "'");
+                return -1;
+            }
+
+            // Helpers
+            void ReplaceCombo(string labelText, string name, string[] items, string defaultVal)
+            {
+                int row = GetRowForLabel(labelText);
+                if (row == -1) return; // Skip if label not found
+
+                // Remove existing at (1, row)
+                 for (int i = settingsPanel.Controls.Count - 1; i >= 0; i--)
+                {
+                    Control ctrl = settingsPanel.Controls[i];
+                    TableLayoutPanelCellPosition pos = settingsPanel.GetPositionFromControl(ctrl);
+                    if (pos.Column == 1 && pos.Row == row)
+                    {
+                        settingsPanel.Controls.Remove(ctrl);
+                        ctrl.Dispose();
+                    }
+                }
+
+                ComboBox box = new ComboBox();
+                box.Name = name;
+                box.DropDownStyle = ComboBoxStyle.DropDownList;
+                box.BackColor = Color.White;
+                box.ForeColor = Color.Black;
+                box.FlatStyle = FlatStyle.Standard;
+                box.Font = new Font("Microsoft Sans Serif", 8.25f);
+                box.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+                box.Height = 21;
+                
+                if (items != null) box.Items.AddRange(items);
+                if (defaultVal != null) 
+                {
+                    int idx = box.FindStringExact(defaultVal);
+                    if (idx != -1) box.SelectedIndex = idx;
+                    else box.Text = defaultVal;
+                }
+                
+                settingsPanel.Controls.Add(box, 1, row);
+            }
+            
+            // 1. Super Sampling
+             string[] ssItems = new string[] { "0.0", "1.0", "1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.7", "1.8", "1.9", "2.0", "2.5" };
+             ReplaceCombo("Super Sampling", "ComboSSstart", ssItems, "1.3");
+             
+             // 2. ASW Mode
+             string[] aswItems = new string[] { "Auto", "Off", "45 Hz", "30 Hz", "18 Hz", "45 Hz forced", "Adaptive" };
+             ReplaceCombo("ASW Mode", "ComboBox1", aswItems, "Auto");
+
+             // 3. Adaptive GPU Scaling
+             ReplaceCombo("Adaptive GPU", "ComboBox2", new string[] { "Default", "On", "Off" }, "On"); 
+             
+             // 4. Voice Commands
+             ReplaceCombo("Voice Commands", "ComboVoice", new string[] { "Disabled", "English", "German", "French", "Spanish", "Italian" }, "Disabled");
+             
+             // 5. Oculus Homeless
+             ReplaceCombo("Homeless", "ComboHomless", new string[] { "Disabled", "Enabled" }, "Disabled");
+             
+             // 6. Mirror Oculus Home
+             ReplaceCombo("Mirror", "ComboMirrorHome", new string[] { "Disabled", "Enabled" }, "Disabled");
+
+             // 7. Visual HUD
+             ReplaceCombo("Visual HUD", "ComboVisualHUD", new string[] { "None", "Performance", "Stereo Debug", "Layer", "Compositor" }, "None");
+
+             // 8. OVR Server Priority
+             ReplaceCombo("Priority", "ComboOVRPrio", new string[] { "Normal", "High", "Realtime" }, "Normal"); 
+             
+             // 9. Force MipMap
+             ReplaceCombo("Force MipMap", "ComboBox8", new string[] { "False", "True" }, "False");
+
+             // 10. Offset MipMap
+             ReplaceCombo("Offset MipMap", "ComboBox9", new string[] { "0", "1", "2", "-1", "-2" }, "0");
+
+             Log.WriteToLog("ReplaceGameSettingsControls: Populated Game Settings defaults.");
+        }
+        catch (Exception ex)
+        {
+            Log.WriteToLog("ReplaceGameSettingsControls Error: " + ex.Message);
         }
     }
 
