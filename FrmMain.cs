@@ -1140,7 +1140,7 @@ namespace OculusTrayTool
     private void ComboUSBsusp_SelectedIndexChanged(object sender, EventArgs e) { }
         private void ComboPowerPlan_SelectedIndexChanged(object sender, EventArgs e) 
     { 
-       Log.WriteToLog("DEBUG: ComboPowerPlan_SelectedIndexChanged. Index: " + this.ComboPowerPlanStart.SelectedIndex + " Text: " + this.ComboPowerPlanStart.Text);
+
     }
     private void CheckMinimizeOnX_CheckedChanged(object sender, EventArgs e) { }
     private void PictureBox1_Click(object sender, EventArgs e) { }
@@ -1321,7 +1321,7 @@ namespace OculusTrayTool
         
         try
         {
-            Log.WriteToLog("ReplaceCorruptedControls: Starting programmatic replacement of Power Plan comboboxes.");
+
             
             // Find the parent container (DbLayoutPanel5)
             Control[] foundControls = this.Controls.Find("DbLayoutPanel5", true);
@@ -1342,7 +1342,7 @@ namespace OculusTrayTool
                     TableLayoutPanelCellPosition pos = parentPanel.GetPositionFromControl(ctrl);
                     if (pos.Column == col && pos.Row == row)
                     {
-                        Log.WriteToLog("Removing existing control at (" + col + "," + row + "): " + ctrl.Name);
+
                         parentPanel.Controls.Remove(ctrl);
                         ctrl.Dispose();
                     }
@@ -1366,7 +1366,7 @@ namespace OculusTrayTool
             
             parentPanel.Controls.Add(this.ComboPowerPlanStart, 1, 0); // Add directly to cell
             
-            Log.WriteToLog("ReplaceCorruptedControls: Placed fresh ComboPowerPlanStart at Col 1, Row 0");
+
 
 
 
@@ -1386,7 +1386,7 @@ namespace OculusTrayTool
             this.ComboPowerPlanExit.SelectedIndexChanged += new EventHandler(this.ComboPowerPlan_SelectedIndexChanged);
 
             parentPanel.Controls.Add(this.ComboPowerPlanExit, 1, 1);
-            Log.WriteToLog("ReplaceCorruptedControls: Placed fresh ComboPowerPlanExit at Col 1, Row 1");
+
 
             // 3. Clear and Recreate ComboApplyPlan (Cell 1, 2)
             RemoveControlAt(1, 2);
@@ -1407,7 +1407,7 @@ namespace OculusTrayTool
             this.ComboApplyPlan.SelectedIndexChanged += new EventHandler(this.ComboApplyPlan_SelectedIndexChanged);
 
             parentPanel.Controls.Add(this.ComboApplyPlan, 1, 2);
-            Log.WriteToLog("ReplaceCorruptedControls: Placed fresh ComboApplyPlan at Col 1, Row 2");
+
 
             // 4. Clear and Recreate ComboUSBsusp (Cell 1, 3)
             RemoveControlAt(1, 3);
@@ -1427,12 +1427,12 @@ namespace OculusTrayTool
             this.ComboUSBsusp.SelectedIndexChanged += new EventHandler(this.ComboUSBsusp_SelectedIndexChanged); // Presumed handler
             
             parentPanel.Controls.Add(this.ComboUSBsusp, 1, 3);
-            Log.WriteToLog("ReplaceCorruptedControls: Placed fresh ComboUSBsusp at Col 1, Row 3");
+
 
             // --- LOG WINDOW REPLACEMENT ---
             ReplaceLogControl();
 
-            Log.WriteToLog("ReplaceCorruptedControls: Successfully replaced controls.");
+
             _controlsReplaced = true;
         }
         catch (Exception ex)
@@ -1524,7 +1524,7 @@ namespace OculusTrayTool
             
             btnClear.BringToFront();
 
-            Log.WriteToLog("ReplaceLogControl: Replaced Log ListBox + Added Clear Button successfully.");
+
         }
         catch (Exception ex)
         {
@@ -1545,7 +1545,7 @@ namespace OculusTrayTool
             // Ensure we are working with fresh, non-corrupted controls
             ReplaceCorruptedControls();
 
-            Log.WriteToLog("LoadPowerPlansDirectly: Starting direct population from PowerPlans.PlanNames.");
+
 
             // Clear existing items
             this.ComboPowerPlanStart.Items.Clear();
@@ -1558,7 +1558,7 @@ namespace OculusTrayTool
                 {
                     this.ComboPowerPlanStart.Items.Add(planName);
                     this.ComboPowerPlanExit.Items.Add(planName);
-                    Log.WriteToLog("Added power plan: " + planName);
+
                 }
             }
             else
@@ -1570,7 +1570,8 @@ namespace OculusTrayTool
                 this.ComboPowerPlanExit.Items.Add("Not Used");
             }
 
-            Log.WriteToLog("LoadPowerPlansDirectly: Populated " + this.ComboPowerPlanStart.Items.Count + " items in ComboPowerPlanStart and " + this.ComboPowerPlanExit.Items.Count + " items in ComboPowerPlanExit.");
+            
+            // Log.WriteToLog("LoadPowerPlansDirectly: Populated " + this.ComboPowerPlanStart.Items.Count + " items in ComboPowerPlanStart and " + this.ComboPowerPlanExit.Items.Count + " items in ComboPowerPlanExit.");
             
             // Set default selections
             if (this.ComboPowerPlanStart.Items.Count > 0)
