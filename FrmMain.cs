@@ -1471,13 +1471,60 @@ namespace OculusTrayTool
             _logListBox.HorizontalScrollbar = true;
             _logListBox.ItemHeight = 15;
             
-            container.Controls.Add(_logListBox);
-            
-            // Explicitly show
-            _logListBox.Visible = true;
-            _logListBox.BringToFront();
+            // Create "Clear Log" Button
+            Button btnClear = new Button();
+            btnClear.Name = "BtnClearLog";
+            btnClear.Text = "Clear Log";
+            btnClear.Dock = DockStyle.Bottom;
+            btnClear.Height = 30;
+            btnClear.FlatStyle = FlatStyle.Flat;
+            btnClear.BackColor = System.Drawing.Color.WhiteSmoke;
+            btnClear.ForeColor = System.Drawing.Color.Black;
+            btnClear.UseVisualStyleBackColor = true;
+            btnClear.Click += (sender, e) => {
+                try {
+                    // Clear UI
+                    if (_logListBox != null) _logListBox.Items.Clear();
+                    // Clear File
+                    Log.ClearLog();
+                    // Feedback
+                    _logListBox?.Items.Add("Log Cleared.");
+                } catch {}
+            };
 
-            Log.WriteToLog("ReplaceLogControl: Replaced Log ListBox successfully.");
+            // Add Control (Order matters for Docking: Add Bottom first, then Fill)
+            container.Controls.Add(_logListBox); // Fill
+            container.Controls.Add(btnClear);    // Bottom (added last = processed first in dock layout?? No, standard Forms docking: Last added is closest to edge usually, or z-order matters. Let's try adding button first, then listbox)
+            // Correction: In WinForms, the LAST control added to collection is at the START of the Z-order.
+            // Dock=Fill takes remaining space. Dock=Bottom takes bottom slice.
+            // If I add ListBox (Fill) first, it might take everything.
+            // Safest: Add Button (Dock=Bottom), THEN ListBox (Dock=Fill) with BringToFront().
+            
+            // Let's redo addition order:
+            container.Controls.Clear();
+            container.Controls.Add(_logListBox); 
+            container.Controls.Add(btnClear);
+            
+            // Set Docking Correctly
+            btnClear.Dock = DockStyle.Bottom;
+            _logListBox.Dock = DockStyle.Fill;
+            
+            // Z-Order: To make sure ListBox doesn't cover Button, we usually want Button to claim its space first.
+            // Actually, in auto-layout, Docking priority is determined by Z-Index.
+            // The control with index 0 (top of Z-order) gets priority.
+            // So we want Button to be index 0? Or index 1?
+            // Usually: Add Button. Dock Bottom. Add ListBox. Dock Fill. Bring ListBox Front? 
+            
+            // Let's just use standard add order and explicit BringToFront/SendToBack if needed.
+            // If I add Button first, it is at 0. then ListBox at 0 (Button becomes 1).
+            // Let's try:
+            // 1. Add ListBox (Fill)
+            // 2. Add Button (Bottom)
+            // 3. Button.BringToFront() -> Button is 0. Button claims Bottom. ListBox claims remaining Fill.
+            
+            btnClear.BringToFront();
+
+            Log.WriteToLog("ReplaceLogControl: Replaced Log ListBox + Added Clear Button successfully.");
         }
         catch (Exception ex)
         {

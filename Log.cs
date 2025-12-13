@@ -49,6 +49,32 @@ namespace OculusTrayTool
       }
     }
 
+    public static void ClearLog()
+    {
+      try
+      {
+        object lockObject = Log.lockObject;
+        ObjectFlowControl.CheckForSyncLockOnValueType(lockObject);
+        bool lockTaken = false;
+        try
+        {
+          Monitor.Enter(lockObject, ref lockTaken);
+          // Overwrite with empty content to clear the file
+          File.WriteAllText(Application.StartupPath + "\\ott_debug.log", string.Empty);
+        }
+        finally
+        {
+          if (lockTaken)
+            Monitor.Exit(lockObject);
+        }
+      }
+      catch (Exception ex)
+      {
+        ProjectData.SetProjectError(ex);
+        ProjectData.ClearProjectError();
+      }
+    }
+
     public static void WriteToMigrateLog(string s)
     {
       try
