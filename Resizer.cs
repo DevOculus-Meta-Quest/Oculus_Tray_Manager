@@ -25,7 +25,7 @@ namespace OculusTrayTool
           {
             if (!Information.IsNothing((object) control.Parent))
             {
-              if (control is Label | control is ComboBox | control is Button | control is CheckBox | control is ListBox | control is RichTextBox | control is DotNetBarTabcontrol && Operators.CompareString(control.Name, "Label8", false) != 0 & Operators.CompareString(control.Name, "Button2", false) != 0 & Operators.CompareString(control.Name, "LabelPropertiesFilename", false) != 0 & Operators.CompareString(control.Name, "LabelProperties", false) != 0 & Operators.CompareString(control.Name, "LabelProperties2", false) != 0)
+            if (control is Label | control is ComboBox | control is Button | control is CheckBox | control is ListBox | control is RichTextBox | control is DotNetBarTabcontrol && Operators.CompareString(control.Name, "Label8", false) != 0 & Operators.CompareString(control.Name, "Button2", false) != 0 & Operators.CompareString(control.Name, "LabelPropertiesFilename", false) != 0 & Operators.CompareString(control.Name, "LabelProperties", false) != 0 & Operators.CompareString(control.Name, "LabelProperties2", false) != 0 & control.Name != "ComboPowerPlanStart" & control.Name != "ComboPowerPlanExit")
               {
                 Resizer.ControlInfo controlInfo = new Resizer.ControlInfo();
                 controlInfo.name = control.Name;
@@ -51,6 +51,7 @@ namespace OculusTrayTool
     public void ResizeAllControls(Control thisCtrl, float Ratio)
     {
       float emSize = Ratio;
+      if (emSize < 8.0f) emSize = 8.0f; // Safeguard against invisible text
         foreach (Control control in thisCtrl.Controls)
         {
           try

@@ -298,6 +298,7 @@ namespace OculusTrayTool
         if (Globals.dbg)
           Log.WriteToLog("Checking Administrator privileges");
         Log.WriteToLog("Form1_Load: fmain is " + (fmain == null ? "null" : "set") + ", matching this: " + (fmain == this));
+        this.Shown += new EventHandler(this.Form1_Shown); // Ensure refresh happens after UI is visible
         this.isElevated = new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
         if (!this.isElevated)
         {
@@ -460,7 +461,7 @@ namespace OculusTrayTool
           
           OTTDB.OpenOttDB();
           PowerPlans.GetPowerPlans();
-          this.RefreshPowerPlanComboboxes();
+          this.LoadPowerPlansDirectly();
            
           
           GetConfig.Load();
@@ -765,6 +766,7 @@ namespace OculusTrayTool
             this.NotificationTimer.Start();
             Log.WriteToLog("Startup Complete");
           }
+
           this.NotifyIcon1.Visible = true;
           this.StartingUp = false;
         }
@@ -1290,29 +1292,86 @@ namespace OculusTrayTool
         }
     }
 
-    
-    private void RefreshPowerPlanComboboxes()
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            if (Globals.dbg)
+                Log.WriteToLog("Form1_Shown: Refreshing Power Plan Comboboxes");
+            this.LoadPowerPlansDirectly();
+        }
+
+    private void LoadPowerPlansDirectly()
     {
         try
         {
-            if (Globals.dbg)
-                Log.WriteToLog("Refreshing Power Plan comboboxes");
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new MethodInvoker(this.LoadPowerPlansDirectly));
+                return;
+            }
+
+            Log.WriteToLog("LoadPowerPlansDirectly: Starting direct population.");
+
+            this.ComboPowerPlanStart.DataSource = null;
+            this.ComboPowerPlanExit.DataSource = null;
+
             this.ComboPowerPlanStart.Items.Clear();
             this.ComboPowerPlanExit.Items.Clear();
-            if (PowerPlans.PlanNames != null)
+
+            // Always add "Not Used"
+            this.ComboPowerPlanStart.Items.Add("Not Used");
+            this.ComboPowerPlanExit.Items.Add("Not Used");
+
+            try 
             {
-                foreach (string planName in PowerPlans.PlanNames)
+                ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\cimv2\\power", "SELECT * FROM Win32_PowerPlan");
+                foreach (ManagementObject obj in searcher.Get())
                 {
-                    this.ComboPowerPlanStart.Items.Add(planName);
-                    this.ComboPowerPlanExit.Items.Add(planName);
+                    string planName = obj["ElementName"].ToString();
+                     // Avoid duplicates if "Not Used" is somehow returned
+                    if (!this.ComboPowerPlanStart.Items.Contains(planName))
+                    {
+                        this.ComboPowerPlanStart.Items.Add(planName);
+                        this.ComboPowerPlanExit.Items.Add(planName);
+                    }
                 }
             }
-            if (Globals.dbg)
-                Log.WriteToLog("Power Plan comboboxes populated with " + (PowerPlans.PlanNames != null ? PowerPlans.PlanNames.Count : 0) + " items");
+            catch (Exception wmiEx)
+            {
+                Log.WriteToLog("LoadPowerPlansDirectly WMI Error: " + wmiEx.Message);
+            }
+
+            Log.WriteToLog("LoadPowerPlansDirectly: Populated " + this.ComboPowerPlanStart.Items.Count + " items.");
+            
+            // Force visual properties to ensure visibility
+            System.Drawing.Font fixedFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25f, System.Drawing.FontStyle.Regular);
+            
+            this.ComboPowerPlanStart.Font = fixedFont;
+            this.ComboPowerPlanStart.ForeColor = System.Drawing.Color.Black;
+            this.ComboPowerPlanStart.BackColor = System.Drawing.Color.White;
+            this.ComboPowerPlanStart.DrawMode = DrawMode.Normal;
+            this.ComboPowerPlanStart.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.ComboPowerPlanStart.IntegralHeight = false; // Sometimes helps with sizing issues
+
+            this.ComboPowerPlanExit.Font = fixedFont;
+            this.ComboPowerPlanExit.ForeColor = System.Drawing.Color.Black;
+            this.ComboPowerPlanExit.BackColor = System.Drawing.Color.White;
+            this.ComboPowerPlanExit.DrawMode = DrawMode.Normal;
+            this.ComboPowerPlanExit.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.ComboPowerPlanExit.IntegralHeight = false;
+
+            if (this.ComboPowerPlanStart.Items.Count > 0)
+                this.ComboPowerPlanStart.SelectedIndex = 0;
+
+            if (this.ComboPowerPlanExit.Items.Count > 0)
+                this.ComboPowerPlanExit.SelectedIndex = 0;
+
+            this.ComboPowerPlanStart.Refresh();
+            this.ComboPowerPlanExit.Refresh();
+            Log.WriteToLog("LoadPowerPlansDirectly: Applied visual overrides.");
         }
         catch (Exception ex)
         {
-            Log.WriteToLog("Error in RefreshPowerPlanComboboxes: " + ex.Message);
+            Log.WriteToLog("LoadPowerPlansDirectly Error: " + ex.Message);
         }
     }
 }
