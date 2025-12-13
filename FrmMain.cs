@@ -1318,13 +1318,25 @@ namespace OculusTrayTool
             }
             TableLayoutPanel parentPanel = (TableLayoutPanel)foundControls[0];
 
-            // 1. Recreate ComboPowerPlanStart (Cell 1, 0)
-            if (this.ComboPowerPlanStart != null)
+            // Helper to remove ALL controls at specific cell
+            void RemoveControlAt(int col, int row)
             {
-                if (parentPanel.Controls.Contains(this.ComboPowerPlanStart))
-                    parentPanel.Controls.Remove(this.ComboPowerPlanStart);
-                this.ComboPowerPlanStart.Dispose();
+                // Iterate backwards safely
+                for (int i = parentPanel.Controls.Count - 1; i >= 0; i--)
+                {
+                    Control ctrl = parentPanel.Controls[i];
+                    TableLayoutPanelCellPosition pos = parentPanel.GetPositionFromControl(ctrl);
+                    if (pos.Column == col && pos.Row == row)
+                    {
+                        Log.WriteToLog("Removing existing control at (" + col + "," + row + "): " + ctrl.Name);
+                        parentPanel.Controls.Remove(ctrl);
+                        ctrl.Dispose();
+                    }
+                }
             }
+
+            // 1. Clear and Recreate ComboPowerPlanStart (Cell 1, 0)
+            RemoveControlAt(1, 0); // Clear the cell first!
 
             this.ComboPowerPlanStart = new ComboBox();
             this.ComboPowerPlanStart.Name = "ComboPowerPlanStart";
@@ -1338,20 +1350,13 @@ namespace OculusTrayTool
             this.ComboPowerPlanStart.Height = 21;
             this.ComboPowerPlanStart.SelectedIndexChanged += new EventHandler(this.ComboPowerPlan_SelectedIndexChanged);
             
-            // Explicitly Add and Position
-            parentPanel.Controls.Add(this.ComboPowerPlanStart); // Add first
-            parentPanel.SetCellPosition(this.ComboPowerPlanStart, new TableLayoutPanelCellPosition(1, 0)); // Col 1, Row 0
+            parentPanel.Controls.Add(this.ComboPowerPlanStart, 1, 0); // Add directly to cell
             
-            Log.WriteToLog("ReplaceCorruptedControls: Placed ComboPowerPlanStart at Col 1, Row 0");
+            Log.WriteToLog("ReplaceCorruptedControls: Placed fresh ComboPowerPlanStart at Col 1, Row 0");
 
 
-            // 2. Recreate ComboPowerPlanExit (Cell 1, 1)
-            if (this.ComboPowerPlanExit != null)
-            {
-                 if (parentPanel.Controls.Contains(this.ComboPowerPlanExit))
-                    parentPanel.Controls.Remove(this.ComboPowerPlanExit);
-                this.ComboPowerPlanExit.Dispose();
-            }
+            // 2. Clear and Recreate ComboPowerPlanExit (Cell 1, 1)
+            RemoveControlAt(1, 1); // Clear the cell first!
 
             this.ComboPowerPlanExit = new ComboBox();
             this.ComboPowerPlanExit.Name = "ComboPowerPlanExit";
@@ -1365,11 +1370,9 @@ namespace OculusTrayTool
             this.ComboPowerPlanExit.Height = 21;
             this.ComboPowerPlanExit.SelectedIndexChanged += new EventHandler(this.ComboPowerPlan_SelectedIndexChanged);
 
-            // Explicitly Add and Position
-            parentPanel.Controls.Add(this.ComboPowerPlanExit);
-            parentPanel.SetCellPosition(this.ComboPowerPlanExit, new TableLayoutPanelCellPosition(1, 1)); // Col 1, Row 1
+            parentPanel.Controls.Add(this.ComboPowerPlanExit, 1, 1); // Add directly to cell
             
-            Log.WriteToLog("ReplaceCorruptedControls: Placed ComboPowerPlanExit at Col 1, Row 1");
+            Log.WriteToLog("ReplaceCorruptedControls: Placed fresh ComboPowerPlanExit at Col 1, Row 1");
 
             _controlsReplaced = true;
             Log.WriteToLog("ReplaceCorruptedControls: Successfully replaced controls.");
