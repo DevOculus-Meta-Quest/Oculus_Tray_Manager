@@ -1,5 +1,5 @@
 
-using Microsoft.VisualBasic.CompilerServices;
+
 using OculusTrayTool.My;
 using System;
 using System.Drawing;
@@ -13,7 +13,6 @@ using System.Text.RegularExpressions;
 #nullable disable
 namespace OculusTrayTool
 {
-  [StandardModule]
   internal sealed class PowerPlans
   {
     public static string activePlanName;
@@ -32,11 +31,11 @@ namespace OculusTrayTool
         ManagementObjectSearcher managementObjectSearcher = new ManagementObjectSearcher("root\\cimv2\\power", "SELECT * FROM Win32_PowerPlan");
         foreach (ManagementObject managementObject in managementObjectSearcher.Get())
         {
-          if (Conversions.ToBoolean(managementObject.GetPropertyValue("IsActive")))
+          if (Convert.ToBoolean(managementObject.GetPropertyValue("IsActive")))
           {
             PowerPlans.ActivePlanID = managementObject["InstanceID"].ToString().Replace("Microsoft:PowerPlan\\", "");
             PowerPlans.filter = PowerPlans.ActivePlanID + "\\AC\\{48e6b7a6-50f5-4782-a5d4-53bb8f07e226}";
-            PowerPlans.activePlanName = Conversions.ToString(managementObject["ElementName"]);
+            PowerPlans.activePlanName = Convert.ToString(managementObject["ElementName"]);
             Log.WriteToLog("Current Power Plan is " + PowerPlans.activePlanName);
             GetConfig.IsReading = true;
             PowerPlans.GetSetUsbSuspend(PowerPlans.filter, false);
@@ -49,13 +48,11 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Exception e = ex;
         FrmMain.fmain.AddToListboxAndScroll("* Exception in GetActivePowerPlan(): " + e.Message);
         MyProject.Forms.FrmMain.hasWarning = true;
         StackTrace stackTrace = new StackTrace(e, true);
         Log.WriteToLog(e.ToString() + stackTrace.ToString());
-        ProjectData.ClearProjectError();
       }
     }
 
@@ -134,19 +131,17 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Exception e = ex;
         FrmMain.fmain.AddToListboxAndScroll("* Exception in GetPowerPlans(): " + e.Message);
         MyProject.Forms.FrmMain.hasWarning = true;
         StackTrace stackTrace = new StackTrace(e, true);
         Log.WriteToLog(e.ToString() + stackTrace.ToString());
-        ProjectData.ClearProjectError();
       }
     }
 
     public static void GetSetUsbSuspend(string filter, bool change)
     {
-      if (Operators.CompareString(PowerPlans.activePlanName, (string) null, false) == 0)
+      if (string.Equals(PowerPlans.activePlanName, null, StringComparison.Ordinal))
       {
         if (!FrmMain.fmain.ComboUSBsusp.Items.Contains((object) "Not Available"))
           FrmMain.fmain.ComboUSBsusp.Items.Add((object) "Not Available");
@@ -164,7 +159,7 @@ namespace OculusTrayTool
             {
               if (!change)
               {
-                if (Operators.ConditionalCompareObjectEqual(managementObject.GetPropertyValue("SettingIndexValue"), (object) 1, false))
+                if (Convert.ToInt32(managementObject.GetPropertyValue("SettingIndexValue")) == 1)
                 {
                   FrmMain.fmain.ComboUSBsusp.Text = "Enabled";
                   Log.WriteToLog("Current Power Plan '" + PowerPlans.activePlanName + "' has USB Selective Suspend Enabled");
@@ -179,7 +174,7 @@ namespace OculusTrayTool
               }
               if (change)
               {
-                if (Operators.CompareString(FrmMain.fmain.ComboUSBsusp.Text, "Disabled", false) == 0)
+                if (string.Equals(FrmMain.fmain.ComboUSBsusp.Text, "Disabled", StringComparison.Ordinal))
                 {
                   Log.WriteToLog("Changing USB Selective Suspend for " + PowerPlans.activePlanName + " to Disabled");
                   managementObject.SetPropertyValue("SettingIndexValue", (object) 0);
@@ -202,14 +197,12 @@ namespace OculusTrayTool
         }
         catch (Exception ex)
         {
-          ProjectData.SetProjectError(ex);
           Exception e = ex;
           FrmMain.fmain.AddToListboxAndScroll("* Exception in GetSetUsbSuspend(): " + e.Message);
           MyProject.Forms.FrmMain.hasWarning = true;
           StackTrace stackTrace = new StackTrace(e, true);
           Log.WriteToLog(e.ToString() + stackTrace.ToString());
           Control.CheckForIllegalCrossThreadCalls = true;
-          ProjectData.ClearProjectError();
         }
       }
     }
@@ -220,7 +213,7 @@ namespace OculusTrayTool
       {
         if (Globals.dbg)
           Log.WriteToLog("Entering SetActivePowerPlan");
-        if (Operators.CompareString(name, "Not Used", false) == 0)
+        if (string.Equals(name, "Not Used", StringComparison.Ordinal))
         {
           Log.WriteToLog("No power plan set for OTT start");
         }
@@ -240,7 +233,6 @@ namespace OculusTrayTool
           }
           catch (Exception ex1)
           {
-            ProjectData.SetProjectError(ex1);
             try
             {
               Log.WriteToLog("Set Powerplan failed, trying alternate method...");
@@ -254,13 +246,10 @@ namespace OculusTrayTool
             }
             catch (Exception ex2)
             {
-              ProjectData.SetProjectError(ex2);
               Exception e = ex2;
               StackTrace stackTrace = new StackTrace(e, true);
               Log.WriteToLog("Set Powerplan failed: " + e.ToString() + stackTrace.ToString());
-              ProjectData.ClearProjectError();
             }
-            ProjectData.ClearProjectError();
           }
           MySettingsProperty.Settings.PowerPlanCurrent = name;
           MySettingsProperty.Settings.Save();
@@ -269,12 +258,10 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Exception e = ex;
         StackTrace stackTrace = new StackTrace(e, true);
         Log.WriteToLog("SetActivePowerPlan: " + e.ToString() + stackTrace.ToString());
         FrmMain.fmain.PowerPlanTimer.Start();
-        ProjectData.ClearProjectError();
       }
     }
 
@@ -299,23 +286,20 @@ namespace OculusTrayTool
         bool flag = false;
         foreach (ManagementObject managementObject in managementObjectSearcher1.Get())
           {
-            dictionary.Add(Conversions.ToString(managementObject["DeviceID"]), Conversions.ToString(managementObject["name"]));
+            dictionary.Add(Convert.ToString(managementObject["DeviceID"]), Convert.ToString(managementObject["name"]));
           }
         foreach (ManagementObject managementObject in managementObjectSearcher2.Get())
         {
           foreach (string str in stringList)
           {
-            string upper1 = NewLateBinding.LateGet(managementObject["InstanceName"], (Type) null, "TrimEnd", new object[1]
-            {
-              (object) "0"
-            }, (string[]) null, (Type[]) null, (bool[]) null).ToString().TrimEnd('_').ToUpper();
+            string upper1 = managementObject["InstanceName"].ToString().TrimEnd("0".ToCharArray()).TrimEnd('_').ToUpper();
             string upper2 = str.ToUpper();
-            if (upper1.Contains(upper2) && Operators.ConditionalCompareObjectEqual(managementObject.GetPropertyValue("Enable"), (object) true, false))
+            if (upper1.Contains(upper2) && Convert.ToBoolean(managementObject.GetPropertyValue("Enable")))
             {
               flag = true;
               foreach (KeyValuePair<string, string> keyValuePair in dictionary)
               {
-                if (Operators.CompareString(keyValuePair.Key, upper1, false) == 0)
+                if (string.Equals(keyValuePair.Key, upper1, StringComparison.Ordinal))
                 {
                   if (change)
                   {
@@ -357,13 +341,11 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Exception e = ex;
         FrmMain.fmain.AddToListboxAndScroll("* Exception in CheckPowerState(): " + e.Message);
         FrmMain.fmain.hasWarning = true;
         StackTrace stackTrace = new StackTrace(e, true);
         Log.WriteToLog(e.ToString() + stackTrace.ToString());
-        ProjectData.ClearProjectError();
       }
     }
   }

@@ -121,9 +121,9 @@ namespace OculusTrayTool
         if (Globals.dbg)
           Log.WriteToLog("Reading setting LibraryPath");
         bool flag = false;
-        if (Operators.CompareString(MySettingsProperty.Settings.LibraryPath, "", false) != 0 & !string.IsNullOrWhiteSpace(MySettingsProperty.Settings.LibraryPath.ToString()))
+        if (!String.Equals(MySettingsProperty.Settings.LibraryPath, "", StringComparison.OrdinalIgnoreCase) & !string.IsNullOrWhiteSpace(MySettingsProperty.Settings.LibraryPath.ToString()))
         {
-          string[] strArray = Strings.Split(MySettingsProperty.Settings.LibraryPath, ",");
+          string[] strArray = MySettingsProperty.Settings.LibraryPath.Split(',');
           int index = 0;
           while (index < strArray.Length)
           {
@@ -285,7 +285,7 @@ namespace OculusTrayTool
           }
           if (Globals.dbg)
             Log.WriteToLog("Reading setting HomlessColor");
-          string[] strArray = Strings.Split(MySettingsProperty.Settings.HomlessColor);
+          string[] strArray = MySettingsProperty.Settings.HomlessColor.Split(' ');
           MyProject.Forms.frmHomeless.TextBox1.BackColor = Color.FromArgb(Convert.ToInt32(strArray[0]), Convert.ToInt32(strArray[1]), Convert.ToInt32(strArray[2]));
           if (Globals.dbg)
             Log.WriteToLog("Reading setting HomelessMusic");
@@ -361,14 +361,14 @@ namespace OculusTrayTool
       MyProject.Forms.frmHotKeys.KeyList.Clear();
       FrmMain.fmain.FuncToKeyDictionary.Clear();
       MyProject.Forms.frmHotKeys.FunctionList.Clear();
-      string[] strArray1 = Strings.Split(MySettingsProperty.Settings.HotKeyCombos, ";");
+      string[] strArray1 = MySettingsProperty.Settings.HotKeyCombos.Split(';');
       if (strArray1.Length <= 0)
         return;
       string[] strArray2 = strArray1;
       int index = 0;
       while (index < strArray2.Length)
       {
-        string[] strArray3 = Strings.Split(strArray2[index], ",");
+        string[] strArray3 = strArray2[index].Split(',');
         ListViewItem listViewItem1 = new ListViewItem();
         ListViewItem listViewItem2 = MyProject.Forms.frmHotKeys.ListView1.Items.Add(strArray3[0]);
         if (strArray3.Length > 2)

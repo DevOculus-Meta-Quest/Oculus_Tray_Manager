@@ -1,6 +1,5 @@
 
-using Microsoft.VisualBasic.ApplicationServices;
-using Microsoft.VisualBasic.CompilerServices;
+
 using System;
 using System.CodeDom.Compiler;
 using System.ComponentModel;
@@ -46,7 +45,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("computer, start listening;speech on")]
     public string StartVoice
     {
-      get => Conversions.ToString(this[nameof (StartVoice)]);
+      get => Convert.ToString(this[nameof (StartVoice)]);
       set => this[nameof (StartVoice)] = (object) value;
     }
 
@@ -55,7 +54,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("computer, stop listening;speech off")]
     public string StopVoice
     {
-      get => Conversions.ToString(this[nameof (StopVoice)]);
+      get => Convert.ToString(this[nameof (StopVoice)]);
       set => this[nameof (StopVoice)] = (object) value;
     }
 
@@ -64,7 +63,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("enable spacewarp")]
     public string EnableASW
     {
-      get => Conversions.ToString(this[nameof (EnableASW)]);
+      get => Convert.ToString(this[nameof (EnableASW)]);
       set => this[nameof (EnableASW)] = (object) value;
     }
 
@@ -73,7 +72,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("disable spacewarp")]
     public string DisableASW
     {
-      get => Conversions.ToString(this[nameof (DisableASW)]);
+      get => Convert.ToString(this[nameof (DisableASW)]);
       set => this[nameof (DisableASW)] = (object) value;
     }
 
@@ -82,7 +81,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("show pixel density; show super sampling")]
     public string ShowPD
     {
-      get => Conversions.ToString(this[nameof (ShowPD)]);
+      get => Convert.ToString(this[nameof (ShowPD)]);
       set => this[nameof (ShowPD)] = (object) value;
     }
 
@@ -91,7 +90,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("show performance")]
     public string ShowPerf
     {
-      get => Conversions.ToString(this[nameof (ShowPerf)]);
+      get => Convert.ToString(this[nameof (ShowPerf)]);
       set => this[nameof (ShowPerf)] = (object) value;
     }
 
@@ -100,7 +99,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("close overlay")]
     public string Close
     {
-      get => Conversions.ToString(this[nameof (Close)]);
+      get => Convert.ToString(this[nameof (Close)]);
       set => this[nameof (Close)] = (object) value;
     }
 
@@ -109,7 +108,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("set pixel density;set super sampling")]
     public string SetPD
     {
-      get => Conversions.ToString(this[nameof (SetPD)]);
+      get => Convert.ToString(this[nameof (SetPD)]);
       set => this[nameof (SetPD)] = (object) value;
     }
 
@@ -118,7 +117,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("show spacewarp")]
     public string ShowASW
     {
-      get => Conversions.ToString(this[nameof (ShowASW)]);
+      get => Convert.ToString(this[nameof (ShowASW)]);
       set => this[nameof (ShowASW)] = (object) value;
     }
 
@@ -153,7 +152,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("")]
     public string OldCPUID
     {
-      get => Conversions.ToString(this[nameof (OldCPUID)]);
+      get => Convert.ToString(this[nameof (OldCPUID)]);
       set => this[nameof (OldCPUID)] = (object) value;
     }
 
@@ -214,7 +213,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("lock framerate")]
     public string LockASWOn
     {
-      get => Conversions.ToString(this[nameof (LockASWOn)]);
+      get => Convert.ToString(this[nameof (LockASWOn)]);
       set => this[nameof (LockASWOn)] = (object) value;
     }
 
@@ -249,7 +248,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("show latency timing")]
     public string ShowLatency
     {
-      get => Conversions.ToString(this[nameof (ShowLatency)]);
+      get => Convert.ToString(this[nameof (ShowLatency)]);
       set => this[nameof (ShowLatency)] = (object) value;
     }
 
@@ -258,7 +257,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("show application timing")]
     public string ShowApplicationRender
     {
-      get => Conversions.ToString(this[nameof (ShowApplicationRender)]);
+      get => Convert.ToString(this[nameof (ShowApplicationRender)]);
       set => this[nameof (ShowApplicationRender)] = (object) value;
     }
 
@@ -267,7 +266,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("show compositor timing")]
     public string ShowCompositorRender
     {
-      get => Conversions.ToString(this[nameof (ShowCompositorRender)]);
+      get => Convert.ToString(this[nameof (ShowCompositorRender)]);
       set => this[nameof (ShowCompositorRender)] = (object) value;
     }
 
@@ -276,7 +275,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("show version")]
     public string ShowVersion
     {
-      get => Conversions.ToString(this[nameof (ShowVersion)]);
+      get => Convert.ToString(this[nameof (ShowVersion)]);
       set => this[nameof (ShowVersion)] = (object) value;
     }
 
@@ -298,7 +297,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("True")]
     public bool ShowConfirmRestart
     {
-      get => Conversions.ToBoolean(this[nameof (ShowConfirmRestart)]);
+      get => Convert.ToBoolean(this[nameof (ShowConfirmRestart)]);
       set => this[nameof (ShowConfirmRestart)] = (object) value;
     }
 
@@ -307,7 +306,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("start steam;launch steam")]
     public string LaunchSteam
     {
-      get => Conversions.ToString(this[nameof (LaunchSteam)]);
+      get => Convert.ToString(this[nameof (LaunchSteam)]);
       set => this[nameof (LaunchSteam)] = (object) value;
     }
 
@@ -316,7 +315,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("")]
     public string AssetsPath
     {
-      get => Conversions.ToString(this[nameof (AssetsPath)]);
+      get => Convert.ToString(this[nameof (AssetsPath)]);
       set => this[nameof (AssetsPath)] = (object) value;
     }
 
@@ -325,7 +324,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("True")]
     public bool StartVoiceEnabled
     {
-      get => Conversions.ToBoolean(this[nameof (StartVoiceEnabled)]);
+      get => Convert.ToBoolean(this[nameof (StartVoiceEnabled)]);
       set => this[nameof (StartVoiceEnabled)] = (object) value;
     }
 
@@ -334,7 +333,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("True")]
     public bool StopVoiceEnabled
     {
-      get => Conversions.ToBoolean(this[nameof (StopVoiceEnabled)]);
+      get => Convert.ToBoolean(this[nameof (StopVoiceEnabled)]);
       set => this[nameof (StopVoiceEnabled)] = (object) value;
     }
 
@@ -343,7 +342,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("True")]
     public bool EnableASWEnabled
     {
-      get => Conversions.ToBoolean(this[nameof (EnableASWEnabled)]);
+      get => Convert.ToBoolean(this[nameof (EnableASWEnabled)]);
       set => this[nameof (EnableASWEnabled)] = (object) value;
     }
 
@@ -352,7 +351,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("True")]
     public bool DisableASWEnabled
     {
-      get => Conversions.ToBoolean(this[nameof (DisableASWEnabled)]);
+      get => Convert.ToBoolean(this[nameof (DisableASWEnabled)]);
       set => this[nameof (DisableASWEnabled)] = (object) value;
     }
 
@@ -361,7 +360,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("True")]
     public bool ShowPDEnabled
     {
-      get => Conversions.ToBoolean(this[nameof (ShowPDEnabled)]);
+      get => Convert.ToBoolean(this[nameof (ShowPDEnabled)]);
       set => this[nameof (ShowPDEnabled)] = (object) value;
     }
 
@@ -370,7 +369,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("True")]
     public bool ShowPerfEnabled
     {
-      get => Conversions.ToBoolean(this[nameof (ShowPerfEnabled)]);
+      get => Convert.ToBoolean(this[nameof (ShowPerfEnabled)]);
       set => this[nameof (ShowPerfEnabled)] = (object) value;
     }
 
@@ -379,7 +378,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("True")]
     public bool CloseEnabled
     {
-      get => Conversions.ToBoolean(this[nameof (CloseEnabled)]);
+      get => Convert.ToBoolean(this[nameof (CloseEnabled)]);
       set => this[nameof (CloseEnabled)] = (object) value;
     }
 
@@ -388,7 +387,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("True")]
     public bool SetPDEnabled
     {
-      get => Conversions.ToBoolean(this[nameof (SetPDEnabled)]);
+      get => Convert.ToBoolean(this[nameof (SetPDEnabled)]);
       set => this[nameof (SetPDEnabled)] = (object) value;
     }
 
@@ -397,7 +396,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("True")]
     public bool ShowASWEnabled
     {
-      get => Conversions.ToBoolean(this[nameof (ShowASWEnabled)]);
+      get => Convert.ToBoolean(this[nameof (ShowASWEnabled)]);
       set => this[nameof (ShowASWEnabled)] = (object) value;
     }
 
@@ -406,7 +405,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("True")]
     public bool ShowLatencyEnabled
     {
-      get => Conversions.ToBoolean(this[nameof (ShowLatencyEnabled)]);
+      get => Convert.ToBoolean(this[nameof (ShowLatencyEnabled)]);
       set => this[nameof (ShowLatencyEnabled)] = (object) value;
     }
 
@@ -415,7 +414,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("True")]
     public bool ShowApplicationRenderEnabled
     {
-      get => Conversions.ToBoolean(this[nameof (ShowApplicationRenderEnabled)]);
+      get => Convert.ToBoolean(this[nameof (ShowApplicationRenderEnabled)]);
       set => this[nameof (ShowApplicationRenderEnabled)] = (object) value;
     }
 
@@ -424,7 +423,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("True")]
     public bool ShowCompositorRenderEnabled
     {
-      get => Conversions.ToBoolean(this[nameof (ShowCompositorRenderEnabled)]);
+      get => Convert.ToBoolean(this[nameof (ShowCompositorRenderEnabled)]);
       set => this[nameof (ShowCompositorRenderEnabled)] = (object) value;
     }
 
@@ -433,7 +432,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("True")]
     public bool ShowVersionEnabled
     {
-      get => Conversions.ToBoolean(this[nameof (ShowVersionEnabled)]);
+      get => Convert.ToBoolean(this[nameof (ShowVersionEnabled)]);
       set => this[nameof (ShowVersionEnabled)] = (object) value;
     }
 
@@ -482,7 +481,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public bool StartWithWindows
     {
-      get => Conversions.ToBoolean(this[nameof (StartWithWindows)]);
+      get => Convert.ToBoolean(this[nameof (StartWithWindows)]);
       set => this[nameof (StartWithWindows)] = (object) value;
     }
 
@@ -491,7 +490,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public bool RunDebug
     {
-      get => Conversions.ToBoolean(this[nameof (RunDebug)]);
+      get => Convert.ToBoolean(this[nameof (RunDebug)]);
       set => this[nameof (RunDebug)] = (object) value;
     }
 
@@ -500,7 +499,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public bool VoiceConfirmProfile
     {
-      get => Conversions.ToBoolean(this[nameof (VoiceConfirmProfile)]);
+      get => Convert.ToBoolean(this[nameof (VoiceConfirmProfile)]);
       set => this[nameof (VoiceConfirmProfile)] = (object) value;
     }
 
@@ -509,7 +508,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("True")]
     public bool ShowStillRunning
     {
-      get => Conversions.ToBoolean(this[nameof (ShowStillRunning)]);
+      get => Convert.ToBoolean(this[nameof (ShowStillRunning)]);
       set => this[nameof (ShowStillRunning)] = (object) value;
     }
 
@@ -518,7 +517,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public bool SendHomeToTray
     {
-      get => Conversions.ToBoolean(this[nameof (SendHomeToTray)]);
+      get => Convert.ToBoolean(this[nameof (SendHomeToTray)]);
       set => this[nameof (SendHomeToTray)] = (object) value;
     }
 
@@ -527,7 +526,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public bool SendHomeToTrayOnStart
     {
-      get => Conversions.ToBoolean(this[nameof (SendHomeToTrayOnStart)]);
+      get => Convert.ToBoolean(this[nameof (SendHomeToTrayOnStart)]);
       set => this[nameof (SendHomeToTrayOnStart)] = (object) value;
     }
 
@@ -536,7 +535,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("True")]
     public bool ShowHomeToast
     {
-      get => Conversions.ToBoolean(this[nameof (ShowHomeToast)]);
+      get => Convert.ToBoolean(this[nameof (ShowHomeToast)]);
       set => this[nameof (ShowHomeToast)] = (object) value;
     }
 
@@ -545,7 +544,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public bool StartMinimized
     {
-      get => Conversions.ToBoolean(this[nameof (StartMinimized)]);
+      get => Convert.ToBoolean(this[nameof (StartMinimized)]);
       set => this[nameof (StartMinimized)] = (object) value;
     }
 
@@ -554,7 +553,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("0")]
     public int StartHomeDelay
     {
-      get => Conversions.ToInteger(this[nameof (StartHomeDelay)]);
+      get => Convert.ToInt32(this[nameof (StartHomeDelay)]);
       set => this[nameof (StartHomeDelay)] = (object) value;
     }
 
@@ -563,7 +562,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public bool UseVoiceCommands
     {
-      get => Conversions.ToBoolean(this[nameof (UseVoiceCommands)]);
+      get => Convert.ToBoolean(this[nameof (UseVoiceCommands)]);
       set => this[nameof (UseVoiceCommands)] = (object) value;
     }
 
@@ -572,7 +571,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public bool DisableFrescoPower
     {
-      get => Conversions.ToBoolean(this[nameof (DisableFrescoPower)]);
+      get => Convert.ToBoolean(this[nameof (DisableFrescoPower)]);
       set => this[nameof (DisableFrescoPower)] = (object) value;
     }
 
@@ -581,7 +580,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("")]
     public string LibraryPath
     {
-      get => Conversions.ToString(this[nameof (LibraryPath)]);
+      get => Convert.ToString(this[nameof (LibraryPath)]);
       set => this[nameof (LibraryPath)] = (object) value;
     }
 
@@ -590,7 +589,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("0")]
     public string PPDPStartup
     {
-      get => Conversions.ToString(this[nameof (PPDPStartup)]);
+      get => Convert.ToString(this[nameof (PPDPStartup)]);
       set => this[nameof (PPDPStartup)] = (object) value;
     }
 
@@ -599,7 +598,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("Not Used")]
     public string PowerPlanStart
     {
-      get => Conversions.ToString(this[nameof (PowerPlanStart)]);
+      get => Convert.ToString(this[nameof (PowerPlanStart)]);
       set => this[nameof (PowerPlanStart)] = (object) value;
     }
 
@@ -608,7 +607,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public bool SpoofCPU
     {
-      get => Conversions.ToBoolean(this[nameof (SpoofCPU)]);
+      get => Convert.ToBoolean(this[nameof (SpoofCPU)]);
       set => this[nameof (SpoofCPU)] = (object) value;
     }
 
@@ -617,7 +616,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public bool StopOVR
     {
-      get => Conversions.ToBoolean(this[nameof (StopOVR)]);
+      get => Convert.ToBoolean(this[nameof (StopOVR)]);
       set => this[nameof (StopOVR)] = (object) value;
     }
 
@@ -626,7 +625,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public bool StartHomeOnServiceStart
     {
-      get => Conversions.ToBoolean(this[nameof (StartHomeOnServiceStart)]);
+      get => Convert.ToBoolean(this[nameof (StartHomeOnServiceStart)]);
       set => this[nameof (StartHomeOnServiceStart)] = (object) value;
     }
 
@@ -635,7 +634,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("")]
     public string OculusPath
     {
-      get => Conversions.ToString(this[nameof (OculusPath)]);
+      get => Convert.ToString(this[nameof (OculusPath)]);
       set => this[nameof (OculusPath)] = (object) value;
     }
 
@@ -644,7 +643,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public bool StartOVR
     {
-      get => Conversions.ToBoolean(this[nameof (StartOVR)]);
+      get => Convert.ToBoolean(this[nameof (StartOVR)]);
       set => this[nameof (StartOVR)] = (object) value;
     }
 
@@ -653,7 +652,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public bool OVRServerPriority
     {
-      get => Conversions.ToBoolean(this[nameof (OVRServerPriority)]);
+      get => Convert.ToBoolean(this[nameof (OVRServerPriority)]);
       set => this[nameof (OVRServerPriority)] = (object) value;
     }
 
@@ -662,7 +661,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public bool StartHomeOnToolStart
     {
-      get => Conversions.ToBoolean(this[nameof (StartHomeOnToolStart)]);
+      get => Convert.ToBoolean(this[nameof (StartHomeOnToolStart)]);
       set => this[nameof (StartHomeOnToolStart)] = (object) value;
     }
 
@@ -671,7 +670,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public bool CloseHomeOnExit
     {
-      get => Conversions.ToBoolean(this[nameof (CloseHomeOnExit)]);
+      get => Convert.ToBoolean(this[nameof (CloseHomeOnExit)]);
       set => this[nameof (CloseHomeOnExit)] = (object) value;
     }
 
@@ -680,7 +679,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public bool HideAltTab
     {
-      get => Conversions.ToBoolean(this[nameof (HideAltTab)]);
+      get => Convert.ToBoolean(this[nameof (HideAltTab)]);
       set => this[nameof (HideAltTab)] = (object) value;
     }
 
@@ -689,7 +688,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("")]
     public string DefaultAudio
     {
-      get => Conversions.ToString(this[nameof (DefaultAudio)]);
+      get => Convert.ToString(this[nameof (DefaultAudio)]);
       set => this[nameof (DefaultAudio)] = (object) value;
     }
 
@@ -698,7 +697,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("")]
     public string DefaultMic
     {
-      get => Conversions.ToString(this[nameof (DefaultMic)]);
+      get => Convert.ToString(this[nameof (DefaultMic)]);
       set => this[nameof (DefaultMic)] = (object) value;
     }
 
@@ -707,7 +706,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public bool SetRiftAsDefault
     {
-      get => Conversions.ToBoolean(this[nameof (SetRiftAsDefault)]);
+      get => Convert.ToBoolean(this[nameof (SetRiftAsDefault)]);
       set => this[nameof (SetRiftAsDefault)] = (object) value;
     }
 
@@ -716,7 +715,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("0")]
     public int SetRiftAudioDefault
     {
-      get => Conversions.ToInteger(this[nameof (SetRiftAudioDefault)]);
+      get => Convert.ToInt32(this[nameof (SetRiftAudioDefault)]);
       set => this[nameof (SetRiftAudioDefault)] = (object) value;
     }
 
@@ -725,7 +724,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("0")]
     public int SetRiftMicDefault
     {
-      get => Conversions.ToInteger(this[nameof (SetRiftMicDefault)]);
+      get => Convert.ToInt32(this[nameof (SetRiftMicDefault)]);
       set => this[nameof (SetRiftMicDefault)] = (object) value;
     }
 
@@ -734,7 +733,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public bool UseLocalDebugTool
     {
-      get => Conversions.ToBoolean(this[nameof (UseLocalDebugTool)]);
+      get => Convert.ToBoolean(this[nameof (UseLocalDebugTool)]);
       set => this[nameof (UseLocalDebugTool)] = (object) value;
     }
 
@@ -743,7 +742,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public bool UseHotKeys
     {
-      get => Conversions.ToBoolean(this[nameof (UseHotKeys)]);
+      get => Convert.ToBoolean(this[nameof (UseHotKeys)]);
       set => this[nameof (UseHotKeys)] = (object) value;
     }
 
@@ -752,7 +751,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("0")]
     public int ASW
     {
-      get => Conversions.ToInteger(this[nameof (ASW)]);
+      get => Convert.ToInt32(this[nameof (ASW)]);
       set => this[nameof (ASW)] = (object) value;
     }
 
@@ -761,7 +760,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("True")]
     public bool CloseOnX
     {
-      get => Conversions.ToBoolean(this[nameof (CloseOnX)]);
+      get => Convert.ToBoolean(this[nameof (CloseOnX)]);
       set => this[nameof (CloseOnX)] = (object) value;
     }
 
@@ -770,7 +769,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public bool NoHome
     {
-      get => Conversions.ToBoolean(this[nameof (NoHome)]);
+      get => Convert.ToBoolean(this[nameof (NoHome)]);
       set => this[nameof (NoHome)] = (object) value;
     }
 
@@ -779,7 +778,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public bool DisableSensorPower
     {
-      get => Conversions.ToBoolean(this[nameof (DisableSensorPower)]);
+      get => Convert.ToBoolean(this[nameof (DisableSensorPower)]);
       set => this[nameof (DisableSensorPower)] = (object) value;
     }
 
@@ -788,7 +787,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("Not Used")]
     public string PowerPlanExit
     {
-      get => Conversions.ToString(this[nameof (PowerPlanExit)]);
+      get => Convert.ToString(this[nameof (PowerPlanExit)]);
       set => this[nameof (PowerPlanExit)] = (object) value;
     }
 
@@ -823,7 +822,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("0")]
     public int ApplyPowerPlan
     {
-      get => Conversions.ToInteger(this[nameof (ApplyPowerPlan)]);
+      get => Convert.ToInt32(this[nameof (ApplyPowerPlan)]);
       set => this[nameof (ApplyPowerPlan)] = (object) value;
     }
 
@@ -832,7 +831,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("True")]
     public bool UpgradeRequired
     {
-      get => Conversions.ToBoolean(this[nameof (UpgradeRequired)]);
+      get => Convert.ToBoolean(this[nameof (UpgradeRequired)]);
       set => this[nameof (UpgradeRequired)] = (object) value;
     }
 
@@ -841,7 +840,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("")]
     public string RiftAudioGuid
     {
-      get => Conversions.ToString(this[nameof (RiftAudioGuid)]);
+      get => Convert.ToString(this[nameof (RiftAudioGuid)]);
       set => this[nameof (RiftAudioGuid)] = (object) value;
     }
 
@@ -850,7 +849,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("")]
     public string RiftMicGuid
     {
-      get => Conversions.ToString(this[nameof (RiftMicGuid)]);
+      get => Convert.ToString(this[nameof (RiftMicGuid)]);
       set => this[nameof (RiftMicGuid)] = (object) value;
     }
 
@@ -859,7 +858,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("")]
     public string SystemDefaultMicGuid
     {
-      get => Conversions.ToString(this[nameof (SystemDefaultMicGuid)]);
+      get => Convert.ToString(this[nameof (SystemDefaultMicGuid)]);
       set => this[nameof (SystemDefaultMicGuid)] = (object) value;
     }
 
@@ -868,7 +867,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("")]
     public string SystemDefaultAudioGuid
     {
-      get => Conversions.ToString(this[nameof (SystemDefaultAudioGuid)]);
+      get => Convert.ToString(this[nameof (SystemDefaultAudioGuid)]);
       set => this[nameof (SystemDefaultAudioGuid)] = (object) value;
     }
 
@@ -877,7 +876,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public bool DisableCallback
     {
-      get => Conversions.ToBoolean(this[nameof (DisableCallback)]);
+      get => Convert.ToBoolean(this[nameof (DisableCallback)]);
       set => this[nameof (DisableCallback)] = (object) value;
     }
 
@@ -886,7 +885,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("True")]
     public bool ShowMicNotDefaultWarning
     {
-      get => Conversions.ToBoolean(this[nameof (ShowMicNotDefaultWarning)]);
+      get => Convert.ToBoolean(this[nameof (ShowMicNotDefaultWarning)]);
       set => this[nameof (ShowMicNotDefaultWarning)] = (object) value;
     }
 
@@ -895,7 +894,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("60")]
     public int Confidence
     {
-      get => Conversions.ToInteger(this[nameof (Confidence)]);
+      get => Convert.ToInt32(this[nameof (Confidence)]);
       set => this[nameof (Confidence)] = (object) value;
     }
 
@@ -904,7 +903,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public bool StartAppwatcherOnStart
     {
-      get => Conversions.ToBoolean(this[nameof (StartAppwatcherOnStart)]);
+      get => Convert.ToBoolean(this[nameof (StartAppwatcherOnStart)]);
       set => this[nameof (StartAppwatcherOnStart)] = (object) value;
     }
 
@@ -913,7 +912,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("True")]
     public bool DBCheck
     {
-      get => Conversions.ToBoolean(this[nameof (DBCheck)]);
+      get => Convert.ToBoolean(this[nameof (DBCheck)]);
       set => this[nameof (DBCheck)] = (object) value;
     }
 
@@ -922,7 +921,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("1")]
     public int DbgToolMethod
     {
-      get => Conversions.ToInteger(this[nameof (DbgToolMethod)]);
+      get => Convert.ToInt32(this[nameof (DbgToolMethod)]);
       set => this[nameof (DbgToolMethod)] = (object) value;
     }
 
@@ -957,7 +956,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("True")]
     public bool AutomaticUpdateCheck
     {
-      get => Conversions.ToBoolean(this[nameof (AutomaticUpdateCheck)]);
+      get => Convert.ToBoolean(this[nameof (AutomaticUpdateCheck)]);
       set => this[nameof (AutomaticUpdateCheck)] = (object) value;
     }
 
@@ -966,7 +965,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("0")]
     public string FOVh
     {
-      get => Conversions.ToString(this[nameof (FOVh)]);
+      get => Convert.ToString(this[nameof (FOVh)]);
       set => this[nameof (FOVh)] = (object) value;
     }
 
@@ -975,7 +974,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("0")]
     public int HomelessEnabled
     {
-      get => Conversions.ToInteger(this[nameof (HomelessEnabled)]);
+      get => Convert.ToInt32(this[nameof (HomelessEnabled)]);
       set => this[nameof (HomelessEnabled)] = (object) value;
     }
 
@@ -984,7 +983,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("0 0 0 ")]
     public string HomlessColor
     {
-      get => Conversions.ToString(this[nameof (HomlessColor)]);
+      get => Convert.ToString(this[nameof (HomlessColor)]);
       set => this[nameof (HomlessColor)] = (object) value;
     }
 
@@ -993,7 +992,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("None")]
     public string HomelessMusic
     {
-      get => Conversions.ToString(this[nameof (HomelessMusic)]);
+      get => Convert.ToString(this[nameof (HomelessMusic)]);
       set => this[nameof (HomelessMusic)] = (object) value;
     }
 
@@ -1002,7 +1001,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("500")]
     public int HomelessVolume
     {
-      get => Conversions.ToInteger(this[nameof (HomelessVolume)]);
+      get => Convert.ToInt32(this[nameof (HomelessVolume)]);
       set => this[nameof (HomelessVolume)] = (object) value;
     }
 
@@ -1011,7 +1010,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("")]
     public string HomelessHash
     {
-      get => Conversions.ToString(this[nameof (HomelessHash)]);
+      get => Convert.ToString(this[nameof (HomelessHash)]);
       set => this[nameof (HomelessHash)] = (object) value;
     }
 
@@ -1020,7 +1019,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("")]
     public string HomeHash
     {
-      get => Conversions.ToString(this[nameof (HomeHash)]);
+      get => Convert.ToString(this[nameof (HomeHash)]);
       set => this[nameof (HomeHash)] = (object) value;
     }
 
@@ -1029,7 +1028,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public bool HomelessAutoPatch
     {
-      get => Conversions.ToBoolean(this[nameof (HomelessAutoPatch)]);
+      get => Convert.ToBoolean(this[nameof (HomelessAutoPatch)]);
       set => this[nameof (HomelessAutoPatch)] = (object) value;
     }
 
@@ -1038,7 +1037,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public bool MirrorHome
     {
-      get => Conversions.ToBoolean(this[nameof (MirrorHome)]);
+      get => Convert.ToBoolean(this[nameof (MirrorHome)]);
       set => this[nameof (MirrorHome)] = (object) value;
     }
 
@@ -1047,7 +1046,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("1")]
     public int USBSuspend
     {
-      get => Conversions.ToInteger(this[nameof (USBSuspend)]);
+      get => Convert.ToInt32(this[nameof (USBSuspend)]);
       set => this[nameof (USBSuspend)] = (object) value;
     }
 
@@ -1056,7 +1055,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public bool RestartServiceAfterSleep
     {
-      get => Conversions.ToBoolean(this[nameof (RestartServiceAfterSleep)]);
+      get => Convert.ToBoolean(this[nameof (RestartServiceAfterSleep)]);
       set => this[nameof (RestartServiceAfterSleep)] = (object) value;
     }
 
@@ -1065,7 +1064,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("Next HUD,None,LEFT;Previous HUD,None,RIGHT;Next ASW Mode,None,UP;Previous ASW Mode,None,DOWN")]
     public string HotKeyCombos
     {
-      get => Conversions.ToString(this[nameof (HotKeyCombos)]);
+      get => Convert.ToString(this[nameof (HotKeyCombos)]);
       set => this[nameof (HotKeyCombos)] = (object) value;
     }
 
@@ -1074,7 +1073,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public bool HotKeyVoiceConfirmation
     {
-      get => Conversions.ToBoolean(this[nameof (HotKeyVoiceConfirmation)]);
+      get => Convert.ToBoolean(this[nameof (HotKeyVoiceConfirmation)]);
       set => this[nameof (HotKeyVoiceConfirmation)] = (object) value;
     }
 
@@ -1083,7 +1082,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("True")]
     public bool VoiceActivationVoiceContinous
     {
-      get => Conversions.ToBoolean(this[nameof (VoiceActivationVoiceContinous)]);
+      get => Convert.ToBoolean(this[nameof (VoiceActivationVoiceContinous)]);
       set => this[nameof (VoiceActivationVoiceContinous)] = (object) value;
     }
 
@@ -1092,7 +1091,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public bool VoiceActivationVoiceRepeated
     {
-      get => Conversions.ToBoolean(this[nameof (VoiceActivationVoiceRepeated)]);
+      get => Convert.ToBoolean(this[nameof (VoiceActivationVoiceRepeated)]);
       set => this[nameof (VoiceActivationVoiceRepeated)] = (object) value;
     }
 
@@ -1101,7 +1100,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public bool VoiceActivationKeyContinous
     {
-      get => Conversions.ToBoolean(this[nameof (VoiceActivationKeyContinous)]);
+      get => Convert.ToBoolean(this[nameof (VoiceActivationKeyContinous)]);
       set => this[nameof (VoiceActivationKeyContinous)] = (object) value;
     }
 
@@ -1110,7 +1109,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public bool VoiceActivationKeyPush
     {
-      get => Conversions.ToBoolean(this[nameof (VoiceActivationKeyPush)]);
+      get => Convert.ToBoolean(this[nameof (VoiceActivationKeyPush)]);
       set => this[nameof (VoiceActivationKeyPush)] = (object) value;
     }
 
@@ -1119,7 +1118,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public string SetFallbackMicDefaultCommDev
     {
-      get => Conversions.ToString(this[nameof (SetFallbackMicDefaultCommDev)]);
+      get => Convert.ToString(this[nameof (SetFallbackMicDefaultCommDev)]);
       set => this[nameof (SetFallbackMicDefaultCommDev)] = (object) value;
     }
 
@@ -1128,7 +1127,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("")]
     public string KeyboardVoiceActivationKey
     {
-      get => Conversions.ToString(this[nameof (KeyboardVoiceActivationKey)]);
+      get => Convert.ToString(this[nameof (KeyboardVoiceActivationKey)]);
       set => this[nameof (KeyboardVoiceActivationKey)] = (object) value;
     }
 
@@ -1137,7 +1136,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("")]
     public string JoystickVoiceActivationButton
     {
-      get => Conversions.ToString(this[nameof (JoystickVoiceActivationButton)]);
+      get => Convert.ToString(this[nameof (JoystickVoiceActivationButton)]);
       set => this[nameof (JoystickVoiceActivationButton)] = (object) value;
     }
 
@@ -1146,7 +1145,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("")]
     public string JoystickDeviceName
     {
-      get => Conversions.ToString(this[nameof (JoystickDeviceName)]);
+      get => Convert.ToString(this[nameof (JoystickDeviceName)]);
       set => this[nameof (JoystickDeviceName)] = (object) value;
     }
 
@@ -1155,7 +1154,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public bool JoystickActivationKeyContinous
     {
-      get => Conversions.ToBoolean(this[nameof (JoystickActivationKeyContinous)]);
+      get => Convert.ToBoolean(this[nameof (JoystickActivationKeyContinous)]);
       set => this[nameof (JoystickActivationKeyContinous)] = (object) value;
     }
 
@@ -1164,7 +1163,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public bool JoystickActivationKeyPush
     {
-      get => Conversions.ToBoolean(this[nameof (JoystickActivationKeyPush)]);
+      get => Convert.ToBoolean(this[nameof (JoystickActivationKeyPush)]);
       set => this[nameof (JoystickActivationKeyPush)] = (object) value;
     }
 
@@ -1173,7 +1172,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public bool DisableVoiceControlAudioFeedback
     {
-      get => Conversions.ToBoolean(this[nameof (DisableVoiceControlAudioFeedback)]);
+      get => Convert.ToBoolean(this[nameof (DisableVoiceControlAudioFeedback)]);
       set => this[nameof (DisableVoiceControlAudioFeedback)] = (object) value;
     }
 
@@ -1182,7 +1181,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("")]
     public string DefaultComm
     {
-      get => Conversions.ToString(this[nameof (DefaultComm)]);
+      get => Convert.ToString(this[nameof (DefaultComm)]);
       set => this[nameof (DefaultComm)] = (object) value;
     }
 
@@ -1191,7 +1190,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("")]
     public string SystemDefaultCommGuid
     {
-      get => Conversions.ToString(this[nameof (SystemDefaultCommGuid)]);
+      get => Convert.ToString(this[nameof (SystemDefaultCommGuid)]);
       set => this[nameof (SystemDefaultCommGuid)] = (object) value;
     }
 
@@ -1200,7 +1199,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("")]
     public string SystemDefaultCommAudioGuid
     {
-      get => Conversions.ToString(this[nameof (SystemDefaultCommAudioGuid)]);
+      get => Convert.ToString(this[nameof (SystemDefaultCommAudioGuid)]);
       set => this[nameof (SystemDefaultCommAudioGuid)] = (object) value;
     }
 
@@ -1209,7 +1208,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("")]
     public string DefaultCommAudio
     {
-      get => Conversions.ToString(this[nameof (DefaultCommAudio)]);
+      get => Convert.ToString(this[nameof (DefaultCommAudio)]);
       set => this[nameof (DefaultCommAudio)] = (object) value;
     }
 
@@ -1218,7 +1217,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("")]
     public string PowerPlanCurrent
     {
-      get => Conversions.ToString(this[nameof (PowerPlanCurrent)]);
+      get => Convert.ToString(this[nameof (PowerPlanCurrent)]);
       set => this[nameof (PowerPlanCurrent)] = (object) value;
     }
 
@@ -1227,7 +1226,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("")]
     public string SetAudioOnStart
     {
-      get => Conversions.ToString(this[nameof (SetAudioOnStart)]);
+      get => Convert.ToString(this[nameof (SetAudioOnStart)]);
       set => this[nameof (SetAudioOnStart)] = (object) value;
     }
 
@@ -1236,7 +1235,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("")]
     public string SetMicOnStart
     {
-      get => Conversions.ToString(this[nameof (SetMicOnStart)]);
+      get => Convert.ToString(this[nameof (SetMicOnStart)]);
       set => this[nameof (SetMicOnStart)] = (object) value;
     }
 
@@ -1245,7 +1244,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("")]
     public string SetAudioCommOnStart
     {
-      get => Conversions.ToString(this[nameof (SetAudioCommOnStart)]);
+      get => Convert.ToString(this[nameof (SetAudioCommOnStart)]);
       set => this[nameof (SetAudioCommOnStart)] = (object) value;
     }
 
@@ -1254,7 +1253,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("")]
     public string SetMicCommOnStart
     {
-      get => Conversions.ToString(this[nameof (SetMicCommOnStart)]);
+      get => Convert.ToString(this[nameof (SetMicCommOnStart)]);
       set => this[nameof (SetMicCommOnStart)] = (object) value;
     }
 
@@ -1263,7 +1262,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("")]
     public string SetAudioOnStartGuid
     {
-      get => Conversions.ToString(this[nameof (SetAudioOnStartGuid)]);
+      get => Convert.ToString(this[nameof (SetAudioOnStartGuid)]);
       set => this[nameof (SetAudioOnStartGuid)] = (object) value;
     }
 
@@ -1272,7 +1271,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("")]
     public string SetMicOnStartGuid
     {
-      get => Conversions.ToString(this[nameof (SetMicOnStartGuid)]);
+      get => Convert.ToString(this[nameof (SetMicOnStartGuid)]);
       set => this[nameof (SetMicOnStartGuid)] = (object) value;
     }
 
@@ -1281,7 +1280,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("")]
     public string SetAudioCommOnStartGuid
     {
-      get => Conversions.ToString(this[nameof (SetAudioCommOnStartGuid)]);
+      get => Convert.ToString(this[nameof (SetAudioCommOnStartGuid)]);
       set => this[nameof (SetAudioCommOnStartGuid)] = (object) value;
     }
 
@@ -1290,7 +1289,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("")]
     public string SetMicCommOnStartGuid
     {
-      get => Conversions.ToString(this[nameof (SetMicCommOnStartGuid)]);
+      get => Convert.ToString(this[nameof (SetMicCommOnStartGuid)]);
       set => this[nameof (SetMicCommOnStartGuid)] = (object) value;
     }
 
@@ -1299,7 +1298,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("0")]
     public string FOVv
     {
-      get => Conversions.ToString(this[nameof (FOVv)]);
+      get => Convert.ToString(this[nameof (FOVv)]);
       set => this[nameof (FOVv)] = (object) value;
     }
 
@@ -1308,7 +1307,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("True")]
     public bool AdaptiveGPUScaling
     {
-      get => Conversions.ToBoolean(this[nameof (AdaptiveGPUScaling)]);
+      get => Convert.ToBoolean(this[nameof (AdaptiveGPUScaling)]);
       set => this[nameof (AdaptiveGPUScaling)] = (object) value;
     }
 
@@ -1317,7 +1316,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("2000")]
     public int SleepAfterServiceStart
     {
-      get => Conversions.ToInteger(this[nameof (SleepAfterServiceStart)]);
+      get => Convert.ToInt32(this[nameof (SleepAfterServiceStart)]);
       set => this[nameof (SleepAfterServiceStart)] = (object) value;
     }
 
@@ -1326,7 +1325,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("2000")]
     public string SleepAfterHomeStart
     {
-      get => Conversions.ToString(this[nameof (SleepAfterHomeStart)]);
+      get => Convert.ToString(this[nameof (SleepAfterHomeStart)]);
       set => this[nameof (SleepAfterHomeStart)] = (object) value;
     }
 
@@ -1335,7 +1334,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("")]
     public string DesktopResolution
     {
-      get => Conversions.ToString(this[nameof (DesktopResolution)]);
+      get => Convert.ToString(this[nameof (DesktopResolution)]);
       set => this[nameof (DesktopResolution)] = (object) value;
     }
 
@@ -1344,7 +1343,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("Normal")]
     public string OVRSrvPrio
     {
-      get => Conversions.ToString(this[nameof (OVRSrvPrio)]);
+      get => Convert.ToString(this[nameof (OVRSrvPrio)]);
       set => this[nameof (OVRSrvPrio)] = (object) value;
     }
 
@@ -1353,7 +1352,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public string ForceMipmap
     {
-      get => Conversions.ToString(this[nameof (ForceMipmap)]);
+      get => Convert.ToString(this[nameof (ForceMipmap)]);
       set => this[nameof (ForceMipmap)] = (object) value;
     }
 
@@ -1362,7 +1361,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("0")]
     public string OffsetMipmap
     {
-      get => Conversions.ToString(this[nameof (OffsetMipmap)]);
+      get => Convert.ToString(this[nameof (OffsetMipmap)]);
       set => this[nameof (OffsetMipmap)] = (object) value;
     }
 
@@ -1371,7 +1370,7 @@ namespace OculusTrayTool.My
     [DefaultSettingValue("False")]
     public bool StopOVRHome
     {
-      get => Conversions.ToBoolean(this[nameof (StopOVRHome)]);
+      get => Convert.ToBoolean(this[nameof (StopOVRHome)]);
       set => this[nameof (StopOVRHome)] = (object) value;
     }
   }

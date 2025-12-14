@@ -1,5 +1,5 @@
 
-using Microsoft.VisualBasic.CompilerServices;
+
 using OculusTrayTool.My;
 using System;
 using System.ComponentModel;
@@ -11,7 +11,7 @@ using System.Windows.Forms;
 #nullable disable
 namespace OculusTrayTool
 {
-  [DesignerGenerated]
+
   public partial class frmEditVoiceCommand : Form
   {
     
@@ -45,74 +45,74 @@ namespace OculusTrayTool
       if (this.TextBoxPhrase.Text.EndsWith(";"))
         this.TextBoxPhrase.Text = this.TextBoxPhrase.Text.TrimEnd(';');
       this.TextBoxPhrase.Text = this.TextBoxPhrase.Text.Replace(";;", ";");
-      if (Operators.CompareString(this.LabelAction.Text, "Enable Voice Control", false) == 0)
+      if (String.Equals(this.LabelAction.Text, "Enable Voice Control", StringComparison.OrdinalIgnoreCase))
         MySettingsProperty.Settings.StartVoice = this.TextBoxPhrase.Text;
-      if (Operators.CompareString(this.LabelAction.Text, "Disable Voice Control", false) == 0)
+      if (String.Equals(this.LabelAction.Text, "Disable Voice Control", StringComparison.OrdinalIgnoreCase))
         MySettingsProperty.Settings.StopVoice = this.TextBoxPhrase.Text;
-      if (Operators.CompareString(this.LabelAction.Text, "Set Pixel Density", false) == 0)
+      if (String.Equals(this.LabelAction.Text, "Set Pixel Density", StringComparison.OrdinalIgnoreCase))
       {
         MySettingsProperty.Settings.SetPD = this.TextBoxPhrase.Text;
-        MySettingsProperty.Settings.SetPDEnabled = Conversions.ToBoolean(this.ComboEnabled.Text);
+        MySettingsProperty.Settings.SetPDEnabled = Convert.ToBoolean(this.ComboEnabled.Text);
       }
-      if (Operators.CompareString(this.LabelAction.Text, "Disable ASW", false) == 0)
+      if (String.Equals(this.LabelAction.Text, "Disable ASW", StringComparison.OrdinalIgnoreCase))
       {
         MySettingsProperty.Settings.DisableASW = this.TextBoxPhrase.Text;
-        MySettingsProperty.Settings.DisableASWEnabled = Conversions.ToBoolean(this.ComboEnabled.Text);
+        MySettingsProperty.Settings.DisableASWEnabled = Convert.ToBoolean(this.ComboEnabled.Text);
       }
-      if (Operators.CompareString(this.LabelAction.Text, "Enable ASW", false) == 0)
+      if (String.Equals(this.LabelAction.Text, "Enable ASW", StringComparison.OrdinalIgnoreCase))
       {
         MySettingsProperty.Settings.EnableASW = this.TextBoxPhrase.Text;
-        MySettingsProperty.Settings.EnableASWEnabled = Conversions.ToBoolean(this.ComboEnabled.Text);
+        MySettingsProperty.Settings.EnableASWEnabled = Convert.ToBoolean(this.ComboEnabled.Text);
       }
-      if (Operators.CompareString(this.LabelAction.Text, "45 fps, ASW On", false) == 0)
+      if (String.Equals(this.LabelAction.Text, "45 fps, ASW On", StringComparison.OrdinalIgnoreCase))
       {
         MySettingsProperty.Settings.LockASWOn = this.TextBoxPhrase.Text;
-        MySettingsProperty.Settings.LockASWOnEnabled = Conversions.ToBoolean(this.ComboEnabled.Text);
+        MySettingsProperty.Settings.LockASWOnEnabled = Convert.ToBoolean(this.ComboEnabled.Text);
       }
-      if (Operators.CompareString(this.LabelAction.Text, "Show ASW Status", false) == 0)
+      if (String.Equals(this.LabelAction.Text, "Show ASW Status", StringComparison.OrdinalIgnoreCase))
       {
         MySettingsProperty.Settings.ShowASW = this.TextBoxPhrase.Text;
-        MySettingsProperty.Settings.ShowASWEnabled = Conversions.ToBoolean(this.ComboEnabled.Text);
+        MySettingsProperty.Settings.ShowASWEnabled = Convert.ToBoolean(this.ComboEnabled.Text);
       }
-      if (Operators.CompareString(this.LabelAction.Text, "Show Pixel Density", false) == 0)
+      if (String.Equals(this.LabelAction.Text, "Show Pixel Density", StringComparison.OrdinalIgnoreCase))
       {
         MySettingsProperty.Settings.ShowPD = this.TextBoxPhrase.Text;
-        MySettingsProperty.Settings.ShowPDEnabled = Conversions.ToBoolean(this.ComboEnabled.Text);
+        MySettingsProperty.Settings.ShowPDEnabled = Convert.ToBoolean(this.ComboEnabled.Text);
       }
-      if (Operators.CompareString(this.LabelAction.Text, "Show Performance", false) == 0)
+      if (String.Equals(this.LabelAction.Text, "Show Performance", StringComparison.OrdinalIgnoreCase))
       {
         MySettingsProperty.Settings.ShowPerf = this.TextBoxPhrase.Text;
-        MySettingsProperty.Settings.ShowPerfEnabled = Conversions.ToBoolean(this.ComboEnabled.Text);
+        MySettingsProperty.Settings.ShowPerfEnabled = Convert.ToBoolean(this.ComboEnabled.Text);
       }
-      if (Operators.CompareString(this.LabelAction.Text, "Show Latency Timing", false) == 0)
+      if (String.Equals(this.LabelAction.Text, "Show Latency Timing", StringComparison.OrdinalIgnoreCase))
       {
         MySettingsProperty.Settings.ShowLatency = this.TextBoxPhrase.Text;
-        MySettingsProperty.Settings.ShowLatencyEnabled = Conversions.ToBoolean(this.ComboEnabled.Text);
+        MySettingsProperty.Settings.ShowLatencyEnabled = Convert.ToBoolean(this.ComboEnabled.Text);
       }
-      if (Operators.CompareString(this.LabelAction.Text, "Show Application Render Timing", false) == 0)
+      if (String.Equals(this.LabelAction.Text, "Show Application Render Timing", StringComparison.OrdinalIgnoreCase))
       {
         MySettingsProperty.Settings.ShowApplicationRender = this.TextBoxPhrase.Text;
-        MySettingsProperty.Settings.ShowApplicationRenderEnabled = Conversions.ToBoolean(this.ComboEnabled.Text);
+        MySettingsProperty.Settings.ShowApplicationRenderEnabled = Convert.ToBoolean(this.ComboEnabled.Text);
       }
-      if (Operators.CompareString(this.LabelAction.Text, "Show Compositor Render Timing", false) == 0)
+      if (String.Equals(this.LabelAction.Text, "Show Compositor Render Timing", StringComparison.OrdinalIgnoreCase))
       {
         MySettingsProperty.Settings.ShowCompositorRender = this.TextBoxPhrase.Text;
-        MySettingsProperty.Settings.ShowCompositorRenderEnabled = Conversions.ToBoolean(this.ComboEnabled.Text);
+        MySettingsProperty.Settings.ShowCompositorRenderEnabled = Convert.ToBoolean(this.ComboEnabled.Text);
       }
-      if (Operators.CompareString(this.LabelAction.Text, "Show Version Info", false) == 0)
+      if (String.Equals(this.LabelAction.Text, "Show Version Info", StringComparison.OrdinalIgnoreCase))
       {
         MySettingsProperty.Settings.ShowVersion = this.TextBoxPhrase.Text;
-        MySettingsProperty.Settings.ShowVersionEnabled = Conversions.ToBoolean(this.ComboEnabled.Text);
+        MySettingsProperty.Settings.ShowVersionEnabled = Convert.ToBoolean(this.ComboEnabled.Text);
       }
-      if (Operators.CompareString(this.LabelAction.Text, "Close Overlay", false) == 0)
+      if (String.Equals(this.LabelAction.Text, "Close Overlay", StringComparison.OrdinalIgnoreCase))
       {
         MySettingsProperty.Settings.Close = this.TextBoxPhrase.Text;
-        MySettingsProperty.Settings.CloseEnabled = Conversions.ToBoolean(this.ComboEnabled.Text);
+        MySettingsProperty.Settings.CloseEnabled = Convert.ToBoolean(this.ComboEnabled.Text);
       }
-      if (Operators.CompareString(this.LabelAction.Text, "Launch SteamVR", false) == 0)
+      if (String.Equals(this.LabelAction.Text, "Launch SteamVR", StringComparison.OrdinalIgnoreCase))
       {
         MySettingsProperty.Settings.LaunchSteam = this.TextBoxPhrase.Text;
-        MySettingsProperty.Settings.LaunchSteamEnabled = Conversions.ToBoolean(this.ComboEnabled.Text);
+        MySettingsProperty.Settings.LaunchSteamEnabled = Convert.ToBoolean(this.ComboEnabled.Text);
       }
       MySettingsProperty.Settings.Save();
       MyProject.Forms.FrmMain.LoadVoiceSettings();

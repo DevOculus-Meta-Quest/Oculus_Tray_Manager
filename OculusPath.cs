@@ -77,15 +77,15 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
+        // ProjectData.SetProjectError(ex);
         Exception e = ex;
-        int num = (int) Interaction.MsgBox((object) "Could not get Oculus Library paths from the registry. Add them manually on the Advanced tab and restart the application", MsgBoxStyle.Exclamation, (object) "Oculus Tray Tool");
+        int num = (int) MessageBox.Show("Could not get Oculus Library paths from the registry. Add them manually on the Advanced tab and restart the application", "Oculus Tray Tool", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         FrmMain.fmain.AddToListboxAndScroll("Could not get Oculus Library path: " + e.Message);
         MyProject.Forms.FrmMain.hasWarning = true;
         StackTrace stackTrace = new StackTrace(e, true);
         Log.WriteToLog("GetOculusSoftwarePath: " + e.ToString() + stackTrace.ToString());
         oculusSoftwarePaths = (object) stringList;
-        ProjectData.ClearProjectError();
+        // ProjectData.ClearProjectError();
       }
       return oculusSoftwarePaths;
     }
@@ -160,12 +160,12 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
+        // ProjectData.SetProjectError(ex);
         Exception e = ex;
         FrmMain.fmain.hasWarning = true;
         StackTrace stackTrace = new StackTrace(e, true);
         Log.WriteToLog("GetOculusPath: " + e.ToString() + stackTrace.ToString());
-        ProjectData.ClearProjectError();
+        // ProjectData.ClearProjectError();
       }
     }
 

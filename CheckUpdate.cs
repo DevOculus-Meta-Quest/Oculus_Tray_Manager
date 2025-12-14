@@ -1,6 +1,5 @@
 
-using Microsoft.VisualBasic;
-using Microsoft.VisualBasic.CompilerServices;
+
 using OculusTrayTool.My;
 using System;
 using System.Diagnostics;
@@ -13,7 +12,7 @@ using System.Windows.Forms;
 #nullable disable
 namespace OculusTrayTool
 {
-  [StandardModule]
+
   internal sealed class CheckUpdate
   {
     private static bool updateFound = false;

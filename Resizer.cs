@@ -1,6 +1,6 @@
 
-using Microsoft.VisualBasic;
-using Microsoft.VisualBasic.CompilerServices;
+
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,9 +23,9 @@ namespace OculusTrayTool
         {
           try
           {
-            if (!Information.IsNothing((object) control.Parent))
+            if (control.Parent != null)
             {
-            if (control is Label | control is ComboBox | control is Button | control is CheckBox | control is ListBox | control is RichTextBox | control is DotNetBarTabcontrol && Operators.CompareString(control.Name, "Label8", false) != 0 & Operators.CompareString(control.Name, "Button2", false) != 0 & Operators.CompareString(control.Name, "LabelPropertiesFilename", false) != 0 & Operators.CompareString(control.Name, "LabelProperties", false) != 0 & Operators.CompareString(control.Name, "LabelProperties2", false) != 0 & control.Name != "ComboPowerPlanStart" & control.Name != "ComboPowerPlanExit")
+            if ((control is Label || control is ComboBox || control is Button || control is CheckBox || control is ListBox || control is RichTextBox || control is DotNetBarTabcontrol) && control.Name != "Label8" && control.Name != "Button2" && control.Name != "LabelPropertiesFilename" && control.Name != "LabelProperties" && control.Name != "LabelProperties2" && control.Name != "ComboPowerPlanStart" && control.Name != "ComboPowerPlanExit")
               {
                 Resizer.ControlInfo controlInfo = new Resizer.ControlInfo();
                 controlInfo.name = control.Name;
@@ -39,9 +39,7 @@ namespace OculusTrayTool
           }
           catch (Exception ex)
           {
-            ProjectData.SetProjectError(ex);
             Debug.Print(ex.Message);
-            ProjectData.ClearProjectError();
           }
           if (control.Controls.Count > 0)
             this.FindAllControls(control);
@@ -56,7 +54,7 @@ namespace OculusTrayTool
         {
           try
           {
-            if (!Information.IsNothing((object) control.Parent))
+            if (control.Parent != null)
             {
               Resizer.ControlInfo controlInfo = new Resizer.ControlInfo();
               try
@@ -69,15 +67,11 @@ namespace OculusTrayTool
               }
               catch (Exception ex)
               {
-                ProjectData.SetProjectError(ex);
-                ProjectData.ClearProjectError();
               }
             }
           }
           catch (Exception ex)
           {
-            ProjectData.SetProjectError(ex);
-            ProjectData.ClearProjectError();
           }
           if (control.Controls.Count > 0)
             this.ResizeAllControls(control, Ratio);

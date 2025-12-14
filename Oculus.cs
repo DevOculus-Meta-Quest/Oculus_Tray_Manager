@@ -1,5 +1,5 @@
 
-using Microsoft.VisualBasic.CompilerServices;
+
 using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
 using System;
@@ -109,7 +109,7 @@ namespace OculusTrayTool
           {
             using (RegistryKey libKey = Registry.Users.OpenSubKey(Path.Combine(librariesKeyPath, subKeyName), false))
             {
-               string pathVal = Conversions.ToString(libKey?.GetValue("Path"));
+               string pathVal = libKey?.GetValue("Path")?.ToString();
                if (!string.IsNullOrEmpty(pathVal))
                {
                  int lastBrace = pathVal.LastIndexOf("}");
@@ -122,10 +122,10 @@ namespace OculusTrayTool
                      {
                          foreach (ManagementObject obj in searcher.Get())
                          {
-                             string deviceID = Conversions.ToString(obj["DeviceID"]);
+                             string deviceID = Convert.ToString(obj["DeviceID"]);
                              if (string.Equals(deviceID, volumeDeviceID, StringComparison.OrdinalIgnoreCase))
                              {
-                                 string driveLetter = Conversions.ToString(obj["DriveLetter"]);
+                                 string driveLetter = Convert.ToString(obj["DriveLetter"]);
                                  softwarePathList.Add(driveLetter + pathSuffix);
                                  break;
                              }
@@ -289,10 +289,8 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryCreateManifest: " + ex.Message);
         manifest = false;
-        ProjectData.ClearProjectError();
         goto label_10;
       }
       manifest = true;
@@ -365,10 +363,8 @@ label_10:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryCreateAssetManifest: " + ex.Message);
         assetManifest = false;
-        ProjectData.ClearProjectError();
         goto label_42;
       }
       assetManifest = true;
@@ -389,10 +385,8 @@ label_42:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryExtractExeIcon: " + ex.Message);
         exeIcon = false;
-        ProjectData.ClearProjectError();
         goto label_12;
       }
       exeIcon = true;
@@ -465,10 +459,8 @@ label_12:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryGetApps: " + ex.Message);
         apps = false;
-        ProjectData.ClearProjectError();
         goto label_19;
       }
       apps = true;
@@ -497,7 +489,7 @@ label_19:
           JObject jobject = JObject.Parse(System.IO.File.ReadAllText(str1));
           string str2 = jobject.SelectToken("appId").ToString();
           ulong result = 0;
-          if (Operators.CompareString(str2, "", false) != 0)
+          if (String.Compare(str2, "", false) != 0)
           {
             ulong.TryParse(str2, out result);
             string str3 = jobject.SelectToken("canonicalName").ToString();
@@ -506,8 +498,8 @@ label_19:
             string _parameters = jobject.SelectToken("launchParameters").ToString();
             string str6 = Path.Combine(Path.Combine(Path.GetDirectoryName(manifestPath), "Software"), str3.Replace("/", "\\").Replace("\\\\", "\\"));
             string _executable = str5.Replace("/", "\\").Replace("\\\\", "\\");
-            string directoryName = Operators.CompareString(str6, "", false) != 0 ? Path.GetDirectoryName(str6) : "";
-            string fileName = Operators.CompareString(str6, "", false) != 0 ? Path.GetFileName(str6) : "";
+            string directoryName = String.Compare(str6, "", false) != 0 ? Path.GetDirectoryName(str6) : "";
+            string fileName = String.Compare(str6, "", false) != 0 ? Path.GetFileName(str6) : "";
             StringBuilder stringBuilder = new StringBuilder();
             try
             {
@@ -527,10 +519,7 @@ label_19:
             }
             catch (Exception ex)
             {
-              ProjectData.SetProjectError(ex);
               apps = false;
-              ProjectData.ClearProjectError();
-              goto label_27;
             }
             finally
             {
@@ -564,17 +553,14 @@ label_19:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         apps = false;
-        ProjectData.ClearProjectError();
-        goto label_27;
       }
       finally
       {
         connection.Close();
       }
       apps = true;
-label_27:
+
       return apps;
     }
 
@@ -613,19 +599,19 @@ label_27:
             foreach (JProperty jproperty in jenumerable)
             {
               jproperty.CreateReader();
-              if (Operators.CompareString(jproperty.Name, "displayName", false) == 0)
+              if (String.Compare(jproperty.Name, "displayName", false) == 0)
                 _name = jproperty.Value.ToString();
-              else if (Operators.CompareString(jproperty.Name, "launchFile", false) == 0)
+              else if (String.Compare(jproperty.Name, "launchFile", false) == 0)
               {
                 string path = jproperty.Value.ToString().Replace("\\\\", "\\").Replace("/", "\\");
                 str2 = Path.GetDirectoryName(path);
                 str1 = Path.GetFileName(path);
-                _libraryFolder = Operators.CompareString(str2, "", false) != 0 ? Path.GetDirectoryName(str2) : "";
-                _installDir = Operators.CompareString(str2, "", false) != 0 ? Path.GetFileName(str2) : "";
-                if (_name.ToLower().EndsWith(".exe") || Operators.CompareString(_name.ToLower(), "unknown app", false) == 0)
+                _libraryFolder = String.Compare(str2, "", false) != 0 ? Path.GetDirectoryName(str2) : "";
+                _installDir = String.Compare(str2, "", false) != 0 ? Path.GetFileName(str2) : "";
+                if (_name.ToLower().EndsWith(".exe") || String.Compare(_name.ToLower(), "unknown app", false) == 0)
                   _name = Path.GetFileNameWithoutExtension(str1);
               }
-              else if (Operators.CompareString(jproperty.Name, "launchParameters", false) == 0)
+              else if (String.Compare(jproperty.Name, "launchParameters", false) == 0)
               {
                 _parameters = jproperty.Value.ToString();
                 break;
@@ -651,10 +637,7 @@ label_27:
               }
               catch (Exception ex)
               {
-                ProjectData.SetProjectError(ex);
                 thirdPartyApps = false;
-                ProjectData.ClearProjectError();
-                goto label_48;
               }
               finally
               {
@@ -672,7 +655,7 @@ label_27:
                 _assetFileName = path2;
               if (!System.IO.File.Exists(str5))
                 str5 = (string) null;
-              if (Operators.CompareString(Left, "", false) != 0)
+              if (String.Compare(Left, "", false) != 0)
               {
                 try
                 {
@@ -683,8 +666,6 @@ label_27:
                 }
                 catch (Exception ex)
                 {
-                  ProjectData.SetProjectError(ex);
-                  ProjectData.ClearProjectError();
                 }
                 finally
                 {
@@ -701,17 +682,14 @@ label_27:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         thirdPartyApps = false;
-        ProjectData.ClearProjectError();
-        goto label_48;
       }
       finally
       {
         connection.Close();
       }
       thirdPartyApps = true;
-label_48:
+
       return thirdPartyApps;
     }
 
@@ -743,11 +721,8 @@ label_48:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryStartOculusService: " + ex.Message);
         flag = false;
-        ProjectData.ClearProjectError();
-        goto label_10;
       }
       flag = true;
 label_10:
@@ -776,11 +751,8 @@ label_10:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryStopOculusService: " + ex.Message);
         flag = false;
-        ProjectData.ClearProjectError();
-        goto label_10;
       }
       flag = true;
 label_10:
@@ -797,11 +769,8 @@ label_10:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryRestartOculusService: " + ex.Message);
         flag = false;
-        ProjectData.ClearProjectError();
-        goto label_4;
       }
       flag = true;
 label_4:
@@ -826,10 +795,8 @@ label_4:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryLaunchHome: " + ex.Message);
         flag = false;
-        ProjectData.ClearProjectError();
         goto label_4;
       }
       flag = true;
@@ -846,9 +813,7 @@ label_4:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("IsHomeRunning: " + ex.Message);
-        ProjectData.ClearProjectError();
       }
       return flag;
     }
@@ -878,9 +843,7 @@ label_4:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TrySendHomeMinimized: " + ex.Message);
-        ProjectData.ClearProjectError();
       }
       return false;
     }
@@ -909,9 +872,7 @@ label_4:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TrySendHomeToTray: " + ex.Message);
-        ProjectData.ClearProjectError();
       }
       return false;
     }
@@ -939,10 +900,8 @@ label_4:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryRestoreHome: " + ex.Message);
         flag = false;
-        ProjectData.ClearProjectError();
         goto label_8;
       }
       flag = false;
@@ -978,10 +937,8 @@ label_8:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryCopyAppDatabase: " + ex.Message);
         flag = false;
-        ProjectData.ClearProjectError();
         goto label_8;
       }
       flag = true;

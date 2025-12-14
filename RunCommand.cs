@@ -1,5 +1,5 @@
 
-using Microsoft.VisualBasic.CompilerServices;
+
 using OculusTrayTool.My;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,6 @@ using System.Windows.Forms;
 #nullable disable
 namespace OculusTrayTool
 {
-  [StandardModule]
   internal sealed class RunCommand
   {
     public static List<string> usb_suspend_list = new List<string>();
@@ -21,7 +20,7 @@ namespace OculusTrayTool
 
     public static void Run_debug_tool(string ss)
     {
-      if (Operators.CompareString(FrmMain.fmain.runningApp, "", false) != 0)
+      if (FrmMain.fmain.runningApp != "")
       {
         Log.WriteToLog(FrmMain.fmain.runningapp_displayname + ": Setting SuperSampling to " + ss);
         FrmMain.fmain.AddToListboxAndScroll(FrmMain.fmain.runningapp_displayname + ": Setting SuperSampling to " + ss);
@@ -55,7 +54,6 @@ namespace OculusTrayTool
       }
       catch (Exception ex1)
       {
-        ProjectData.SetProjectError(ex1);
         Exception exception = ex1;
         try
         {
@@ -77,15 +75,12 @@ namespace OculusTrayTool
         }
         catch (Exception ex2)
         {
-          ProjectData.SetProjectError(ex2);
           Exception e = ex2;
           Log.WriteToLog("Set SuperSampling: Failed: " + e.Message);
           StackTrace stackTrace = new StackTrace(e, true);
           Log.WriteToLog(e.ToString() + stackTrace.ToString());
           FrmMain.fmain.AddToListboxAndScroll("* " + e.Message);
-          ProjectData.ClearProjectError();
         }
-        ProjectData.ClearProjectError();
       }
     }
 
@@ -116,7 +111,6 @@ namespace OculusTrayTool
       }
       catch (Exception ex1)
       {
-        ProjectData.SetProjectError(ex1);
         Exception exception = ex1;
         try
         {
@@ -138,15 +132,12 @@ namespace OculusTrayTool
         }
         catch (Exception ex2)
         {
-          ProjectData.SetProjectError(ex2);
           Exception e = ex2;
           Log.WriteToLog("Warning: Set Info Overlay: " + e.Message);
           StackTrace stackTrace = new StackTrace(e, true);
           Log.WriteToLog(e.ToString() + stackTrace.ToString());
           FrmMain.fmain.AddToListboxAndScroll("* " + e.Message);
-          ProjectData.ClearProjectError();
         }
-        ProjectData.ClearProjectError();
       }
     }
 
@@ -177,7 +168,6 @@ namespace OculusTrayTool
       }
       catch (Exception ex1)
       {
-        ProjectData.SetProjectError(ex1);
         Exception exception = ex1;
         try
         {
@@ -199,21 +189,18 @@ namespace OculusTrayTool
         }
         catch (Exception ex2)
         {
-          ProjectData.SetProjectError(ex2);
           Exception e = ex2;
           Log.WriteToLog("Set ASW: Failed: " + e.Message);
           StackTrace stackTrace = new StackTrace(e, true);
           Log.WriteToLog(e.ToString() + stackTrace.ToString());
           FrmMain.fmain.AddToListboxAndScroll("* " + e.Message);
-          ProjectData.ClearProjectError();
         }
-        ProjectData.ClearProjectError();
       }
     }
 
     public static void Run_debug_tool_fov(string info)
     {
-      if (Operators.CompareString(FrmMain.fmain.runningApp, "", false) != 0)
+      if (FrmMain.fmain.runningApp != "")
       {
         Log.WriteToLog(FrmMain.fmain.runningapp_displayname + ": Setting FOV to " + info.Replace(" ", ";"));
         FrmMain.fmain.AddToListboxAndScroll(FrmMain.fmain.runningapp_displayname + ": Setting FOV to " + info.Replace(" ", ";"));
@@ -247,19 +234,17 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Exception e = ex;
         Log.WriteToLog("Set FOV: Failed: " + e.Message);
         StackTrace stackTrace = new StackTrace(e, true);
         Log.WriteToLog(e.ToString() + stackTrace.ToString());
         FrmMain.fmain.AddToListboxAndScroll("* " + e.Message);
-        ProjectData.ClearProjectError();
       }
     }
 
     public static void Run_debug_tool_agps(string info)
     {
-      if (Operators.CompareString(FrmMain.fmain.runningApp, "", false) != 0)
+      if (FrmMain.fmain.runningApp != "")
       {
         Log.WriteToLog(FrmMain.fmain.runningapp_displayname + ": Setting Adaptive GPU Scaling to " + info);
         FrmMain.fmain.AddToListboxAndScroll(FrmMain.fmain.runningapp_displayname + ": Setting Adaptive GPU Scaling to " + info);
@@ -293,19 +278,17 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Exception e = ex;
         Log.WriteToLog("Set GPU Scaling: Failed: " + e.Message);
         StackTrace stackTrace = new StackTrace(e, true);
         Log.WriteToLog(e.ToString() + stackTrace.ToString());
         FrmMain.fmain.AddToListboxAndScroll("* " + e.Message);
-        ProjectData.ClearProjectError();
       }
     }
 
     public static void Run_debug_tool_force_mipmap(string info)
     {
-      if (Operators.CompareString(FrmMain.fmain.runningApp, "", false) != 0)
+      if (FrmMain.fmain.runningApp != "")
       {
         Log.WriteToLog(FrmMain.fmain.runningapp_displayname + ": Setting Force MipMap Generation On All Layers to " + info.ToLower());
         FrmMain.fmain.AddToListboxAndScroll(FrmMain.fmain.runningapp_displayname + ": Setting Force MipMap Generation On All Layers to " + info.ToLower());
@@ -339,19 +322,17 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Exception e = ex;
         Log.WriteToLog("Setting force-mip-gen-on-all-layers: " + e.Message);
         StackTrace stackTrace = new StackTrace(e, true);
         Log.WriteToLog(e.ToString() + stackTrace.ToString());
         FrmMain.fmain.AddToListboxAndScroll("* " + e.Message);
-        ProjectData.ClearProjectError();
       }
     }
 
     public static void Run_debug_tool_offset_mipmap(string info)
     {
-      if (Operators.CompareString(FrmMain.fmain.runningApp, "", false) != 0)
+      if (FrmMain.fmain.runningApp != "")
       {
         Log.WriteToLog(FrmMain.fmain.runningapp_displayname + ": Setting Offset MipMap Bias On All Layers to " + info);
         FrmMain.fmain.AddToListboxAndScroll(FrmMain.fmain.runningapp_displayname + ": Setting Offset MipMap Bias On All Layers to " + info);
@@ -385,13 +366,11 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Exception e = ex;
         Log.WriteToLog("Setting offset-mip-bias-on-all-layers: " + e.Message);
         StackTrace stackTrace = new StackTrace(e, true);
         Log.WriteToLog(e.ToString() + stackTrace.ToString());
         FrmMain.fmain.AddToListboxAndScroll("* " + e.Message);
-        ProjectData.ClearProjectError();
       }
     }
 
@@ -403,7 +382,7 @@ namespace OculusTrayTool
       {
         if (Process.GetProcessesByName("OculusClient").Length > 0)
           return;
-        FrmMain.fmain.AddToListboxAndScroll("Launching Oculus Home in " + Conversions.ToString(GetConfig.StartHomeDelay) + " seconds..");
+        FrmMain.fmain.AddToListboxAndScroll("Launching Oculus Home in " + GetConfig.StartHomeDelay.ToString() + " seconds..");
         Log.WriteToLog("Launching Oculus Home");
         Thread.Sleep(checked (GetConfig.StartHomeDelay * 1000));
         if (Globals.dbg)
@@ -422,13 +401,11 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Exception e = ex;
         Log.WriteToLog("Warning: Could not launch Oculus Home: " + e.Message);
         StackTrace stackTrace = new StackTrace(e, true);
         Log.WriteToLog(e.ToString() + stackTrace.ToString());
         FrmMain.fmain.AddToListboxAndScroll("* " + e.Message);
-        ProjectData.ClearProjectError();
       }
     }
 
@@ -453,22 +430,19 @@ namespace OculusTrayTool
           }
           catch (InvalidOperationException ex)
           {
-            ProjectData.SetProjectError((Exception) ex);
             InvalidOperationException operationException = ex;
-            if ((double) operationException.HResult == Conversions.ToDouble("-2146233079 "))
+            if ((double) operationException.HResult == -2146233079)
             {
-              ProjectData.ClearProjectError();
               return;
             }
             Log.WriteToLog("Warning: CloseDebugTool: " + operationException.Message);
-            ProjectData.ClearProjectError();
           }
           checked { ++index; }
         }
         if (RunCommand.DebugToolInstances > 0)
-          Log.WriteToLog("Killed " + Conversions.ToString(RunCommand.DebugToolInstances) + " running instances of the OculusDebugTool");
+          Log.WriteToLog("Killed " + RunCommand.DebugToolInstances.ToString() + " running instances of the OculusDebugTool");
         else
-          Log.WriteToLog("Found " + Conversions.ToString(RunCommand.DebugToolInstances) + " running instances of the OculusDebugTool");
+          Log.WriteToLog("Found " + RunCommand.DebugToolInstances.ToString() + " running instances of the OculusDebugTool");
         if (File.Exists(Application.StartupPath + "\\perf_info.txt"))
         {
           File.Delete(Application.StartupPath + "\\perf_info.txt");
@@ -522,21 +496,23 @@ namespace OculusTrayTool
       }
       catch (Win32Exception ex)
       {
-        ProjectData.SetProjectError((Exception) ex);
-        if (Operators.CompareString(ex.HResult.ToString(), "0x80004005", false) == 0)
-          ProjectData.ClearProjectError();
+        // 0x80004005 = E_FAIL, -2147467259
+        if (ex.HResult == -2147467259)
+        {
+           // ignore
+        }
         else
-          ProjectData.ClearProjectError();
+        {
+           // ignore
+        }
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Exception e = ex;
         Log.WriteToLog("CloseDebugTool: " + e.Message);
         StackTrace stackTrace = new StackTrace(e, true);
         Log.WriteToLog(e.ToString() + stackTrace.ToString());
         FrmMain.fmain.AddToListboxAndScroll("* " + e.Message);
-        ProjectData.ClearProjectError();
       }
     }
 
@@ -557,13 +533,11 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Exception e = ex;
         Log.WriteToLog("Run_PowerCFG: " + e.Message);
         StackTrace stackTrace = new StackTrace(e, true);
         Log.WriteToLog(e.ToString() + stackTrace.ToString());
         FrmMain.fmain.AddToListboxAndScroll("* " + e.Message);
-        ProjectData.ClearProjectError();
       }
     }
   }

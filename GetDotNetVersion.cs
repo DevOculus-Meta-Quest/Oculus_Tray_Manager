@@ -1,5 +1,5 @@
 
-using Microsoft.VisualBasic.CompilerServices;
+
 using Microsoft.Win32;
 
 #nullable disable
@@ -12,7 +12,7 @@ namespace OculusTrayTool
       using (RegistryKey registryKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32).OpenSubKey("SOFTWARE\\Microsoft\\NET Framework Setup\\NDP\\v4\\Full\\"))
       {
         if (registryKey != null && registryKey.GetValue("Release") != null)
-          Log.WriteToLog(".NET Framework Version: " + GetDotNetVersion.CheckFor45PlusVersion(Conversions.ToInteger(registryKey.GetValue("Release"))));
+          Log.WriteToLog(".NET Framework Version: " + GetDotNetVersion.CheckFor45PlusVersion(Convert.ToInt32(registryKey.GetValue("Release"))));
         else
           Log.WriteToLog(".NET Framework Version not detected.");
       }

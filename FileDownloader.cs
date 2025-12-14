@@ -1,5 +1,5 @@
 
-using Microsoft.VisualBasic.CompilerServices;
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -57,8 +57,6 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
-        ProjectData.ClearProjectError();
       }
       this.m_speedStopwatch = new Stopwatch();
       this.m_speedSampleArray = new double[11];
@@ -142,8 +140,6 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
-        ProjectData.ClearProjectError();
       }
       return false;
     }
@@ -170,12 +166,10 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Exception _error = ex;
         EventHandler<FileDownloadErrorEventArgs> downloadErrorEvent = this.FileDownloadError;
         if (downloadErrorEvent != null)
           downloadErrorEvent((object) this, new FileDownloadErrorEventArgs(downloadFileNode, _error));
-        ProjectData.ClearProjectError();
       }
       return false;
     }
@@ -247,12 +241,10 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Exception _error = ex;
         EventHandler<FileDownloadErrorEventArgs> downloadErrorEvent = this.FileDownloadError;
         if (downloadErrorEvent != null)
           downloadErrorEvent((object) this, new FileDownloadErrorEventArgs(userState, _error));
-        ProjectData.ClearProjectError();
       }
       finally
       {

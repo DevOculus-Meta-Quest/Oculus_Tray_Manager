@@ -1,6 +1,5 @@
 
-using Microsoft.VisualBasic;
-using Microsoft.VisualBasic.CompilerServices;
+
 using OculusTrayTool.My;
 using System;
 using System.Collections;
@@ -14,7 +13,7 @@ using System.Windows.Forms;
 #nullable disable
 namespace OculusTrayTool
 {
-  [DesignerGenerated]
+
   public partial class frmHotKeys : Form
   {
     
@@ -125,7 +124,7 @@ namespace OculusTrayTool
 
     private void Button2_Click(object sender, EventArgs e)
     {
-      if (Operators.CompareString(this.ComboFunction.Text, "", false) == 0)
+      if (String.Equals(this.ComboFunction.Text, "", StringComparison.Ordinal))
         return;
       if (!this.FunctionList.Contains(this.ComboFunction.Text))
       {
@@ -138,12 +137,12 @@ namespace OculusTrayTool
         }
         else
         {
-          int num1 = (int) Interaction.MsgBox((object) "The selected key is already bound. You can right-click a keybinding in the list to remove it.", MsgBoxStyle.Exclamation, (object) "Error");
+          MessageBox.Show("The selected key is already bound. You can right-click a keybinding in the list to remove it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
       }
       else
       {
-        int num2 = (int) Interaction.MsgBox((object) "The selected function is already bound. You can right-click a keybinding in the list to remove it.", MsgBoxStyle.Exclamation, (object) "Error");
+        MessageBox.Show("The selected function is already bound. You can right-click a keybinding in the list to remove it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
       }
       this.isCapture = false;
       this.Label1.Text = "";

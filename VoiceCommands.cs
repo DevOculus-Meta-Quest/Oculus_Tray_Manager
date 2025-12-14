@@ -51,9 +51,9 @@ namespace OculusTrayTool
         VoiceCommands.sRecognizeStartStop.SpeechRecognized += new EventHandler<SpeechRecognizedEventArgs>(VoiceCommands.sRecognizeStartStop_SpeechRecognized);
         MMDevice defaultAudioEndpoint = new MMDeviceEnumerator().GetDefaultAudioEndpoint(EDataFlow.eCapture, ERole.eConsole);
         MyProject.Forms.FrmMain.AddToListboxAndScroll("Voice recognition initialized, waiting for Oculus Home to start");
-        MyProject.Forms.FrmMain.AddToListboxAndScroll("Input device: " + Conversions.ToString(defaultAudioEndpoint.Properties.GetValue(1).Value) + " (" + defaultAudioEndpoint.FriendlyName + ")");
+        MyProject.Forms.FrmMain.AddToListboxAndScroll("Input device: " + Convert.ToString(defaultAudioEndpoint.Properties.GetValue(1).Value) + " (" + defaultAudioEndpoint.FriendlyName + ")");
         MyProject.Forms.FrmMain.AddToListboxAndScroll("Input volume: " + (defaultAudioEndpoint.AudioEndpointVolume.MasterVolumeLevelScalar * 100f).ToString() + "%");
-        MyProject.Forms.FrmMain.AddToListboxAndScroll("Confidence level: " + Conversions.ToString(OculusTrayTool.My.MySettings.Default.Confidence) + "%");
+        MyProject.Forms.FrmMain.AddToListboxAndScroll("Confidence level: " + Convert.ToString(OculusTrayTool.My.MySettings.Default.Confidence) + "%");
         MyProject.Forms.FrmMain.AddToListboxAndScroll("Language: " + VoiceCommands.sRecognizeStartStop.RecognizerInfo.Culture.EnglishName);
         if (!defaultAudioEndpoint.FriendlyName.ToLower().Contains("rift"))
         {

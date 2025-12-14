@@ -269,14 +269,14 @@ namespace OculusTrayTool
         while (index1 < commandLineArgs.Length)
         {
           string Left = commandLineArgs[index1];
-          if (Operators.CompareString(Left, "-r", false) == 0)
+          if (String.Equals(Left, "-r", StringComparison.OrdinalIgnoreCase))
           {
             OculusTrayTool.My.MySettings.Default.Reset();
             OculusTrayTool.My.MySettings.Default.Save();
             this.Shutdown();
           }
-          Globals.dbg = Operators.CompareString(Left, "-d", false) == 0;
-          if (Operators.CompareString(Left, "-u", false) == 0)
+          Globals.dbg = String.Equals(Left, "-d", StringComparison.OrdinalIgnoreCase);
+          if (String.Equals(Left, "-u", StringComparison.OrdinalIgnoreCase))
             OculusTrayTool.My.MySettings.Default.UpgradeRequired = true;
           checked { ++index1; }
         }
@@ -288,7 +288,8 @@ namespace OculusTrayTool
         }
         if (Globals.dbg)
         {
-          FileSystem.Rename(Application.StartupPath + "\\ott.log", "ott_" + DateTime.Now.ToString().Replace("/", "").Replace("\\", "").Replace("-", "").Replace(" ", "_").Replace(":", "") + ".log");
+          if (File.Exists(Application.StartupPath + "\\ott.log"))
+            File.Move(Application.StartupPath + "\\ott.log", "ott_" + DateTime.Now.ToString().Replace("/", "").Replace("\\", "").Replace("-", "").Replace(" ", "_").Replace(":", "") + ".log");
           Log.WriteToLog(":: Debug is ON ::");
         }
         Log.WriteToLog("Starting up...");
@@ -304,7 +305,7 @@ namespace OculusTrayTool
         this.isElevated = new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
         if (!this.isElevated)
         {
-          int num = (int) Interaction.MsgBox((object) "You must run Oculus Tray Tool as Administrator.\r\nThe application will now exit.", MsgBoxStyle.Critical, (object) "Oculus Tray Tool");
+          int num = (int) MessageBox.Show("You must run Oculus Tray Tool as Administrator.\r\nThe application will now exit.", "Oculus Tray Tool", MessageBoxButtons.OK, MessageBoxIcon.Error);
           this.Shutdown();
         }
         this.DotNetBarTabcontrol1.TabPages[0].ImageIndex = 0;
@@ -319,26 +320,26 @@ namespace OculusTrayTool
         if (!File.Exists(Application.StartupPath + "\\CoreAudio.dll"))
         {
           Log.WriteToLog("Missing dependency: CoreAudio.dll, cannot continue");
-          int num = (int) Interaction.MsgBox((object) "Missing dependency: CoreAudio.dll, cannot continue", MsgBoxStyle.Critical, (object) "Oculus Tray Tool");
+          int num = (int) MessageBox.Show("Missing dependency: CoreAudio.dll, cannot continue", "Oculus Tray Tool", MessageBoxButtons.OK, MessageBoxIcon.Error);
           this.Dispose();
         }
         else if (!File.Exists(Application.StartupPath + "\\Microsoft.Win32.TaskScheduler.dll"))
         {
           Log.WriteToLog("Missing dependency: Microsoft.Win32.TaskScheduler.dll, cannot continue");
-          int num = (int) Interaction.MsgBox((object) "Missing dependency: Microsoft.Win32.TaskScheduler.dll, cannot continue", MsgBoxStyle.Critical, (object) "Oculus Tray Tool");
+          int num = (int) MessageBox.Show("Missing dependency: Microsoft.Win32.TaskScheduler.dll, cannot continue", "Oculus Tray Tool", MessageBoxButtons.OK, MessageBoxIcon.Error);
           this.Dispose();
         }
         else if (!File.Exists(Application.StartupPath + "\\Newtonsoft.Json.dll"))
         {
           Log.WriteToLog("Missing dependency: Newtonsoft.Json.dll, cannot continue");
-          int num = (int) Interaction.MsgBox((object) "Missing dependency: Newtonsoft.Json.dll, cannot continue", MsgBoxStyle.Critical, (object) "Oculus Tray Tool");
+          int num = (int) MessageBox.Show("Missing dependency: Newtonsoft.Json.dll, cannot continue", "Oculus Tray Tool", MessageBoxButtons.OK, MessageBoxIcon.Error);
           this.Dispose();
         }
 
         else if (!File.Exists(Application.StartupPath + "\\System.Data.SQLite.dll"))
         {
           Log.WriteToLog("Missing dependency: System.Data.SQLite.dll, cannot continue");
-          int num = (int) Interaction.MsgBox((object) "Missing dependency: System.Data.SQLite.dll, cannot continue", MsgBoxStyle.Critical, (object) "Oculus Tray Tool");
+          int num = (int) MessageBox.Show("Missing dependency: System.Data.SQLite.dll, cannot continue", "Oculus Tray Tool", MessageBoxButtons.OK, MessageBoxIcon.Error);
           this.Dispose();
         }
         else
@@ -447,13 +448,13 @@ namespace OculusTrayTool
             }
             catch (Exception ex)
             {
-              ProjectData.SetProjectError(ex);
+              //ProjectData.SetProjectError(ex);
               Exception exception = ex;
               Log.WriteToLog("Failed to create database copy: " + exception.Message);
-              int num3 = (int) Interaction.MsgBox((object) ("Failed to create database copy: " + exception.Message), MsgBoxStyle.Critical, (object) "Error copying database");
+              int num3 = (int) MessageBox.Show("Failed to create database copy: " + exception.Message, "Error copying database", MessageBoxButtons.OK, MessageBoxIcon.Error);
               this.AddToListboxAndScroll("Failed to create database copy: " + exception.Message);
               this.hasError = true;
-              ProjectData.ClearProjectError();
+              //ProjectData.ClearProjectError();
               return;
             }
           }
@@ -608,7 +609,7 @@ namespace OculusTrayTool
               GetGames.GetFiles(this.OculusPath.TrimEnd('\\') + "\\Software\\Manifests");
             if (string.Compare(OculusTrayTool.My.MySettings.Default.LibraryPath, "", StringComparison.Ordinal) != 0 & !string.IsNullOrWhiteSpace(OculusTrayTool.My.MySettings.Default.LibraryPath.ToString()))
             {
-              string[] strArray = Strings.Split(OculusTrayTool.My.MySettings.Default.LibraryPath, ",");
+              string[] strArray = OculusTrayTool.My.MySettings.Default.LibraryPath.Split(',');
               int index2 = 0;
               while (index2 < strArray.Length)
               {
@@ -836,7 +837,7 @@ namespace OculusTrayTool
             if (((IEnumerable<Process>) Process.GetProcessesByName("OculusClient")).Count<Process>() >= 3)
             {
               Log.WriteToLog("Oculus Home seems to have started up fully. Sleeping " + OculusTrayTool.My.MySettings.Default.SleepAfterHomeStart + "ms before attempting to minimize to tray");
-              Thread.Sleep(Conversions.ToInteger(OculusTrayTool.My.MySettings.Default.SleepAfterHomeStart));
+              Thread.Sleep(Convert.ToInt32(OculusTrayTool.My.MySettings.Default.SleepAfterHomeStart));
               HomeToTray.SendHomeToTrayOnStart();
               if (HomeToTray.HomeIsMinimized)
               {
@@ -865,7 +866,7 @@ namespace OculusTrayTool
         Log.WriteToLog("Windows shutdown detected, performing quick cleanup");
         if (OTTDB.ott_cnn.State == ConnectionState.Open)
           OTTDB.ott_cnn.Close();
-        if (Operators.CompareString(OculusTrayTool.My.MySettings.Default.PowerPlanExit, "Not Used", false) != 0 && OculusTrayTool.My.MySettings.Default.ApplyPowerPlan == 0)
+        if (!String.Equals(OculusTrayTool.My.MySettings.Default.PowerPlanExit, "Not Used", StringComparison.OrdinalIgnoreCase) && OculusTrayTool.My.MySettings.Default.ApplyPowerPlan == 0)
         {
           PowerPlans.SetActivePowerPlan(OculusTrayTool.My.MySettings.Default.PowerPlanExit);
           PowerPlans.GetSetUsbSuspend(PowerPlans.filter, false);
@@ -895,7 +896,7 @@ namespace OculusTrayTool
             MyProject.Forms.frmStillRunningToast.Show();
           this.WindowState = FormWindowState.Minimized;
         }
-        else if (Interaction.MsgBox((object) "Oculus Tray Tool needs to be running to work its magic!\r\n\r\nAre you sure you want to exit?", MsgBoxStyle.YesNo | MsgBoxStyle.Question, (object) "Confirm Exit") == MsgBoxResult.No)
+        else if (MessageBox.Show("Oculus Tray Tool needs to be running to work its magic!\r\n\r\nAre you sure you want to exit?", "Confirm Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
           e.Cancel = true;
         else
           this.Shutdown();
@@ -916,7 +917,7 @@ namespace OculusTrayTool
 
     private void ComboSSstart_KeyPress(object sender, KeyPressEventArgs e)
     {
-      if ((int) e.KeyChar == (int) Conversions.ToChar(this.DSep))
+      if ((int) e.KeyChar == (int) Convert.ToChar(this.DSep))
         e.Handled = true;
       else if (e.KeyChar == '\r')
       {
@@ -943,13 +944,13 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
+        //ProjectData.SetProjectError(ex);
         Exception e1 = ex;
         this.AddToListboxAndScroll("* Exception: " + e1.Message);
         this.hasWarning = true;
         StackTrace stackTrace = new StackTrace(e1, true);
         Log.WriteToLog(e1.ToString() + stackTrace.ToString());
-        ProjectData.ClearProjectError();
+        //ProjectData.ClearProjectError();
       }
     }
 

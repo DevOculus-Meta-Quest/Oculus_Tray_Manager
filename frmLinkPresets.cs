@@ -1,6 +1,5 @@
 
-using Microsoft.VisualBasic;
-using Microsoft.VisualBasic.CompilerServices;
+
 using OculusTrayTool.My;
 using System;
 using System.ComponentModel;
@@ -12,7 +11,7 @@ using System.Windows.Forms;
 #nullable disable
 namespace OculusTrayTool
 {
-  [DesignerGenerated]
+
   public partial class frmLinkPresets : Form
   {
     
@@ -31,7 +30,7 @@ namespace OculusTrayTool
     {
       if (FrmMain.fmain.ComboBox4.FindString(this.TextBox1.Text) >= 0)
       {
-        int num = (int) Interaction.MsgBox((object) "A Preset with this name already exists", MsgBoxStyle.Critical, (object) "Preset exists");
+        int num = (int) MessageBox.Show("A Preset with this name already exists", "Preset exists", MessageBoxButtons.OK, MessageBoxIcon.Error);
         this.TextBox1.Text = "";
       }
       else

@@ -1,6 +1,5 @@
 
-using Microsoft.VisualBasic;
-using Microsoft.VisualBasic.CompilerServices;
+
 using OculusTrayTool.My;
 using System;
 using System.Collections.Generic;
@@ -13,7 +12,7 @@ using System.Windows.Forms;
 #nullable disable
 namespace OculusTrayTool
 {
-  [DesignerGenerated]
+
   public partial class FrmSetFallback : Form
   {
     
@@ -89,10 +88,10 @@ namespace OculusTrayTool
       {
         if (this.ComboBox6.SelectedItem != null)
         {
-          if (Operators.CompareString(this.ComboBox6.Text, "Use current default", false) == 0)
+          if (String.Equals(this.ComboBox6.Text, "Use current default", StringComparison.OrdinalIgnoreCase))
           {
-            MySettingsProperty.Settings.SetAudioOnStart = Conversions.ToString(GetDevices.GetDefaultAudioDeviceName());
-            MySettingsProperty.Settings.SetAudioOnStartGuid = Conversions.ToString(GetDevices.GetDefaultAudioDevice());
+            MySettingsProperty.Settings.SetAudioOnStart = Convert.ToString(GetDevices.GetDefaultAudioDeviceName());
+            MySettingsProperty.Settings.SetAudioOnStartGuid = Convert.ToString(GetDevices.GetDefaultAudioDevice());
             Log.WriteToLog("Stored '" + MySettingsProperty.Settings.SetAudioOnStart.ToString() + "' as current default audio device (on startup)");
           }
           else
@@ -104,10 +103,10 @@ namespace OculusTrayTool
         }
         if (this.ComboAudioFallback.SelectedItem != null)
         {
-          if (Operators.CompareString(this.ComboAudioFallback.Text, "Use current default", false) == 0)
+          if (String.Equals(this.ComboAudioFallback.Text, "Use current default", StringComparison.OrdinalIgnoreCase))
           {
-            MySettingsProperty.Settings.DefaultAudio = Conversions.ToString(GetDevices.GetDefaultAudioDeviceName());
-            MySettingsProperty.Settings.SystemDefaultAudioGuid = Conversions.ToString(GetDevices.GetDefaultAudioDevice());
+            MySettingsProperty.Settings.DefaultAudio = Convert.ToString(GetDevices.GetDefaultAudioDeviceName());
+            MySettingsProperty.Settings.SystemDefaultAudioGuid = Convert.ToString(GetDevices.GetDefaultAudioDevice());
             Log.WriteToLog("Stored '" + MySettingsProperty.Settings.DefaultAudio + "' as current default audio device (on exit)");
           }
           else
@@ -119,10 +118,10 @@ namespace OculusTrayTool
         }
         if (this.ComboBox5.SelectedItem != null)
         {
-          if (Operators.CompareString(this.ComboBox5.Text, "Use current default", false) == 0)
+          if (String.Equals(this.ComboBox5.Text, "Use current default", StringComparison.OrdinalIgnoreCase))
           {
-            MySettingsProperty.Settings.SetMicOnStart = Conversions.ToString(GetDevices.GetDefaultMicDeviceName());
-            MySettingsProperty.Settings.SetMicOnStartGuid = Conversions.ToString(GetDevices.GetDefaultMicDevice());
+            MySettingsProperty.Settings.SetMicOnStart = Convert.ToString(GetDevices.GetDefaultMicDeviceName());
+            MySettingsProperty.Settings.SetMicOnStartGuid = Convert.ToString(GetDevices.GetDefaultMicDevice());
             Log.WriteToLog("Stored '" + MySettingsProperty.Settings.SetMicOnStart + "' as current default mic device (on startup)");
           }
           else
@@ -134,10 +133,10 @@ namespace OculusTrayTool
         }
         if (this.ComboMicFallback.SelectedItem != null)
         {
-          if (Operators.CompareString(this.ComboMicFallback.Text, "Use current default", false) == 0)
+          if (String.Equals(this.ComboMicFallback.Text, "Use current default", StringComparison.OrdinalIgnoreCase))
           {
-            MySettingsProperty.Settings.DefaultMic = Conversions.ToString(GetDevices.GetDefaultMicDeviceName());
-            MySettingsProperty.Settings.SystemDefaultMicGuid = Conversions.ToString(GetDevices.GetDefaultMicDevice());
+            MySettingsProperty.Settings.DefaultMic = Convert.ToString(GetDevices.GetDefaultMicDeviceName());
+            MySettingsProperty.Settings.SystemDefaultMicGuid = Convert.ToString(GetDevices.GetDefaultMicDevice());
             Log.WriteToLog("Stored '" + MySettingsProperty.Settings.DefaultMic + "' as current default mic device (on exit)");
           }
           else
@@ -149,10 +148,10 @@ namespace OculusTrayTool
         }
         if (this.ComboBox4.SelectedItem != null)
         {
-          if (Operators.CompareString(this.ComboBox4.Text, "Use current default", false) == 0)
+          if (String.Equals(this.ComboBox4.Text, "Use current default", StringComparison.OrdinalIgnoreCase))
           {
-            MySettingsProperty.Settings.SetAudioCommOnStart = Conversions.ToString(GetDevices.GetDefaultAudioCommDeviceName());
-            MySettingsProperty.Settings.SetAudioCommOnStartGuid = Conversions.ToString(GetDevices.GetDefaultAudioCommDevice());
+            MySettingsProperty.Settings.SetAudioCommOnStart = Convert.ToString(GetDevices.GetDefaultAudioCommDeviceName());
+            MySettingsProperty.Settings.SetAudioCommOnStartGuid = Convert.ToString(GetDevices.GetDefaultAudioCommDevice());
             Log.WriteToLog("Stored '" + MySettingsProperty.Settings.SetAudioCommOnStart + "' as current default audio comm device (on startup)");
           }
           else
@@ -164,10 +163,10 @@ namespace OculusTrayTool
         }
         if (this.ComboCommFallback.SelectedItem != null)
         {
-          if (Operators.CompareString(this.ComboCommFallback.Text, "Use current default", false) == 0)
+          if (String.Equals(this.ComboCommFallback.Text, "Use current default", StringComparison.OrdinalIgnoreCase))
           {
-            MySettingsProperty.Settings.DefaultCommAudio = Conversions.ToString(GetDevices.GetDefaultAudioCommDeviceName());
-            MySettingsProperty.Settings.SystemDefaultCommAudioGuid = Conversions.ToString(GetDevices.GetDefaultAudioCommDevice());
+            MySettingsProperty.Settings.DefaultCommAudio = Convert.ToString(GetDevices.GetDefaultAudioCommDeviceName());
+            MySettingsProperty.Settings.SystemDefaultCommAudioGuid = Convert.ToString(GetDevices.GetDefaultAudioCommDevice());
             Log.WriteToLog("Stored '" + MySettingsProperty.Settings.DefaultCommAudio + "' as current default audio comm device (on exit)");
           }
           else
@@ -179,10 +178,10 @@ namespace OculusTrayTool
         }
         if (this.ComboBox3.SelectedItem != null)
         {
-          if (Operators.CompareString(this.ComboBox3.Text, "Use current default", false) == 0)
+          if (String.Equals(this.ComboBox3.Text, "Use current default", StringComparison.OrdinalIgnoreCase))
           {
-            MySettingsProperty.Settings.SetMicCommOnStart = Conversions.ToString(GetDevices.GetDefaultMicCommDeviceName());
-            MySettingsProperty.Settings.SetMicCommOnStartGuid = Conversions.ToString(GetDevices.GetDefaultMicCommDevice());
+            MySettingsProperty.Settings.SetMicCommOnStart = Convert.ToString(GetDevices.GetDefaultMicCommDeviceName());
+            MySettingsProperty.Settings.SetMicCommOnStartGuid = Convert.ToString(GetDevices.GetDefaultMicCommDevice());
             Log.WriteToLog("Stored '" + MySettingsProperty.Settings.SetAudioOnStart + "' as current mic comm device (on startup)");
           }
           else
@@ -194,10 +193,10 @@ namespace OculusTrayTool
         }
         if (this.ComboCommMicFallback.SelectedItem != null)
         {
-          if (Operators.CompareString(this.ComboCommFallback.Text, "Use current default", false) == 0)
+          if (String.Equals(this.ComboCommFallback.Text, "Use current default", StringComparison.OrdinalIgnoreCase))
           {
-            MySettingsProperty.Settings.DefaultComm = Conversions.ToString(GetDevices.GetDefaultMicCommDeviceName());
-            MySettingsProperty.Settings.SystemDefaultCommGuid = Conversions.ToString(GetDevices.GetDefaultMicCommDevice());
+            MySettingsProperty.Settings.DefaultComm = Convert.ToString(GetDevices.GetDefaultMicCommDeviceName());
+            MySettingsProperty.Settings.SystemDefaultCommGuid = Convert.ToString(GetDevices.GetDefaultMicCommDevice());
             Log.WriteToLog("Stored '" + MySettingsProperty.Settings.DefaultComm + "' as current mic comm device (on exit)");
           }
           else
@@ -208,7 +207,7 @@ namespace OculusTrayTool
           }
         }
         MySettingsProperty.Settings.Save();
-        if (Operators.CompareString(MySettingsProperty.Settings.DefaultAudio, (string) null, false) != 0 & Operators.CompareString(MySettingsProperty.Settings.DefaultMic, (string) null, false) != 0)
+        if (!String.Equals(MySettingsProperty.Settings.DefaultAudio, null, StringComparison.OrdinalIgnoreCase) & !String.Equals(MySettingsProperty.Settings.DefaultMic, null, StringComparison.OrdinalIgnoreCase))
         {
           MyProject.Forms.FrmMain.ToolStripMenuItem3.Enabled = true;
         }
@@ -220,11 +219,11 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
+        //ProjectData.SetProjectError(ex);
         Exception exception = ex;
         Log.WriteToLog("Error setting Audio fallback device: " + exception.Message);
-        int num = (int) Interaction.MsgBox((object) ("Error setting Audio fallback device: " + exception.Message), MsgBoxStyle.Critical, (object) "Error");
-        ProjectData.ClearProjectError();
+        int num = (int) MessageBox.Show("Error setting Audio fallback device: " + exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //ProjectData.ClearProjectError();
       }
       this.Close();
     }
@@ -255,7 +254,7 @@ namespace OculusTrayTool
       this.Cursor = Cursors.WaitCursor;
       this.ComboAudioFallback.Text = "";
       this.ComboMicFallback.Text = "";
-      this.ComboCommFallback.Text = Conversions.ToString(this.ComboBox1.SelectedIndex == 0);
+      this.ComboCommFallback.Text = Convert.ToString(this.ComboBox1.SelectedIndex == 0);
       this.ComboBox2.SelectedIndex = 0;
       GetConfig.IsReading = false;
       MySettingsProperty.Settings.DefaultAudio = (string) null;

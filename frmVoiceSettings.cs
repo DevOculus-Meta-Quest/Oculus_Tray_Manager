@@ -1,6 +1,5 @@
 
-using Microsoft.VisualBasic;
-using Microsoft.VisualBasic.CompilerServices;
+
 using OculusTrayTool.My;
 using System;
 using System.Collections.Generic;
@@ -13,7 +12,7 @@ using System.Windows.Forms;
 #nullable disable
 namespace OculusTrayTool
 {
-  [DesignerGenerated]
+
   public partial class frmVoiceSettings : Form
   {
     
@@ -189,7 +188,7 @@ namespace OculusTrayTool
 
     private void TrackBar1_Scroll(object sender, EventArgs e)
     {
-      this.LabelConfidencePercent.Text = Conversions.ToString(this.TrackBar1.Value) + "%";
+      this.LabelConfidencePercent.Text = Convert.ToString(this.TrackBar1.Value) + "%";
       this.LabelConfidencePercent.Refresh();
       this.VoicechangeMade = true;
     }
@@ -276,12 +275,12 @@ namespace OculusTrayTool
     {
       this.ButtonListen.Image = this.ImageList1.Images[0];
       this.ButtonListen.Refresh();
-      if (Operators.CompareString(this.ComboDevice.SelectedItem.ToString(), "Keyboard", false) != 0 & Operators.CompareString(this.ComboDevice.SelectedItem.ToString(), "", false) != 0)
+      if (!String.Equals(this.ComboDevice.SelectedItem.ToString(), "Keyboard", StringComparison.Ordinal) & !String.Equals(this.ComboDevice.SelectedItem.ToString(), "", StringComparison.Ordinal))
       {
         frmVoiceSettings.UpdateButtonLabel("Push button");
         GetControllers.CaptureSelectedButton();
       }
-      if (!(Operators.CompareString(this.ComboDevice.SelectedItem.ToString(), "Keyboard", false) == 0 & Operators.CompareString(this.ComboDevice.SelectedItem.ToString(), "", false) != 0))
+      if (!(String.Equals(this.ComboDevice.SelectedItem.ToString(), "Keyboard", StringComparison.Ordinal) & !String.Equals(this.ComboDevice.SelectedItem.ToString(), "", StringComparison.Ordinal)))
         return;
       this.LabelKey.Text = "Press key";
     }
@@ -289,10 +288,10 @@ namespace OculusTrayTool
     private void ComboDevice_SelectedIndexChanged(object sender, EventArgs e)
     {
       GetControllers.selectedDevice = this.ComboDevice.SelectedItem.ToString();
-      if (Operators.CompareString(this.ComboDevice.SelectedItem.ToString(), "Keyboard", false) != 0)
+      if (!String.Equals(this.ComboDevice.SelectedItem.ToString(), "Keyboard", StringComparison.Ordinal))
       {
         GetControllers.SelectController();
-        if (Operators.CompareString(MySettingsProperty.Settings.JoystickDeviceName, this.ComboDevice.SelectedItem.ToString(), false) == 0)
+        if (String.Equals(MySettingsProperty.Settings.JoystickDeviceName, this.ComboDevice.SelectedItem.ToString(), StringComparison.Ordinal))
           this.LabelKey.Text = MySettingsProperty.Settings.JoystickVoiceActivationButton.Replace("Buttons", "");
       }
       else
@@ -384,7 +383,7 @@ namespace OculusTrayTool
 
     private void frmVoiceSettings_KeyDown(object sender, KeyEventArgs e)
     {
-      if (Operators.CompareString(this.LabelKey.Text, "Press key", false) != 0)
+      if (!String.Equals(this.LabelKey.Text, "Press key", StringComparison.Ordinal))
         return;
       frmVoiceSettings.UpdateButtonLabel(e.KeyCode.ToString().ToUpper());
       this.ButtonListen.Image = this.ImageList1.Images[1];
@@ -452,7 +451,7 @@ namespace OculusTrayTool
         return;
       MyProject.Forms.frmEditVoiceCommand.LabelAction.Text = listViewHitTestInfo.Item.Text;
       MyProject.Forms.frmEditVoiceCommand.TextBoxPhrase.Text = listViewHitTestInfo.Item.SubItems[1].Text + ";";
-      MyProject.Forms.frmEditVoiceCommand.ComboEnabled.SelectedIndex = Operators.CompareString(listViewHitTestInfo.Item.SubItems[2].Text, "True", false) != 0 ? 1 : 0;
+      MyProject.Forms.frmEditVoiceCommand.ComboEnabled.SelectedIndex = !String.Equals(listViewHitTestInfo.Item.SubItems[2].Text, "True", StringComparison.Ordinal) ? 1 : 0;
       int num = (int) MyProject.Forms.frmEditVoiceCommand.ShowDialog();
     }
 
@@ -471,22 +470,22 @@ namespace OculusTrayTool
 
     private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
     {
-      if (Operators.ConditionalCompareObjectNotEqual(this.ComboBox1.SelectedItem, (object) null, false))
+      if (this.ComboBox1.SelectedItem != null)
       {
         this.Button2.Enabled = true;
         List<string> stringList = new List<string>();
         List<string> voiceProfileCommands = (List<string>) OTTDB.GetVoiceProfileCommands(this.ComboBox1.SelectedItem.ToString());
         foreach (string Expression in voiceProfileCommands)
         {
-          string[] strArray1 = Strings.Split(Expression, "|");
+          string[] strArray1 = Expression.Split('|');
           ListViewItem listViewItem1 = new ListViewItem();
           ListViewItem listViewItem2 = this.ListView2.Items.Add(strArray1[0]);
-          string[] strArray2 = Strings.Split(strArray1[1], ",");
+          string[] strArray2 = strArray1[1].Split(',');
           int index = 0;
           while (index < strArray2.Length)
           {
-            string[] strArray3 = Strings.Split(strArray2[index], ":");
-            if (Operators.CompareString(strArray3[0], "wait", false) != 0)
+            string[] strArray3 = strArray2[index].Split(':');
+            if (!String.Equals(strArray3[0], "wait", StringComparison.Ordinal))
               listViewItem2.SubItems.Add(strArray3[0] + " '" + strArray3[1] + "'");
             checked { ++index; }
           }
@@ -507,7 +506,7 @@ namespace OculusTrayTool
 
     private void ComboBox1_TextChanged(object sender, EventArgs e)
     {
-      if (Operators.CompareString(this.ComboBox1.Text, (string) null, false) != 0)
+      if (!String.Equals(this.ComboBox1.Text, null, StringComparison.Ordinal))
         return;
       this.Button2.Enabled = false;
     }

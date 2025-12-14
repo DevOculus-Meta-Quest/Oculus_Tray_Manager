@@ -1,12 +1,12 @@
 
-using Microsoft.VisualBasic.CompilerServices;
+
 using System;
 using System.Net;
 
 #nullable disable
 namespace OculusTrayTool
 {
-  [StandardModule]
+
   internal sealed class CheckConnection
   {
     public static bool HaveiConnection;
@@ -27,10 +27,8 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         CheckConnection.HaveiConnection = false;
         flag = false;
-        ProjectData.ClearProjectError();
       }
       return flag;
     }

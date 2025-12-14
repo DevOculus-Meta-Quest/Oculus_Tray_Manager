@@ -188,11 +188,11 @@ namespace OculusTrayTool
                   }
                   catch (Exception ex)
                   {
-                    ProjectData.SetProjectError(ex);
+                    // ProjectData.SetProjectError(ex);
                     Exception exception = ex;
                     Log.WriteToLog("GetThirdPartyApps:  -> Failed to read database entry for appId '" + canonName + "': " + exception.Message);
                     FrmMain.fmain.AddToListboxAndScroll("Failed to read database entry for appId '" + canonName + "': " + exception.Message);
-                    ProjectData.ClearProjectError();
+                    // ProjectData.ClearProjectError();
                     continue;
                   }
                   if (!FrmMain.fmain.includedApps.Contains(str2) && stringBuilder.ToString().Contains("FLAT"))
@@ -430,12 +430,12 @@ namespace OculusTrayTool
                   }
                   catch (Exception ex)
                   {
-                    ProjectData.SetProjectError(ex);
+                    // ProjectData.SetProjectError(ex);
                     Exception exception = ex;
                     Log.WriteToLog("GetApps:  -> Failed to read database entry for appId '" + appId + "': " + exception.Message);
                     FrmMain.fmain.AddToListboxAndScroll("Failed to read database entry for appId '" + appId + "': " + exception.Message);
                     FrmMain.fmain.hasError = true;
-                    ProjectData.ClearProjectError();
+                    // ProjectData.ClearProjectError();
                     return;
                   }
                   if (stringBuilder.ToString().Contains("FLAT") && !FrmMain.fmain.includedApps.Contains(str4))
@@ -524,9 +524,9 @@ namespace OculusTrayTool
             }
             catch (Exception ex)
             {
-              ProjectData.SetProjectError(ex);
+              // ProjectData.SetProjectError(ex);
               Log.WriteToLog("GetApps:  -> Failed to open manifest file: " + ex.Message);
-              ProjectData.ClearProjectError();
+              // ProjectData.ClearProjectError();
               continue;
             }
 
@@ -539,9 +539,9 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
+        // ProjectData.SetProjectError(ex);
         Log.WriteToLog("GetApps: " + ex.Message);
-        ProjectData.ClearProjectError();
+        // ProjectData.ClearProjectError();
       }
     }
 

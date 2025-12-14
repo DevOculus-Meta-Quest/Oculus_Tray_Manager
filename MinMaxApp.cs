@@ -1,5 +1,5 @@
 
-using Microsoft.VisualBasic.CompilerServices;
+
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -8,7 +8,7 @@ using System.Threading;
 #nullable disable
 namespace OculusTrayTool
 {
-  [StandardModule]
+
   internal sealed class MinMaxApp
   {
     public static int wHandle;
@@ -37,7 +37,7 @@ namespace OculusTrayTool
         }
         else if (MinMaxApp.SetMirrorRetry >= 5 & MinMaxApp.MinimizeCount == 0)
         {
-          Log.WriteToLog("MinimizeApp: " + app + ": Re-tried " + Conversions.ToString(MinMaxApp.SetMirrorRetry) + " times then gave up. Check the process in Task Manager and verify the .exe path and name.");
+          Log.WriteToLog("MinimizeApp: " + app + ": Re-tried " + Convert.ToString(MinMaxApp.SetMirrorRetry) + " times then gave up. Check the process in Task Manager and verify the .exe path and name.");
           FrmMain.fmain.mirrorTimer.Enabled = false;
         }
         else
@@ -76,11 +76,11 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
+        // ProjectData.SetProjectError(ex);
         Exception exception = ex;
         Log.WriteToLog("MinimizeApp: " + app + ": " + exception.Message);
         FrmMain.fmain.AddToListboxAndScroll("MinimizeApp: " + app + ": " + exception.Message);
-        ProjectData.ClearProjectError();
+        // ProjectData.ClearProjectError();
       }
     }
 
@@ -110,10 +110,10 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
+        // ProjectData.SetProjectError(ex);
         Exception exception = ex;
         Log.WriteToLog("MaximizeApp: " + app + ": " + exception.Message);
-        ProjectData.ClearProjectError();
+        // ProjectData.ClearProjectError();
       }
     }
 
@@ -144,10 +144,10 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
+        // ProjectData.SetProjectError(ex);
         Exception exception = ex;
         Log.WriteToLog("ShowDefault: " + app + ": " + exception.Message);
-        ProjectData.ClearProjectError();
+        // ProjectData.ClearProjectError();
       }
     }
 

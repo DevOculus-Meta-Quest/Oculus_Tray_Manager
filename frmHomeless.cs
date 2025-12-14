@@ -1,6 +1,5 @@
 
-using Microsoft.VisualBasic;
-using Microsoft.VisualBasic.CompilerServices;
+
 using OculusTrayTool.My;
 using System;
 using System.ComponentModel;
@@ -14,7 +13,7 @@ using System.Windows.Forms;
 #nullable disable
 namespace OculusTrayTool
 {
-  [DesignerGenerated]
+
   public partial class frmHomeless : Form
   {
     
@@ -64,15 +63,15 @@ namespace OculusTrayTool
         streamWriter1.WriteLine(str);
         streamWriter1.Close();
         Log.WriteToLog("Homeless background color set to " + str);
-        if (Operators.CompareString(this.ComboMusic.Text, "None", false) != 0)
+        if (!String.Equals(this.ComboMusic.Text, "None", StringComparison.OrdinalIgnoreCase))
         {
           if (File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\OculusTrayTool\\Music\\" + this.ComboMusic.Text))
           {
             StreamWriter streamWriter2 = new StreamWriter(MyProject.Forms.FrmMain.OculusPath + "Support\\oculus-worlds\\Home2\\Binaries\\Win64\\background_music.txt");
-            streamWriter2.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData).ToString().Replace("\\", "\\\\") + "\\\\OculusTrayTool\\\\Music\\\\" + this.ComboMusic.Text + "," + Conversions.ToString(Decimal.Multiply(this.NumericVolume.Value, 10M)));
+            streamWriter2.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData).ToString().Replace("\\", "\\\\") + "\\\\OculusTrayTool\\\\Music\\\\" + this.ComboMusic.Text + "," + Decimal.Multiply(this.NumericVolume.Value, 10M).ToString());
             streamWriter2.Close();
             Log.WriteToLog("Homeless background music set to " + this.ComboMusic.Text);
-            Log.WriteToLog("Homeless background volume set to " + Conversions.ToString(this.NumericVolume.Value) + "%");
+            Log.WriteToLog("Homeless background volume set to " + this.NumericVolume.Value.ToString() + "%");
           }
         }
         else if (File.Exists(MyProject.Forms.FrmMain.OculusPath + "Support\\oculus-worlds\\Home2\\Binaries\\Win64\\background_music.txt"))
@@ -111,11 +110,9 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Exception exception = ex;
         Log.WriteToLog("Could save settings: " + exception.Message);
-        int num = (int) Interaction.MsgBox((object) ("Could save settings: " + exception.Message), MsgBoxStyle.Critical, (object) "Error saving settings");
-        ProjectData.ClearProjectError();
+        MessageBox.Show("Could save settings: " + exception.Message, "Error saving settings", MessageBoxButtons.OK, MessageBoxIcon.Error);
       }
     }
 
@@ -159,11 +156,9 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Exception exception = ex;
         Log.WriteToLog("Could not add music file: " + exception.Message);
-        int num = (int) Interaction.MsgBox((object) ("Could not add music file: " + exception.Message), MsgBoxStyle.Critical, (object) "Error adding music");
-        ProjectData.ClearProjectError();
+        MessageBox.Show("Could not add music file: " + exception.Message, "Error adding music", MessageBoxButtons.OK, MessageBoxIcon.Error);
       }
     }
 

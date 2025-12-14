@@ -1,12 +1,12 @@
 
-using Microsoft.VisualBasic.CompilerServices;
+
 using System.Drawing;
 using System.Windows.Forms;
 
 #nullable disable
 namespace OculusTrayTool
 {
-  [StandardModule]
+
   internal sealed class CenterForms
   {
     public static void CenterForm(Form frm, Form parent = null)

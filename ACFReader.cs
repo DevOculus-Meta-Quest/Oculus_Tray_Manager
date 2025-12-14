@@ -1,5 +1,5 @@
 
-using Microsoft.VisualBasic.CompilerServices;
+
 using Newtonsoft.Json.Linq;
 using System;
 using System.IO;
@@ -46,11 +46,8 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryProcessFolder: " + ex.Message);
         flag = false;
-        ProjectData.ClearProjectError();
-        goto label_8;
       }
       flag = true;
 label_8:
@@ -86,11 +83,8 @@ label_8:
         }
         catch (Exception ex)
         {
-          ProjectData.SetProjectError(ex);
           Log.WriteToLog("TryProcessFile: " + ex.Message);
           flag = false;
-          ProjectData.ClearProjectError();
-          goto label_9;
         }
         flag = true;
       }
@@ -156,11 +150,8 @@ label_9:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("AcfToJson: " + ex.Message);
         json = false;
-        ProjectData.ClearProjectError();
-        goto label_11;
       }
       json = true;
 label_11:

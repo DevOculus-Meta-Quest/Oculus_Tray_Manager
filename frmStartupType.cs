@@ -1,5 +1,5 @@
 
-using Microsoft.VisualBasic.CompilerServices;
+
 using OculusTrayTool.My;
 using System;
 using System.ComponentModel;
@@ -11,7 +11,7 @@ using System.Windows.Forms;
 #nullable disable
 namespace OculusTrayTool
 {
-  [DesignerGenerated]
+
   public partial class frmStartupType : Form
   {
     
@@ -31,20 +31,18 @@ namespace OculusTrayTool
     {
       if (this.RadioButton1.Checked)
       {
-        if (MyProject.Computer.Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true).GetValue(Application.ProductName) == null)
+        if (Microsoft.Win32.Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true).GetValue(Application.ProductName) == null)
         {
           try
           {
-            MyProject.Computer.Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true).SetValue(Application.ProductName, (object) (Application.StartupPath + "\\OculusTrayTool.exe"));
+            Microsoft.Win32.Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true).SetValue(Application.ProductName, (object) (Application.StartupPath + "\\OculusTrayTool.exe"));
             MySettingsProperty.Settings.StartWithWindows = true;
             MySettingsProperty.Settings.Save();
             Log.WriteToLog("Enabled 'Start with Windows', startup type' Regular'");
           }
           catch (Exception ex)
           {
-            ProjectData.SetProjectError(ex);
             Log.WriteToLog("Could not enable 'Start with Windows', startup type' Regular': " + ex.Message);
-            ProjectData.ClearProjectError();
           }
         }
       }

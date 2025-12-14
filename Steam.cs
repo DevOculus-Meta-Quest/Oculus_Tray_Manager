@@ -1,5 +1,5 @@
 
-using Microsoft.VisualBasic.CompilerServices;
+
 using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
 using System;
@@ -95,7 +95,7 @@ namespace OculusTrayTool
         }
         else
         {
-          steamPath = Conversions.ToString(registryKey.GetValue("SteamPath"));
+          steamPath = registryKey.GetValue("SteamPath")?.ToString();
           if (string.IsNullOrEmpty(steamPath))
           {
             steamPath1 = false;
@@ -107,10 +107,8 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryGetSteamPath: " + ex.Message);
         steamPath1 = false;
-        ProjectData.ClearProjectError();
         goto label_8;
       }
       steamPath1 = true;
@@ -132,7 +130,7 @@ label_8:
         }
         else
         {
-          installPath = Conversions.ToString(registryKey.GetValue("InstallPath"));
+          installPath = registryKey.GetValue("InstallPath")?.ToString();
           if (string.IsNullOrEmpty(installPath))
           {
             installPath1 = false;
@@ -144,10 +142,8 @@ label_8:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryGetInstallPath: " + ex.Message);
         installPath1 = false;
-        ProjectData.ClearProjectError();
         goto label_8;
       }
       installPath1 = true;
@@ -175,10 +171,8 @@ label_8:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryGetLibraryPathList: " + ex.Message);
         libraryPathList = false;
-        ProjectData.ClearProjectError();
         goto label_8;
       }
       libraryPathList = true;
@@ -206,10 +200,8 @@ label_8:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryGetLibraryPathDictionary: " + ex.Message);
         libraryPathDictionary = false;
-        ProjectData.ClearProjectError();
         goto label_14;
       }
       libraryPathDictionary = true;
@@ -248,10 +240,8 @@ label_14:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryDisableSafeMode: " + ex.Message);
         flag = false;
-        ProjectData.ClearProjectError();
         goto label_10;
       }
       flag = true;
@@ -286,10 +276,8 @@ label_10:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryGetAppIdList: " + ex.Message);
         appIdList1 = false;
-        ProjectData.ClearProjectError();
         goto label_14;
       }
       appIdList1 = true;
@@ -325,10 +313,8 @@ label_14:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryCopyACFFiles: " + ex.Message);
         flag = false;
-        ProjectData.ClearProjectError();
         goto label_11;
       }
       flag = true;
@@ -358,10 +344,8 @@ label_11:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryCheckACFFiles: " + ex.Message);
         flag2 = false;
-        ProjectData.ClearProjectError();
         goto label_9;
       }
       flag2 = flag1;
@@ -380,10 +364,8 @@ label_9:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryGetSteamACFJson: " + ex.Message);
         steamAcfJson = false;
-        ProjectData.ClearProjectError();
         goto label_8;
       }
       steamAcfJson = true;
@@ -410,10 +392,8 @@ label_8:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryGetSteamACFJson: " + ex.Message);
         steamAcfJson = false;
-        ProjectData.ClearProjectError();
         goto label_7;
       }
       steamAcfJson = true;
@@ -444,10 +424,8 @@ label_7:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryGetOpenVRPathsEntry: " + ex.Message);
         openVrPathsEntry = false;
-        ProjectData.ClearProjectError();
         goto label_13;
       }
       openVrPathsEntry = flag;
@@ -482,10 +460,8 @@ label_13:
         }
         catch (Exception ex)
         {
-          ProjectData.SetProjectError(ex);
           Log.WriteToLog("TryGetVRManifest: " + ex.Message);
           vrManifest = false;
-          ProjectData.ClearProjectError();
           goto label_11;
         }
         vrManifest = true;
@@ -511,9 +487,7 @@ label_11:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryGetAppDetails: " + ex.Message);
-        ProjectData.ClearProjectError();
       }
     }
 
@@ -551,10 +525,8 @@ label_11:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryGetAppInfo: " + ex.Message);
         appInfo = false;
-        ProjectData.ClearProjectError();
         goto label_11;
       }
       appInfo = true;
@@ -583,8 +555,8 @@ label_11:
           executable = (string) jtoken1[(object) nameof (executable)];
           arguments = (string) jtoken1[(object) nameof (arguments)];
           type = (string) jtoken1[(object) nameof (type)];
-          bool flag2 = !windowsOnly || Operators.CompareString(oslist, "windows", false) == 0;
-          bool flag3 = !vrOnly || Operators.CompareString(type, "vr", false) == 0 || Operators.CompareString(type, "othervr", false) == 0;
+          bool flag2 = !windowsOnly || String.Compare(oslist, "windows", StringComparison.Ordinal) == 0;
+          bool flag3 = !vrOnly || String.Compare(type, "vr", StringComparison.Ordinal) == 0 || String.Compare(type, "othervr", StringComparison.Ordinal) == 0;
           if (jtoken2 != null)
             oslist = (string) jtoken2[(object) nameof (oslist)];
           if (flag2 && flag3 && executable != null)
@@ -596,10 +568,8 @@ label_11:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryGetAppLaunchInfo: " + ex.Message);
         appLaunchInfo = false;
-        ProjectData.ClearProjectError();
         goto label_15;
       }
       appLaunchInfo = flag1;
@@ -693,10 +663,8 @@ label_15:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryGetAppInfo: " + ex.Message);
         appInfo = false;
-        ProjectData.ClearProjectError();
         goto label_28;
       }
       appInfo = true;
@@ -723,10 +691,8 @@ label_28:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TrySaveAppInfoJson: " + ex.Message);
         flag = false;
-        ProjectData.ClearProjectError();
         goto label_6;
       }
       flag = true;
@@ -802,10 +768,10 @@ label_6:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
+        // ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryReadAppInfo: " + ex.Message);
         flag1 = false;
-        ProjectData.ClearProjectError();
+        // ProjectData.ClearProjectError();
         goto label_21;
       }
       flag1 = true;
@@ -916,7 +882,7 @@ label_21:
       DownloadProgressChangedEventHandler downloadProgressChanged,
       EventHandler<DataDownloadEventArgs> downloadComplete)
     {
-      return Steam.TryDownloadFile(string.Format("https://steamcdn-a.akamaihd.net/steam/apps/{0}/header.jpg", (object) appId), RuntimeHelpers.GetObjectValue(tag), downloadProgressChanged, downloadComplete);
+      return Steam.TryDownloadFile(string.Format("https://steamcdn-a.akamaihd.net/steam/apps/{0}/header.jpg", (object) appId), tag, downloadProgressChanged, downloadComplete);
     }
 
     public static bool TryDownloadFile(
@@ -931,14 +897,14 @@ label_21:
         {
           webClient.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)");
           webClient.DownloadProgressChanged += downloadProgressChanged;
-          webClient.DownloadDataCompleted += (DownloadDataCompletedEventHandler) ([SpecialName] (sender, e) =>
+          webClient.DownloadDataCompleted += (sender, e) =>
           {
             if (e.Result == null || e.Error != null || e.Cancelled)
               return;
             object[] userState = (object[]) e.UserState;
             Uri uri = (Uri) userState[0];
-            object objectValue1 = RuntimeHelpers.GetObjectValue(userState[1]);
-            object objectValue2 = RuntimeHelpers.GetObjectValue(userState[2]);
+            object objectValue1 = userState[1];
+            object objectValue2 = userState[2];
             string str1 = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
             string str2 = Path.Combine(str1, Path.GetFileName(uri.LocalPath));
             if (!Directory.Exists(str1))
@@ -947,14 +913,13 @@ label_21:
               System.IO.File.Delete(str2);
             System.IO.File.WriteAllBytes(str2, e.Result);
             if (downloadComplete != null)
-              downloadComplete((object) null, new DataDownloadEventArgs(str2, RuntimeHelpers.GetObjectValue(objectValue2)));
+              downloadComplete((object) null, new DataDownloadEventArgs(str2, objectValue2));
             object Expression = objectValue1;
-            ObjectFlowControl.CheckForSyncLockOnValueType(Expression);
             bool lockTaken = false;
             try
             {
               Monitor.Enter(Expression, ref lockTaken);
-              Monitor.Pulse(RuntimeHelpers.GetObjectValue(objectValue1));
+              Monitor.Pulse(objectValue1);
             }
             finally
             {
@@ -963,9 +928,8 @@ label_21:
             }
           });
           Uri address = new Uri(url);
-          object objectValue = RuntimeHelpers.GetObjectValue(new object());
+          object objectValue = new object();
           object Expression1 = objectValue;
-          ObjectFlowControl.CheckForSyncLockOnValueType(Expression1);
           bool lockTaken1 = false;
           try
           {
@@ -973,10 +937,8 @@ label_21:
             webClient.DownloadDataAsync(address, (object) new object[3]
             {
               (object) address,
-              objectValue,
-              tag
             });
-            Monitor.Wait(RuntimeHelpers.GetObjectValue(objectValue));
+            Monitor.Wait(objectValue);
           }
           finally
           {
@@ -988,9 +950,7 @@ label_21:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryDownloadFile: " + ex.Message);
-        ProjectData.ClearProjectError();
       }
       return false;
     }
@@ -1008,7 +968,7 @@ label_21:
         {
           webClient.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)");
           webClient.DownloadProgressChanged += downloadProgressChanged;
-          webClient.DownloadDataCompleted += (DownloadDataCompletedEventHandler) ([SpecialName] (sender, e) =>
+          webClient.DownloadDataCompleted += (sender, e) =>
           {
             if (e.Result == null || e.Error != null || e.Cancelled)
               return;
@@ -1023,17 +983,15 @@ label_21:
               System.IO.File.Delete(str2);
             System.IO.File.WriteAllBytes(str2, e.Result);
             if (downloadComplete != null)
-              downloadComplete((object) null, new DataDownloadEventArgs(str2, RuntimeHelpers.GetObjectValue(tag)));
+              downloadComplete((object) null, new DataDownloadEventArgs(str2, tag));
           });
-          webClient.DownloadDataAsync(address, RuntimeHelpers.GetObjectValue(tag));
+          webClient.DownloadDataAsync(address, tag);
         }
         return true;
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryDownloadFileAsync: " + ex.Message);
-        ProjectData.ClearProjectError();
       }
       return false;
     }
@@ -1048,7 +1006,7 @@ label_21:
         using (WebClient webClient = new WebClient())
         {
           webClient.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)");
-          webClient.DownloadDataCompleted += (DownloadDataCompletedEventHandler) ([SpecialName] (sender, e) =>
+          webClient.DownloadDataCompleted += (sender, e) =>
           {
             if (e.Result == null || e.Error != null || e.Cancelled)
               return;
@@ -1057,7 +1015,7 @@ label_21:
               System.IO.File.Delete(str);
             System.IO.File.WriteAllBytes(str, e.Result);
             if (downloadComplete != null)
-              downloadComplete((object) null, new DataDownloadEventArgs(str, RuntimeHelpers.GetObjectValue(tag)));
+              downloadComplete((object) null, new DataDownloadEventArgs(str, tag));
           });
           webClient.DownloadDataAsync(address);
         }
@@ -1065,9 +1023,7 @@ label_21:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryDownloadAppList: " + ex.Message);
-        ProjectData.ClearProjectError();
       }
       return false;
     }
@@ -1087,9 +1043,7 @@ label_21:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryDownloadAppDetails: " + ex.Message);
-        ProjectData.ClearProjectError();
       }
       return false;
     }
@@ -1112,10 +1066,8 @@ label_21:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryLaunchApp: " + ex.Message);
         flag = false;
-        ProjectData.ClearProjectError();
         goto label_4;
       }
       flag = true;
@@ -1158,10 +1110,8 @@ label_4:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryInstallDriver: " + ex.Message);
         flag1 = false;
-        ProjectData.ClearProjectError();
         goto label_8;
       }
       flag1 = flag2;
@@ -1182,10 +1132,8 @@ label_8:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryGetOpenVRPathsFileName: " + ex.Message);
         openVrPathsFileName = false;
-        ProjectData.ClearProjectError();
         goto label_4;
       }
       openVrPathsFileName = flag;
@@ -1216,10 +1164,8 @@ label_4:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryUninstall: " + ex.Message);
         flag2 = false;
-        ProjectData.ClearProjectError();
         goto label_11;
       }
       flag2 = flag1;
@@ -1252,10 +1198,8 @@ label_11:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("IsDriverInstalled: " + ex.Message);
         flag = false;
-        ProjectData.ClearProjectError();
         goto label_10;
       }
       flag = false;

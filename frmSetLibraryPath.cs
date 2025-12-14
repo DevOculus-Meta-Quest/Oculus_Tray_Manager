@@ -1,6 +1,5 @@
 
-using Microsoft.VisualBasic;
-using Microsoft.VisualBasic.CompilerServices;
+
 using OculusTrayTool.My;
 using System;
 using System.ComponentModel;
@@ -13,7 +12,7 @@ using System.Windows.Forms;
 #nullable disable
 namespace OculusTrayTool
 {
-  [DesignerGenerated]
+
   public partial class frmSetLibraryPath : Form
   {
     
@@ -35,7 +34,7 @@ namespace OculusTrayTool
       {
         if (File.Exists(this.FolderBrowserDialog1.SelectedPath.TrimEnd('\\') + "\\Manifests\\oculus-home.json"))
         {
-          int num1 = (int) Interaction.MsgBox((object) "While this path contains a 'Manifests' folder, it is not the correct one. See if there's a subfolder called 'Software' to the folder you selected. If so please select that folder.", MsgBoxStyle.Exclamation, (object) "Invalid Path");
+          int num1 = (int) MessageBox.Show("While this path contains a 'Manifests' folder, it is not the correct one. See if there's a subfolder called 'Software' to the folder you selected. If so please select that folder.", "Invalid Path", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
         else
         {
@@ -46,7 +45,7 @@ namespace OculusTrayTool
       }
       else
       {
-        int num2 = (int) Interaction.MsgBox((object) "Invalid Path: Folder does not contain 'Manifests'", MsgBoxStyle.Exclamation, (object) "Invalid Path");
+        int num2 = (int) MessageBox.Show("Invalid Path: Folder does not contain 'Manifests'", "Invalid Path", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
       }
     }
   }

@@ -1,5 +1,5 @@
 
-using Microsoft.VisualBasic.CompilerServices;
+
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -46,11 +46,9 @@ namespace OculusTrayTool
       {
         parentProcess = Process.GetProcessById(processInformation.InheritedFromUniqueProcessId.ToInt32());
       }
-      catch (ArgumentException ex)
+      catch (ArgumentException)
       {
-        ProjectData.SetProjectError((Exception) ex);
-        parentProcess = (Process) null;
-        ProjectData.ClearProjectError();
+        parentProcess = null;
       }
       return parentProcess;
     }

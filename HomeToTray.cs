@@ -1,5 +1,5 @@
 
-using Microsoft.VisualBasic.CompilerServices;
+
 using OculusTrayTool.My;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Timers;
 #nullable disable
 namespace OculusTrayTool
 {
-  [StandardModule]
+
   internal sealed class HomeToTray
   {
     public static bool HomeIsMinimized = false;
@@ -51,7 +51,7 @@ namespace OculusTrayTool
           if (lpwndpl.showCmd == 2)
           {
             if (Globals.dbg)
-              Log.WriteToLog("Oculus Home minimized, sending " + Conversions.ToString(HomeToTray.wHandle) + " to tray");
+              Log.WriteToLog("Oculus Home minimized, sending " + Convert.ToString(HomeToTray.wHandle) + " to tray");
             HomeToTray.ShowWindow((IntPtr) HomeToTray.wHandle, HomeToTray.SHOW_WINDOW.SW_HIDE);
             MyProject.Forms.FrmMain.HometoTrayTimer.Enabled = false;
             HomeToTray.HomeIsMinimized = true;
@@ -84,7 +84,7 @@ namespace OculusTrayTool
             HomeToTray.GetWindowPlacement((IntPtr) HomeToTray.wHandle, ref lpwndpl);
             HomeToTray.ShowWindow((IntPtr) HomeToTray.wHandle, HomeToTray.SHOW_WINDOW.SW_HIDE);
             if (Globals.dbg)
-              Log.WriteToLog("OculusClient process '" + Conversions.ToString(process.Id) + "' minimized to tray");
+              Log.WriteToLog("OculusClient process '" + Convert.ToString(process.Id) + "' minimized to tray");
             HomeToTray.HomeIsMinimized = true;
             break;
           }

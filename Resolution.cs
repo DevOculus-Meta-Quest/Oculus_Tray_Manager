@@ -1,5 +1,5 @@
 
-using Microsoft.VisualBasic.CompilerServices;
+
 using OculusTrayTool.ResChanger;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -37,7 +37,7 @@ namespace OculusTrayTool
       while (Resolution.EnumDisplaySettings((string) null, iModeNum, ref lpDevMode))
       {
         string Left = lpDevMode.dmPelsWidth.ToString().Trim() + " x " + lpDevMode.dmPelsHeight.ToString().Trim();
-        if (Operators.CompareString(Left, Right, false) != 0)
+        if (!String.Equals(Left, Right, StringComparison.OrdinalIgnoreCase))
         {
           if (lpDevMode.dmPelsWidth >= 800U)
             stringList.Add(Left);
@@ -76,8 +76,8 @@ namespace OculusTrayTool
           Log.WriteToLog("Could not change desktop resolution: Restart required");
           return false;
         default:
-          FrmMain.fmain.AddToListboxAndScroll("Could not change desktop resolution: Error code = " + Conversions.ToString(num));
-          Log.WriteToLog("Could not change desktop resolution: Error code = " + Conversions.ToString(num));
+          FrmMain.fmain.AddToListboxAndScroll("Could not change desktop resolution: Error code = " + Convert.ToString(num));
+          Log.WriteToLog("Could not change desktop resolution: Error code = " + Convert.ToString(num));
           return false;
       }
     }

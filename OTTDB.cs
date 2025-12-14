@@ -1,5 +1,5 @@
 
-using OculusTrayTool.My;
+
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -86,9 +86,7 @@ namespace OculusTrayTool
               }
               catch (Exception ex)
               {
-                ProjectData.SetProjectError(ex);
                 Log.WriteToLog("Error creating table 'ignoredApps': " + ex.Message);
-                ProjectData.ClearProjectError();
               }
             }
           }
@@ -108,9 +106,7 @@ namespace OculusTrayTool
               }
               catch (Exception ex)
               {
-                ProjectData.SetProjectError(ex);
                 Log.WriteToLog("Error creating table 'knownApps': " + ex.Message);
-                ProjectData.ClearProjectError();
               }
             }
           }
@@ -130,9 +126,7 @@ namespace OculusTrayTool
               }
               catch (Exception ex)
               {
-                ProjectData.SetProjectError(ex);
                 Log.WriteToLog("Error creating table 'profiles': " + ex.Message);
-                ProjectData.ClearProjectError();
               }
             }
             else
@@ -150,9 +144,7 @@ namespace OculusTrayTool
               }
               catch (Exception ex)
               {
-                ProjectData.SetProjectError(ex);
                 Log.WriteToLog("Error adding missing column 'ASWDelay': " + ex.Message);
-                ProjectData.ClearProjectError();
               }
               try
               {
@@ -167,9 +159,7 @@ namespace OculusTrayTool
               }
               catch (Exception ex)
               {
-                ProjectData.SetProjectError(ex);
                 Log.WriteToLog("Error adding missing column 'CPUDelay': " + ex.Message);
-                ProjectData.ClearProjectError();
               }
               try
               {
@@ -184,9 +174,7 @@ namespace OculusTrayTool
               }
               catch (Exception ex)
               {
-                ProjectData.SetProjectError(ex);
                 Log.WriteToLog("Error adding missing column 'Mirror': " + ex.Message);
-                ProjectData.ClearProjectError();
               }
               try
               {
@@ -201,9 +189,7 @@ namespace OculusTrayTool
               }
               catch (Exception ex)
               {
-                ProjectData.SetProjectError(ex);
                 Log.WriteToLog("Error adding missing column 'GPUScaling': " + ex.Message);
-                ProjectData.ClearProjectError();
               }
               try
               {
@@ -218,9 +204,7 @@ namespace OculusTrayTool
               }
               catch (Exception ex)
               {
-                ProjectData.SetProjectError(ex);
                 Log.WriteToLog("Error adding missing column 'Comment': " + ex.Message);
-                ProjectData.ClearProjectError();
               }
               try
               {
@@ -235,9 +219,7 @@ namespace OculusTrayTool
               }
               catch (Exception ex)
               {
-                ProjectData.SetProjectError(ex);
                 Log.WriteToLog("Error adding missing column 'FOV': " + ex.Message);
-                ProjectData.ClearProjectError();
               }
               try
               {
@@ -252,9 +234,7 @@ namespace OculusTrayTool
               }
               catch (Exception ex)
               {
-                ProjectData.SetProjectError(ex);
                 Log.WriteToLog("Error adding missing column 'ForceMipMap': " + ex.Message);
-                ProjectData.ClearProjectError();
               }
               try
               {
@@ -269,9 +249,7 @@ namespace OculusTrayTool
               }
               catch (Exception ex)
               {
-                ProjectData.SetProjectError(ex);
                 Log.WriteToLog("Error adding missing column 'OffsetMipMap': " + ex.Message);
-                ProjectData.ClearProjectError();
               }
               try
               {
@@ -286,9 +264,7 @@ namespace OculusTrayTool
               }
               catch (Exception ex)
               {
-                ProjectData.SetProjectError(ex);
                 Log.WriteToLog("Error adding missing column 'Enabled': " + ex.Message);
-                ProjectData.ClearProjectError();
               }
             }
           }
@@ -308,9 +284,7 @@ namespace OculusTrayTool
               }
               catch (Exception ex)
               {
-                ProjectData.SetProjectError(ex);
                 Log.WriteToLog("Error creating table 'hiddenApps': " + ex.Message);
-                ProjectData.ClearProjectError();
               }
             }
           }
@@ -330,9 +304,7 @@ namespace OculusTrayTool
               }
               catch (Exception ex)
               {
-                ProjectData.SetProjectError(ex);
                 Log.WriteToLog("Error creating table 'customVoice': " + ex.Message);
-                ProjectData.ClearProjectError();
               }
             }
           }
@@ -352,9 +324,7 @@ namespace OculusTrayTool
               }
               catch (Exception ex)
               {
-                ProjectData.SetProjectError(ex);
                 Log.WriteToLog("Error creating table 'includedApps': " + ex.Message);
-                ProjectData.ClearProjectError();
               }
             }
           }
@@ -374,9 +344,7 @@ namespace OculusTrayTool
               }
               catch (Exception ex)
               {
-                ProjectData.SetProjectError(ex);
                 Log.WriteToLog("Error creating table 'LinkPresets': " + ex.Message);
-                ProjectData.ClearProjectError();
               }
             }
             try
@@ -392,9 +360,7 @@ namespace OculusTrayTool
             }
             catch (Exception ex)
             {
-              ProjectData.SetProjectError(ex);
               Log.WriteToLog("Error adding missing column 'Bitrate': " + ex.Message);
-              ProjectData.ClearProjectError();
             }
             try
             {
@@ -409,9 +375,7 @@ namespace OculusTrayTool
             }
             catch (Exception ex)
             {
-              ProjectData.SetProjectError(ex);
               Log.WriteToLog("Error adding missing column 'Sharpening': " + ex.Message);
-              ProjectData.ClearProjectError();
             }
             try
             {
@@ -426,9 +390,7 @@ namespace OculusTrayTool
             }
             catch (Exception ex)
             {
-              ProjectData.SetProjectError(ex);
               Log.WriteToLog("Error adding missing column 'DBR': " + ex.Message);
-              ProjectData.ClearProjectError();
             }
           }
         }
@@ -436,9 +398,7 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("OpenOttDb " + ex.Message);
-        ProjectData.ClearProjectError();
       }
     }
 
@@ -462,7 +422,7 @@ namespace OculusTrayTool
     public static void GetVoiceProfileNames()
     {
       Log.WriteToLog("Reading voice profiles");
-      MyProject.Forms.FrmMain.voiceProfileNames.Clear();
+      FrmMain.fmain.voiceProfileNames.Clear();
       using (SQLiteDataReader sqLiteDataReader = new SQLiteCommand(OTTDB.ott_cnn)
       {
         CommandText = "select distinct Name from userVoice"
@@ -471,7 +431,7 @@ namespace OculusTrayTool
         if (!sqLiteDataReader.HasRows)
           return;
         while (sqLiteDataReader.Read())
-          MyProject.Forms.FrmMain.voiceProfileNames.Add(Conversions.ToString(sqLiteDataReader[0]));
+          FrmMain.fmain.voiceProfileNames.Add(sqLiteDataReader[0].ToString());
       }
     }
 
@@ -485,7 +445,7 @@ namespace OculusTrayTool
         if (sqLiteDataReader.HasRows)
         {
           while (sqLiteDataReader.Read())
-            voiceProfileCommands.Add(Conversions.ToString(Microsoft.VisualBasic.CompilerServices.Operators.ConcatenateObject(Microsoft.VisualBasic.CompilerServices.Operators.ConcatenateObject(Microsoft.VisualBasic.CompilerServices.Operators.ConcatenateObject(Microsoft.VisualBasic.CompilerServices.Operators.ConcatenateObject(sqLiteDataReader[0], (object) "|"), sqLiteDataReader[1]), (object) "|"), sqLiteDataReader[2])));
+            voiceProfileCommands.Add(sqLiteDataReader[0].ToString() + "|" + sqLiteDataReader[1].ToString() + "|" + sqLiteDataReader[2].ToString());
         }
       }
       return (object) voiceProfileCommands;
@@ -506,23 +466,23 @@ namespace OculusTrayTool
     public static void GetProfiles()
     {
       Log.WriteToLog("Reading profiles");
-      MyProject.Forms.FrmMain.profileList.Clear();
-      MyProject.Forms.FrmMain.profileTimerList.Clear();
-      MyProject.Forms.FrmMain.profileNames.Clear();
-      MyProject.Forms.FrmMain.profileASWList.Clear();
-      MyProject.Forms.FrmMain.profileDisplayNames.Clear();
-      MyProject.Forms.FrmMain.profilePriorityList.Clear();
-      MyProject.Forms.FrmMain.profileAswDelay.Clear();
-      MyProject.Forms.FrmMain.profileCpuDelay.Clear();
-      MyProject.Forms.frmLibrary.ManualStartProfiles.Clear();
-      MyProject.Forms.FrmMain.profilePaths.Clear();
-      MyProject.Forms.FrmMain.profileMirror.Clear();
-      MyProject.Forms.FrmMain.profileAGPS.Clear();
-      MyProject.Forms.FrmMain.profileFOV.Clear();
-      MyProject.Forms.FrmMain.profileForceMipMap.Clear();
-      MyProject.Forms.FrmMain.profileOffsetMipMap.Clear();
-      MyProject.Forms.frmProfiles.ListView1.Items.Clear();
-      MyProject.Forms.frmLibrary.DisplayNameList.Clear();
+      FrmMain.fmain.profileList.Clear();
+      FrmMain.fmain.profileTimerList.Clear();
+      FrmMain.fmain.profileNames.Clear();
+      FrmMain.fmain.profileASWList.Clear();
+      FrmMain.fmain.profileDisplayNames.Clear();
+      FrmMain.fmain.profilePriorityList.Clear();
+      FrmMain.fmain.profileAswDelay.Clear();
+      FrmMain.fmain.profileCpuDelay.Clear();
+      // MyProject.Forms.frmLibrary.ManualStartProfiles.Clear(); // Needs reference to FrmLibrary instance or similar
+      FrmMain.fmain.profilePaths.Clear();
+      FrmMain.fmain.profileMirror.Clear();
+      FrmMain.fmain.profileAGPS.Clear();
+      FrmMain.fmain.profileFOV.Clear();
+      FrmMain.fmain.profileForceMipMap.Clear();
+      FrmMain.fmain.profileOffsetMipMap.Clear();
+      // MyProject.Forms.frmProfiles.ListView1.Items.Clear(); // Needs reference to FrmProfiles instance
+      // MyProject.Forms.frmLibrary.DisplayNameList.Clear();  // Needs reference to FrmLibrary instance
       GetConfig.numprofiles = 0;
       int num = 0;
       OTTDB.numWMI = 0;
@@ -535,87 +495,85 @@ namespace OculusTrayTool
         {
           if (sqLiteDataReader.HasRows)
           {
-            while (sqLiteDataReader.Read())
+              while (sqLiteDataReader.Read())
             {
-              string text1 = Conversions.ToString(sqLiteDataReader[1]);
-              string text2 = Conversions.ToString(sqLiteDataReader[2]);
-              string text3 = Conversions.ToString(sqLiteDataReader[3]);
-              string str1 = Conversions.ToString(sqLiteDataReader[4]);
-              string str2 = Conversions.ToString(sqLiteDataReader[5]);
-              string str3 = Conversions.ToString(sqLiteDataReader[6]);
-              string Left = Conversions.ToString(sqLiteDataReader[7]);
-              string str4 = Conversions.ToString(sqLiteDataReader.FieldCount > 8 ? sqLiteDataReader[8] : (object) "5");
-              string str5 = Conversions.ToString(sqLiteDataReader.FieldCount > 9 ? sqLiteDataReader[9] : (object) "5");
-              string str6 = Conversions.ToString(sqLiteDataReader[10]);
-              string str7 = Conversions.ToString(sqLiteDataReader[11]);
-              string str8 = Conversions.ToString(sqLiteDataReader[12]);
-              string str9 = Conversions.ToString(sqLiteDataReader[13]);
-              string str10 = Conversions.ToString(sqLiteDataReader[14]);
-              string str11 = Conversions.ToString(sqLiteDataReader[15]);
-              string str12 = Conversions.ToString(sqLiteDataReader[16]);
-              if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(str12, "No", false) == 0)
+              string text1 = sqLiteDataReader[1].ToString();
+              string text2 = sqLiteDataReader[2].ToString();
+              string text3 = sqLiteDataReader[3].ToString();
+              string str1 = sqLiteDataReader[4].ToString();
+              string str2 = sqLiteDataReader[5].ToString();
+              string str3 = sqLiteDataReader[6].ToString();
+              string Left = sqLiteDataReader[7].ToString();
+              string str4 = (sqLiteDataReader.FieldCount > 8 ? sqLiteDataReader[8] : (object) "5").ToString();
+              string str5 = (sqLiteDataReader.FieldCount > 9 ? sqLiteDataReader[9] : (object) "5").ToString();
+              string str6 = sqLiteDataReader[10].ToString();
+              string str7 = sqLiteDataReader[11].ToString();
+              string str8 = sqLiteDataReader[12].ToString();
+              string str9 = sqLiteDataReader[13].ToString();
+              string str10 = sqLiteDataReader[14].ToString();
+              string str11 = sqLiteDataReader[15].ToString();
+              string str12 = sqLiteDataReader[16].ToString();
+              if (String.Compare(str12, "No", false) == 0)
                 checked { ++num; }
                 foreach (KeyValuePair<string, string> game in GetGames.GameList)
                 {
-                  if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(game.Value, str3, false) == 0)
+                  if (String.Compare(game.Value, str3, false) == 0)
                   {
                     GetGames.GameList.Remove(game.Key);
                     break;
                   }
                 }
-              MyProject.Forms.frmLibrary.DisplayNameList.Add(text1.ToLower());
+              // MyProject.Forms.frmLibrary.DisplayNameList.Add(text1.ToLower());
               ListViewItem listViewItem1 = new ListViewItem();
-              ListViewItem listViewItem2 = MyProject.Forms.frmProfiles.ListView1.Items.Add(text1);
-              listViewItem2.Tag = (object) (text1 + "," + text2 + "," + text3 + "," + Left + "," + str1 + "," + str3 + "," + str4 + "," + str5 + "," + str6 + "," + str7 + "," + str8 + "," + str9 + "," + str10 + "," + str11 + "," + str12);
-              listViewItem2.SubItems.Add(text2);
-              listViewItem2.SubItems.Add(text3);
-              listViewItem2.SubItems.Add(str1);
-              listViewItem2.SubItems.Add(str12);
+              // ListViewItem listViewItem2 = MyProject.Forms.frmProfiles.ListView1.Items.Add(text1);
+              // listViewItem2.Tag = (object) (text1 + "," + text2 + "," + text3 + "," + Left + "," + str1 + "," + str3 + "," + str4 + "," + str5 + "," + str6 + "," + str7 + "," + str8 + "," + str9 + "," + str10 + "," + str11 + "," + str12);
+              // listViewItem2.SubItems.Add(text2);
+              // listViewItem2.SubItems.Add(text3);
+              // listViewItem2.SubItems.Add(str1);
+              // listViewItem2.SubItems.Add(str12);
               if (Globals.dbg)
                 Log.WriteToLog(text1 + "," + text3 + "," + text2 + "," + str1 + "," + str2 + "," + str3 + "," + Left);
               checked { ++GetConfig.numprofiles; }
-              if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(str12, "Yes", false) == 0)
+              if (String.Compare(str12, "Yes", false) == 0)
               {
-                MyProject.Forms.FrmMain.profileDisplayNames.Add(str3, text1);
-                if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(Left, "WMI", false) == 0)
+                FrmMain.fmain.profileDisplayNames.Add(str3, text1);
+                if (String.Compare(Left, "WMI", false) == 0)
                 {
-                  MyProject.Forms.FrmMain.profileList.Add(str3.ToLower(), text2);
+                  FrmMain.fmain.profileList.Add(str3.ToLower(), text2);
                   checked { ++OTTDB.numWMI; }
                 }
-                if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(Left, "Timer", false) == 0)
+                if (String.Compare(Left, "Timer", false) == 0)
                 {
-                  MyProject.Forms.FrmMain.profileTimerList.Add(str3, text2);
+                  FrmMain.fmain.profileTimerList.Add(str3, text2);
                   checked { ++OTTDB.numTimer; }
                 }
-                MyProject.Forms.frmLibrary.ManualStartProfiles.Add(str3.ToLower(), text2);
-                MyProject.Forms.FrmMain.profileASWList.Add(str3.ToLower(), text3);
-                if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(str1, "Default", false) != 0)
+                // MyProject.Forms.frmLibrary.ManualStartProfiles.Add(str3.ToLower(), text2);
+                FrmMain.fmain.profileASWList.Add(str3.ToLower(), text3);
+                if (String.Compare(str1, "Default", false) != 0)
                 {
-                  MyProject.Forms.FrmMain.profilePriorityList.Add(str3.ToLower(), str1);
-                  MyProject.Forms.FrmMain.profileCpuDelay.Add(str3.ToLower(), str5);
+                  FrmMain.fmain.profilePriorityList.Add(str3.ToLower(), str1);
+                  FrmMain.fmain.profileCpuDelay.Add(str3.ToLower(), str5);
                 }
-                MyProject.Forms.FrmMain.profileNames.Add(str3);
-                MyProject.Forms.FrmMain.profileAswDelay.Add(str3.ToLower(), str4);
-                MyProject.Forms.FrmMain.profilePaths.Add(str3, str2);
-                MyProject.Forms.FrmMain.profileMirror.Add(str3.ToLower(), str6);
-                MyProject.Forms.FrmMain.profileAGPS.Add(str3.ToLower(), str7);
-                MyProject.Forms.FrmMain.profileFOV.Add(str3.ToLower(), str9);
-                MyProject.Forms.FrmMain.profileOffsetMipMap.Add(str3.ToLower(), str11);
-                MyProject.Forms.FrmMain.profileForceMipMap.Add(str3.ToLower(), str10);
+                FrmMain.fmain.profileNames.Add(str3);
+                FrmMain.fmain.profileAswDelay.Add(str3.ToLower(), str4);
+                FrmMain.fmain.profilePaths.Add(str3, str2);
+                FrmMain.fmain.profileMirror.Add(str3.ToLower(), str6);
+                FrmMain.fmain.profileAGPS.Add(str3.ToLower(), str7);
+                FrmMain.fmain.profileFOV.Add(str3.ToLower(), str9);
+                FrmMain.fmain.profileOffsetMipMap.Add(str3.ToLower(), str11);
+                FrmMain.fmain.profileForceMipMap.Add(str3.ToLower(), str10);
               }
             }
           }
         }
-        Log.WriteToLog(Conversions.ToString(GetConfig.numprofiles) + " profiles found");
-        Log.WriteToLog(Conversions.ToString(num) + " profiles are disabled");
-        Log.WriteToLog("  " + Conversions.ToString(OTTDB.numWMI) + " monitored using WMI");
-        Log.WriteToLog("  " + Conversions.ToString(OTTDB.numTimer) + " monitored using Timer");
+        Log.WriteToLog(GetConfig.numprofiles.ToString() + " profiles found");
+        Log.WriteToLog(num.ToString() + " profiles are disabled");
+        Log.WriteToLog("  " + OTTDB.numWMI.ToString() + " monitored using WMI");
+        Log.WriteToLog("  " + OTTDB.numTimer.ToString() + " monitored using Timer");
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("GetProfiles(): " + ex.Message);
-        ProjectData.ClearProjectError();
       }
     }
 
@@ -663,9 +621,7 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("AddProfile: " + ex.Message);
-        ProjectData.ClearProjectError();
       }
     }
 
@@ -674,13 +630,13 @@ namespace OculusTrayTool
       try
       {
         SQLiteCommand sqLiteCommand = new SQLiteCommand(OTTDB.ott_cnn);
-        if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(asw, (string) null, false) != 0)
+        if (asw != null)
         {
           sqLiteCommand.CommandText = "UPDATE profiles SET ASW=" + asw + " WHERE Path = \"" + path + "\"";
           sqLiteCommand.ExecuteNonQuery();
           Log.WriteToLog("Updated '" + name + "'. New ASW setting is '" + asw + "'");
         }
-        if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(ppdp, (string) null, false) == 0)
+        if (ppdp == null)
           return;
         sqLiteCommand.CommandText = "UPDATE profiles SET PPDP=" + ppdp + " WHERE Path = \"" + path + "\"";
         sqLiteCommand.ExecuteNonQuery();
@@ -688,9 +644,7 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("UpdateProfile: " + ex.Message);
-        ProjectData.ClearProjectError();
       }
     }
 
@@ -707,9 +661,7 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("RemoveProfile: " + ex.Message);
-        ProjectData.ClearProjectError();
       }
     }
 
@@ -723,14 +675,12 @@ namespace OculusTrayTool
         }.ExecuteNonQuery();
         Log.WriteToLog("All Profiles have been removed");
         FrmMain.fmain.AddToListboxAndScroll("All Profiles have been removed");
-        MyProject.Forms.frmProfiles.ListView1.Items.Clear();
+        // MyProject.Forms.frmProfiles.ListView1.Items.Clear(); // Needs ref
         OTTDB.GetProfiles();
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("RemoveAllProfiles: " + ex.Message);
-        ProjectData.ClearProjectError();
       }
     }
 
@@ -746,9 +696,7 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("HideApp: " + ex.Message);
-        ProjectData.ClearProjectError();
       }
     }
 
@@ -764,18 +712,18 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("UnHideApp: " + ex.Message);
-        ProjectData.ClearProjectError();
       }
     }
 
     public static bool CheckHiddenApp(string launchfile, string displayname, string location)
     {
-      return Microsoft.VisualBasic.CompilerServices.Operators.ConditionalCompareObjectNotEqual(new SQLiteCommand(OTTDB.ott_cnn)
+      object result = new SQLiteCommand(OTTDB.ott_cnn)
       {
         CommandText = ("select * from hiddenApps where DisplayName = \"" + displayname + "\" AND Location = \"" + location + "\" AND LaunchFile = \"" + launchfile + "\"")
-      }.ExecuteScalar(), (object) 0, false);
+      }.ExecuteScalar();
+      
+      return (result != null && (result is int && (int)result != 0));
     }
 
     public static object GetHiddenApps()
@@ -788,7 +736,7 @@ namespace OculusTrayTool
         if (sqLiteDataReader.HasRows)
         {
           while (sqLiteDataReader.Read())
-            hiddenApps.Add(Conversions.ToString(sqLiteDataReader[0]));
+            hiddenApps.Add(sqLiteDataReader[0].ToString());
         }
       }
       return (object) hiddenApps;
@@ -805,9 +753,9 @@ namespace OculusTrayTool
         {
           while (sqLiteDataReader.Read())
           {
-            ignoredApps.Add(Conversions.ToString(sqLiteDataReader[0]));
-            if (!File.Exists(Conversions.ToString(sqLiteDataReader[0])))
-              OTTDB.RemoveIgnoredApp(Conversions.ToString(sqLiteDataReader[0]));
+            ignoredApps.Add(Convert.ToString(sqLiteDataReader[0]));
+            if (!File.Exists(Convert.ToString(sqLiteDataReader[0])))
+              OTTDB.RemoveIgnoredApp(Convert.ToString(sqLiteDataReader[0]));
           }
         }
       }
@@ -825,9 +773,9 @@ namespace OculusTrayTool
         {
           while (sqLiteDataReader.Read())
           {
-            includedApps.Add(Conversions.ToString(sqLiteDataReader[0]));
-            if (!File.Exists(Conversions.ToString(sqLiteDataReader[0])))
-              OTTDB.RemoveIncludedApp(Conversions.ToString(sqLiteDataReader[0]));
+            includedApps.Add(Convert.ToString(sqLiteDataReader[0]));
+            if (!File.Exists(Convert.ToString(sqLiteDataReader[0])))
+              OTTDB.RemoveIncludedApp(Convert.ToString(sqLiteDataReader[0]));
           }
         }
       }
@@ -860,7 +808,7 @@ namespace OculusTrayTool
         if (sqLiteDataReader.HasRows)
         {
           while (sqLiteDataReader.Read())
-            stringList.Add(Conversions.ToString(sqLiteDataReader[0]));
+            stringList.Add(Convert.ToString(sqLiteDataReader[0]));
         }
       }
       return (object) stringList;
@@ -877,7 +825,7 @@ namespace OculusTrayTool
         if (sqLiteDataReader.HasRows)
         {
           while (sqLiteDataReader.Read())
-            str = Conversions.ToString(Microsoft.VisualBasic.CompilerServices.Operators.ConcatenateObject(Microsoft.VisualBasic.CompilerServices.Operators.ConcatenateObject(Microsoft.VisualBasic.CompilerServices.Operators.ConcatenateObject(Microsoft.VisualBasic.CompilerServices.Operators.ConcatenateObject(Microsoft.VisualBasic.CompilerServices.Operators.ConcatenateObject(Microsoft.VisualBasic.CompilerServices.Operators.ConcatenateObject(sqLiteDataReader[0], (object) ","), sqLiteDataReader[1]), (object) ","), sqLiteDataReader[2]), (object) ","), sqLiteDataReader[3]));
+            str = string.Format("{0},{1},{2},{3}", sqLiteDataReader[0], sqLiteDataReader[1], sqLiteDataReader[2], sqLiteDataReader[3]);
         }
       }
       return (object) str;
@@ -899,9 +847,7 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("AddKnownApp: " + ex.Message);
-        ProjectData.ClearProjectError();
       }
     }
 
@@ -916,9 +862,7 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("AddIgnoreApp: " + ex.Message);
-        ProjectData.ClearProjectError();
       }
     }
 
@@ -933,9 +877,7 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("AddIncludedApp: " + ex.Message);
-        ProjectData.ClearProjectError();
       }
     }
 
@@ -953,7 +895,7 @@ namespace OculusTrayTool
           {
             if (sqLiteDataReader.Read())
             {
-              displayName = Conversions.ToString(sqLiteDataReader[0]);
+              displayName = Convert.ToString(sqLiteDataReader[0]);
               goto label_10;
             }
           }
@@ -961,9 +903,7 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("UpdateProfile: " + ex.Message);
-        ProjectData.ClearProjectError();
       }
 label_10:
       return displayName;
@@ -986,9 +926,7 @@ label_10:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("AddLinkPreset: " + ex.Message);
-        ProjectData.ClearProjectError();
       }
     }
 
@@ -1006,7 +944,7 @@ label_10:
           {
             if (sqLiteDataReader.Read())
             {
-              presetValueByName = Conversions.ToString(sqLiteDataReader[0]);
+              presetValueByName = Convert.ToString(sqLiteDataReader[0]);
               goto label_10;
             }
           }
@@ -1014,9 +952,7 @@ label_10:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("GetLinkPresetValueByName: " + ex.Message);
-        ProjectData.ClearProjectError();
       }
 label_10:
       return presetValueByName;
@@ -1041,7 +977,7 @@ label_10:
           {
             if (sqLiteDataReader.Read())
             {
-              presetValueByValues = Conversions.ToString(sqLiteDataReader[0]);
+              presetValueByValues = Convert.ToString(sqLiteDataReader[0]);
               goto label_10;
             }
           }
@@ -1049,9 +985,7 @@ label_10:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("GetLinkPresetValueByValues: " + ex.Message);
-        ProjectData.ClearProjectError();
       }
 label_10:
       return presetValueByValues;
@@ -1070,9 +1004,7 @@ label_10:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("RemoveLinkPresetValueByName: " + ex.Message);
-        ProjectData.ClearProjectError();
       }
       return null;
     }
@@ -1091,8 +1023,8 @@ label_10:
           {
             while (sqLiteDataReader.Read())
             {
-              FrmMain.fmain.ComboBox4.Items.Add(RuntimeHelpers.GetObjectValue(sqLiteDataReader[0]));
-              stringList.Add(Conversions.ToString(sqLiteDataReader[0]));
+              FrmMain.fmain.ComboBox4.Items.Add(sqLiteDataReader[0]);
+              stringList.Add(Convert.ToString(sqLiteDataReader[0]));
             }
           }
         }
@@ -1119,9 +1051,7 @@ label_10:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("GetLinkPresetCurve: " + ex.Message);
-        ProjectData.ClearProjectError();
       }
       return stringList;
     }
@@ -1151,9 +1081,9 @@ label_10:
             {
               while (sqLiteDataReader.Read())
               {
-                integer1 = Conversions.ToInteger(sqLiteDataReader[0]);
-                string str1 = Conversions.ToString(sqLiteDataReader[1]);
-                string str2 = Conversions.ToString(sqLiteDataReader[2]);
+                integer1 = Convert.ToInt32(sqLiteDataReader[0]);
+                string str1 = Convert.ToString(sqLiteDataReader[1]);
+                string str2 = Convert.ToString(sqLiteDataReader[2]);
                 if (str2.Contains("\\\\") | str2.Contains("/"))
                 {
                   string path = str2.Replace("\\\\", "\\").Replace("/", "\\");
@@ -1173,10 +1103,8 @@ label_10:
         }
         catch (Exception ex)
         {
-          ProjectData.SetProjectError(ex);
           if (Globals.dbg)
             Log.WriteToLog("Table 'knownApps' does not exist yet, ignoring");
-          ProjectData.ClearProjectError();
         }
         try
         {
@@ -1187,9 +1115,9 @@ label_10:
             {
               while (sqLiteDataReader.Read())
               {
-                integer1 = Conversions.ToInteger(sqLiteDataReader[0]);
-                string str = Conversions.ToString(sqLiteDataReader[1]);
-                string path1 = Conversions.ToString(sqLiteDataReader[2]);
+                integer1 = Convert.ToInt32(sqLiteDataReader[0]);
+                string str = Convert.ToString(sqLiteDataReader[1]);
+                string path1 = Convert.ToString(sqLiteDataReader[2]);
                 if (path1.Contains("\\\\") | path1.Contains("/"))
                 {
                   string path2 = path1.Replace("\\\\", "\\").Replace("/", "\\");
@@ -1221,10 +1149,8 @@ label_10:
         }
         catch (Exception ex)
         {
-          ProjectData.SetProjectError(ex);
           if (Globals.dbg)
             Log.WriteToLog("Table 'profiles' does not exist!");
-          ProjectData.ClearProjectError();
         }
         try
         {
@@ -1235,15 +1161,15 @@ label_10:
             {
               while (sqLiteDataReader.Read())
               {
-                int integer2 = Conversions.ToInteger(sqLiteDataReader[0]);
-                string Left = Conversions.ToString(sqLiteDataReader[1]);
-                string str = Conversions.ToString(sqLiteDataReader[2]);
-                if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(Left, "0", false) != 0 & Microsoft.VisualBasic.CompilerServices.Operators.CompareString(Left, "1", false) != 0 & Microsoft.VisualBasic.CompilerServices.Operators.CompareString(Left, "2", false) != 0)
+                int integer2 = Convert.ToInt32(sqLiteDataReader[0]);
+                string Left = Convert.ToString(sqLiteDataReader[1]);
+                string str = Convert.ToString(sqLiteDataReader[2]);
+                if (string.Compare(Left, "0", StringComparison.Ordinal) != 0 & string.Compare(Left, "1", StringComparison.Ordinal) != 0 & string.Compare(Left, "2", StringComparison.Ordinal) != 0)
                 {
                   Log.WriteToLog(str + " has incorrect value for 'Mirror' in profiles, correcting it");
                   MyProject.Forms.FrmMain.AddToListboxAndScroll(str + " has incorrect value for 'Mirror' in profiles, correcting it");
                   SQLiteCommand sqLiteCommand4 = new SQLiteCommand(OTTDB.ott_cnn);
-                  sqLiteCommand4.CommandText = "UPDATE profiles SET Mirror = '0' WHERE ID = '" + Conversions.ToString(integer2) + "'";
+                  sqLiteCommand4.CommandText = "UPDATE profiles SET Mirror = '0' WHERE ID = '" + Convert.ToString(integer2) + "'";
                   sqLiteCommand4.ExecuteNonQuery();
                   sqLiteCommand4.Dispose();
                   checked { ++num1; }
@@ -1254,15 +1180,13 @@ label_10:
         }
         catch (Exception ex)
         {
-          ProjectData.SetProjectError(ex);
           if (Globals.dbg)
             Log.WriteToLog("Table 'profiles' does not exist!");
-          ProjectData.ClearProjectError();
         }
         if (num1 > 0)
         {
-          Log.WriteToLog("Fixed " + Conversions.ToString(num1) + " problems");
-          FrmMain.fmain.AddToListboxAndScroll("Fixed " + Conversions.ToString(num1) + " problems");
+          Log.WriteToLog("Fixed " + Convert.ToString(num1) + " problems");
+          FrmMain.fmain.AddToListboxAndScroll("Fixed " + Convert.ToString(num1) + " problems");
         }
         if (num1 == 0 & num2 == 0)
         {
@@ -1275,13 +1199,11 @@ label_10:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Exception exception = ex;
         OTTDB.ott_cnn.Close();
         My.MySettings.Default.DBCheck = false;
         My.MySettings.Default.Save();
         Log.WriteToLog("CheckDB: " + exception.Message);
-        ProjectData.ClearProjectError();
       }
     }
 

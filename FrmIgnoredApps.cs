@@ -1,5 +1,5 @@
 
-using Microsoft.VisualBasic.CompilerServices;
+
 using Newtonsoft.Json.Linq;
 using OculusTrayTool.My;
 using System;
@@ -16,7 +16,7 @@ using System.Windows.Forms;
 #nullable disable
 namespace OculusTrayTool
 {
-  [DesignerGenerated]
+
   public partial class FrmIgnoredApps : Form
   {
     
@@ -49,8 +49,8 @@ namespace OculusTrayTool
     {
         foreach (ListViewItem checkedItem in this.ListView1.CheckedItems)
         {
-          OTTDB.RemoveIgnoredApp(Conversions.ToString(checkedItem.Tag));
-          OTTDB.AddIncludedApp(Conversions.ToString(checkedItem.Tag));
+          OTTDB.RemoveIgnoredApp(Convert.ToString(checkedItem.Tag));
+          OTTDB.AddIncludedApp(Convert.ToString(checkedItem.Tag));
           Log.WriteToLog("'" + checkedItem.Text + "' is not being ignored anymore");
           MyProject.Forms.FrmMain.AddToListboxAndScroll("'" + checkedItem.Text + "' is not being ignored anymore");
         }
@@ -91,18 +91,18 @@ namespace OculusTrayTool
               {
                 jproperty.CreateReader();
                 string name = jproperty.Name;
-                if (Operators.CompareString(name, "displayName", false) != 0)
+                if (!String.Equals(name, "displayName", StringComparison.OrdinalIgnoreCase))
                 {
-                  if (Operators.CompareString(name, "launchFile", false) != 0)
+                  if (!String.Equals(name, "launchFile", StringComparison.OrdinalIgnoreCase))
                   {
-                    if (Operators.CompareString(name, "launchParameters", false) == 0)
+                    if (String.Equals(name, "launchParameters", StringComparison.OrdinalIgnoreCase))
                       str2 = jproperty.Value.ToString();
                   }
                   else
                   {
                     string fileName = Path.GetFileName(jproperty.Value.ToString().Replace("\\\\", "\\").Replace("/", "\\"));
                     str1 = jproperty.Value.ToString().Replace("\\\\", "\\").Replace("/", "\\");
-                    if (text.ToLower().EndsWith(".exe") | Operators.CompareString(text.ToLower(), "unknown app", false) == 0)
+                    if (text.ToLower().EndsWith(".exe") | String.Equals(text, "unknown app", StringComparison.OrdinalIgnoreCase))
                       text = Path.GetFileNameWithoutExtension(fileName);
                   }
                 }

@@ -1,5 +1,5 @@
 
-using Microsoft.VisualBasic.CompilerServices;
+
 using System;
 using System.IO;
 using System.Runtime.CompilerServices;
@@ -9,17 +9,16 @@ using System.Windows.Forms;
 #nullable disable
 namespace OculusTrayTool
 {
-  [StandardModule]
-  internal sealed class Log
+  internal static class Log
   {
-    private static object lockObject = RuntimeHelpers.GetObjectValue(new object());
+    private static object lockObject = new object();
 
     public static void WriteToLog(string s)
     {
       try
       {
         object lockObject = Log.lockObject;
-        ObjectFlowControl.CheckForSyncLockOnValueType(lockObject);
+        object lockObject = Log.lockObject;
         bool lockTaken = false;
         try
         {
@@ -44,8 +43,9 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
-        ProjectData.ClearProjectError();
+      catch (Exception ex)
+      {
+      }
       }
     }
 
@@ -54,7 +54,6 @@ namespace OculusTrayTool
       try
       {
         object lockObject = Log.lockObject;
-        ObjectFlowControl.CheckForSyncLockOnValueType(lockObject);
         bool lockTaken = false;
         try
         {
@@ -70,8 +69,9 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
-        ProjectData.ClearProjectError();
+      catch (Exception ex)
+      {
+      }
       }
     }
 
@@ -80,7 +80,7 @@ namespace OculusTrayTool
       try
       {
         object lockObject = Log.lockObject;
-        ObjectFlowControl.CheckForSyncLockOnValueType(lockObject);
+        object lockObject = Log.lockObject;
         bool lockTaken = false;
         try
         {
@@ -99,8 +99,9 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
-        ProjectData.ClearProjectError();
+      catch (Exception ex)
+      {
+      }
       }
     }
 
@@ -109,7 +110,7 @@ namespace OculusTrayTool
       try
       {
         object lockObject = Log.lockObject;
-        ObjectFlowControl.CheckForSyncLockOnValueType(lockObject);
+        object lockObject = Log.lockObject;
         bool lockTaken = false;
         try
         {
@@ -128,8 +129,9 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
-        ProjectData.ClearProjectError();
+      catch (Exception ex)
+      {
+      }
       }
     }
   }

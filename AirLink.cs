@@ -2,7 +2,7 @@
     using System;
     using System.Diagnostics;
     using System.IO;
-    using Microsoft.VisualBasic.CompilerServices; // Needed for ProjectData
+
 
 #nullable disable
     namespace OculusTrayTool
@@ -21,7 +21,7 @@
                 string arguments = "/C npm install -g --engine-strict asar";
                 string cmd3 = "kill -ErrorAction SilentlyContinue -name OculusClient";
                 
-                if (!Conversions.ToString(Packages.CheckCode("(New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/pd29/oculus-airlink-enabler/main/airlink.js')")).Contains("setTimeout(function enable() {"))
+                if (!Convert.ToString(Packages.CheckCode("(New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/pd29/oculus-airlink-enabler/main/airlink.js')")).Contains("setTimeout(function enable() {"))
                 {
                     Log.WriteToLinkLog("Could not download code, aborting");
                     FrmMain.fmain.AddToListboxAndScroll("Could not download code, aborting");
@@ -31,12 +31,12 @@
                     string cmd4 = "Add-Content \"" + MyProject.Forms.FrmMain.OculusPath + "Support\\oculus-client\\resources\\app\\output\\main.js\" (New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/pd29/oculus-airlink-enabler/main/airlink.js')";
                     MyProject.Forms.FrmMain.AddToListboxAndScroll("Checking for chocolatey");
                     Log.WriteToLinkLog("Checking for chocolatey");
-                    if (Operators.ConditionalCompareObjectEqual(Packages.CheckPackage(AirLink.choco_check, ""), (object)0, false))
+                    if (Equals(Packages.CheckPackage(AirLink.choco_check, ""), 0))
                     {
                         MyProject.Forms.FrmMain.AddToListboxAndScroll("Installing chocolatey..");
                         Log.WriteToLinkLog("chocolatey not installed, installing");
                         AirLink.RunPSCommand(cmd1);
-                        if (Operators.ConditionalCompareObjectNotEqual(Packages.CheckPackage(AirLink.choco_check, "chocolatey"), (object)0, false))
+                        if (!Equals(Packages.CheckPackage(AirLink.choco_check, "chocolatey"), 0))
                         {
                             MyProject.Forms.FrmMain.AddToListboxAndScroll("chocolatey installed");
                         }
@@ -46,18 +46,18 @@
                             Log.WriteToLinkLog("chocolatey installation failed");
                         }
                     }
-                    else if (Operators.ConditionalCompareObjectNotEqual(Packages.CheckPackage(AirLink.choco_check, "chocolatey"), (object)0, false))
+                    else if (!Equals(Packages.CheckPackage(AirLink.choco_check, "chocolatey"), 0))
                         MyProject.Forms.FrmMain.AddToListboxAndScroll("chocolatey already installed");
-                    if (Operators.ConditionalCompareObjectNotEqual(Packages.CheckPackage(AirLink.choco_check, ""), (object)0, false))
+                    if (!Equals(Packages.CheckPackage(AirLink.choco_check, ""), 0))
                     {
                         MyProject.Forms.FrmMain.AddToListboxAndScroll("Checking for nodejs");
                         Log.WriteToLinkLog("Checking For nodejs");
-                        if (Operators.ConditionalCompareObjectEqual(Packages.CheckPackage(AirLink.node_check, ""), (object)0, false))
+                        if (Equals(Packages.CheckPackage(AirLink.node_check, ""), 0))
                         {
                             MyProject.Forms.FrmMain.AddToListboxAndScroll("Installing nodejs..");
                             Log.WriteToLinkLog("nodejs Not installed, installing");
                             AirLink.RunPSCommand(cmd2);
-                            if (Operators.ConditionalCompareObjectNotEqual(Packages.CheckPackage(AirLink.node_check, "nodejs"), (object)0, false))
+                            if (!Equals(Packages.CheckPackage(AirLink.node_check, "nodejs"), 0))
                             {
                                 MyProject.Forms.FrmMain.AddToListboxAndScroll("nodejs installed");
                             }
@@ -67,19 +67,19 @@
                                 Log.WriteToLinkLog("nodejs installation failed");
                             }
                         }
-                        else if (Operators.ConditionalCompareObjectNotEqual(Packages.CheckPackage(AirLink.node_check, "nodejs"), (object)0, false))
+                        else if (!Equals(Packages.CheckPackage(AirLink.node_check, "nodejs"), 0))
                             MyProject.Forms.FrmMain.AddToListboxAndScroll("nodejs already installed");
                     }
-                    if (Operators.ConditionalCompareObjectNotEqual(Packages.CheckPackage(AirLink.node_check, ""), (object)0, false))
+                    if (!Equals(Packages.CheckPackage(AirLink.node_check, ""), 0))
                     {
                         MyProject.Forms.FrmMain.AddToListboxAndScroll("Checking for asar");
                         Log.WriteToLinkLog("Checking for asar");
-                        if (Operators.ConditionalCompareObjectEqual(Packages.CheckPackage(AirLink.asar_check, ""), (object)0, false))
+                        if (Equals(Packages.CheckPackage(AirLink.asar_check, ""), 0))
                         {
                             MyProject.Forms.FrmMain.AddToListboxAndScroll("Installing asar..");
                             Log.WriteToLinkLog("asar Not installed, installing");
                             AirLink.RunCMDCommand(arguments);
-                            if (Operators.ConditionalCompareObjectNotEqual(Packages.CheckPackage(AirLink.asar_check, "asar"), (object)0, false))
+                            if (!Equals(Packages.CheckPackage(AirLink.asar_check, "asar"), 0))
                             {
                                 MyProject.Forms.FrmMain.AddToListboxAndScroll("asar installed");
                             }
@@ -89,10 +89,10 @@
                                 Log.WriteToLinkLog("asar installation failed");
                             }
                         }
-                        else if (Operators.ConditionalCompareObjectNotEqual(Packages.CheckPackage(AirLink.asar_check, "asar"), (object)0, false))
+                        else if (!Equals(Packages.CheckPackage(AirLink.asar_check, "asar"), 0))
                             MyProject.Forms.FrmMain.AddToListboxAndScroll("asar already installed");
                     }
-                    if (Operators.ConditionalCompareObjectNotEqual(Packages.CheckPackage(AirLink.asar_check, ""), (object)0, false))
+                    if (!Equals(Packages.CheckPackage(AirLink.asar_check, ""), 0))
                     {
                         MyProject.Forms.FrmMain.AddToListboxAndScroll("Killing OculusClient if it's running");
                         Log.WriteToLinkLog("Killing OculusClient if it's running");
@@ -164,11 +164,9 @@
                 }
                 catch (Exception ex)
                 {
-                    ProjectData.SetProjectError(ex);
                     Exception exception = ex;
                     FrmMain.fmain.AddToListboxAndScroll(exception.Message);
                     Log.WriteToLinkLog($"RunPSCommand: {cmd}: {exception.Message}: {exception.StackTrace}");
-                    ProjectData.ClearProjectError();
                 }
                 return num;
             }
@@ -191,16 +189,14 @@
                     process.Start();
                     process.WaitForExit();
                     string end = process.StandardError.ReadToEnd();
-                    if (Operators.CompareString(end, "", false) == 0)
+      if (string.Equals(end, "", StringComparison.OrdinalIgnoreCase))
                         return;
                     MyProject.Forms.FrmMain.AddToListboxAndScroll(end);
                 }
                 catch (Exception ex)
                 {
-                    ProjectData.SetProjectError(ex);
                     Exception exception = ex;
                     Log.WriteToLinkLog("RunCMDCommand: " + arguments + " " + exception.Message + ": " + exception.StackTrace);
-                    ProjectData.ClearProjectError();
                 }
             }
         }

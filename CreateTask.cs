@@ -1,5 +1,5 @@
 
-using Microsoft.VisualBasic.CompilerServices;
+
 using Microsoft.Win32.TaskScheduler;
 using OculusTrayTool.My;
 using System;
@@ -9,7 +9,7 @@ using System.Windows.Forms;
 #nullable disable
 namespace OculusTrayTool
 {
-  [StandardModule]
+
   internal sealed class CreateTask
   {
     public static void CreateScheduledTask(bool everyone)
@@ -45,14 +45,12 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Exception e = ex;
-        MyProject.Forms.FrmMain.CheckStartWindows.Checked = false;
+        FrmMain.fmain.CheckStartWindows.Checked = false;
         FrmMain.fmain.AddToListboxAndScroll("* Start with Windows: " + e.Message);
-        MyProject.Forms.FrmMain.hasWarning = true;
+        FrmMain.fmain.hasWarning = true;
         StackTrace stackTrace = new StackTrace(e, true);
         Log.WriteToLog(e.ToString() + stackTrace.ToString());
-        ProjectData.ClearProjectError();
       }
     }
 
@@ -64,9 +62,9 @@ namespace OculusTrayTool
       {
         using (TaskService taskService = new TaskService())
         {
-          if (taskService.GetTask(Conversions.ToString(taskName)) == null)
+          if (taskService.GetTask(Convert.ToString(taskName)) == null)
             return;
-          taskService.RootFolder.DeleteTask(Conversions.ToString(taskName));
+          taskService.RootFolder.DeleteTask(Convert.ToString(taskName));
         }
         Log.WriteToLog("Deleted scheduled task");
         if (Globals.dbg)
@@ -74,13 +72,11 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Exception e = ex;
         FrmMain.fmain.AddToListboxAndScroll("* Start with Windows: " + e.Message);
-        MyProject.Forms.FrmMain.hasWarning = true;
+        FrmMain.fmain.hasWarning = true;
         StackTrace stackTrace = new StackTrace(e, true);
         Log.WriteToLog(e.ToString() + stackTrace.ToString());
-        ProjectData.ClearProjectError();
       }
     }
 
@@ -92,17 +88,15 @@ namespace OculusTrayTool
       try
       {
         using (TaskService taskService = new TaskService())
-          task = taskService.GetTask(Conversions.ToString(taskName)) != null;
+          task = taskService.GetTask(Convert.ToString(taskName)) != null;
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Exception e = ex;
         FrmMain.fmain.AddToListboxAndScroll("* Start with Windows: " + e.Message);
-        MyProject.Forms.FrmMain.hasWarning = true;
+        FrmMain.fmain.hasWarning = true;
         StackTrace stackTrace = new StackTrace(e, true);
         Log.WriteToLog(e.ToString() + stackTrace.ToString());
-        ProjectData.ClearProjectError();
       }
       return task;
     }

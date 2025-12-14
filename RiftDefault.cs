@@ -1,6 +1,6 @@
 
 using CoreAudio;
-using Microsoft.VisualBasic.CompilerServices;
+
 using OculusTrayTool.My;
 using OculusTrayTool.PolicyClient;
 using System;
@@ -8,7 +8,7 @@ using System;
 #nullable disable
 namespace OculusTrayTool
 {
-  [StandardModule]
+
   internal sealed class RiftDefault
   {
     public static void SetRiftDefaultAudioDevice()
@@ -22,9 +22,9 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
+        // ProjectData.SetProjectError(ex);
         Log.WriteToLog("SetRiftDefaultAudioDevice: " + ex.Message);
-        ProjectData.ClearProjectError();
+        // ProjectData.ClearProjectError();
       }
     }
 
@@ -39,9 +39,9 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
+        // ProjectData.SetProjectError(ex);
         Log.WriteToLog("SetRiftDefaultMicDevice: " + ex.Message);
-        ProjectData.ClearProjectError();
+        // ProjectData.ClearProjectError();
       }
     }
   }

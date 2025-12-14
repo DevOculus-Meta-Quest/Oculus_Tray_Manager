@@ -1,6 +1,4 @@
-using Microsoft.VisualBasic;
-using Microsoft.VisualBasic.ApplicationServices;
-using Microsoft.VisualBasic.CompilerServices;
+
 using System;
 using System.CodeDom.Compiler;
 using System.ComponentModel;
@@ -10,23 +8,14 @@ using System.Windows.Forms;
 
 namespace OculusTrayTool.My
 {
-  [StandardModule]
-  [HideModuleName]
-  [GeneratedCode("MyTemplate", "11.0.0.0")]
+
   internal sealed class MyProject
   {
-    private static readonly ThreadSafeObjectProvider<MyComputer> m_ComputerObjectProvider = new ThreadSafeObjectProvider<MyComputer>();
+
     private static readonly ThreadSafeObjectProvider<MyForms> m_MyFormsObjectProvider = new ThreadSafeObjectProvider<MyForms>();
 
 
-    internal static MyComputer Computer
-    {
-      [DebuggerHidden]
-      get
-      {
-        return MyProject.m_ComputerObjectProvider.GetInstance();
-      }
-    }
+
 
     internal static MyForms Forms
     {

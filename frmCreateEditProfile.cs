@@ -1,5 +1,5 @@
 
-using Microsoft.VisualBasic.CompilerServices;
+
 using OculusTrayTool.My;
 using System;
 using System.ComponentModel;
@@ -12,7 +12,7 @@ using System.Windows.Forms;
 #nullable disable
 namespace OculusTrayTool
 {
-  [DesignerGenerated]
+
   public partial class frmCreateEditProfile : Form
   {
     
@@ -128,10 +128,10 @@ namespace OculusTrayTool
 
     private void Button1_Click(object sender, EventArgs e)
     {
-      if (Operators.CompareString(this.TextDisplayName.Text, (string) null, false) == 0)
+      if (String.Equals(this.TextDisplayName.Text, null, StringComparison.Ordinal))
         return;
       MyProject.Forms.frmProfiles.TopMost = true;
-      if (Operators.CompareString(this.TextDisplayName.Text, "- All Games & Apps -", false) != 0)
+      if (!String.Equals(this.TextDisplayName.Text, "- All Games & Apps -", StringComparison.Ordinal))
       {
         this.pLaunchfile = Path.GetFileName(this.TextBoxPath.Text);
         this.pPath = this.TextBoxPath.Text;
@@ -208,7 +208,7 @@ namespace OculusTrayTool
         if (OTTDB.numTimer > 0)
           FrmMain.fmain.pTimer.Start();
       }
-      this.ComboBox1.Items.Remove(RuntimeHelpers.GetObjectValue(this.ComboBox1.SelectedItem));
+      this.ComboBox1.Items.Remove(this.ComboBox1.SelectedItem);
       this.ComboBox1.Text = "- Select Game -";
       this.ComboSS.SelectedIndex = 0;
       this.ComboASW.SelectedIndex = 0;
@@ -249,7 +249,7 @@ namespace OculusTrayTool
     {
       OpenFileDialog openFileDialog = new OpenFileDialog();
       openFileDialog.Title = "Browse...";
-      if (Operators.CompareString(this.TextBoxPath.Text, "", false) != 0)
+      if (!String.Equals(this.TextBoxPath.Text, "", StringComparison.Ordinal))
       {
         if (Directory.Exists(Path.GetDirectoryName(this.TextBoxPath.Text)))
           openFileDialog.InitialDirectory = Path.GetDirectoryName(this.TextBoxPath.Text);
@@ -284,7 +284,7 @@ namespace OculusTrayTool
 
     private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
     {
-      if (Operators.CompareString(this.ComboBox1.SelectedItem.ToString(), "- All Games & Apps -", false) != 0)
+      if (!String.Equals(this.ComboBox1.SelectedItem.ToString(), "- All Games & Apps -", StringComparison.Ordinal))
       {
         frmCreateEditProfile.GameItem selectedItem = (frmCreateEditProfile.GameItem) this.ComboBox1.SelectedItem;
         this.TextBoxPath.Text = selectedItem.Info;
@@ -304,7 +304,7 @@ namespace OculusTrayTool
     {
       if (!(!char.IsNumber(e.KeyChar) & e.KeyChar != '.' & Convert.ToInt32(e.KeyChar) != 8))
         return;
-      e.Handled = (int) e.KeyChar == (int) Conversions.ToChar(this.DSep) || true;
+      e.Handled = (int) e.KeyChar == (int) Convert.ToChar(this.DSep) || true;
     }
 
     public class GameItem

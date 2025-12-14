@@ -1,6 +1,6 @@
 
 using CoreAudio;
-using Microsoft.VisualBasic.CompilerServices;
+
 using OculusTrayTool.My;
 using System;
 using System.Windows.Forms;
@@ -8,7 +8,7 @@ using System.Windows.Forms;
 #nullable disable
 namespace OculusTrayTool
 {
-  [StandardModule]
+
   internal sealed class GetDevices
   {
     private static MMDeviceEnumerator devenum = new MMDeviceEnumerator();
@@ -71,7 +71,7 @@ namespace OculusTrayTool
             MySettingsProperty.Settings.SystemDefaultCommAudioGuid = "";
             MySettingsProperty.Settings.Save();
           }
-          Log.WriteToLog("Found " + Conversions.ToString(checked (GetDevices.AudioDevices.Count - 1)) + " non-Rift output devices");
+          Log.WriteToLog("Found " + Convert.ToString(checked (GetDevices.AudioDevices.Count - 1)) + " non-Rift output devices");
         }
         else
         {
@@ -89,9 +89,7 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("GetAllAudioDevices: " + ex.Message);
-        ProjectData.ClearProjectError();
       }
     }
 
@@ -126,7 +124,7 @@ namespace OculusTrayTool
             MyProject.Forms.FrmSetFallback.ComboMicFallbackSource.Add(GetDevices.MicDevices[index].ID.ToString(), GetDevices.MicDevices[index].Properties[checked (GetDevices.MicDevices[index].Properties.Count - 3)].Value.ToString());
             checked { ++index; }
           }
-          Log.WriteToLog("Found " + Conversions.ToString(checked (GetDevices.MicDevices.Count - 1)) + " non-Rift input devices");
+          Log.WriteToLog("Found " + Convert.ToString(checked (GetDevices.MicDevices.Count - 1)) + " non-Rift input devices");
         }
         else
         {
@@ -168,9 +166,8 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Exception exception = ex;
-        if (Operators.CompareString(exception.HResult.ToString(), "-2147023728", false) == 0)
+        if (string.Equals(exception.HResult.ToString(), "-2147023728", StringComparison.Ordinal))
         {
           Log.WriteToLog("No microphone devices found!");
           FrmMain.fmain.AddToListboxAndScroll("No microphone devices found!");
@@ -181,7 +178,6 @@ namespace OculusTrayTool
         }
         else
           Log.WriteToLog("GetAllMicDevices: " + exception.Message + " (" + exception.HResult.ToString() + ")");
-        ProjectData.ClearProjectError();
       }
     }
 
@@ -194,10 +190,8 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("GetDefaultMicDevice: " + ex.Message);
         defaultMicDevice = (object) "";
-        ProjectData.ClearProjectError();
       }
       return defaultMicDevice;
     }
@@ -212,10 +206,8 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("GetDefaultMicDeviceName: " + ex.Message);
         defaultMicDeviceName = (object) "";
-        ProjectData.ClearProjectError();
       }
       return defaultMicDeviceName;
     }
@@ -229,10 +221,8 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("GetDefaultAudioDevice: " + ex.Message);
         defaultAudioDevice = (object) "";
-        ProjectData.ClearProjectError();
       }
       return defaultAudioDevice;
     }
@@ -247,10 +237,8 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("GetDefaultAudioDeviceName: " + ex.Message);
         defaultAudioDeviceName = (object) "";
-        ProjectData.ClearProjectError();
       }
       return defaultAudioDeviceName;
     }
@@ -264,10 +252,8 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("GetDefaultAudioCommDevice: " + ex.Message);
         defaultAudioCommDevice = (object) "";
-        ProjectData.ClearProjectError();
       }
       return defaultAudioCommDevice;
     }
@@ -282,10 +268,8 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("GetDefaultAudioCommDeviceName: " + ex.Message);
         audioCommDeviceName = (object) "";
-        ProjectData.ClearProjectError();
       }
       return audioCommDeviceName;
     }
@@ -299,10 +283,8 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("GetDefaultMiCommDevice: " + ex.Message);
         defaultMicCommDevice = (object) "";
-        ProjectData.ClearProjectError();
       }
       return defaultMicCommDevice;
     }
@@ -317,10 +299,8 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("GetDefaultMiCommDeviceName: " + ex.Message);
         micCommDeviceName = (object) "";
-        ProjectData.ClearProjectError();
       }
       return micCommDeviceName;
     }

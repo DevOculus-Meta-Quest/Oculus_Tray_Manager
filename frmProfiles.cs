@@ -1,6 +1,5 @@
 
-using Microsoft.VisualBasic;
-using Microsoft.VisualBasic.CompilerServices;
+
 using Newtonsoft.Json.Linq;
 using OculusTrayTool.My;
 using OculusTrayTool.MyNameSpace;
@@ -20,7 +19,7 @@ using System.Windows.Forms;
 #nullable disable
 namespace OculusTrayTool
 {
-  [DesignerGenerated]
+
   public partial class frmProfiles : Form
   {
     
@@ -223,7 +222,7 @@ namespace OculusTrayTool
     {
         foreach (ListViewItem listViewItem in ItemList)
         {
-          if (Operators.CompareString(listViewItem.SubItems[ColumnIndex].Text, SearchString, false) == 0)
+          if (String.Equals(listViewItem.SubItems[ColumnIndex].Text, SearchString, StringComparison.Ordinal))
             return true;
         }
       return false;
@@ -252,7 +251,7 @@ namespace OculusTrayTool
 
       foreach (ListViewItem selectedItem in this.ListView1.SelectedItems)
       {
-        if (Interaction.MsgBox((object) ("Remove profile for '" + selectedItem.Text.Replace(" *", "") + "'?"), MsgBoxStyle.YesNo | MsgBoxStyle.Question, (object) "Confirm") == MsgBoxResult.Yes)
+        if (MessageBox.Show("Remove profile for '" + selectedItem.Text.Replace(" *", "") + "'?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
         {
           OTTDB.RemoveProfile(this.TextBox1.Text);
           this.ListView1.Items.Clear();
@@ -267,9 +266,9 @@ namespace OculusTrayTool
       MyProject.Forms.frmCreateEditProfile.ComboBox1.Items.Clear();
       if (Directory.Exists(MyProject.Forms.FrmMain.OculusPath.TrimEnd('\\') + "\\CoreData\\Manifests"))
         GetGames.GetThirdPartyApps(MyProject.Forms.FrmMain.OculusPath.TrimEnd('\\') + "\\CoreData\\Manifests");
-      if (Operators.CompareString(MySettingsProperty.Settings.LibraryPath, "", false) != 0)
+      if (String.Equals(MySettingsProperty.Settings.LibraryPath, "", StringComparison.Ordinal) == false)
       {
-        string[] strArray = Strings.Split(MySettingsProperty.Settings.LibraryPath, ",");
+        string[] strArray = MySettingsProperty.Settings.LibraryPath.Split(',');
         int index = 0;
         while (index < strArray.Length)
         {
@@ -343,7 +342,7 @@ namespace OculusTrayTool
     {
       try
       {
-        string[] strArray1 = Strings.Split(Conversions.ToString(this.ListView1.SelectedItems[0].Tag), ",");
+        string[] strArray1 = Convert.ToString(this.ListView1.SelectedItems[0].Tag).Split(',');
         MyProject.Forms.frmCreateEditProfile.TextDisplayName.Text = strArray1[0];
         MyProject.Forms.frmCreateEditProfile.ComboSS.Text = strArray1[1];
         MyProject.Forms.frmCreateEditProfile.ComboASW.Text = strArray1[2];
@@ -362,14 +361,14 @@ namespace OculusTrayTool
           MyProject.Forms.frmCreateEditProfile.TextBoxPath.BackColor = Color.White;
           this.ToolTip1.SetToolTip((Control) MyProject.Forms.frmCreateEditProfile.TextBoxPath, "");
         }
-        MyProject.Forms.frmCreateEditProfile.NumericUpDown1.Value = new Decimal(Conversions.ToInteger(strArray1[6]));
-        MyProject.Forms.frmCreateEditProfile.NumericUpDown2.Value = new Decimal(Conversions.ToInteger(strArray1[7]));
+        MyProject.Forms.frmCreateEditProfile.NumericUpDown1.Value = new Decimal(Convert.ToInt32(strArray1[6]));
+        MyProject.Forms.frmCreateEditProfile.NumericUpDown2.Value = new Decimal(Convert.ToInt32(strArray1[7]));
         MyProject.Forms.frmCreateEditProfile.ComboMirror.Text = strArray1[8];
         MyProject.Forms.frmCreateEditProfile.ComboAGPS.Text = strArray1[9];
         MyProject.Forms.frmCreateEditProfile.TextBoxComment.Text = strArray1[10];
-        string[] strArray2 = Strings.Split(strArray1[11]);
-        MyProject.Forms.frmCreateEditProfile.NumericUpDown3.Value = new Decimal(Conversions.ToDouble(strArray2[0]));
-        MyProject.Forms.frmCreateEditProfile.NumericUpDown4.Value = new Decimal(Conversions.ToDouble(strArray2[1]));
+        string[] strArray2 = strArray1[11].Split(new char[] { ' ' });
+        MyProject.Forms.frmCreateEditProfile.NumericUpDown3.Value = new Decimal(Convert.ToDouble(strArray2[0]));
+        MyProject.Forms.frmCreateEditProfile.NumericUpDown4.Value = new Decimal(Convert.ToDouble(strArray2[1]));
         MyProject.Forms.frmCreateEditProfile.ComboBox8.Text = strArray1[12];
         MyProject.Forms.frmCreateEditProfile.ComboBox9.Text = strArray1[13];
         MyProject.Forms.frmCreateEditProfile.ComboBoxEnabled.Text = strArray1[14];
@@ -382,9 +381,9 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
+        // ProjectData.SetProjectError(ex);
         Log.WriteToLog("ShowEdit: " + ex.Message);
-        ProjectData.ClearProjectError();
+        // ProjectData.ClearProjectError();
       }
     }
 
@@ -428,9 +427,9 @@ namespace OculusTrayTool
                     if (Directory.Exists(mainPath + "\\Software\\Manifests"))
                          GetGames.GetFiles(mainPath + "\\Software\\Manifests");
                     
-                    if (Operators.CompareString(MySettingsProperty.Settings.LibraryPath, "", false) != 0)
+                    if (String.Equals(MySettingsProperty.Settings.LibraryPath, "", StringComparison.Ordinal) == false)
                     {
-                        string[] strArray = Strings.Split(MySettingsProperty.Settings.LibraryPath, ",");
+                        string[] strArray = MySettingsProperty.Settings.LibraryPath.Split(',');
                         foreach (string str in strArray)
                         {
                            if (Directory.Exists(str.TrimEnd('\\') + "\\Manifests"))
@@ -479,9 +478,9 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
+        // ProjectData.SetProjectError(ex);
         Log.WriteToLog("ShowCreate: " + ex.Message);
-        ProjectData.ClearProjectError();
+        // ProjectData.ClearProjectError();
       }
     }
 
@@ -537,7 +536,7 @@ namespace OculusTrayTool
               str3 = appInfo[1];
               checked { ++num2; }
             }
-            if (Operators.CompareString(str2, "", false) != 0 & File.Exists(str2))
+            if (!String.Equals(str2, "", StringComparison.Ordinal) & File.Exists(str2))
             {
               MyProject.Forms.FrmMain.ManualStart = true;
               if (!MyProject.Forms.FrmMain.HomeIsRunning)
@@ -553,7 +552,7 @@ namespace OculusTrayTool
                 Log.WriteToLog("No profile found for '" + str2 + "'");
                 FrmMain.fmain.AddToListboxAndScroll("No profile found for '" + str2 + "'");
               }
-              if (Operators.CompareString(str3, "", false) != 0)
+              if (!String.Equals(str3, "", StringComparison.Ordinal))
                 Log.WriteToLog("Launching " + this.ListView1.SelectedItems[0].Text + " (" + str2.TrimStart().TrimEnd() + str3.TrimStart().TrimEnd() + ")");
               else
                 Log.WriteToLog("Launching " + this.ListView1.SelectedItems[0].Text + " (" + str2.TrimStart().TrimEnd() + ")");
@@ -580,11 +579,11 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
+        // ProjectData.SetProjectError(ex);
         Exception exception = ex;
         Log.WriteToLog("LaunchApp(): " + exception.Message);
-        int num = (int) Interaction.MsgBox((object) ("Could not launch app: " + exception.Message));
-        ProjectData.ClearProjectError();
+        MessageBox.Show("Could not launch app: " + exception.Message);
+        // ProjectData.ClearProjectError();
       }
       if (Globals.dbg)
         Log.WriteToLog("Adding backgroundworker AppWatchWorker");
@@ -605,7 +604,7 @@ namespace OculusTrayTool
         string Left = "";
         if (MyProject.Forms.FrmMain.profileAGPS.TryGetValue(appName.ToLower(), out Left))
         {
-          if (Operators.CompareString(Left, "0", false) == 0)
+          if (String.Equals(Left, "0", StringComparison.Ordinal))
           {
             new Thread(() => RunCommand.Run_debug_tool_agps("false")).Start();
           }
@@ -616,7 +615,7 @@ namespace OculusTrayTool
         }
         if (MySettingsProperty.Settings.VoiceConfirmProfile)
         {
-          new Thread(() => MyProject.Computer.Audio.Play(Application.StartupPath + "\\Sounds\\gamelaunchdetected.wav")).Start();
+          new System.Media.SoundPlayer(Application.StartupPath + "\\Sounds\\gamelaunchdetected.wav").Play();
         }
         MyProject.Forms.FrmMain.runningApp = appName;
         string displayName = OTTDB.GetDisplayName(appName);
@@ -631,7 +630,7 @@ namespace OculusTrayTool
         {
           System.Timers.Timer timer = new System.Timers.Timer();
           timer.AutoReset = false;
-          timer.Interval = (double) checked (Conversions.ToInteger(str1) * 1000);
+          timer.Interval = (double) checked (Convert.ToInt32(str1) * 1000);
           timer.Elapsed += new ElapsedEventHandler(MyProject.Forms.FrmMain.ApplyAswTick);
           timer.Start();
           Log.WriteToLog(MyProject.Forms.FrmMain.runningapp_displayname + ": Applying ASW setting in " + str1 + " seconds");
@@ -642,7 +641,7 @@ namespace OculusTrayTool
           return;
         System.Timers.Timer timer1 = new System.Timers.Timer();
         timer1.AutoReset = false;
-        timer1.Interval = (double) checked (Conversions.ToInteger(str2) * 1000);
+        timer1.Interval = (double) checked (Convert.ToInt32(str2) * 1000);
         timer1.Elapsed += new ElapsedEventHandler(MyProject.Forms.FrmMain.ApplyCpuPrioTick);
         timer1.Start();
         Log.WriteToLog(MyProject.Forms.FrmMain.runningapp_displayname + ": Applying CPU Priority in " + str2 + " seconds");
@@ -658,9 +657,9 @@ namespace OculusTrayTool
       JObject jobject = (JObject) JToken.Parse(File.ReadAllText(jFile));
       string str1 = (string) jobject.SelectToken("canonicalName");
       string str2 = ((string) jobject.SelectToken("launchFile")).Replace("\\\\", "\\").Replace("/", "\\");
-      string str3 = Operators.CompareString(customParms, "", false) != 0 ? customParms : (string) jobject.SelectToken("launchParameters");
+      string str3 = !String.Equals(customParms, "", StringComparison.Ordinal) ? customParms : (string) jobject.SelectToken("launchParameters");
       string str4 = str2.Replace("\\\\", "\\").Replace("/", "\\");
-      string[] strArray = Strings.Split(MySettingsProperty.Settings.LibraryPath, ",");
+      string[] strArray = MySettingsProperty.Settings.LibraryPath.Split(',');
       int index = 0;
       while (index < strArray.Length)
       {
@@ -700,9 +699,9 @@ namespace OculusTrayTool
           int num3 = (int) MyProject.Forms.frmLaunchOptions.ShowDialog();
           if (MyProject.Forms.frmLaunchOptions.optionsCanceled)
             return;
-          if (Operators.CompareString(MyProject.Forms.frmLaunchOptions.TextBox1.Text, "", false) != 0)
+          if (!String.Equals(MyProject.Forms.frmLaunchOptions.TextBox1.Text, "", StringComparison.Ordinal))
             str3 = str3 + " " + MyProject.Forms.frmLaunchOptions.TextBox1.Text;
-          if (Operators.CompareString(str2, "", false) != 0 & File.Exists(str2))
+          if (!String.Equals(str2, "", StringComparison.Ordinal) & File.Exists(str2))
           {
             MyProject.Forms.FrmMain.ManualStart = true;
             if (!MyProject.Forms.FrmMain.HomeIsRunning)
@@ -720,7 +719,7 @@ namespace OculusTrayTool
               FrmMain.fmain.AddToListboxAndScroll("No profile found for '" + str2 + "'");
             }
             FrmMain.fmain.AddToListboxAndScroll("Launching " + this.ListView1.SelectedItems[0].Text + " with params '" + str3.TrimStart().TrimEnd() + "'");
-            if (Operators.CompareString(str3, "", false) != 0)
+            if (!String.Equals(str3, "", StringComparison.Ordinal))
               Log.WriteToLog("Launching " + this.ListView1.SelectedItems[0].Text + " (" + str2.TrimStart().TrimEnd() + str3.TrimStart().TrimEnd() + ")");
             else
               Log.WriteToLog("Launching " + this.ListView1.SelectedItems[0].Text + " (" + str2.TrimStart().TrimEnd() + ")");
@@ -851,7 +850,7 @@ namespace OculusTrayTool
 
     private void ComboResolution_SelectedIndexChanged(object sender, EventArgs e)
     {
-      MySettingsProperty.Settings.DesktopResolution = Conversions.ToString(this.ComboResolution.SelectedItem);
+      MySettingsProperty.Settings.DesktopResolution = Convert.ToString(this.ComboResolution.SelectedItem);
       MySettingsProperty.Settings.Save();
     }
 
@@ -861,7 +860,7 @@ namespace OculusTrayTool
     {
       if (this.ListView1.SelectedItems.Count <= 0)
         return;
-      string[] strArray1 = Strings.Split(Conversions.ToString(this.ListView1.SelectedItems[0].Tag), ",");
+      string[] strArray1 = Convert.ToString(this.ListView1.SelectedItems[0].Tag).Split(',');
       this.Label16.Text = strArray1[0];
       this.Label17.Text = strArray1[1];
       this.Label18.Text = strArray1[2];
@@ -873,7 +872,7 @@ namespace OculusTrayTool
       this.Label24.Text = strArray1[8];
       this.Label25.Text = strArray1[9];
       this.Label26.Text = strArray1[10];
-      string[] strArray2 = Strings.Split(strArray1[11]);
+      string[] strArray2 = strArray1[11].Split(' ');
       this.Label27.Text = "Horizontal: " + strArray2[0] + " Vertical: " + strArray2[1];
       this.Label28.Text = strArray1[12];
       this.Label30.Text = strArray1[13];

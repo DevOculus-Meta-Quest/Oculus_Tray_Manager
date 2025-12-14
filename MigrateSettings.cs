@@ -1,6 +1,4 @@
 
-using Microsoft.VisualBasic;
-using Microsoft.VisualBasic.CompilerServices;
 using Newtonsoft.Json.Linq;
 using OculusTrayTool.My;
 using System;
@@ -19,7 +17,6 @@ using System.Xml;
 #nullable disable
 namespace OculusTrayTool
 {
-  [StandardModule]
   internal sealed class MigrateSettings
   {
     public static Dictionary<string, string> oldProfiles = new Dictionary<string, string>();
@@ -33,154 +30,154 @@ namespace OculusTrayTool
         XmlDocument xmlDocument = new XmlDocument();
         xmlDocument.Load(Application.StartupPath + "\\config.xml");
         XmlNode xmlNode1 = xmlDocument.SelectSingleNode("/Config");
-        if (!Information.IsNothing((object) xmlNode1["StartMinimized"]))
+        if (xmlNode1["StartMinimized"] != null)
         {
           XmlNode xmlNode2 = xmlDocument.SelectSingleNode("/Config/StartMinimized");
-          MySettingsProperty.Settings.StartMinimized = Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode2.InnerText, "", false) != 0 && Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode2.InnerText, "True", false) == 0;
+          MySettingsProperty.Settings.StartMinimized = xmlNode2.InnerText == "True";
         }
-        if (!Information.IsNothing((object) xmlNode1["StartHomeDelay"]))
+        if (xmlNode1["StartHomeDelay"] != null)
         {
           XmlNode xmlNode3 = xmlDocument.SelectSingleNode("/Config/StartHomeDelay");
-          MySettingsProperty.Settings.StartHomeDelay = Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode3.InnerText, "", false) != 0 ? Conversions.ToInteger(xmlNode3.InnerText) : 3;
+          MySettingsProperty.Settings.StartHomeDelay = xmlNode3.InnerText != "" ? Convert.ToInt32(xmlNode3.InnerText) : 3;
         }
-        if (!Information.IsNothing((object) xmlNode1["UseVoiceCommands"]))
+        if (xmlNode1["UseVoiceCommands"] != null)
         {
           XmlNode xmlNode4 = xmlDocument.SelectSingleNode("/Config/UseVoiceCommands");
-          MySettingsProperty.Settings.UseVoiceCommands = Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode4.InnerText, "", false) != 0 && Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode4.InnerText, "True", false) == 0;
+          MySettingsProperty.Settings.UseVoiceCommands = xmlNode4.InnerText == "True";
         }
-        if (!Information.IsNothing((object) xmlNode1["DisableFrescoPower"]))
+        if (xmlNode1["DisableFrescoPower"] != null)
         {
           XmlNode xmlNode5 = xmlDocument.SelectSingleNode("/Config/DisableFrescoPower");
-          if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode5.InnerText, "", false) == 0)
+          if (xmlNode5.InnerText == "")
           {
             MySettingsProperty.Settings.DisableFrescoPower = false;
           }
           else
           {
-            if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode5.InnerText, "False", false) == 0)
+            if (xmlNode5.InnerText == "False")
               MySettingsProperty.Settings.DisableFrescoPower = false;
-            if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode5.InnerText, "True", false) == 0)
+            if (xmlNode5.InnerText == "True")
               MySettingsProperty.Settings.DisableFrescoPower = true;
           }
         }
-        if (!Information.IsNothing((object) xmlNode1["LibraryPath"]))
+        if (xmlNode1["LibraryPath"] != null)
         {
           XmlNode xmlNode6 = xmlDocument.SelectSingleNode("/Config/LibraryPath");
-          if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode6.InnerText, "", false) != 0)
+          if (xmlNode6.InnerText != "")
           {
             if (Directory.Exists(xmlNode6.InnerText.TrimEnd('\\') + "\\Manifests"))
               MySettingsProperty.Settings.LibraryPath = xmlNode6.InnerText;
           }
         }
-        if (!Information.IsNothing((object) xmlNode1["PPDPStartup"]))
+        if (xmlNode1["PPDPStartup"] != null)
         {
           XmlNode xmlNode7 = xmlDocument.SelectSingleNode("/Config/PPDPStartup");
-          MySettingsProperty.Settings.PPDPStartup = Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode7.InnerText, "", false) != 0 ? xmlNode7.InnerText : "0";
+          MySettingsProperty.Settings.PPDPStartup = xmlNode7.InnerText != "" ? xmlNode7.InnerText : "0";
         }
-        if (!Information.IsNothing((object) xmlNode1["PowerPlan"]))
+        if (xmlNode1["PowerPlan"] != null)
         {
           XmlNode xmlNode8 = xmlDocument.SelectSingleNode("/Config/PowerPlan");
-          if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode8.InnerText, "", false) != 0)
+          if (xmlNode8.InnerText != "")
             MySettingsProperty.Settings.PowerPlanStart = xmlNode8.InnerText;
         }
-        if (!Information.IsNothing((object) xmlNode1["SpoofCPU"]))
+        if (xmlNode1["SpoofCPU"] != null)
         {
           XmlNode xmlNode9 = xmlDocument.SelectSingleNode("/Config/SpoofCPU");
-          if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode9.InnerText, "", false) != 0)
+          if (xmlNode9.InnerText != "")
           {
-            if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode9.InnerText, "False", false) == 0)
+            if (xmlNode9.InnerText == "False")
               MySettingsProperty.Settings.SpoofCPU = false;
-            if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode9.InnerText, "True", false) == 0)
+            if (xmlNode9.InnerText == "True")
               MySettingsProperty.Settings.SpoofCPU = true;
           }
         }
-        if (!Information.IsNothing((object) xmlNode1["StopOVR"]))
+        if (xmlNode1["StopOVR"] != null)
         {
           XmlNode xmlNode10 = xmlDocument.SelectSingleNode("/Config/StopOVR");
-          MySettingsProperty.Settings.StopOVR = Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode10.InnerText, "", false) != 0 && Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode10.InnerText, "False", false) != 0;
+          MySettingsProperty.Settings.StopOVR = xmlNode10.InnerText == "False";
         }
-        if (!Information.IsNothing((object) xmlNode1["StartHomeOnServiceStart"]))
+        if (xmlNode1["StartHomeOnServiceStart"] != null)
         {
           XmlNode xmlNode11 = xmlDocument.SelectSingleNode("/Config/StartHomeOnServiceStart");
-          MySettingsProperty.Settings.StartHomeOnServiceStart = Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode11.InnerText, "", false) != 0 && Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode11.InnerText, "False", false) != 0;
+          MySettingsProperty.Settings.StartHomeOnServiceStart = xmlNode11.InnerText == "False";
         }
-        if (!Information.IsNothing((object) xmlNode1["OculusPath"]))
+        if (xmlNode1["OculusPath"] != null)
         {
           XmlNode xmlNode12 = xmlDocument.SelectSingleNode("/Config/OculusPath");
-          if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode12.InnerText, "", false) != 0)
+          if (xmlNode12.InnerText != "")
           {
-            if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(MyProject.Forms.FrmMain.OculusPath, "", false) == 0)
+            if (MyProject.Forms.FrmMain.OculusPath == "")
               MySettingsProperty.Settings.OculusPath = xmlNode12.InnerText;
           }
-          else if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(MyProject.Forms.FrmMain.OculusPath, "", false) != 0)
+          else if (MyProject.Forms.FrmMain.OculusPath != "")
             MySettingsProperty.Settings.OculusPath = MyProject.Forms.FrmMain.OculusPath;
         }
-        if (!Information.IsNothing((object) xmlNode1["StartOVR"]))
+        if (xmlNode1["StartOVR"] != null)
         {
           XmlNode xmlNode13 = xmlDocument.SelectSingleNode("/Config/StartOVR");
-          MySettingsProperty.Settings.StartOVR = Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode13.InnerText, "", false) != 0 && Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode13.InnerText, "False", false) != 0;
+          MySettingsProperty.Settings.StartOVR = xmlNode13.InnerText == "False";
         }
-        if (!Information.IsNothing((object) xmlNode1["OVRServerPriority"]))
-          MySettingsProperty.Settings.OVRServerPriority = Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlDocument.SelectSingleNode("/Config/OVRServerPriority").InnerText, "False", false) != 0;
-        if (!Information.IsNothing((object) xmlNode1["StartHomeOnToolStart"]))
+        if (xmlNode1["OVRServerPriority"] != null)
+          MySettingsProperty.Settings.OVRServerPriority = xmlDocument.SelectSingleNode("/Config/OVRServerPriority").InnerText != "False";
+        if (xmlNode1["StartHomeOnToolStart"] != null)
         {
           XmlNode xmlNode14 = xmlDocument.SelectSingleNode("/Config/StartHomeOnToolStart");
-          MySettingsProperty.Settings.StartHomeOnToolStart = Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode14.InnerText, "", false) != 0 && Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode14.InnerText, "False", false) != 0;
+          MySettingsProperty.Settings.StartHomeOnToolStart = xmlNode14.InnerText == "False";
         }
-        if (!Information.IsNothing((object) xmlNode1["CloseHomeOnExit"]))
+        if (xmlNode1["CloseHomeOnExit"] != null)
         {
           XmlNode xmlNode15 = xmlDocument.SelectSingleNode("/Config/CloseHomeOnExit");
-          MySettingsProperty.Settings.CloseHomeOnExit = Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode15.InnerText, "", false) != 0 && Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode15.InnerText, "False", false) != 0;
+          MySettingsProperty.Settings.CloseHomeOnExit = xmlNode15.InnerText == "False";
         }
-        if (!Information.IsNothing((object) xmlNode1["HideAltTab"]))
+        if (xmlNode1["HideAltTab"] != null)
         {
           XmlNode xmlNode16 = xmlDocument.SelectSingleNode("/Config/HideAltTab");
-          MySettingsProperty.Settings.HideAltTab = Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode16.InnerText, "", false) != 0 && Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode16.InnerText, "False", false) != 0;
+          MySettingsProperty.Settings.HideAltTab = xmlNode16.InnerText == "False";
         }
-        if (!Information.IsNothing((object) xmlNode1["DefaultAudio"]))
+        if (xmlNode1["DefaultAudio"] != null)
         {
           XmlNode xmlNode17 = xmlDocument.SelectSingleNode("/Config/DefaultAudio");
-          MySettingsProperty.Settings.DefaultAudio = Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode17.InnerText, "", false) != 0 ? xmlNode17.InnerText : "";
+          MySettingsProperty.Settings.DefaultAudio = xmlNode17.InnerText != "" ? xmlNode17.InnerText : "";
         }
-        if (!Information.IsNothing((object) xmlNode1["DefaultMic"]))
+        if (xmlNode1["DefaultMic"] != null)
         {
           XmlNode xmlNode18 = xmlDocument.SelectSingleNode("/Config/DefaultMic");
-          MySettingsProperty.Settings.DefaultMic = Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode18.InnerText, "", false) != 0 ? xmlNode18.InnerText : "";
+          MySettingsProperty.Settings.DefaultMic = xmlNode18.InnerText != "" ? xmlNode18.InnerText : "";
         }
-        if (!Information.IsNothing((object) xmlNode1["SetRiftAsDefault"]))
+        if (xmlNode1["SetRiftAsDefault"] != null)
         {
           XmlNode xmlNode19 = xmlDocument.SelectSingleNode("/Config/SetRiftAsDefault");
-          MySettingsProperty.Settings.SetRiftAsDefault = Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode19.InnerText, "", false) != 0 && Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode19.InnerText, "False", false) != 0;
+          MySettingsProperty.Settings.SetRiftAsDefault = xmlNode19.InnerText == "False";
         }
-        if (!Information.IsNothing((object) xmlNode1["SetRiftAudioDefault"]))
+        if (xmlNode1["SetRiftAudioDefault"] != null)
         {
           XmlNode xmlNode20 = xmlDocument.SelectSingleNode("/Config/SetRiftAudioDefault");
-          MySettingsProperty.Settings.SetRiftAudioDefault = Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode20.InnerText, "", false) != 0 ? (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode20.InnerText, "False", false) != 0 ? -1 : 0) : 0;
+          MySettingsProperty.Settings.SetRiftAudioDefault = xmlNode20.InnerText != "" ? (xmlNode20.InnerText != "False" ? -1 : 0) : 0;
         }
-        if (!Information.IsNothing((object) xmlNode1["SetRiftMicDefault"]))
+        if (xmlNode1["SetRiftMicDefault"] != null)
         {
           XmlNode xmlNode21 = xmlDocument.SelectSingleNode("/Config/SetRiftMicDefault");
-          MySettingsProperty.Settings.SetRiftMicDefault = Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode21.InnerText, "", false) != 0 ? (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode21.InnerText, "False", false) != 0 ? -1 : 0) : 0;
+          MySettingsProperty.Settings.SetRiftMicDefault = xmlNode21.InnerText != "" ? (xmlNode21.InnerText != "False" ? -1 : 0) : 0;
         }
-        if (!Information.IsNothing((object) xmlNode1["UseLocalDebugTool"]))
+        if (xmlNode1["UseLocalDebugTool"] != null)
         {
           XmlNode xmlNode22 = xmlDocument.SelectSingleNode("/Config/UseLocalDebugTool");
-          MySettingsProperty.Settings.UseLocalDebugTool = Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode22.InnerText, "", false) != 0 && Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode22.InnerText, "False", false) != 0;
+          MySettingsProperty.Settings.UseLocalDebugTool = xmlNode22.InnerText == "False";
         }
-        if (!Information.IsNothing((object) xmlNode1["UseHotKeys"]))
+        if (xmlNode1["UseHotKeys"] != null)
         {
           XmlNode xmlNode23 = xmlDocument.SelectSingleNode("/Config/UseHotKeys");
-          MySettingsProperty.Settings.UseHotKeys = Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode23.InnerText, "", false) != 0 && Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode23.InnerText, "False", false) != 0;
+          MySettingsProperty.Settings.UseHotKeys = xmlNode23.InnerText == "False";
         }
-        if (!Information.IsNothing((object) xmlNode1["ASW"]))
+        if (xmlNode1["ASW"] != null)
         {
           XmlNode xmlNode24 = xmlDocument.SelectSingleNode("/Config/ASW");
-          MySettingsProperty.Settings.ASW = Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode24.InnerText, "", false) != 0 ? Conversions.ToInteger(xmlNode24.InnerText) : 0;
+          MySettingsProperty.Settings.ASW = xmlNode24.InnerText != "" ? Convert.ToInt32(xmlNode24.InnerText) : 0;
         }
-        if (!Information.IsNothing((object) xmlNode1["CloseOnX"]))
+        if (xmlNode1["CloseOnX"] != null)
         {
           XmlNode xmlNode25 = xmlDocument.SelectSingleNode("/Config/CloseOnX");
-          MySettingsProperty.Settings.CloseOnX = Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode25.InnerText, "", false) != 0 && Microsoft.VisualBasic.CompilerServices.Operators.CompareString(xmlNode25.InnerText, "False", false) != 0;
+          MySettingsProperty.Settings.CloseOnX = xmlNode25.InnerText == "False";
         }
         xmlDocument.Save(Application.StartupPath + "\\config.xml");
         MySettingsProperty.Settings.Save();
@@ -190,14 +187,11 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
-        Exception e = ex;
         FrmMain.fmain.AddToListboxAndScroll("Error migrating configurarion parameters: " + e.Message);
         MyProject.Forms.FrmMain.hasError = true;
         StackTrace stackTrace = new StackTrace(e, true);
         Log.WriteToLog(e.ToString() + stackTrace.ToString());
         Log.WriteToMigrateLog(e.ToString() + stackTrace.ToString());
-        ProjectData.ClearProjectError();
       }
     }
 
@@ -235,14 +229,9 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
-        Exception e = ex;
-        FrmMain.fmain.AddToListboxAndScroll("Error: GetOldProfiles: " + e.Message);
-        MyProject.Forms.FrmMain.hasError = true;
         StackTrace stackTrace = new StackTrace(e, true);
         Log.WriteToLog("GetOldProfiles: " + e.ToString() + stackTrace.ToString());
         Log.WriteToMigrateLog("GetOldProfiles: " + e.ToString() + stackTrace.ToString());
-        ProjectData.ClearProjectError();
       }
       finally
       {
@@ -259,18 +248,15 @@ namespace OculusTrayTool
         while (index < files.Length)
         {
           JObject jobject = JObject.Parse(File.ReadAllText(files[index]));
-          if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(jobject.SelectToken("appId").ToString(), "", false) == 0)
+          if (jobject.SelectToken("appId").ToString() == "")
           {
         }
       }
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
-        Exception exception = ex;
         Log.WriteToLog("MigrateThirdPartyApps: " + exception.Message);
         Log.WriteToMigrateLog("MigrateThirdPartyApps: " + exception.Message);
-        ProjectData.ClearProjectError();
       }
     }
 
@@ -290,13 +276,10 @@ namespace OculusTrayTool
         }
         catch (Exception ex)
         {
-          ProjectData.SetProjectError(ex);
-          Exception exception = ex;
           Log.WriteToMigrateLog("Failed to create database copy: " + exception.Message);
-          int num = (int) Interaction.MsgBox((object) ("Failed to create database copy: " + exception.Message), MsgBoxStyle.Critical, (object) "Error copying database");
+          MessageBox.Show("Failed to create database copy: " + exception.Message, "Error copying database", MessageBoxButtons.OK, MessageBoxIcon.Error);
           FrmMain.fmain.AddToListboxAndScroll("Failed to create database copy: " + exception.Message);
           MyProject.Forms.FrmMain.hasError = true;
-          ProjectData.ClearProjectError();
           return;
         }
         if (Globals.dbg)
@@ -311,14 +294,11 @@ namespace OculusTrayTool
         }
         catch (Exception ex)
         {
-          ProjectData.SetProjectError(ex);
-          Exception exception = ex;
           Log.WriteToLog("Failed to open database copy: " + exception.Message);
           Log.WriteToMigrateLog("Failed to open database copy: " + exception.Message);
-          int num = (int) Interaction.MsgBox((object) ("Failed to open database copy: " + exception.Message), MsgBoxStyle.Critical, (object) "Error opening database");
+          MessageBox.Show("Failed to open database copy: " + exception.Message, "Error opening database", MessageBoxButtons.OK, MessageBoxIcon.Error);
           FrmMain.fmain.AddToListboxAndScroll("Failed to open database copy: " + exception.Message);
           MyProject.Forms.FrmMain.hasError = true;
-          ProjectData.ClearProjectError();
           return;
         }
         if (Globals.dbg)
@@ -337,7 +317,7 @@ namespace OculusTrayTool
             string appId = jobject.SelectToken("appId").ToString();
             if (Globals.dbg)
               Log.WriteToMigrateLog("    appId is '" + appId + "'");
-            if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(appId, "", false) != 0)
+            if (appId != "")
             {
               string str1 = jobject.SelectToken("canonicalName").ToString();
               if (Globals.dbg)
@@ -363,14 +343,10 @@ namespace OculusTrayTool
               }
               catch (Exception ex)
               {
-                ProjectData.SetProjectError(ex);
-                Exception exception = ex;
-                Log.WriteToLog("Failed to read database entry for appId '" + appId + "': " + exception.Message);
                 Log.WriteToMigrateLog("Failed to read database entry for appId '" + appId + "': " + exception.Message);
-                int num = (int) Interaction.MsgBox((object) ("Failed to read database entry for appId '" + appId + "': " + exception.Message), MsgBoxStyle.Critical, (object) "Error reading database");
+                MessageBox.Show("Failed to read database entry for appId '" + appId + "': " + exception.Message, "Error reading database", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 FrmMain.fmain.AddToListboxAndScroll("Failed to read database entry for appId '" + appId + "': " + exception.Message);
                 MyProject.Forms.FrmMain.hasError = true;
-                ProjectData.ClearProjectError();
                 return;
               }
               string str3 = Regex.Replace(stringBuilder.ToString(), "[^A-Za-z0-9\\-/]", ":").Replace(":::", ":").Replace("::", ":");
@@ -387,9 +363,9 @@ namespace OculusTrayTool
                   Log.WriteToMigrateLog("Looking for match: " + Path.GetFileName(str2));
                 string str6 = "";
                 MigrateSettings.oldProfiles.TryGetValue(Path.GetFileName(str2), out str6);
-                if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(str6, "", false) != 0)
+                if (str6 != "")
                 {
-                  string[] strArray = Strings.Split(str6, ",");
+                  string[] strArray = str6.Split(',');
                   string ppdp = strArray[0];
                   string asw = strArray[1];
                   string priority = strArray[2];
@@ -404,16 +380,12 @@ namespace OculusTrayTool
         }
         catch (Exception ex)
         {
-          ProjectData.SetProjectError(ex);
-          Exception exception = ex;
-          Log.WriteToLog("Failed to open manifest file: " + exception.Message);
           Log.WriteToMigrateLog("Failed to open manifest file: " + exception.Message);
-          int num = (int) Interaction.MsgBox((object) ("Failed to open manifest file: " + exception.Message), MsgBoxStyle.Critical, (object) "Error reading mainfest");
+          MessageBox.Show("Failed to open manifest file: " + exception.Message, "Error reading mainfest", MessageBoxButtons.OK, MessageBoxIcon.Error);
           FrmMain.fmain.AddToListboxAndScroll("Failed to open manifest file: " + exception.Message);
           MyProject.Forms.FrmMain.hasError = true;
           sqLiteCommand.Dispose();
           connection.Close();
-          ProjectData.ClearProjectError();
           return;
         }
         sqLiteCommand.Dispose();

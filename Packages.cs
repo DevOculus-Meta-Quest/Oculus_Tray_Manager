@@ -1,5 +1,5 @@
 
-    using Microsoft.VisualBasic.CompilerServices;
+
     using OculusTrayTool.My;
     using System;
     using System.Diagnostics;
@@ -8,7 +8,7 @@
 #nullable disable
     namespace OculusTrayTool
     {
-        [StandardModule]
+
         internal sealed class Packages
         {
             public static object CheckPackage(string cmd, string app)
@@ -54,11 +54,11 @@
                 }
                 catch (Exception ex)
                 {
-                    ProjectData.SetProjectError(ex);
+                    // ProjectData.SetProjectError(ex);
                     Exception exception = ex;
                     Log.WriteToLinkLog("CheckPackage: " + exception.Message);
                     MyProject.Forms.FrmMain.AddToListboxAndScroll(exception.Message);
-                    ProjectData.ClearProjectError();
+                    // ProjectData.ClearProjectError();
                 }
                 return (object)num;
             }
@@ -90,11 +90,11 @@
                 }
                 catch (Exception ex)
                 {
-                    ProjectData.SetProjectError(ex);
+                    // ProjectData.SetProjectError(ex);
                     Exception exception = ex;
                     Log.WriteToLinkLog("CheckCode: " + exception.Message);
                     MyProject.Forms.FrmMain.AddToListboxAndScroll(exception.Message);
-                    ProjectData.ClearProjectError();
+                    // ProjectData.ClearProjectError();
                 }
                 return (object)"0";
             }

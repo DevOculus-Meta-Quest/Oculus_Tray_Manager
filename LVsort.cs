@@ -1,12 +1,12 @@
 
-using Microsoft.VisualBasic.CompilerServices;
+
 using System.Collections;
 using System.Windows.Forms;
 
 #nullable disable
 namespace OculusTrayTool
 {
-  [StandardModule]
+
   internal sealed class LVsort
   {
     public class ListViewItemComparer : IComparer

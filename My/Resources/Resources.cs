@@ -1,6 +1,5 @@
 
-using Microsoft.VisualBasic;
-using Microsoft.VisualBasic.CompilerServices;
+
 using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -12,7 +11,7 @@ using System.Runtime.CompilerServices;
 #nullable disable
 namespace OculusTrayTool.My.Resources
 {
-  [StandardModule]
+
   [GeneratedCode("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
   [DebuggerNonUserCode]
   [CompilerGenerated]

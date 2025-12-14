@@ -1,5 +1,5 @@
 
-using Microsoft.VisualBasic.CompilerServices;
+
 using OculusTrayTool.My;
 using System;
 using System.Collections;
@@ -14,7 +14,7 @@ using System.Windows.Forms;
 #nullable disable
 namespace OculusTrayTool
 {
-  [DesignerGenerated]
+
   public partial class frmImportSteamApps : Form
   {
     
@@ -174,7 +174,7 @@ namespace OculusTrayTool
 
           foreach (ColumnHeader column in this.lvwAppList.Columns)
           {
-            if (Operators.CompareString(column.Text, "Description", false) != 0)
+            if (!String.Equals(column.Text, "Description", StringComparison.OrdinalIgnoreCase))
               column.Width = -2;
           }
 
@@ -185,9 +185,7 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog(ex.Message);
-        ProjectData.ClearProjectError();
       }
     }
 
@@ -284,9 +282,7 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("ImportSelectedApps: " + ex.Message);
-        ProjectData.ClearProjectError();
       }
     }
 
@@ -309,9 +305,7 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("RemoveSelectedApps: " + ex.Message);
-        ProjectData.ClearProjectError();
       }
     }
 
@@ -341,9 +335,7 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("DownloadSelectedAssets: " + ex.Message);
-        ProjectData.ClearProjectError();
       }
     }
 
@@ -373,10 +365,8 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryGetSelectedSteamList: " + ex.Message);
         selectedSteamList = false;
-        ProjectData.ClearProjectError();
       }
       return selectedSteamList;
     }
@@ -392,9 +382,7 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("Could not launch app: " + ex.Message);
-        ProjectData.ClearProjectError();
       }
     }
 
@@ -465,9 +453,7 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
         Log.WriteToLog("TryRemoveApp: " + ex.Message);
-        ProjectData.ClearProjectError();
         flag = false; // Default
       }
 label_22:

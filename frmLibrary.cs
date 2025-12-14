@@ -1,6 +1,5 @@
 
-using Microsoft.VisualBasic;
-using Microsoft.VisualBasic.CompilerServices;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using OculusTrayTool.My;
@@ -27,7 +26,7 @@ using System.Windows.Forms;
 #nullable disable
 namespace OculusTrayTool
 {
-  [DesignerGenerated]
+
   public partial class frmLibrary : Form
   {
     
@@ -265,13 +264,13 @@ namespace OculusTrayTool
         }
         catch (Exception ex)
         {
-          ProjectData.SetProjectError(ex);
+
           Exception exception = ex;
           Log.WriteToLog("Failed to open database copy: " + exception.Message);
-          int num = (int) Interaction.MsgBox((object) ("Failed to open database copy: " + exception.Message), MsgBoxStyle.Critical, (object) "Error opening database");
+          MessageBox.Show("Failed to open database copy: " + exception.Message, "Error opening database", MessageBoxButtons.OK, MessageBoxIcon.Critical);
           FrmMain.fmain.AddToListboxAndScroll("Failed to open database copy: " + exception.Message);
           MyProject.Forms.FrmMain.hasError = true;
-          ProjectData.ClearProjectError();
+
           return;
         }
         if (Globals.dbg)
@@ -293,7 +292,7 @@ namespace OculusTrayTool
           if (!System.IO.File.Exists(str5))
           {
             Log.WriteToLog("Could not find game icon '" + str5 + "', looking in the other library paths");
-            string[] strArray = Strings.Split(MySettingsProperty.Settings.LibraryPath, ",");
+            string[] strArray = Convert.ToString(MySettingsProperty.Settings.LibraryPath).Split(',');
             int index2 = 0;
             while (index2 < strArray.Length)
             {
@@ -307,7 +306,7 @@ namespace OculusTrayTool
               checked { ++index2; }
             }
           }
-          if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(Left, "", false) != 0)
+          if (!String.Equals(Left, "", StringComparison.OrdinalIgnoreCase))
           {
             StringBuilder stringBuilder = new StringBuilder();
             try
@@ -329,17 +328,17 @@ namespace OculusTrayTool
             }
             catch (Exception ex)
             {
-              ProjectData.SetProjectError(ex);
+    
               Exception exception = ex;
               Log.WriteToLog("Failed to read database entry for appId '" + Left + "': " + exception.Message);
               FrmMain.fmain.AddToListboxAndScroll("Failed to read database entry for appId '" + Left + "': " + exception.Message);
               MyProject.Forms.FrmMain.hasError = true;
-              ProjectData.ClearProjectError();
+    
               return;
             }
             string str6 = Regex.Replace(stringBuilder.ToString(), "[^A-Za-z0-9\\-/]", ":").Replace(":::", ":").Replace("::", ":");
             string str7 = "display:name::";
-            string str8 = Conversions.ToInteger(MyProject.Forms.FrmMain.OculusAppVersion) < 118 ? ":grouping" : ":display:short:description";
+            string str8 = Convert.ToInt32(MyProject.Forms.FrmMain.OculusAppVersion) < 118 ? ":grouping" : ":display:short:description";
             int num1 = str6.IndexOf(str7);
             int num2 = str6.IndexOf(str8);
             if (num1 > -1 && num2 > -1)
@@ -516,17 +515,17 @@ label_44:
           }
           catch (Exception ex)
           {
-            ProjectData.SetProjectError(ex);
+  
             Log.WriteToLog("Error processing file " + file + ": " + ex.Message);
-            ProjectData.ClearProjectError();
+  
           }
         }
       }
       catch (Exception ex)
       {
-         ProjectData.SetProjectError(ex);
+         // ProjectData.SetProjectError(ex);
          Log.WriteToLog("Error in GetThirdPartyApps: " + ex.Message);
-         ProjectData.ClearProjectError();
+         // ProjectData.ClearProjectError();
       }
 
       ListView1.EndUpdate();
@@ -564,7 +563,7 @@ label_44:
           }
           else
           {
-            string[] strArray = Strings.Split(MySettingsProperty.Settings.LibraryPath, ",");
+            string[] strArray = Convert.ToString(MySettingsProperty.Settings.LibraryPath).Split(',');
             int index = 0;
             while (index < strArray.Length)
             {
@@ -588,7 +587,7 @@ label_44:
             Log.WriteToLog("Could not locate local icon for '" + DisplayName + "'");
             str3 = "Default Unknown";
           }
-          if (DisplayName.ToLower().EndsWith(".exe") | Microsoft.VisualBasic.CompilerServices.Operators.CompareString(DisplayName.ToLower(), "unknown app", false) == 0)
+          if (DisplayName.ToLower().EndsWith(".exe") | String.Equals(DisplayName, "unknown app", StringComparison.OrdinalIgnoreCase))
             DisplayName = Path.GetFileNameWithoutExtension(LaunchFile);
           if (Globals.dbg)
           {
@@ -633,9 +632,9 @@ label_44:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
+        // ProjectData.SetProjectError(ex);
         Log.WriteToLog("AddThirdPartyGameToLibrary: " + ex.Message);
-        ProjectData.ClearProjectError();
+        // ProjectData.ClearProjectError();
       }
     }
 
@@ -643,7 +642,7 @@ label_44:
     {
       if (this.changeMade && Process.GetProcessesByName("OculusClient").Length > 0)
       {
-        int num = (int) Interaction.MsgBox((object) "You may need to restart oculus Home to see the new icons in VR.", MsgBoxStyle.Information, (object) "Oculus Tray Tool");
+        MessageBox.Show("You may need to restart oculus Home to see the new icons in VR.", "Oculus Tray Tool", MessageBoxButtons.OK, MessageBoxIcon.Information);
       }
       MySettingsProperty.Settings.LibraryWindowLocation = this.Location;
       MySettingsProperty.Settings.LibraryWindowSize = this.Size;
@@ -729,9 +728,9 @@ label_44:
         this.GetOculusLibrary(MyProject.Forms.FrmMain.OculusPath.TrimEnd('\\') + "\\Software\\Manifests");
       if (Directory.Exists(MyProject.Forms.FrmMain.OculusPath.TrimEnd('\\') + "\\CoreData\\Manifests"))
         this.GetThirdPartyApps(MyProject.Forms.FrmMain.OculusPath.TrimEnd('\\') + "\\CoreData\\Manifests");
-      if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(MySettingsProperty.Settings.LibraryPath, "", false) != 0)
+      if (String.Equals(MySettingsProperty.Settings.LibraryPath, "", StringComparison.OrdinalIgnoreCase))
       {
-        string[] strArray = Strings.Split(MySettingsProperty.Settings.LibraryPath, ",");
+        string[] strArray = Convert.ToString(MySettingsProperty.Settings.LibraryPath).Split(',');
         int index = 0;
         while (index < strArray.Length)
         {
@@ -751,9 +750,9 @@ label_44:
         GetGames.GetFiles(MyProject.Forms.FrmMain.OculusPath.TrimEnd('\\') + "\\Software\\Manifests");
       if (Directory.Exists(MyProject.Forms.FrmMain.OculusPath.TrimEnd('\\') + "\\CoreData\\Manifests"))
         GetGames.GetThirdPartyApps(MyProject.Forms.FrmMain.OculusPath.TrimEnd('\\') + "\\CoreData\\Manifests");
-      if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(MySettingsProperty.Settings.LibraryPath, "", false) != 0)
+      if (String.Equals(MySettingsProperty.Settings.LibraryPath, "", StringComparison.OrdinalIgnoreCase))
       {
-        string[] strArray = Strings.Split(MySettingsProperty.Settings.LibraryPath, ",");
+        string[] strArray = Convert.ToString(MySettingsProperty.Settings.LibraryPath).Split(',');
         int index = 0;
         while (index < strArray.Length)
         {
@@ -787,10 +786,7 @@ label_44:
           this.ToolStripMenuItem9.Visible = true;
           this.RemoveProfileToolStripMenuItem.Visible = true;
         }
-        if (Conversions.ToBoolean(NewLateBinding.LateGet(this.ListView1.SelectedItems[0].Tag, (Type) null, "contains", new object[1]
-        {
-          (object) "3rdParty"
-        }, (string[]) null, (Type[]) null, (bool[]) null)))
+if (Convert.ToString(this.ListView1.SelectedItems[0].Tag).Contains("3rdParty"))
         {
           this.ToolStripMenuItem2.Visible = true;
           this.ToolStripMenuItem4.Visible = true;
@@ -798,10 +794,7 @@ label_44:
           this.ToolStripMenuItem7.Visible = true;
           this.ToolStripMenuItem8.Visible = true;
         }
-        else if (Conversions.ToBoolean(Microsoft.VisualBasic.CompilerServices.Operators.NotObject(NewLateBinding.LateGet(this.ListView1.SelectedItems[0].Tag, (Type) null, "contains", new object[1]
-        {
-          (object) "hidden"
-        }, (string[]) null, (Type[]) null, (bool[]) null))))
+else if (Convert.ToString(this.ListView1.SelectedItems[0].Tag).Contains("hidden"))
         {
           this.ToolStripMenuItem2.Visible = true;
           this.ToolStripMenuItem4.Visible = false;
@@ -907,7 +900,7 @@ label_44:
         jsonWriter.WritePropertyName("launchFile");
         jsonWriter.WriteNull();
         jsonWriter.WritePropertyName("launchParameters");
-        if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(parameters, "", false) == 0)
+        if (String.Equals(parameters, "", StringComparison.OrdinalIgnoreCase))
           jsonWriter.WriteNull();
         else
           jsonWriter.WriteValue(parameters);
@@ -936,7 +929,7 @@ label_44:
 
     private void ToolStripMenuItem2_Click(object sender, EventArgs e)
     {
-      string[] strArray = Strings.Split(Conversions.ToString(this.ListView1.SelectedItems[0].Tag), ",");
+      string[] strArray = Convert.ToString(this.ListView1.SelectedItems[0].Tag).Split(',');
       if (!System.IO.File.Exists(strArray[2]))
         return;
       MyProject.Forms.frmProperties.RichTextBox1.Text = JToken.Parse(System.IO.File.ReadAllText(strArray[2])).ToString(Formatting.Indented);
@@ -944,10 +937,7 @@ label_44:
       MyProject.Forms.frmProperties.fname = strArray[2];
       this.rs.FindAllControls((Control) MyProject.Forms.frmProperties);
       this.rs.ResizeAllControls((Control) MyProject.Forms.frmProperties, (float) MyProject.Forms.FrmMain.TrackBar1.Value);
-      if (Conversions.ToBoolean(Microsoft.VisualBasic.CompilerServices.Operators.NotObject(NewLateBinding.LateGet(this.ListView1.SelectedItems[0].Tag, (Type) null, "contains", new object[1]
-      {
-        (object) "3rdParty"
-      }, (string[]) null, (Type[]) null, (bool[]) null))))
+if (Convert.ToString(this.ListView1.SelectedItems[0].Tag).Contains("3rdParty"))
         MyProject.Forms.frmProperties.Button1.Enabled = false;
       else
         MyProject.Forms.frmProperties.Button1.Enabled = true;
@@ -956,13 +946,13 @@ label_44:
 
     private void ToolStripMenuItem4_Click(object sender, EventArgs e)
     {
-      OTTDB.HideApp(this.ListView1.SelectedItems[0].Text, Strings.Split(Conversions.ToString(this.ListView1.SelectedItems[0].Tag), ",")[0], "Library");
+      OTTDB.HideApp(this.ListView1.SelectedItems[0].Text, Convert.ToString(this.ListView1.SelectedItems[0].Tag).Split(',')[0], "Library");
       this.PopulateList();
     }
 
     private void ToolStripMenuItem5_Click(object sender, EventArgs e)
     {
-      OTTDB.HideApp(this.ListView1.SelectedItems[0].Text, Strings.Split(Conversions.ToString(this.ListView1.SelectedItems[0].Tag), ",")[0], "Both");
+      OTTDB.HideApp(this.ListView1.SelectedItems[0].Text, Convert.ToString(this.ListView1.SelectedItems[0].Tag).Split(',')[0], "Both");
       this.PopulateList();
     }
 
@@ -973,7 +963,7 @@ label_44:
       try
       {
         this.Cursor = Cursors.WaitCursor;
-        string[] strArray = Strings.Split(Conversions.ToString(this.ListView1.SelectedItems[0].Tag), ",");
+        string[] strArray = Convert.ToString(this.ListView1.SelectedItems[0].Tag).Split(',');
         if (!System.IO.File.Exists(strArray[2]))
           return;
         string str1 = "";
@@ -988,7 +978,7 @@ label_44:
           str2 = appInfo[1];
           checked { ++num2; }
         }
-        if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(str1, "", false) != 0 & System.IO.File.Exists(str1))
+        if (!String.Equals(str1, "", StringComparison.OrdinalIgnoreCase) & System.IO.File.Exists(str1))
         {
           MyProject.Forms.FrmMain.ManualStart = true;
           if (!MyProject.Forms.FrmMain.HomeIsRunning)
@@ -1004,7 +994,7 @@ label_44:
           else
             Log.WriteToLog("No profile found for '" + str1 + "'");
           Log.WriteToLog("Launching " + this.ListView1.SelectedItems[0].Text);
-          if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(str2, "", false) != 0)
+          if (!String.Equals(str2, "", StringComparison.OrdinalIgnoreCase))
             Log.WriteToLog(" -> " + str1.TrimStart().TrimEnd() + " " + str2.TrimStart().TrimEnd());
           else
             Log.WriteToLog(" -> " + str1.TrimStart().TrimEnd());
@@ -1021,9 +1011,9 @@ label_44:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
+        // ProjectData.SetProjectError(ex);
         Log.WriteToLog("LaunchApp(): " + ex.Message);
-        ProjectData.ClearProjectError();
+        // ProjectData.ClearProjectError();
       }
     }
 
@@ -1046,7 +1036,7 @@ label_44:
         {
           System.Timers.Timer timer = new System.Timers.Timer();
           timer.AutoReset = false;
-          timer.Interval = (double) checked (Conversions.ToInteger(str1) * 1000);
+          timer.Interval = (double) checked (Convert.ToInt32(str1) * 1000);
           timer.Elapsed += new ElapsedEventHandler(MyProject.Forms.FrmMain.ApplyCpuPrioTick);
           timer.Start();
           Log.WriteToLog(MyProject.Forms.FrmMain.runningapp_displayname + ": Applying CPU Priority in " + str1 + " seconds");
@@ -1057,14 +1047,14 @@ label_44:
         {
           System.Timers.Timer timer = new System.Timers.Timer();
           timer.AutoReset = false;
-          timer.Interval = (double) checked (Conversions.ToInteger(str2) * 1000);
+          timer.Interval = (double) checked (Convert.ToInt32(str2) * 1000);
           timer.Elapsed += new ElapsedEventHandler(MyProject.Forms.FrmMain.ApplyAswTick);
           timer.Start();
           Log.WriteToLog(MyProject.Forms.FrmMain.runningapp_displayname + ": Applying ASW setting in " + str2 + " seconds");
           FrmMain.fmain.AddToListboxAndScroll(MyProject.Forms.FrmMain.runningapp_displayname + ": Applying ASW setting in " + str2 + " seconds");
         }
         string Left2 = "";
-        if (MyProject.Forms.FrmMain.profileMirror.TryGetValue(MyProject.Forms.FrmMain.runningApp, out Left2) && Microsoft.VisualBasic.CompilerServices.Operators.CompareString(Left2, "1", false) == 0)
+        if (MyProject.Forms.FrmMain.profileMirror.TryGetValue(MyProject.Forms.FrmMain.runningApp, out Left2) && String.Equals(Left2, "1", StringComparison.OrdinalIgnoreCase))
         {
           System.Timers.Timer timer = new System.Timers.Timer();
           timer.AutoReset = false;
@@ -1075,9 +1065,9 @@ label_44:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
+        // ProjectData.SetProjectError(ex);
         Log.WriteToLog("ApplyProfile(): " + ex.Message);
-        ProjectData.ClearProjectError();
+        // ProjectData.ClearProjectError();
       }
     }
 
@@ -1091,12 +1081,12 @@ label_44:
         JObject jobject = (JObject) JToken.Parse(System.IO.File.ReadAllText(jFile));
         string str2 = (string) jobject.SelectToken("canonicalName");
         string str3 = ((string) jobject.SelectToken("launchFile")).Replace("/", "\\").Replace("\\\\", "\\");
-        string str4 = Microsoft.VisualBasic.CompilerServices.Operators.CompareString(customParms, "", false) != 0 ? customParms : (string) jobject.SelectToken("launchParameters");
+        string str4 = !String.Equals(customParms, "", StringComparison.OrdinalIgnoreCase) ? customParms : (string) jobject.SelectToken("launchParameters");
         if (this.ListView1.SelectedItems[0].Tag.ToString().Contains("3rdParty"))
           str1 = str3.Replace("/", "\\").Replace("\\\\", "\\");
         if (!this.ListView1.SelectedItems[0].Tag.ToString().Contains("3rdParty"))
         {
-          string[] strArray = Strings.Split(MySettingsProperty.Settings.LibraryPath, ",");
+          string[] strArray = Convert.ToString(MySettingsProperty.Settings.LibraryPath).Split(',');
           int index = 0;
           while (index < strArray.Length)
           {
@@ -1115,9 +1105,9 @@ label_44:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
+        // ProjectData.SetProjectError(ex);
         Log.WriteToLog("GetAppInfo(): " + ex.Message);
-        ProjectData.ClearProjectError();
+        // ProjectData.ClearProjectError();
       }
       return appInfo;
     }
@@ -1151,7 +1141,7 @@ label_44:
           int top2 = bounds.Top;
           int num2 = checked (top1 + top2 + 2);
           picturePlay2.Top = num2;
-          string[] source = Strings.Split(Conversions.ToString(itemAt.Tag), ",");
+          string[] source = Convert.ToString(itemAt.Tag).Split(',');
           this.PicturePlay.Image = this.CreateOverlay(this.imageListLarge.Images[source[checked (((IEnumerable<string>) source).Count<string>() - 1)]]);
           this.PicturePlay.Visible = true;
           this.PicturePlay.Select();
@@ -1161,8 +1151,8 @@ label_44:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
-        ProjectData.ClearProjectError();
+        // ProjectData.SetProjectError(ex);
+        // ProjectData.ClearProjectError();
       }
     }
 
@@ -1191,7 +1181,7 @@ label_44:
 
     private void ToolStripMenuItem8_Click(object sender, EventArgs e)
     {
-      string[] strArray = Strings.Split(Conversions.ToString(this.ListView1.SelectedItems[0].Tag), ",");
+      string[] strArray = Convert.ToString(this.ListView1.SelectedItems[0].Tag).Split(',');
       if (System.IO.File.Exists(strArray[2]))
       {
         string str1 = "";
@@ -1208,7 +1198,7 @@ label_44:
         }
         MyProject.Forms.frmLaunchOptions.TextBox1.Text = str2;
         int num3 = (int) MyProject.Forms.frmLaunchOptions.ShowDialog();
-        if (MyProject.Forms.frmLaunchOptions.optionsCanceled || !(Microsoft.VisualBasic.CompilerServices.Operators.CompareString(str1, "", false) != 0 & System.IO.File.Exists(str1)))
+        if (MyProject.Forms.frmLaunchOptions.optionsCanceled || !(!String.Equals(str1, "", StringComparison.OrdinalIgnoreCase) & System.IO.File.Exists(str1)))
           return;
         MyProject.Forms.FrmMain.ManualStart = true;
         Log.WriteToLog("Launching " + this.ListView1.SelectedItems[0].Text);
@@ -1230,10 +1220,7 @@ label_44:
     {
       if (this.ListView1.SelectedItems.Count == 0 || this.ListView1.SelectedItems.Count <= 0)
         return;
-      if (Conversions.ToBoolean(NewLateBinding.LateGet(this.ListView1.SelectedItems[0].Tag, (Type) null, "contains", new object[1]
-      {
-        (object) "hidden"
-      }, (string[]) null, (Type[]) null, (bool[]) null)))
+if (Convert.ToString(this.ListView1.SelectedItems[0].Tag).Contains("hidden"))
         this.ShowAppInLibraryAndProfilesToolStripMenuItem.Visible = true;
       else
         this.ShowAppInLibraryAndProfilesToolStripMenuItem.Visible = false;
@@ -1263,7 +1250,7 @@ label_44:
 
     private void ToolStripMenuItem1_Click(object sender, EventArgs e)
     {
-      string[] strArray = Strings.Split(Conversions.ToString(this.ListView1.SelectedItems[0].Tag), ",");
+      string[] strArray = Convert.ToString(this.ListView1.SelectedItems[0].Tag).Split(',');
       frmCreateEditProfile createEditProfile = new frmCreateEditProfile();
       string str = !this.ListView1.SelectedItems[0].Tag.ToString().Contains("3rdParty") ? strArray[3] : JObject.Parse(System.IO.File.ReadAllText(strArray[2])).SelectToken("launchFile").ToString();
       createEditProfile.TextDisplayName.Text = this.ListView1.SelectedItems[0].Text;
@@ -1295,15 +1282,15 @@ label_44:
         if (Globals.dbg)
           Log.WriteToLog("Editing Profile: '" + this.ListView1.SelectedItems[0].Text + "'");
         if (Globals.dbg)
-          Log.WriteToLog(Conversions.ToString(Microsoft.VisualBasic.CompilerServices.Operators.ConcatenateObject((object) " Tag: ", this.ListView1.SelectedItems[0].Tag)));
-        string[] strArray = Strings.Split(Conversions.ToString(this.ListView1.SelectedItems[0].Tag), ",");
+          Log.WriteToLog(Convert.ToString(" Tag: " + this.ListView1.SelectedItems[0].Tag));
+        string[] strArray = Convert.ToString(this.ListView1.SelectedItems[0].Tag).Split(',');
         if (Globals.dbg)
           Log.WriteToLog(" Reading " + strArray[2].Replace("\\\\", "\\").Replace("/", "\\"));
         string str1 = JObject.Parse(System.IO.File.ReadAllText(strArray[2].Replace("\\\\", "\\").Replace("/", "\\"))).SelectToken("launchFile").ToString();
         if (Globals.dbg)
           Log.WriteToLog(" Json Launchfile: " + str1);
         string str2 = strArray[3];
-        if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(str2, "3rdParty", false) == 0)
+        if (String.Equals(str2, "3rdParty", StringComparison.OrdinalIgnoreCase))
           str2 = str1.Replace("\\\\", "\\").Replace("/", "\\");
         if (Globals.dbg)
           Log.WriteToLog(" Path: " + str2);
@@ -1333,29 +1320,29 @@ label_44:
         createEditProfile.ComboMethod.Text = !MyProject.Forms.FrmMain.profileTimerList.TryGetValue(str3, out str7) ? "WMI" : "Timer";
         Dictionary<string, string> profileAswDelay = MyProject.Forms.FrmMain.profileAswDelay;
         string key1 = str3;
-        string str9 = Conversions.ToString(num1);
+        string str9 = Convert.ToString(num1);
         ref string local1 = ref str9;
         int num5 = profileAswDelay.TryGetValue(key1, out local1) ? 1 : 0;
-        int integer1 = Conversions.ToInteger(str9);
+        int integer1 = Convert.ToInt32(str9);
         if (num5 != 0)
           createEditProfile.NumericUpDown1.Value = new Decimal(integer1);
         Dictionary<string, string> profileCpuDelay = MyProject.Forms.FrmMain.profileCpuDelay;
         string key2 = str3;
-        string str10 = Conversions.ToString(num2);
+        string str10 = Convert.ToString(num2);
         ref string local2 = ref str10;
         int num6 = profileCpuDelay.TryGetValue(key2, out local2) ? 1 : 0;
-        int integer2 = Conversions.ToInteger(str10);
+        int integer2 = Convert.ToInt32(str10);
         if (num6 != 0)
           createEditProfile.NumericUpDown2.Value = new Decimal(integer2);
         Dictionary<string, string> profileMirror = MyProject.Forms.FrmMain.profileMirror;
         string lower1 = str3.ToLower();
-        str10 = Conversions.ToString(num3);
+        str10 = Convert.ToString(num3);
         ref string local3 = ref str10;
         if (profileMirror.TryGetValue(lower1, out local3))
           createEditProfile.ComboMirror.SelectedIndex = num3;
         Dictionary<string, string> profileAgps = MyProject.Forms.FrmMain.profileAGPS;
         string lower2 = str3.ToLower();
-        str10 = Conversions.ToString(num4);
+        str10 = Convert.ToString(num4);
         ref string local4 = ref str10;
         if (profileAgps.TryGetValue(lower2, out local4))
           createEditProfile.ComboAGPS.SelectedIndex = num4;
@@ -1367,9 +1354,9 @@ label_44:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
+        // ProjectData.SetProjectError(ex);
         Log.WriteToLog("Could not edit profile: " + ex.Message);
-        ProjectData.ClearProjectError();
+        // ProjectData.ClearProjectError();
       }
     }
 
@@ -1399,8 +1386,8 @@ label_44:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
-        ProjectData.ClearProjectError();
+        // ProjectData.SetProjectError(ex);
+        // ProjectData.ClearProjectError();
       }
     }
 
@@ -1422,9 +1409,9 @@ label_44:
 
     private void AddSteamVRToolStripMenuItem_Click(object sender, EventArgs e)
     {
-      if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(MyProject.Forms.FrmMain.steamvr, "", false) == 0)
+      if (String.Equals(MyProject.Forms.FrmMain.steamvr, "", StringComparison.OrdinalIgnoreCase))
       {
-        int num1 = (int) Interaction.MsgBox((object) "Could not locate Steam VR path", MsgBoxStyle.Critical, (object) "Error");
+        MessageBox.Show("Could not locate Steam VR path", "Error", MessageBoxButtons.OK, MessageBoxIcon.Critical);
       }
       else
       {
@@ -1443,32 +1430,32 @@ label_44:
           while (index < files2.Length)
           {
             string str1 = files2[index];
-            if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(Path.GetExtension(str1), ".bat", false) != 0 & Microsoft.VisualBasic.CompilerServices.Operators.CompareString(Path.GetExtension(str1), ".exe", false) != 0)
+            if (!String.Equals(Path.GetExtension(str1), ".bat", StringComparison.OrdinalIgnoreCase) && !String.Equals(Path.GetExtension(str1), ".exe", StringComparison.OrdinalIgnoreCase))
             {
               Log.WriteToLog("Copying " + Path.GetFileName(str1) + " -> " + path);
               System.IO.File.Copy(str1, path + "\\" + Path.GetFileName(str1), true);
               Log.WriteToLog("Generating hash for " + Path.GetFileName(str1));
-              string str2 = Conversions.ToString(this.GenerateSHA256Hash(str1));
+              string str2 = Convert.ToString(this.GenerateSHA256Hash(str1));
               files1.Add(Path.GetFileName(str1), str2);
             }
-            if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(Path.GetExtension(str1), ".bat", false) == 0)
+            if (String.Equals(Path.GetExtension(str1), ".bat", StringComparison.OrdinalIgnoreCase))
               System.IO.File.Copy(str1, MyProject.Forms.FrmMain.steamvr + Path.GetFileName(str1), true);
             checked { ++index; }
           }
         }
         catch (Exception ex)
         {
-          ProjectData.SetProjectError(ex);
+
           Exception exception = ex;
           Log.WriteToLog("Exception occurred when copying files: " + exception.Message);
-          int num2 = (int) Interaction.MsgBox((object) ("Exception occurred when copying files: " + exception.Message));
-          ProjectData.ClearProjectError();
+          MessageBox.Show("Exception occurred when copying files: " + exception.Message);
+
           return;
         }
         this.CreateManifest(canonicalName.Replace("_assets", ""), "SteamVR", MyProject.Forms.FrmMain.steamvr + "SteamVR.bat", MyProject.Forms.FrmMain.steamvr + "SteamVR.bat", MyProject.Forms.FrmMain.OculusPath + "\\CoreData\\Manifests");
         this.CreateAssetManifest(canonicalName, "#060404", files1, "", MyProject.Forms.FrmMain.OculusPath + "\\CoreData\\Manifests");
         this.PopulateList();
-        if (Interaction.MsgBox((object) "You need to restart the Oculus Service for SteamVR to be visible in Oculus Home. Restart it now?", MsgBoxStyle.YesNo | MsgBoxStyle.Information, (object) "Restart Required") == MsgBoxResult.Yes)
+        if (MessageBox.Show("You need to restart the Oculus Service for SteamVR to be visible in Oculus Home. Restart it now?", "Restart Required", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
         {
           MyProject.Forms.FrmMain.StopOVR();
           MyProject.Forms.FrmMain.StartOVR();
@@ -1491,7 +1478,7 @@ label_44:
         this.ListView1.View = View.LargeIcon;
         foreach (object hiddenApp in (IEnumerable) OTTDB.GetHiddenApps())
         {
-          string str = Conversions.ToString(hiddenApp);
+          string str = Convert.ToString(hiddenApp);
           this.imageListLarge.Images.Add(str, (Image) OculusTrayTool.My.Resources.Resources.removed_app);
           this.ListView1.Items.Add(new ListViewItem(str, str)
           {
@@ -1540,13 +1527,13 @@ label_44:
       }
       catch (Exception ex)
       {
-        ProjectData.SetProjectError(ex);
+        // ProjectData.SetProjectError(ex);
         Exception exception = ex;
         Log.WriteToLog("Failed to delete database copy: " + exception.Message);
-        int num = (int) Interaction.MsgBox((object) ("Failed to delete database copy: " + exception.Message));
+        MessageBox.Show("Failed to delete database copy: " + exception.Message);
         FrmMain.fmain.AddToListboxAndScroll("Failed to delete database copy: " + exception.Message);
         MyProject.Forms.FrmMain.hasError = true;
-        ProjectData.ClearProjectError();
+        // ProjectData.ClearProjectError();
         return;
       }
       if (Globals.dbg)
@@ -1561,13 +1548,13 @@ label_44:
         }
         catch (Exception ex)
         {
-          ProjectData.SetProjectError(ex);
+
           Exception exception = ex;
           Log.WriteToLog("Failed to create database copy: " + exception.Message);
-          int num = (int) Interaction.MsgBox((object) ("Failed to create database copy: " + exception.Message), MsgBoxStyle.Critical, (object) "Error copying database");
+          MessageBox.Show("Failed to create database copy: " + exception.Message, "Error copying database", MessageBoxButtons.OK, MessageBoxIcon.Critical);
           FrmMain.fmain.AddToListboxAndScroll("Failed to create database copy: " + exception.Message);
           MyProject.Forms.FrmMain.hasError = true;
-          ProjectData.ClearProjectError();
+
           return;
         }
       }
@@ -1595,7 +1582,7 @@ label_44:
     {
       if (this.ListView1.SelectedItems.Count <= 0)
         return;
-      string str = Strings.Split(Conversions.ToString(this.ListView1.SelectedItems[0].Tag), ",")[2];
+      string str = Convert.ToString(this.ListView1.SelectedItems[0].Tag).Split(',')[2];
       string text = this.ListView1.SelectedItems[0].Text;
       OTTDB.AddIgnoreApp(str);
       OTTDB.RemoveIncludedApp(str);
@@ -1617,21 +1604,21 @@ label_44:
       if (this.ListView1.SelectedItems.Count <= 0)
         return;
       ListViewItem selectedItem = this.ListView1.SelectedItems[0];
-      string[] strArray = Strings.Split(Conversions.ToString(selectedItem.Tag), ",");
+      string[] strArray = Convert.ToString(selectedItem.Tag).Split(',');
       if (Globals.dbg)
         Log.WriteToLog(" Reading " + strArray[2].Replace("\\\\", "\\").Replace("/", "\\"));
       string str1 = JObject.Parse(System.IO.File.ReadAllText(strArray[2].Replace("\\\\", "\\").Replace("/", "\\"))).SelectToken("launchFile").ToString();
       if (Globals.dbg)
         Log.WriteToLog(" Json Launchfile: " + str1);
       string str2 = strArray[3];
-      if (Microsoft.VisualBasic.CompilerServices.Operators.CompareString(str2, "3rdParty", false) == 0)
+      if (String.Equals(str2, "3rdParty", StringComparison.OrdinalIgnoreCase))
         str2 = str1.Replace("\\\\", "\\").Replace("/", "\\");
       if (Globals.dbg)
         Log.WriteToLog(" Path: " + str2);
       if (MyProject.Forms.FrmMain.profilePaths.TryGetValue(str2, out str1))
         str1 = str2;
       string Path = str1.Replace("\\\\", "\\").Replace("/", "\\");
-      if (Interaction.MsgBox((object) ("Remove profile for '" + selectedItem.Text + "'?"), MsgBoxStyle.YesNo | MsgBoxStyle.Question, (object) "Confirm") == MsgBoxResult.Yes)
+      if (MessageBox.Show("Remove profile for '" + selectedItem.Text + "'?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
       {
         OTTDB.RemoveProfile(Path);
         OTTDB.GetProfiles();

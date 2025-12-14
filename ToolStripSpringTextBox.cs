@@ -1,6 +1,4 @@
 using System.Windows.Forms.Layout;
-
-using Microsoft.VisualBasic.CompilerServices;
 using System;
 using System.Collections;
 using System.ComponentModel;
@@ -11,7 +9,6 @@ using System.Windows.Forms;
 #nullable disable
 namespace OculusTrayTool
 {
-  [DesignerGenerated]
   public partial class ToolStripSpringTextBox : CueToolStripTextBox
   {
     
