@@ -1153,7 +1153,10 @@ namespace MetaQuestTrayTool.Forms
 
     }
     private void CheckMinimizeOnX_CheckedChanged(object sender, EventArgs e) { }
-    private void PictureBox1_Click(object sender, EventArgs e) { }
+    private void PictureBox1_Click(object sender, EventArgs e)
+    {
+      MyProject.Forms.frmDonate.ShowDialog();
+    }
     private void TrackBar1_Scroll(object sender, EventArgs e) { }
     private void HometoTrayTimer_Tick(object sender, EventArgs e) { }
     private void CheckSendHomeToTray_CheckedChanged(object sender, EventArgs e) { }
