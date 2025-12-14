@@ -403,8 +403,10 @@ namespace MetaQuestTrayTool.Forms
           Graphics graphics = Graphics.FromHwnd(IntPtr.Zero);
           this.scaleX = (object) (float) ((double) graphics.DpiX / 96.0);
           this.scaleY = (object) (float) ((double) graphics.DpiY / 96.0);
-          this.Text = this.Text + " " + Application.ProductVersion.Substring(0, 8);
-          MyProject.Forms.frmAbout.Label4.Text = Application.ProductVersion.Substring(0, 8);
+           string safeVersion = Application.ProductVersion;
+           if (safeVersion.Length > 8) safeVersion = safeVersion.Substring(0, 8);
+           this.Text = this.Text + " " + safeVersion;
+           MyProject.Forms.frmAbout.Label4.Text = safeVersion;
           this.customCulture.NumberFormat.NumberDecimalSeparator = ".";
           if (Globals.dbg)
             Log.WriteToLog("Setting culture to " + this.customCulture.ToString());
@@ -988,25 +990,74 @@ namespace MetaQuestTrayTool.Forms
 
     public void AddToListboxAndScroll(string text)
     {
-       // Use replacement control if available, otherwise fallback to designer control (for safety)
-       ListBox targetList = _logListBox != null ? _logListBox : this.ListBox1;
-       
-       if (targetList == null) return; // Should not happen
+       try
+       {
+           // Restore dynamic ListBox logic as the designer one seems broken/blank
+           if (_logListBox == null || _logListBox.IsDisposed)
+           {
+               if (Globals.dbg) {
+                   try { System.IO.File.AppendAllText(System.IO.Path.Combine(Application.StartupPath, "UI_Debug_Log.txt"), DateTime.Now + ": Recreating _logListBox\n"); } catch {}
+               }
 
-       if (targetList.InvokeRequired)
-       {
-           this.Invoke((Delegate) new FrmMain.AddToListboxAndScrollDelegate(this.AddToListboxAndScroll), (object) text);
+               // Find container
+               Control[] found = this.Controls.Find("GroupBox3", true);
+               GroupBox container = null;
+               if (found.Length > 0) container = (GroupBox)found[0];
+               else 
+               {
+                    if (Globals.dbg) {
+                       try { System.IO.File.AppendAllText(System.IO.Path.Combine(Application.StartupPath, "UI_Debug_Log.txt"), DateTime.Now + ": GroupBox3 NOT FOUND!\n"); } catch {}
+                   }
+                   return; // Critical error
+               }
+
+               // Ensure container is visible
+               if (!container.Visible) container.Visible = true;
+
+               // Initialize the replacement listbox
+               _logListBox = new ListBox();
+               _logListBox.Name = "_logListBox";
+               _logListBox.Dock = DockStyle.Fill;
+               _logListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular);
+               _logListBox.ForeColor = System.Drawing.Color.DodgerBlue;
+               _logListBox.BackColor = System.Drawing.Color.White;
+               _logListBox.FormattingEnabled = true;
+               _logListBox.HorizontalScrollbar = true;
+               
+               container.Controls.Clear(); // Remove old ListBox1
+               container.Controls.Add(_logListBox);
+               _logListBox.BringToFront();
+           }
+
+           ListBox targetList = _logListBox;
+
+           if (targetList == null) return; 
+
+           if (targetList.InvokeRequired)
+           {
+               this.Invoke((Delegate) new FrmMain.AddToListboxAndScrollDelegate(this.AddToListboxAndScroll), (object) text);
+           }
+           else
+           {
+               // Force visibility every time
+               if (!targetList.Visible) targetList.Visible = true;
+               if (targetList.Parent != null && !targetList.Parent.Visible) targetList.Parent.Visible = true;
+
+               targetList.Items.Add((object) text);
+               targetList.TopIndex = checked (targetList.Items.Count - 1);
+               // targetList.Refresh(); // Can cause flicker, maybe skip
+
+               if (Globals.dbg) {
+                   // Verify item count
+                    try { System.IO.File.AppendAllText(System.IO.Path.Combine(Application.StartupPath, "UI_Debug_Log.txt"), DateTime.Now + ": Added to UI Log: " + text + " (Count: " + targetList.Items.Count + ")\n"); } catch {}
+               }
+           }
        }
-       else
+       catch (Exception ex)
        {
-           // Explicit visibility force for new control too
-           if (!targetList.Visible) targetList.Visible = true;
-           
-           targetList.Items.Add((object) text);
-           targetList.TopIndex = checked (targetList.Items.Count - 1);
-           
-           // Refresh to be sure
-           targetList.Refresh();
+           if (Globals.dbg) {
+               try { System.IO.File.AppendAllText(System.IO.Path.Combine(Application.StartupPath, "UI_Debug_Log.txt"), DateTime.Now + ": Error in AddToListboxAndScroll: " + ex.ToString() + "\n"); } catch {}
+           }
        }
     }
 
