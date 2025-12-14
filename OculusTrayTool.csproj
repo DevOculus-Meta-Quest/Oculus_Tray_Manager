@@ -83,17 +83,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AirLink.cs" />
-    <Compile Include="AudioSwitcher.cs" />
-    <Compile Include="Compat.cs" />
-    <Compile Include="CenterForms.cs" />
+    <Compile Include="Utilities\AirLink.cs" />
+    <Compile Include="Utilities\AudioSwitcher.cs" />
+    <Compile Include="Utilities\Compat.cs" />
+    <Compile Include="Utilities\CenterForms.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="CheckConnection.cs" />
-    <Compile Include="CheckUpdate.cs" />
+    <Compile Include="Utilities\CheckConnection.cs" />
+    <Compile Include="Utilities\CheckUpdate.cs" />
     <Compile Include="CueToolStripTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ListViewColumnSorter.cs" />
+    <Compile Include="Utilities\ListViewColumnSorter.cs" />
     <Compile Include="MyCustomToolStripControlHost.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -106,7 +106,7 @@
     <Compile Include="ToolStripSpringTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="FileDownloader.cs" />
+    <Compile Include="Utilities\FileDownloader.cs" />
     <Compile Include="FileDownloadProgressChangedEventArgs.cs" />
     <Compile Include="FileDownloadErrorEventArgs.cs" />
     <Compile Include="FileDownloadEventArgs.cs" />
@@ -153,13 +153,13 @@
     <Compile Include="Forms\frmProcessing.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GetConfig.cs" />
-    <Compile Include="GetControllers.cs" />
-    <Compile Include="GetDevices.cs" />
-    <Compile Include="GetDotNetVersion.cs" />
-    <Compile Include="GetGames.cs" />
-    <Compile Include="Globals.cs" />
-    <Compile Include="HomeToTray.cs" />
+    <Compile Include="Utilities\GetConfig.cs" />
+    <Compile Include="Utilities\GetControllers.cs" />
+    <Compile Include="Utilities\GetDevices.cs" />
+    <Compile Include="Utilities\GetDotNetVersion.cs" />
+    <Compile Include="Utilities\GetGames.cs" />
+    <Compile Include="Utilities\Globals.cs" />
+    <Compile Include="Utilities\HomeToTray.cs" />
     <Compile Include="Forms\frmHomeTrayToast.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -169,31 +169,31 @@
     <Compile Include="Forms\frmLaunchOptions.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="KeyboardHook.cs" />
-    <Compile Include="KillRunningApp.cs" />
-    <Compile Include="ParentProcessUtilities.cs" />
+    <Compile Include="Utilities\KeyboardHook.cs" />
+    <Compile Include="Utilities\KillRunningApp.cs" />
+    <Compile Include="Utilities\ParentProcessUtilities.cs" />
     <Compile Include="Forms\frmLinkPresets.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MathTools.cs" />
-    <Compile Include="MigrateSettings.cs" />
-    <Compile Include="MinMaxApp.cs" />
+    <Compile Include="Utilities\MathTools.cs" />
+    <Compile Include="Utilities\MigrateSettings.cs" />
+    <Compile Include="Utilities\MinMaxApp.cs" />
     <Compile Include="SteamLaunchType.cs" />
-    <Compile Include="Oculus.cs" />
+    <Compile Include="Utilities\Oculus.cs" />
     <Compile Include="PlatformType.cs" />
     <Compile Include="OculusNode.cs" />
-    <Compile Include="OculusPath.cs" />
-    <Compile Include="OTTDB.cs" />
+    <Compile Include="Utilities\OculusPath.cs" />
+    <Compile Include="Utilities\OTTDB.cs" />
     <Compile Include="Forms\frmProperties.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmRemoveProgress.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Packages.cs" />
-    <Compile Include="Resizer.cs" />
-    <Compile Include="Resolution.cs" />
-    <Compile Include="ScrollListener.cs" />
+    <Compile Include="Utilities\Packages.cs" />
+    <Compile Include="Utilities\Resizer.cs" />
+    <Compile Include="Utilities\Resolution.cs" />
+    <Compile Include="Utilities\ScrollListener.cs" />
     <Compile Include="Forms\frmSetLibraryPath.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -206,7 +206,7 @@
     <Compile Include="Forms\frmUpdateToast.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CreateTask.cs" />
+    <Compile Include="Utilities\CreateTask.cs" />
     <Compile Include="Forms\FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -216,14 +216,14 @@
     <Compile Include="Forms\frmLoading.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LVsort.cs" />
-    <Compile Include="PowerPlans.cs" />
+    <Compile Include="Utilities\LVsort.cs" />
+    <Compile Include="Utilities\PowerPlans.cs" />
     <Compile Include="Forms\frmAbout.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RiftDefault.cs" />
-    <Compile Include="RunCommand.cs" />
-    <Compile Include="Log.cs" />
+    <Compile Include="Utilities\RiftDefault.cs" />
+    <Compile Include="Utilities\RunCommand.cs" />
+    <Compile Include="Utilities\Log.cs" />
     <Compile Include="Forms\frmProfiles.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -233,16 +233,16 @@
     <Compile Include="Forms\frmSSChanged.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Steam.cs" />
-    <Compile Include="ACFReader.cs" />
+    <Compile Include="Utilities\Steam.cs" />
+    <Compile Include="Utilities\ACFReader.cs" />
     <Compile Include="DataDownloadEventArgs.cs" />
     <Compile Include="SteamNode.cs" />
     <Compile Include="SteamScreenshotNode.cs" />
-    <Compile Include="VoiceCommands.cs" />
+    <Compile Include="Utilities\VoiceCommands.cs" />
     <Compile Include="Forms\frmVoiceSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Win32.cs" />
+    <Compile Include="Utilities\Win32.cs" />
     <Compile Include="My\MyProject.cs" />
     <Compile Include="My\MySettings.cs" />
     <Compile Include="My\MySettingsProperty.cs" />
