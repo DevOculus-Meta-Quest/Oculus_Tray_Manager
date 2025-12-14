@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using OculusTrayTool.Forms;
 
 namespace OculusTrayTool.My
 {

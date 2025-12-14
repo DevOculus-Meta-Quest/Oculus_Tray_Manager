@@ -1,3 +1,4 @@
+using OculusTrayTool.Forms;
 
 using System;
 using System.Collections.Generic;
@@ -573,3 +574,4 @@ namespace OculusTrayTool
     }
   }
 }
+

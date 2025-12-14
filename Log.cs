@@ -5,6 +5,7 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Windows.Forms;
+using OculusTrayTool.Forms;
 
 #nullable disable
 namespace OculusTrayTool

@@ -1,3 +1,4 @@
+using OculusTrayTool.Forms;
 
 using CoreAudio;
 
@@ -306,3 +307,4 @@ namespace OculusTrayTool
     }
   }
 }
+

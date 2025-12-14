@@ -1,3 +1,4 @@
+using OculusTrayTool.Forms;
 
 using System.Speech.Recognition;
 
@@ -390,3 +391,4 @@ namespace OculusTrayTool
     }
   }
 }
+
