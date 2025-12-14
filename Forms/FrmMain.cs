@@ -1258,6 +1258,10 @@ namespace OculusTrayTool.Forms
         this.NotificationTimer.Stop();
         if (this._NotifyIcon1 != null)
             this._NotifyIcon1.Visible = false;
+        
+        // Ensure the loading/status form is closed
+        if (MyProject.Forms.frmLoading != null)
+             MyProject.Forms.frmLoading.Close();
     }
 
 
