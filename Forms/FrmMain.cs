@@ -761,7 +761,7 @@ namespace OculusTrayTool.Forms
               Log.WriteToLog("hasWarning=" + this.hasWarning.ToString());
             MyProject.Forms.frmLoading.Label2.Text = "Ready (Warnings)";
             MyProject.Forms.frmLoading.Label2.Refresh();
-            this.NotificationTimer.Interval = 1500;
+            this.NotificationTimer.Interval = 3000;
             this.NotificationTimer.Start();
             Log.WriteToLog("Startup Complete");
           }
@@ -771,7 +771,7 @@ namespace OculusTrayTool.Forms
               Log.WriteToLog("No warnings or errors");
             MyProject.Forms.frmLoading.Label2.Text = "Ready";
             MyProject.Forms.frmLoading.Label2.Refresh();
-            this.NotificationTimer.Interval = 1000;
+            this.NotificationTimer.Interval = 3000;
             this.NotificationTimer.Start();
             Log.WriteToLog("Startup Complete");
           }
