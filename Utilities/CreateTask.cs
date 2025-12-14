@@ -23,7 +23,7 @@ namespace MetaQuestTrayTool
         {
           TaskDefinition definition = taskService.NewTask();
           definition.RegistrationInfo.Description = "Meta Quest Tray Tool";
-          definition.RegistrationInfo.Author = "ApollyonVR";
+          definition.RegistrationInfo.Author = "Eliminater74";
           definition.Settings.DisallowStartIfOnBatteries = false;
           definition.Settings.StopIfGoingOnBatteries = false;
           definition.Settings.IdleSettings.StopOnIdleEnd = false;

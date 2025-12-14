@@ -80,7 +80,7 @@ protected override void Dispose(bool disposing)
       this.LinkLabel2.Size = new Size(114, 13);
       this.LinkLabel2.TabIndex = 7;
       this.LinkLabel2.TabStop = true;
-      this.LinkLabel2.Text = "https://apollyonvr.com";
+      this.LinkLabel2.Text = "https://Eliminater74.com";
       this.Label7.Location = new Point(7, 87);
       this.Label7.Name = "Label7";
       this.Label7.Size = new Size(55, 13);
@@ -91,13 +91,13 @@ protected override void Dispose(bool disposing)
       this.Label6.Name = "Label6";
       this.Label6.Size = new Size(143, 15);
       this.Label6.TabIndex = 5;
-      this.Label6.Text = " ApollyonVR@gmail.com";
+      this.Label6.Text = " Eliminater74@gmail.com";
       this.Label5.ForeColor = Color.Crimson;
       this.Label5.Location = new Point(103, 42);
       this.Label5.Name = "Label5";
       this.Label5.Size = new Size(100, 15);
       this.Label5.TabIndex = 4;
-      this.Label5.Text = " ApollyonVR";
+      this.Label5.Text = " Eliminater74";
       this.Label4.ForeColor = Color.Crimson;
       this.Label4.Location = new Point(105, 20);
       this.Label4.Name = "Label4";

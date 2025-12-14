@@ -2,10 +2,10 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Meta Quest Tray Tool")]
-[assembly: AssemblyDescription("https://apollyonvr.wixsite.com/vrtools")]
-[assembly: AssemblyCompany("ApollyonVR")]
+[assembly: AssemblyDescription("https://Eliminater74.wixsite.com/vrtools")]
+[assembly: AssemblyCompany("Eliminater74")]
 [assembly: AssemblyProduct("Meta Quest Tray Tool")]
-[assembly: AssemblyCopyright("Copyright ApollyonVR ©  2021")]
+[assembly: AssemblyCopyright("Copyright Eliminater74 ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: ComVisible(false)]
 [assembly: Guid("b56dbadf-9299-4657-8c10-f466449659f3")]

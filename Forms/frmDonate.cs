@@ -62,7 +62,7 @@ namespace MetaQuestTrayTool.Forms
 
     private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
     {
-      Process.Start("https://apollyonvr.com");
+      Process.Start("https://Eliminater74.com");
     }
   }
 }

@@ -1,6 +1,6 @@
-Version 0.87.7 - Created by ApollyonVR 
-Email: ApollyonVR@gmail.com
-Website: www.apollyonvr.com
+Version 0.87.7 - Created by Eliminater74 
+Email: Eliminater74@gmail.com
+Website: www.Eliminater74.com
 
 NOTE: You need to run this application "as Administrator"
 
@@ -30,5 +30,5 @@ NOTE: You need to run this application "as Administrator"
   The same goes for the Super Sampling options in Profiles. No need hit Enter here, just click OK.
 * Fixed some bugs.
 
-As a side-note, i now have a proper domain; Welcome to www.apollyonvr.com!
+As a side-note, i now have a proper domain; Welcome to www.Eliminater74.com!
 There's also a Forum on the site now, so come join the fun! =)

@@ -32,7 +32,7 @@ protected override void Dispose(bool disposing)
     {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
-            System.Management.EventWatcherOptions eventWatcherOptions2 = new System.Management.EventWatcherOptions();
+            System.Management.EventWatcherOptions eventWatcherOptions1 = new System.Management.EventWatcherOptions();
             this.NotifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.ContextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolStripStartOVR = new System.Windows.Forms.ToolStripMenuItem();
@@ -452,7 +452,7 @@ protected override void Dispose(bool disposing)
             "2.4",
             "2.45",
             "2.5"});
-            this.ComboSSstart.Location = new System.Drawing.Point(167, 39);
+            this.ComboSSstart.Location = new System.Drawing.Point(167, 38);
             this.ComboSSstart.Name = "ComboSSstart";
             this.ComboSSstart.Size = new System.Drawing.Size(116, 23);
             this.ComboSSstart.Sorted = true;
@@ -477,7 +477,7 @@ protected override void Dispose(bool disposing)
             "Adaptive",
             "Auto",
             "Off"});
-            this.ComboBox1.Location = new System.Drawing.Point(167, 72);
+            this.ComboBox1.Location = new System.Drawing.Point(167, 71);
             this.ComboBox1.Name = "ComboBox1";
             this.ComboBox1.Size = new System.Drawing.Size(116, 23);
             this.ComboBox1.Sorted = true;
@@ -548,7 +548,7 @@ protected override void Dispose(bool disposing)
             this.ComboVoice.Items.AddRange(new object[] {
             "Disabled",
             "Enabled"});
-            this.ComboVoice.Location = new System.Drawing.Point(167, 171);
+            this.ComboVoice.Location = new System.Drawing.Point(167, 170);
             this.ComboVoice.Name = "ComboVoice";
             this.ComboVoice.Size = new System.Drawing.Size(116, 23);
             this.ComboVoice.TabIndex = 13;
@@ -607,7 +607,7 @@ protected override void Dispose(bool disposing)
             this.CheckRiftAudio.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CheckRiftAudio.Location = new System.Drawing.Point(4, 90);
             this.CheckRiftAudio.Name = "CheckRiftAudio";
-            this.CheckRiftAudio.Size = new System.Drawing.Size(149, 36);
+            this.CheckRiftAudio.Size = new System.Drawing.Size(148, 36);
             this.CheckRiftAudio.TabIndex = 7;
             this.CheckRiftAudio.TabStop = false;
             this.CheckRiftAudio.Text = "Use Audio Switcher";
@@ -892,9 +892,9 @@ protected override void Dispose(bool disposing)
             this.Label8.ForeColor = System.Drawing.Color.DarkRed;
             this.Label8.Location = new System.Drawing.Point(432, 0);
             this.Label8.Name = "Label8";
-            this.Label8.Size = new System.Drawing.Size(68, 12);
+            this.Label8.Size = new System.Drawing.Size(69, 12);
             this.Label8.TabIndex = 7;
-            this.Label8.Text = "By ApollyonVR";
+            this.Label8.Text = "By Eliminater74";
             // 
             // NotificationTimer
             // 
@@ -903,9 +903,9 @@ protected override void Dispose(bool disposing)
             // 
             // MinimizeHomeWatcher
             // 
-            eventWatcherOptions2.BlockSize = 1;
-            eventWatcherOptions2.Timeout = System.TimeSpan.Parse("10675199.02:48:05.4775807");
-            this.MinimizeHomeWatcher.Options = eventWatcherOptions2;
+            eventWatcherOptions1.BlockSize = 1;
+            eventWatcherOptions1.Timeout = System.TimeSpan.Parse("10675199.02:48:05.4775807");
+            this.MinimizeHomeWatcher.Options = eventWatcherOptions1;
             this.MinimizeHomeWatcher.Query = new System.Management.EventQuery("");
             this.MinimizeHomeWatcher.Scope = new System.Management.ManagementScope("\\\\.\\root\\cimv2");
             this.MinimizeHomeWatcher.EventArrived += new System.Management.EventArrivedEventHandler(this.MinimizeHomeWatcher_EventArrived);
@@ -1126,7 +1126,7 @@ protected override void Dispose(bool disposing)
             "Application Render Timing",
             "Compositor Render Timing",
             "Version Info"});
-            this.ComboVisualHUD.Location = new System.Drawing.Point(167, 270);
+            this.ComboVisualHUD.Location = new System.Drawing.Point(167, 269);
             this.ComboVisualHUD.Name = "ComboVisualHUD";
             this.ComboVisualHUD.Size = new System.Drawing.Size(116, 23);
             this.ComboVisualHUD.TabIndex = 40;
@@ -1142,7 +1142,7 @@ protected override void Dispose(bool disposing)
             this.ComboBox5.Items.AddRange(new object[] {
             "On",
             "Off"});
-            this.ComboBox5.Location = new System.Drawing.Point(167, 105);
+            this.ComboBox5.Location = new System.Drawing.Point(167, 104);
             this.ComboBox5.Name = "ComboBox5";
             this.ComboBox5.Size = new System.Drawing.Size(116, 23);
             this.ComboBox5.TabIndex = 45;
@@ -1217,7 +1217,7 @@ protected override void Dispose(bool disposing)
             "Above normal",
             "High",
             "Realtime"});
-            this.ComboOVRPrio.Location = new System.Drawing.Point(167, 303);
+            this.ComboOVRPrio.Location = new System.Drawing.Point(167, 302);
             this.ComboOVRPrio.Name = "ComboOVRPrio";
             this.ComboOVRPrio.Size = new System.Drawing.Size(116, 23);
             this.ComboOVRPrio.TabIndex = 48;
@@ -1326,7 +1326,7 @@ protected override void Dispose(bool disposing)
             this.DbLayoutPanel4.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.DbLayoutPanel4.ColumnCount = 2;
             this.DbLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.DbLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 195F));
+            this.DbLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 196F));
             this.DbLayoutPanel4.Controls.Add(this.CheckStartWithWindows, 0, 0);
             this.DbLayoutPanel4.Controls.Add(this.CheckStartMin, 0, 1);
             this.DbLayoutPanel4.Controls.Add(this.CheckMinimizeOnX, 0, 4);
@@ -1361,7 +1361,7 @@ protected override void Dispose(bool disposing)
             this.CheckStartWithWindows.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CheckStartWithWindows.Location = new System.Drawing.Point(4, 4);
             this.CheckStartWithWindows.Name = "CheckStartWithWindows";
-            this.CheckStartWithWindows.Size = new System.Drawing.Size(149, 36);
+            this.CheckStartWithWindows.Size = new System.Drawing.Size(148, 36);
             this.CheckStartWithWindows.TabIndex = 4;
             this.CheckStartWithWindows.TabStop = false;
             this.CheckStartWithWindows.Text = "Start with Windows";
@@ -1373,7 +1373,7 @@ protected override void Dispose(bool disposing)
             this.CheckStartMin.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CheckStartMin.Location = new System.Drawing.Point(4, 47);
             this.CheckStartMin.Name = "CheckStartMin";
-            this.CheckStartMin.Size = new System.Drawing.Size(149, 36);
+            this.CheckStartMin.Size = new System.Drawing.Size(148, 36);
             this.CheckStartMin.TabIndex = 5;
             this.CheckStartMin.TabStop = false;
             this.CheckStartMin.Text = "Start minimized";
@@ -1385,7 +1385,7 @@ protected override void Dispose(bool disposing)
             this.CheckMinimizeOnX.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CheckMinimizeOnX.Location = new System.Drawing.Point(4, 176);
             this.CheckMinimizeOnX.Name = "CheckMinimizeOnX";
-            this.CheckMinimizeOnX.Size = new System.Drawing.Size(149, 36);
+            this.CheckMinimizeOnX.Size = new System.Drawing.Size(148, 36);
             this.CheckMinimizeOnX.TabIndex = 9;
             this.CheckMinimizeOnX.Text = "Minimize Tool on X";
             this.CheckMinimizeOnX.UseVisualStyleBackColor = true;
@@ -1396,7 +1396,7 @@ protected override void Dispose(bool disposing)
             this.CheckBoxAltTab.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CheckBoxAltTab.Location = new System.Drawing.Point(4, 133);
             this.CheckBoxAltTab.Name = "CheckBoxAltTab";
-            this.CheckBoxAltTab.Size = new System.Drawing.Size(149, 36);
+            this.CheckBoxAltTab.Size = new System.Drawing.Size(148, 36);
             this.CheckBoxAltTab.TabIndex = 6;
             this.CheckBoxAltTab.TabStop = false;
             this.CheckBoxAltTab.Text = "Hide from Alt+Tab";
@@ -1408,7 +1408,7 @@ protected override void Dispose(bool disposing)
             this.HotKeysCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.HotKeysCheckBox.Location = new System.Drawing.Point(4, 219);
             this.HotKeysCheckBox.Name = "HotKeysCheckBox";
-            this.HotKeysCheckBox.Size = new System.Drawing.Size(149, 36);
+            this.HotKeysCheckBox.Size = new System.Drawing.Size(148, 36);
             this.HotKeysCheckBox.TabIndex = 27;
             this.HotKeysCheckBox.Text = "Enable HotKeys";
             this.HotKeysCheckBox.UseVisualStyleBackColor = true;
@@ -1418,9 +1418,9 @@ protected override void Dispose(bool disposing)
             // 
             this.BtnConfigureAudio.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnConfigureAudio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnConfigureAudio.Location = new System.Drawing.Point(160, 90);
+            this.BtnConfigureAudio.Location = new System.Drawing.Point(159, 90);
             this.BtnConfigureAudio.Name = "BtnConfigureAudio";
-            this.BtnConfigureAudio.Size = new System.Drawing.Size(189, 36);
+            this.BtnConfigureAudio.Size = new System.Drawing.Size(190, 36);
             this.BtnConfigureAudio.TabIndex = 29;
             this.BtnConfigureAudio.Text = "Configure";
             this.BtnConfigureAudio.UseVisualStyleBackColor = true;
@@ -1433,7 +1433,7 @@ protected override void Dispose(bool disposing)
             this.Label14.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.Label14.Location = new System.Drawing.Point(4, 298);
             this.Label14.Name = "Label14";
-            this.Label14.Size = new System.Drawing.Size(149, 33);
+            this.Label14.Size = new System.Drawing.Size(148, 33);
             this.Label14.TabIndex = 28;
             this.Label14.Text = "Font Size: ";
             this.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1444,7 +1444,7 @@ protected override void Dispose(bool disposing)
             this.CheckBoxCheckForUpdates.AutoSize = true;
             this.CheckBoxCheckForUpdates.Location = new System.Drawing.Point(4, 268);
             this.CheckBoxCheckForUpdates.Name = "CheckBoxCheckForUpdates";
-            this.CheckBoxCheckForUpdates.Size = new System.Drawing.Size(149, 19);
+            this.CheckBoxCheckForUpdates.Size = new System.Drawing.Size(148, 19);
             this.CheckBoxCheckForUpdates.TabIndex = 30;
             this.CheckBoxCheckForUpdates.Text = "Check for updates on startup";
             this.CheckBoxCheckForUpdates.UseVisualStyleBackColor = true;
@@ -1454,9 +1454,9 @@ protected override void Dispose(bool disposing)
             // 
             this.BtnConfigureHotKeys.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnConfigureHotKeys.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnConfigureHotKeys.Location = new System.Drawing.Point(160, 219);
+            this.BtnConfigureHotKeys.Location = new System.Drawing.Point(159, 219);
             this.BtnConfigureHotKeys.Name = "BtnConfigureHotKeys";
-            this.BtnConfigureHotKeys.Size = new System.Drawing.Size(189, 36);
+            this.BtnConfigureHotKeys.Size = new System.Drawing.Size(190, 36);
             this.BtnConfigureHotKeys.TabIndex = 31;
             this.BtnConfigureHotKeys.Text = "Configure";
             this.BtnConfigureHotKeys.UseVisualStyleBackColor = true;
@@ -1469,7 +1469,7 @@ protected override void Dispose(bool disposing)
             this.TrackBar1.Maximum = 12;
             this.TrackBar1.Minimum = 8;
             this.TrackBar1.Name = "TrackBar1";
-            this.TrackBar1.Size = new System.Drawing.Size(149, 60);
+            this.TrackBar1.Size = new System.Drawing.Size(148, 60);
             this.TrackBar1.TabIndex = 26;
             this.TrackBar1.Value = 8;
             this.TrackBar1.Scroll += new System.EventHandler(this.TrackBar1_Scroll);
@@ -1536,7 +1536,7 @@ protected override void Dispose(bool disposing)
             this.ComboApplyPlan.Items.AddRange(new object[] {
             "MQTT Start/Exit",
             "Oculus Home Start/Exit"});
-            this.ComboApplyPlan.Location = new System.Drawing.Point(190, 187);
+            this.ComboApplyPlan.Location = new System.Drawing.Point(190, 186);
             this.ComboApplyPlan.Name = "ComboApplyPlan";
             this.ComboApplyPlan.Size = new System.Drawing.Size(159, 23);
             this.ComboApplyPlan.TabIndex = 20;
@@ -1560,7 +1560,7 @@ protected override void Dispose(bool disposing)
             this.ComboPowerPlanExit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboPowerPlanExit.ForeColor = System.Drawing.Color.Black;
             this.ComboPowerPlanExit.FormattingEnabled = true;
-            this.ComboPowerPlanExit.Location = new System.Drawing.Point(190, 108);
+            this.ComboPowerPlanExit.Location = new System.Drawing.Point(190, 107);
             this.ComboPowerPlanExit.Name = "ComboPowerPlanExit";
             this.ComboPowerPlanExit.Size = new System.Drawing.Size(159, 23);
             this.ComboPowerPlanExit.TabIndex = 12;
@@ -1584,7 +1584,7 @@ protected override void Dispose(bool disposing)
             this.ComboPowerPlanStart.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboPowerPlanStart.ForeColor = System.Drawing.Color.Black;
             this.ComboPowerPlanStart.FormattingEnabled = true;
-            this.ComboPowerPlanStart.Location = new System.Drawing.Point(190, 28);
+            this.ComboPowerPlanStart.Location = new System.Drawing.Point(190, 29);
             this.ComboPowerPlanStart.Name = "ComboPowerPlanStart";
             this.ComboPowerPlanStart.Size = new System.Drawing.Size(159, 23);
             this.ComboPowerPlanStart.TabIndex = 6;
@@ -1646,7 +1646,7 @@ protected override void Dispose(bool disposing)
             this.ComboUSBsusp.Items.AddRange(new object[] {
             "Disabled",
             "Enabled"});
-            this.ComboUSBsusp.Location = new System.Drawing.Point(190, 266);
+            this.ComboUSBsusp.Location = new System.Drawing.Point(190, 265);
             this.ComboUSBsusp.Name = "ComboUSBsusp";
             this.ComboUSBsusp.Size = new System.Drawing.Size(159, 23);
             this.ComboUSBsusp.TabIndex = 7;
