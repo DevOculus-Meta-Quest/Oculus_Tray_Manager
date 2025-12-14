@@ -501,6 +501,7 @@ namespace OculusTrayTool.Forms
               Log.WriteToLog("Using " + this.OculusPath + " as default library path");
               this.AddToListboxAndScroll("No library paths returned from registry! You may need to add them manually.");
               this.AddToListboxAndScroll("Using " + this.OculusPath + " as default library path");
+              Log.WriteToLog("WARNING TRIGGERED: No library paths found in registry");
               this.hasWarning = true;
             }
           }
@@ -713,6 +714,7 @@ namespace OculusTrayTool.Forms
             ProjectData.SetProjectError(ex);
             Log.WriteToLog("* Could not get default audio endpoint!");
             this.AddToListboxAndScroll("* Could not get default audio endpoint, no enabled devices found!");
+            Log.WriteToLog("WARNING TRIGGERED: Could not get default audio endpoint");
             this.hasWarning = true;
             ProjectData.ClearProjectError();
           }
@@ -947,6 +949,7 @@ namespace OculusTrayTool.Forms
         //ProjectData.SetProjectError(ex);
         Exception e1 = ex;
         this.AddToListboxAndScroll("* Exception: " + e1.Message);
+        Log.WriteToLog("WARNING TRIGGERED: CheckStopServiceHome exception");
         this.hasWarning = true;
         StackTrace stackTrace = new StackTrace(e1, true);
         Log.WriteToLog(e1.ToString() + stackTrace.ToString());

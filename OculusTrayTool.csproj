@@ -10,7 +10,7 @@
     <ApplicationVersion>0.87.8.0</ApplicationVersion>
     <RootNamespace>OculusTrayTool</RootNamespace>
     <RootNamespace>OculusTrayTool</RootNamespace>
-    <GenerateResourceUsePreserializedResources>false</GenerateResourceUsePreserializedResources>
+    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -39,6 +39,21 @@
       <HintPath>lib\CoreAudio.dll</HintPath>
     </Reference>
     <Reference Include="System.Speech" />
+    <Reference Include="System.Resources.Extensions">
+      <HintPath>packages\System.Resources.Extensions.4.6.0\lib\netstandard2.0\System.Resources.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory">
+      <HintPath>packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Buffers">
+      <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics.Vectors">
+      <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Win32.TaskScheduler">
       <HintPath>lib\Microsoft.Win32.TaskScheduler.dll</HintPath>
     </Reference>

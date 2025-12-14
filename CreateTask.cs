@@ -49,6 +49,7 @@ namespace OculusTrayTool
         Exception e = ex;
         FrmMain.fmain.CheckStartWindows.Checked = false;
         FrmMain.fmain.AddToListboxAndScroll("* Start with Windows: " + e.Message);
+        Log.WriteToLog("WARNING TRIGGERED: CreateScheduledTask exception");
         FrmMain.fmain.hasWarning = true;
         StackTrace stackTrace = new StackTrace(e, true);
         Log.WriteToLog(e.ToString() + stackTrace.ToString());
@@ -75,6 +76,7 @@ namespace OculusTrayTool
       {
         Exception e = ex;
         FrmMain.fmain.AddToListboxAndScroll("* Start with Windows: " + e.Message);
+        Log.WriteToLog("WARNING TRIGGERED: GetAndDeleteTask exception");
         FrmMain.fmain.hasWarning = true;
         StackTrace stackTrace = new StackTrace(e, true);
         Log.WriteToLog(e.ToString() + stackTrace.ToString());
@@ -95,6 +97,7 @@ namespace OculusTrayTool
       {
         Exception e = ex;
         FrmMain.fmain.AddToListboxAndScroll("* Start with Windows: " + e.Message);
+        Log.WriteToLog("WARNING TRIGGERED: GetTask exception");
         FrmMain.fmain.hasWarning = true;
         StackTrace stackTrace = new StackTrace(e, true);
         Log.WriteToLog(e.ToString() + stackTrace.ToString());

@@ -78,6 +78,7 @@ namespace OculusTrayTool
         {
           Log.WriteToLog("No enabled audio devices found");
           FrmMain.fmain.AddToListboxAndScroll("No enabled audio devices found");
+          Log.WriteToLog("WARNING TRIGGERED: No enabled audio devices found");
           MyProject.Forms.FrmMain.hasWarning = true;
           GetConfig.useVoiceCommands = false;
           MyProject.Forms.FrmMain.ComboVoice.SelectedIndex = 0;
@@ -131,6 +132,7 @@ namespace OculusTrayTool
         {
           Log.WriteToLog("No enabled microphone devices found");
           FrmMain.fmain.AddToListboxAndScroll("No enabled microphone devices found");
+          Log.WriteToLog("WARNING TRIGGERED: No enabled microphone devices found");
           MyProject.Forms.FrmMain.hasWarning = true;
           GetConfig.useVoiceCommands = false;
           MyProject.Forms.FrmMain.ComboVoice.SelectedIndex = 0;
@@ -172,6 +174,7 @@ namespace OculusTrayTool
         {
           Log.WriteToLog("No microphone devices found!");
           FrmMain.fmain.AddToListboxAndScroll("No microphone devices found!");
+          Log.WriteToLog("WARNING TRIGGERED: No microphone devices found (Exception)");
           MyProject.Forms.FrmMain.hasWarning = true;
           MySettingsProperty.Settings.DefaultMic = "";
           MySettingsProperty.Settings.SystemDefaultMicGuid = "";

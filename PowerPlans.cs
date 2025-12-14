@@ -51,6 +51,7 @@ namespace OculusTrayTool
       {
         Exception e = ex;
         FrmMain.fmain.AddToListboxAndScroll("* Exception in GetActivePowerPlan(): " + e.Message);
+        Log.WriteToLog("WARNING TRIGGERED: GetActivePowerPlan exception");
         MyProject.Forms.FrmMain.hasWarning = true;
         StackTrace stackTrace = new StackTrace(e, true);
         Log.WriteToLog(e.ToString() + stackTrace.ToString());
@@ -134,6 +135,7 @@ namespace OculusTrayTool
       {
         Exception e = ex;
         FrmMain.fmain.AddToListboxAndScroll("* Exception in GetPowerPlans(): " + e.Message);
+        Log.WriteToLog("WARNING TRIGGERED: GetPowerPlans exception");
         MyProject.Forms.FrmMain.hasWarning = true;
         StackTrace stackTrace = new StackTrace(e, true);
         Log.WriteToLog(e.ToString() + stackTrace.ToString());
@@ -200,6 +202,7 @@ namespace OculusTrayTool
         {
           Exception e = ex;
           FrmMain.fmain.AddToListboxAndScroll("* Exception in GetSetUsbSuspend(): " + e.Message);
+          Log.WriteToLog("WARNING TRIGGERED: GetSetUsbSuspend exception");
           MyProject.Forms.FrmMain.hasWarning = true;
           StackTrace stackTrace = new StackTrace(e, true);
           Log.WriteToLog(e.ToString() + stackTrace.ToString());
@@ -324,6 +327,7 @@ namespace OculusTrayTool
                       FrmMain.fmain.ToolStripMenuItem4.Visible = false;
                     }
                     FrmMain.fmain.ListBox1.TopIndex = checked (FrmMain.fmain.ListBox1.Items.Count - 1);
+                    Log.WriteToLog("WARNING TRIGGERED: Power Management Enabled on device " + keyValuePair.Value);
                     FrmMain.fmain.hasWarning = true;
                   }
                 }
@@ -344,6 +348,7 @@ namespace OculusTrayTool
       {
         Exception e = ex;
         FrmMain.fmain.AddToListboxAndScroll("* Exception in CheckPowerState(): " + e.Message);
+        Log.WriteToLog("WARNING TRIGGERED: CheckPowerState exception");
         FrmMain.fmain.hasWarning = true;
         StackTrace stackTrace = new StackTrace(e, true);
         Log.WriteToLog(e.ToString() + stackTrace.ToString());

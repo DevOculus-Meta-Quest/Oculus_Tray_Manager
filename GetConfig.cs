@@ -144,6 +144,7 @@ namespace OculusTrayTool
             FrmMain.fmain.AddToListboxAndScroll("* Found incorrectly formated Library path. If you have manually added Library paths you may need to do this again");
             MySettingsProperty.Settings.LibraryPath = "";
             MySettingsProperty.Settings.Save();
+            Log.WriteToLog("WARNING TRIGGERED: Incorrectly formatted Library path");
             FrmMain.fmain.hasWarning = true;
           }
           Log.WriteToLog("Retrieving and cross-checking Oculus Library paths from the registry");
@@ -180,6 +181,7 @@ namespace OculusTrayTool
           {
             Log.WriteToLog("Warning: No library paths returned from registry!");
             FrmMain.fmain.AddToListboxAndScroll("Warning: No library paths returned from registry!");
+            Log.WriteToLog("WARNING TRIGGERED: No library paths returned from registry");
             FrmMain.fmain.hasWarning = true;
           }
         }
