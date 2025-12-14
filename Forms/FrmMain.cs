@@ -1664,10 +1664,10 @@ namespace MetaQuestTrayTool.Forms
              ReplaceCombo("Voice Commands", "ComboVoice", new string[] { "Disabled", "English", "German", "French", "Spanish", "Italian" }, "Disabled");
              
              // 5. Oculus Homeless
-             ReplaceCombo("Homeless", "ComboHomless", new string[] { "Disabled", "Enabled" }, "Disabled");
+             // ReplaceCombo("Homeless", "ComboHomless", new string[] { "Disabled", "Enabled" }, "Disabled");
              
              // 6. Mirror Oculus Home
-             ReplaceCombo("Mirror", "ComboMirrorHome", new string[] { "Disabled", "Enabled" }, "Disabled");
+             // ReplaceCombo("Mirror", "ComboMirrorHome", new string[] { "Disabled", "Enabled" }, "Disabled");
 
              // 7. Visual HUD
              ReplaceCombo("Visual HUD", "ComboVisualHUD", new string[] { "None", "Performance", "Stereo Debug", "Layer", "Compositor" }, "None");
@@ -1786,7 +1786,7 @@ namespace MetaQuestTrayTool.Forms
             ReplaceCombo("Encode Resolution", "ComboLinkResolution", new string[] { "0", "1832", "2048", "2352", "2784", "3648", "3664" }, "0"); 
 
             // 3. Encode Bitrate
-            ReplaceCombo("Encode Bitrate", "ComboLinkBitrate", new string[] { "0", "100", "150", "200", "250", "300", "350", "400", "500" }, "0");
+            // ReplaceCombo("Encode Bitrate", "ComboLinkBitrate", new string[] { "0", "100", "150", "200", "250", "300", "350", "400", "500" }, "0");
 
             // 4. Encode Dynamic Bitrate
             ReplaceCombo("Encode Dynamic Bitrate", "ComboLinkDynamicBitrate", new string[] { "Default", "Enabled", "Disabled" }, "Default");

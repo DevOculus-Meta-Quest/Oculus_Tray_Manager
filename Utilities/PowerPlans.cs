@@ -166,13 +166,11 @@ namespace MetaQuestTrayTool
                 {
                   FrmMain.fmain.ComboUSBsusp.Text = "Enabled";
                   Log.WriteToLog("Current Power Plan '" + PowerPlans.activePlanName + "' has USB Selective Suspend Enabled");
-                  FrmMain.fmain.AddToListboxAndScroll("Current Power Plan '" + PowerPlans.activePlanName + "' has USB Selective Suspend Enabled");
                 }
                 else
                 {
                   FrmMain.fmain.ComboUSBsusp.Text = "Disabled";
                   Log.WriteToLog("Current Power Plan '" + PowerPlans.activePlanName + "' has USB Selective Suspend Disabled");
-                  FrmMain.fmain.AddToListboxAndScroll("Current Power Plan '" + PowerPlans.activePlanName + "' has USB Selective Suspend Disabled");
                 }
               }
               if (change)
