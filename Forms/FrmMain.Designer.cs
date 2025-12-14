@@ -32,7 +32,7 @@ protected override void Dispose(bool disposing)
     {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
-            System.Management.EventWatcherOptions eventWatcherOptions1 = new System.Management.EventWatcherOptions();
+            System.Management.EventWatcherOptions eventWatcherOptions2 = new System.Management.EventWatcherOptions();
             this.NotifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.ContextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolStripStartOVR = new System.Windows.Forms.ToolStripMenuItem();
@@ -98,10 +98,6 @@ protected override void Dispose(bool disposing)
             this.Label7 = new System.Windows.Forms.Label();
             this.BtnProfiles = new System.Windows.Forms.Button();
             this.Label9 = new System.Windows.Forms.Label();
-            this.Label17 = new System.Windows.Forms.Label();
-            this.ComboMirrorHome = new System.Windows.Forms.ComboBox();
-            this.Label16 = new System.Windows.Forms.Label();
-            this.BtnHomless = new System.Windows.Forms.Button();
             this.Label15 = new System.Windows.Forms.Label();
             this.Label35 = new System.Windows.Forms.Label();
             this.ComboVisualHUD = new System.Windows.Forms.ComboBox();
@@ -176,18 +172,14 @@ protected override void Dispose(bool disposing)
             this.Button12 = new System.Windows.Forms.Button();
             this.DbLayoutPanel3 = new MetaQuestTrayTool.MyNameSpace.DBLayoutPanel(this.components);
             this.ComboBox11 = new System.Windows.Forms.ComboBox();
-            this.ComboBox6 = new System.Windows.Forms.ComboBox();
             this.Label32 = new System.Windows.Forms.Label();
             this.Label30 = new System.Windows.Forms.Label();
             this.Label31 = new System.Windows.Forms.Label();
             this.ComboBox4 = new System.Windows.Forms.ComboBox();
             this.ComboBox3 = new System.Windows.Forms.ComboBox();
             this.ComboBox2 = new System.Windows.Forms.ComboBox();
-            this.Label36 = new System.Windows.Forms.Label();
             this.Label38 = new System.Windows.Forms.Label();
             this.ComboBox10 = new System.Windows.Forms.ComboBox();
-            this.Label21 = new System.Windows.Forms.Label();
-            this.Button6 = new System.Windows.Forms.Button();
             this.Label20 = new System.Windows.Forms.Label();
             this.ComboBox7 = new System.Windows.Forms.ComboBox();
             this.Label39 = new System.Windows.Forms.Label();
@@ -200,6 +192,14 @@ protected override void Dispose(bool disposing)
             this.Label12 = new System.Windows.Forms.Label();
             this.Button9 = new System.Windows.Forms.Button();
             this.Button8 = new System.Windows.Forms.Button();
+            this.Label17 = new System.Windows.Forms.Label();
+            this.ComboMirrorHome = new System.Windows.Forms.ComboBox();
+            this.Label16 = new System.Windows.Forms.Label();
+            this.BtnHomless = new System.Windows.Forms.Button();
+            this.ComboBox6 = new System.Windows.Forms.ComboBox();
+            this.Label36 = new System.Windows.Forms.Label();
+            this.Label21 = new System.Windows.Forms.Label();
+            this.Button6 = new System.Windows.Forms.Button();
             this.ContextMenuStrip1.SuspendLayout();
             this.ContextMenuStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
@@ -452,7 +452,7 @@ protected override void Dispose(bool disposing)
             "2.4",
             "2.45",
             "2.5"});
-            this.ComboSSstart.Location = new System.Drawing.Point(167, 38);
+            this.ComboSSstart.Location = new System.Drawing.Point(167, 39);
             this.ComboSSstart.Name = "ComboSSstart";
             this.ComboSSstart.Size = new System.Drawing.Size(116, 23);
             this.ComboSSstart.Sorted = true;
@@ -477,7 +477,7 @@ protected override void Dispose(bool disposing)
             "Adaptive",
             "Auto",
             "Off"});
-            this.ComboBox1.Location = new System.Drawing.Point(167, 71);
+            this.ComboBox1.Location = new System.Drawing.Point(167, 72);
             this.ComboBox1.Name = "ComboBox1";
             this.ComboBox1.Size = new System.Drawing.Size(116, 23);
             this.ComboBox1.Sorted = true;
@@ -522,7 +522,7 @@ protected override void Dispose(bool disposing)
             "Enabled"});
             this.ComboHomless.Location = new System.Drawing.Point(167, 202);
             this.ComboHomless.Name = "ComboHomless";
-            this.ComboHomless.Size = new System.Drawing.Size(116, 23);
+            this.ComboHomless.Size = new System.Drawing.Size(116, 21);
             this.ComboHomless.TabIndex = 37;
             this.ToolTip.SetToolTip(this.ComboHomless, "Enable or Disable Oculus Homeless");
             this.ComboHomless.SelectedIndexChanged += new System.EventHandler(this.ComboHomless_SelectedIndexChanged);
@@ -548,7 +548,7 @@ protected override void Dispose(bool disposing)
             this.ComboVoice.Items.AddRange(new object[] {
             "Disabled",
             "Enabled"});
-            this.ComboVoice.Location = new System.Drawing.Point(167, 170);
+            this.ComboVoice.Location = new System.Drawing.Point(167, 171);
             this.ComboVoice.Name = "ComboVoice";
             this.ComboVoice.Size = new System.Drawing.Size(116, 23);
             this.ComboVoice.TabIndex = 13;
@@ -607,7 +607,7 @@ protected override void Dispose(bool disposing)
             this.CheckRiftAudio.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CheckRiftAudio.Location = new System.Drawing.Point(4, 90);
             this.CheckRiftAudio.Name = "CheckRiftAudio";
-            this.CheckRiftAudio.Size = new System.Drawing.Size(150, 36);
+            this.CheckRiftAudio.Size = new System.Drawing.Size(149, 36);
             this.CheckRiftAudio.TabIndex = 7;
             this.CheckRiftAudio.TabStop = false;
             this.CheckRiftAudio.Text = "Use Audio Switcher";
@@ -703,8 +703,8 @@ protected override void Dispose(bool disposing)
             this.CheckLocalDebug.Size = new System.Drawing.Size(156, 41);
             this.CheckLocalDebug.TabIndex = 0;
             this.CheckLocalDebug.Text = "Use MQTT Local";
-            this.ToolTip.SetToolTip(this.CheckLocalDebug, "Use the Oculus Debug Tool shipped with MQTT. Don\'t check this box unless you know " +
-        "what you are doing as it could potantially break functionality.");
+            this.ToolTip.SetToolTip(this.CheckLocalDebug, "Use the Oculus Debug Tool shipped with MQTT. Don\'t check this box unless you know" +
+        " what you are doing as it could potantially break functionality.");
             this.CheckLocalDebug.UseVisualStyleBackColor = true;
             this.CheckLocalDebug.CheckedChanged += new System.EventHandler(this.CheckLocalDebug_CheckedChanged);
             // 
@@ -731,8 +731,8 @@ protected override void Dispose(bool disposing)
             this.Label13.TabIndex = 31;
             this.Label13.Text = "Oculus Debug Tool";
             this.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ToolTip.SetToolTip(this.Label13, "Use the Oculus Debug Tool shipped with MQTT. Don\'t check this box unless you know " +
-        "what you are doing as it could potantially break functionality.");
+            this.ToolTip.SetToolTip(this.Label13, "Use the Oculus Debug Tool shipped with MQTT. Don\'t check this box unless you know" +
+        " what you are doing as it could potantially break functionality.");
             // 
             // Label18
             // 
@@ -903,9 +903,9 @@ protected override void Dispose(bool disposing)
             // 
             // MinimizeHomeWatcher
             // 
-            eventWatcherOptions1.BlockSize = 1;
-            eventWatcherOptions1.Timeout = System.TimeSpan.Parse("10675199.02:48:05.4775807");
-            this.MinimizeHomeWatcher.Options = eventWatcherOptions1;
+            eventWatcherOptions2.BlockSize = 1;
+            eventWatcherOptions2.Timeout = System.TimeSpan.Parse("10675199.02:48:05.4775807");
+            this.MinimizeHomeWatcher.Options = eventWatcherOptions2;
             this.MinimizeHomeWatcher.Query = new System.Management.EventQuery("");
             this.MinimizeHomeWatcher.Scope = new System.Management.ManagementScope("\\\\.\\root\\cimv2");
             this.MinimizeHomeWatcher.EventArrived += new System.Management.EventArrivedEventHandler(this.MinimizeHomeWatcher_EventArrived);
@@ -1008,11 +1008,6 @@ protected override void Dispose(bool disposing)
             this.DbLayoutPanel2.Controls.Add(this.Label1, 0, 1);
             this.DbLayoutPanel2.Controls.Add(this.Label6, 0, 2);
             this.DbLayoutPanel2.Controls.Add(this.Label9, 0, 8);
-            // this.DbLayoutPanel2.Controls.Add(this.Label17, 0, 7);
-            // this.DbLayoutPanel2.Controls.Add(this.ComboMirrorHome, 1, 7);
-            // this.DbLayoutPanel2.Controls.Add(this.Label16, 0, 6);
-            // this.DbLayoutPanel2.Controls.Add(this.ComboHomless, 1, 6);
-            // this.DbLayoutPanel2.Controls.Add(this.BtnHomless, 2, 6);
             this.DbLayoutPanel2.Controls.Add(this.Label5, 0, 5);
             this.DbLayoutPanel2.Controls.Add(this.ComboVoice, 1, 5);
             this.DbLayoutPanel2.Controls.Add(this.BtnVoice, 2, 5);
@@ -1093,58 +1088,6 @@ protected override void Dispose(bool disposing)
             this.Label9.Text = "Visual HUD";
             this.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // Label17
-            // 
-            this.Label17.AutoSize = true;
-            this.Label17.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Label17.Location = new System.Drawing.Point(4, 232);
-            this.Label17.Name = "Label17";
-            this.Label17.Size = new System.Drawing.Size(156, 32);
-            this.Label17.TabIndex = 41;
-            this.Label17.Text = "Mirror Oculus Home";
-            this.Label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // ComboMirrorHome
-            // 
-            this.ComboMirrorHome.BackColor = System.Drawing.Color.AliceBlue;
-            this.ComboMirrorHome.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ComboMirrorHome.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.ComboMirrorHome.FormattingEnabled = true;
-            this.ComboMirrorHome.Items.AddRange(new object[] {
-            "Enabled",
-            "Disabled"});
-            this.ComboMirrorHome.Location = new System.Drawing.Point(167, 235);
-            this.ComboMirrorHome.Name = "ComboMirrorHome";
-            this.ComboMirrorHome.Size = new System.Drawing.Size(116, 23);
-            this.ComboMirrorHome.TabIndex = 42;
-            this.ComboMirrorHome.SelectedIndexChanged += new System.EventHandler(this.ComboMirrorHome_SelectedIndexChanged);
-            // 
-            // Label16
-            // 
-            this.Label16.AutoSize = true;
-            this.Label16.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Label16.Location = new System.Drawing.Point(4, 199);
-            this.Label16.Name = "Label16";
-            this.Label16.Size = new System.Drawing.Size(156, 32);
-            this.Label16.TabIndex = 36;
-            this.Label16.Text = "Oculus Homeless";
-            this.Label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // BtnHomless
-            // 
-            this.BtnHomless.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnHomless.Enabled = false;
-            this.BtnHomless.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnHomless.Location = new System.Drawing.Point(290, 202);
-            this.BtnHomless.Name = "BtnHomless";
-            this.BtnHomless.Size = new System.Drawing.Size(59, 26);
-            this.BtnHomless.TabIndex = 38;
-            this.BtnHomless.Text = "Edit";
-            this.BtnHomless.UseVisualStyleBackColor = true;
-            this.BtnHomless.Click += new System.EventHandler(this.BtnHomless_Click);
-            // 
             // Label15
             // 
             this.Label15.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1183,7 +1126,7 @@ protected override void Dispose(bool disposing)
             "Application Render Timing",
             "Compositor Render Timing",
             "Version Info"});
-            this.ComboVisualHUD.Location = new System.Drawing.Point(167, 269);
+            this.ComboVisualHUD.Location = new System.Drawing.Point(167, 270);
             this.ComboVisualHUD.Name = "ComboVisualHUD";
             this.ComboVisualHUD.Size = new System.Drawing.Size(116, 23);
             this.ComboVisualHUD.TabIndex = 40;
@@ -1199,7 +1142,7 @@ protected override void Dispose(bool disposing)
             this.ComboBox5.Items.AddRange(new object[] {
             "On",
             "Off"});
-            this.ComboBox5.Location = new System.Drawing.Point(167, 104);
+            this.ComboBox5.Location = new System.Drawing.Point(167, 105);
             this.ComboBox5.Name = "ComboBox5";
             this.ComboBox5.Size = new System.Drawing.Size(116, 23);
             this.ComboBox5.TabIndex = 45;
@@ -1274,7 +1217,7 @@ protected override void Dispose(bool disposing)
             "Above normal",
             "High",
             "Realtime"});
-            this.ComboOVRPrio.Location = new System.Drawing.Point(167, 302);
+            this.ComboOVRPrio.Location = new System.Drawing.Point(167, 303);
             this.ComboOVRPrio.Name = "ComboOVRPrio";
             this.ComboOVRPrio.Size = new System.Drawing.Size(116, 23);
             this.ComboOVRPrio.TabIndex = 48;
@@ -1383,7 +1326,7 @@ protected override void Dispose(bool disposing)
             this.DbLayoutPanel4.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.DbLayoutPanel4.ColumnCount = 2;
             this.DbLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.DbLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 194F));
+            this.DbLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 195F));
             this.DbLayoutPanel4.Controls.Add(this.CheckStartWithWindows, 0, 0);
             this.DbLayoutPanel4.Controls.Add(this.CheckStartMin, 0, 1);
             this.DbLayoutPanel4.Controls.Add(this.CheckMinimizeOnX, 0, 4);
@@ -1418,7 +1361,7 @@ protected override void Dispose(bool disposing)
             this.CheckStartWithWindows.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CheckStartWithWindows.Location = new System.Drawing.Point(4, 4);
             this.CheckStartWithWindows.Name = "CheckStartWithWindows";
-            this.CheckStartWithWindows.Size = new System.Drawing.Size(150, 36);
+            this.CheckStartWithWindows.Size = new System.Drawing.Size(149, 36);
             this.CheckStartWithWindows.TabIndex = 4;
             this.CheckStartWithWindows.TabStop = false;
             this.CheckStartWithWindows.Text = "Start with Windows";
@@ -1430,7 +1373,7 @@ protected override void Dispose(bool disposing)
             this.CheckStartMin.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CheckStartMin.Location = new System.Drawing.Point(4, 47);
             this.CheckStartMin.Name = "CheckStartMin";
-            this.CheckStartMin.Size = new System.Drawing.Size(150, 36);
+            this.CheckStartMin.Size = new System.Drawing.Size(149, 36);
             this.CheckStartMin.TabIndex = 5;
             this.CheckStartMin.TabStop = false;
             this.CheckStartMin.Text = "Start minimized";
@@ -1442,7 +1385,7 @@ protected override void Dispose(bool disposing)
             this.CheckMinimizeOnX.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CheckMinimizeOnX.Location = new System.Drawing.Point(4, 176);
             this.CheckMinimizeOnX.Name = "CheckMinimizeOnX";
-            this.CheckMinimizeOnX.Size = new System.Drawing.Size(150, 36);
+            this.CheckMinimizeOnX.Size = new System.Drawing.Size(149, 36);
             this.CheckMinimizeOnX.TabIndex = 9;
             this.CheckMinimizeOnX.Text = "Minimize Tool on X";
             this.CheckMinimizeOnX.UseVisualStyleBackColor = true;
@@ -1453,7 +1396,7 @@ protected override void Dispose(bool disposing)
             this.CheckBoxAltTab.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CheckBoxAltTab.Location = new System.Drawing.Point(4, 133);
             this.CheckBoxAltTab.Name = "CheckBoxAltTab";
-            this.CheckBoxAltTab.Size = new System.Drawing.Size(150, 36);
+            this.CheckBoxAltTab.Size = new System.Drawing.Size(149, 36);
             this.CheckBoxAltTab.TabIndex = 6;
             this.CheckBoxAltTab.TabStop = false;
             this.CheckBoxAltTab.Text = "Hide from Alt+Tab";
@@ -1465,7 +1408,7 @@ protected override void Dispose(bool disposing)
             this.HotKeysCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.HotKeysCheckBox.Location = new System.Drawing.Point(4, 219);
             this.HotKeysCheckBox.Name = "HotKeysCheckBox";
-            this.HotKeysCheckBox.Size = new System.Drawing.Size(150, 36);
+            this.HotKeysCheckBox.Size = new System.Drawing.Size(149, 36);
             this.HotKeysCheckBox.TabIndex = 27;
             this.HotKeysCheckBox.Text = "Enable HotKeys";
             this.HotKeysCheckBox.UseVisualStyleBackColor = true;
@@ -1475,9 +1418,9 @@ protected override void Dispose(bool disposing)
             // 
             this.BtnConfigureAudio.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnConfigureAudio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnConfigureAudio.Location = new System.Drawing.Point(161, 90);
+            this.BtnConfigureAudio.Location = new System.Drawing.Point(160, 90);
             this.BtnConfigureAudio.Name = "BtnConfigureAudio";
-            this.BtnConfigureAudio.Size = new System.Drawing.Size(188, 36);
+            this.BtnConfigureAudio.Size = new System.Drawing.Size(189, 36);
             this.BtnConfigureAudio.TabIndex = 29;
             this.BtnConfigureAudio.Text = "Configure";
             this.BtnConfigureAudio.UseVisualStyleBackColor = true;
@@ -1490,21 +1433,20 @@ protected override void Dispose(bool disposing)
             this.Label14.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.Label14.Location = new System.Drawing.Point(4, 298);
             this.Label14.Name = "Label14";
-            this.Label14.Size = new System.Drawing.Size(150, 33);
+            this.Label14.Size = new System.Drawing.Size(149, 33);
             this.Label14.TabIndex = 28;
             this.Label14.Text = "Font Size: ";
             this.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // CheckBoxCheckForUpdates
             // 
-            this.CheckBoxCheckForUpdates.AutoSize = true;
             this.CheckBoxCheckForUpdates.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.CheckBoxCheckForUpdates.Location = new System.Drawing.Point(4, 262);
+            this.CheckBoxCheckForUpdates.AutoSize = true;
+            this.CheckBoxCheckForUpdates.Location = new System.Drawing.Point(4, 268);
             this.CheckBoxCheckForUpdates.Name = "CheckBoxCheckForUpdates";
-            this.CheckBoxCheckForUpdates.Size = new System.Drawing.Size(150, 32);
+            this.CheckBoxCheckForUpdates.Size = new System.Drawing.Size(149, 19);
             this.CheckBoxCheckForUpdates.TabIndex = 30;
             this.CheckBoxCheckForUpdates.Text = "Check for updates on startup";
-            this.CheckBoxCheckForUpdates.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.CheckBoxCheckForUpdates.UseVisualStyleBackColor = true;
             this.CheckBoxCheckForUpdates.CheckedChanged += new System.EventHandler(this.CheckBoxCheckForUpdates_CheckedChanged);
             // 
@@ -1512,9 +1454,9 @@ protected override void Dispose(bool disposing)
             // 
             this.BtnConfigureHotKeys.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BtnConfigureHotKeys.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnConfigureHotKeys.Location = new System.Drawing.Point(161, 219);
+            this.BtnConfigureHotKeys.Location = new System.Drawing.Point(160, 219);
             this.BtnConfigureHotKeys.Name = "BtnConfigureHotKeys";
-            this.BtnConfigureHotKeys.Size = new System.Drawing.Size(188, 36);
+            this.BtnConfigureHotKeys.Size = new System.Drawing.Size(189, 36);
             this.BtnConfigureHotKeys.TabIndex = 31;
             this.BtnConfigureHotKeys.Text = "Configure";
             this.BtnConfigureHotKeys.UseVisualStyleBackColor = true;
@@ -1527,7 +1469,7 @@ protected override void Dispose(bool disposing)
             this.TrackBar1.Maximum = 12;
             this.TrackBar1.Minimum = 8;
             this.TrackBar1.Name = "TrackBar1";
-            this.TrackBar1.Size = new System.Drawing.Size(150, 60);
+            this.TrackBar1.Size = new System.Drawing.Size(149, 60);
             this.TrackBar1.TabIndex = 26;
             this.TrackBar1.Value = 8;
             this.TrackBar1.Scroll += new System.EventHandler(this.TrackBar1_Scroll);
@@ -1594,7 +1536,7 @@ protected override void Dispose(bool disposing)
             this.ComboApplyPlan.Items.AddRange(new object[] {
             "MQTT Start/Exit",
             "Oculus Home Start/Exit"});
-            this.ComboApplyPlan.Location = new System.Drawing.Point(190, 186);
+            this.ComboApplyPlan.Location = new System.Drawing.Point(190, 187);
             this.ComboApplyPlan.Name = "ComboApplyPlan";
             this.ComboApplyPlan.Size = new System.Drawing.Size(159, 23);
             this.ComboApplyPlan.TabIndex = 20;
@@ -1618,7 +1560,7 @@ protected override void Dispose(bool disposing)
             this.ComboPowerPlanExit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboPowerPlanExit.ForeColor = System.Drawing.Color.Black;
             this.ComboPowerPlanExit.FormattingEnabled = true;
-            this.ComboPowerPlanExit.Location = new System.Drawing.Point(190, 107);
+            this.ComboPowerPlanExit.Location = new System.Drawing.Point(190, 108);
             this.ComboPowerPlanExit.Name = "ComboPowerPlanExit";
             this.ComboPowerPlanExit.Size = new System.Drawing.Size(159, 23);
             this.ComboPowerPlanExit.TabIndex = 12;
@@ -1642,7 +1584,7 @@ protected override void Dispose(bool disposing)
             this.ComboPowerPlanStart.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboPowerPlanStart.ForeColor = System.Drawing.Color.Black;
             this.ComboPowerPlanStart.FormattingEnabled = true;
-            this.ComboPowerPlanStart.Location = new System.Drawing.Point(190, 29);
+            this.ComboPowerPlanStart.Location = new System.Drawing.Point(190, 28);
             this.ComboPowerPlanStart.Name = "ComboPowerPlanStart";
             this.ComboPowerPlanStart.Size = new System.Drawing.Size(159, 23);
             this.ComboPowerPlanStart.TabIndex = 6;
@@ -1704,7 +1646,7 @@ protected override void Dispose(bool disposing)
             this.ComboUSBsusp.Items.AddRange(new object[] {
             "Disabled",
             "Enabled"});
-            this.ComboUSBsusp.Location = new System.Drawing.Point(190, 265);
+            this.ComboUSBsusp.Location = new System.Drawing.Point(190, 266);
             this.ComboUSBsusp.Name = "ComboUSBsusp";
             this.ComboUSBsusp.Size = new System.Drawing.Size(159, 23);
             this.ComboUSBsusp.TabIndex = 7;
@@ -1790,7 +1732,7 @@ protected override void Dispose(bool disposing)
             this.CheckStartService.Size = new System.Drawing.Size(322, 23);
             this.CheckStartService.TabIndex = 17;
             this.CheckStartService.TabStop = false;
-            this.CheckStartService.Text = "Start Oculus service when tool starts";
+            this.CheckStartService.Text = "Start MetaQuest service when tool starts";
             this.CheckStartService.UseVisualStyleBackColor = true;
             this.CheckStartService.CheckedChanged += new System.EventHandler(this.CheckStartService_CheckedChanged);
             // 
@@ -1802,7 +1744,7 @@ protected override void Dispose(bool disposing)
             this.CheckStopService.Size = new System.Drawing.Size(322, 23);
             this.CheckStopService.TabIndex = 18;
             this.CheckStopService.TabStop = false;
-            this.CheckStopService.Text = "Stop Oculus service when tool exits";
+            this.CheckStopService.Text = "Stop MetaQuest service when tool exits";
             this.CheckStopService.UseVisualStyleBackColor = true;
             this.CheckStopService.CheckedChanged += new System.EventHandler(this.CheckStopService_CheckedChanged);
             // 
@@ -1814,7 +1756,7 @@ protected override void Dispose(bool disposing)
             this.CheckSendHomeToTrayOnStart.Size = new System.Drawing.Size(322, 22);
             this.CheckSendHomeToTrayOnStart.TabIndex = 30;
             this.CheckSendHomeToTrayOnStart.TabStop = false;
-            this.CheckSendHomeToTrayOnStart.Text = "Send Oculus Home to tray when it starts";
+            this.CheckSendHomeToTrayOnStart.Text = "Send MetaQuest Home to tray when it starts";
             this.CheckSendHomeToTrayOnStart.UseVisualStyleBackColor = true;
             this.CheckSendHomeToTrayOnStart.CheckedChanged += new System.EventHandler(this.CheckSendHomeToTrayOnStart_CheckedChanged);
             // 
@@ -1826,7 +1768,7 @@ protected override void Dispose(bool disposing)
             this.CheckSendHomeToTray.Size = new System.Drawing.Size(322, 23);
             this.CheckSendHomeToTray.TabIndex = 29;
             this.CheckSendHomeToTray.TabStop = false;
-            this.CheckSendHomeToTray.Text = "Send Oculus Home to tray when it\'s minimized";
+            this.CheckSendHomeToTray.Text = "Send MetaQuest Home to tray when it\'s minimized";
             this.CheckSendHomeToTray.UseVisualStyleBackColor = true;
             this.CheckSendHomeToTray.CheckedChanged += new System.EventHandler(this.CheckSendHomeToTray_CheckedChanged);
             // 
@@ -1838,7 +1780,7 @@ protected override void Dispose(bool disposing)
             this.CheckCloseHome.Size = new System.Drawing.Size(322, 23);
             this.CheckCloseHome.TabIndex = 21;
             this.CheckCloseHome.TabStop = false;
-            this.CheckCloseHome.Text = "Close Oculus Home on tool exit";
+            this.CheckCloseHome.Text = "Close MetaQuest Home on tool exit";
             this.CheckCloseHome.UseVisualStyleBackColor = true;
             this.CheckCloseHome.CheckedChanged += new System.EventHandler(this.CheckCloseHome_CheckedChanged);
             // 
@@ -1850,7 +1792,7 @@ protected override void Dispose(bool disposing)
             this.CheckLaunchHomeTool.Size = new System.Drawing.Size(322, 23);
             this.CheckLaunchHomeTool.TabIndex = 20;
             this.CheckLaunchHomeTool.TabStop = false;
-            this.CheckLaunchHomeTool.Text = "Launch Oculus Home on tool start";
+            this.CheckLaunchHomeTool.Text = "Launch MetaQuest Home on tool start";
             this.CheckLaunchHomeTool.UseVisualStyleBackColor = true;
             this.CheckLaunchHomeTool.CheckedChanged += new System.EventHandler(this.CheckLaunchHomeTool_CheckedChanged);
             // 
@@ -1862,7 +1804,7 @@ protected override void Dispose(bool disposing)
             this.CheckLaunchHome.Size = new System.Drawing.Size(322, 23);
             this.CheckLaunchHome.TabIndex = 19;
             this.CheckLaunchHome.TabStop = false;
-            this.CheckLaunchHome.Text = "Launch Oculus Home on service start";
+            this.CheckLaunchHome.Text = "Launch MetaQuest Home on service start";
             this.CheckLaunchHome.UseVisualStyleBackColor = true;
             this.CheckLaunchHome.CheckedChanged += new System.EventHandler(this.CheckLaunchHome_CheckedChanged);
             // 
@@ -1873,7 +1815,7 @@ protected override void Dispose(bool disposing)
             this.CheckRestartSleep.Name = "CheckRestartSleep";
             this.CheckRestartSleep.Size = new System.Drawing.Size(322, 23);
             this.CheckRestartSleep.TabIndex = 31;
-            this.CheckRestartSleep.Text = "Restart Oculus service when computer wakes up";
+            this.CheckRestartSleep.Text = "Restart MetaQuest service when computer wakes up";
             this.CheckRestartSleep.UseVisualStyleBackColor = true;
             this.CheckRestartSleep.CheckedChanged += new System.EventHandler(this.CheckRestartSleep_CheckedChanged);
             // 
@@ -1885,7 +1827,7 @@ protected override void Dispose(bool disposing)
             this.CheckStopServiceHome.Name = "CheckStopServiceHome";
             this.CheckStopServiceHome.Size = new System.Drawing.Size(322, 23);
             this.CheckStopServiceHome.TabIndex = 32;
-            this.CheckStopServiceHome.Text = "Stop Oculus service when Oculus Home is closed";
+            this.CheckStopServiceHome.Text = "Stop MetaQuest service when Oculus Home is closed";
             this.CheckStopServiceHome.UseVisualStyleBackColor = true;
             this.CheckStopServiceHome.CheckedChanged += new System.EventHandler(this.CheckStopServiceHome_CheckedChanged);
             // 
@@ -1941,7 +1883,7 @@ protected override void Dispose(bool disposing)
             this.Label11.Name = "Label11";
             this.Label11.Size = new System.Drawing.Size(115, 61);
             this.Label11.TabIndex = 25;
-            this.Label11.Text = "Oculus Service: ";
+            this.Label11.Text = "MetaQuest Service: ";
             this.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // TabPage5
@@ -2181,18 +2123,14 @@ protected override void Dispose(bool disposing)
             this.DbLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 58.33333F));
             this.DbLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.66667F));
             this.DbLayoutPanel3.Controls.Add(this.ComboBox11, 1, 5);
-            // this.DbLayoutPanel3.Controls.Add(this.ComboBox6, 1, 3);
             this.DbLayoutPanel3.Controls.Add(this.Label32, 0, 0);
             this.DbLayoutPanel3.Controls.Add(this.Label30, 0, 1);
             this.DbLayoutPanel3.Controls.Add(this.Label31, 0, 2);
             this.DbLayoutPanel3.Controls.Add(this.ComboBox4, 1, 0);
             this.DbLayoutPanel3.Controls.Add(this.ComboBox3, 1, 2);
             this.DbLayoutPanel3.Controls.Add(this.ComboBox2, 1, 1);
-            // this.DbLayoutPanel3.Controls.Add(this.Label36, 0, 3);
             this.DbLayoutPanel3.Controls.Add(this.Label38, 0, 4);
             this.DbLayoutPanel3.Controls.Add(this.ComboBox10, 1, 4);
-            // this.DbLayoutPanel3.Controls.Add(this.Label21, 0, 7);
-            // this.DbLayoutPanel3.Controls.Add(this.Button6, 1, 7);
             this.DbLayoutPanel3.Controls.Add(this.Label20, 0, 6);
             this.DbLayoutPanel3.Controls.Add(this.ComboBox7, 1, 6);
             this.DbLayoutPanel3.Controls.Add(this.Label39, 0, 5);
@@ -2243,39 +2181,6 @@ protected override void Dispose(bool disposing)
             this.ComboBox11.Name = "ComboBox11";
             this.ComboBox11.Size = new System.Drawing.Size(117, 24);
             this.ComboBox11.TabIndex = 18;
-            // 
-            // ComboBox6
-            // 
-            this.ComboBox6.BackColor = System.Drawing.Color.AliceBlue;
-            this.ComboBox6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ComboBox6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ComboBox6.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.ComboBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ComboBox6.FormattingEnabled = true;
-            this.ComboBox6.Items.AddRange(new object[] {
-            "0",
-            "150",
-            "200",
-            "250",
-            "300",
-            "350",
-            "400",
-            "450",
-            "500",
-            "550",
-            "600",
-            "650",
-            "700",
-            "750",
-            "800",
-            "850",
-            "900",
-            "960"});
-            this.ComboBox6.Location = new System.Drawing.Point(175, 103);
-            this.ComboBox6.MaxLength = 4;
-            this.ComboBox6.Name = "ComboBox6";
-            this.ComboBox6.Size = new System.Drawing.Size(117, 24);
-            this.ComboBox6.TabIndex = 10;
             // 
             // Label32
             // 
@@ -2365,17 +2270,6 @@ protected override void Dispose(bool disposing)
             this.ComboBox2.Size = new System.Drawing.Size(117, 24);
             this.ComboBox2.TabIndex = 3;
             // 
-            // Label36
-            // 
-            this.Label36.AutoSize = true;
-            this.Label36.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Label36.Location = new System.Drawing.Point(4, 100);
-            this.Label36.Name = "Label36";
-            this.Label36.Size = new System.Drawing.Size(164, 32);
-            this.Label36.TabIndex = 9;
-            this.Label36.Text = "Encode Bitrate";
-            this.Label36.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // Label38
             // 
             this.Label38.AutoSize = true;
@@ -2403,29 +2297,6 @@ protected override void Dispose(bool disposing)
             this.ComboBox10.Name = "ComboBox10";
             this.ComboBox10.Size = new System.Drawing.Size(117, 24);
             this.ComboBox10.TabIndex = 16;
-            // 
-            // Label21
-            // 
-            this.Label21.AutoSize = true;
-            this.Label21.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Label21.Location = new System.Drawing.Point(4, 232);
-            this.Label21.Name = "Label21";
-            this.Label21.Size = new System.Drawing.Size(164, 35);
-            this.Label21.TabIndex = 13;
-            this.Label21.Text = "Permanent AirLink";
-            this.Label21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // Button6
-            // 
-            this.Button6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button6.Location = new System.Drawing.Point(175, 235);
-            this.Button6.Name = "Button6";
-            this.Button6.Size = new System.Drawing.Size(117, 29);
-            this.Button6.TabIndex = 14;
-            this.Button6.Text = "Enable";
-            this.Button6.UseVisualStyleBackColor = true;
-            this.Button6.Click += new System.EventHandler(this.Button6_Click);
             // 
             // Label20
             // 
@@ -2485,9 +2356,9 @@ protected override void Dispose(bool disposing)
             this.Label10.Name = "Label10";
             this.Label10.Size = new System.Drawing.Size(324, 72);
             this.Label10.TabIndex = 0;
-            this.Label10.Text = "These settings are for the Oculus Quest/Quest 2 when using Link. You can change t" +
-    "he Preset values to experiment. Higher settings require more GPU power and may c" +
-    "ause a significant performance drop.";
+            this.Label10.Text = "These settings are for the Meta Quest 2,3 and Pro when using Link. You can change" +
+    " the Preset values to experiment. Higher settings require more GPU power and may" +
+    " cause a significant performance drop.";
             // 
             // TabPage6
             // 
@@ -2567,6 +2438,125 @@ protected override void Dispose(bool disposing)
             this.Button8.Text = "Download and Install";
             this.Button8.UseVisualStyleBackColor = true;
             this.Button8.Click += new System.EventHandler(this.Button8_Click);
+            // 
+            // Label17
+            // 
+            this.Label17.AutoSize = true;
+            this.Label17.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Label17.Location = new System.Drawing.Point(4, 232);
+            this.Label17.Name = "Label17";
+            this.Label17.Size = new System.Drawing.Size(156, 32);
+            this.Label17.TabIndex = 41;
+            this.Label17.Text = "Mirror Oculus Home";
+            this.Label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // ComboMirrorHome
+            // 
+            this.ComboMirrorHome.BackColor = System.Drawing.Color.AliceBlue;
+            this.ComboMirrorHome.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComboMirrorHome.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.ComboMirrorHome.FormattingEnabled = true;
+            this.ComboMirrorHome.Items.AddRange(new object[] {
+            "Enabled",
+            "Disabled"});
+            this.ComboMirrorHome.Location = new System.Drawing.Point(167, 235);
+            this.ComboMirrorHome.Name = "ComboMirrorHome";
+            this.ComboMirrorHome.Size = new System.Drawing.Size(116, 21);
+            this.ComboMirrorHome.TabIndex = 42;
+            this.ComboMirrorHome.SelectedIndexChanged += new System.EventHandler(this.ComboMirrorHome_SelectedIndexChanged);
+            // 
+            // Label16
+            // 
+            this.Label16.AutoSize = true;
+            this.Label16.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Label16.Location = new System.Drawing.Point(4, 199);
+            this.Label16.Name = "Label16";
+            this.Label16.Size = new System.Drawing.Size(156, 32);
+            this.Label16.TabIndex = 36;
+            this.Label16.Text = "Oculus Homeless";
+            this.Label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // BtnHomless
+            // 
+            this.BtnHomless.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnHomless.Enabled = false;
+            this.BtnHomless.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnHomless.Location = new System.Drawing.Point(290, 202);
+            this.BtnHomless.Name = "BtnHomless";
+            this.BtnHomless.Size = new System.Drawing.Size(59, 26);
+            this.BtnHomless.TabIndex = 38;
+            this.BtnHomless.Text = "Edit";
+            this.BtnHomless.UseVisualStyleBackColor = true;
+            this.BtnHomless.Click += new System.EventHandler(this.BtnHomless_Click);
+            // 
+            // ComboBox6
+            // 
+            this.ComboBox6.BackColor = System.Drawing.Color.AliceBlue;
+            this.ComboBox6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ComboBox6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComboBox6.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.ComboBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ComboBox6.FormattingEnabled = true;
+            this.ComboBox6.Items.AddRange(new object[] {
+            "0",
+            "150",
+            "200",
+            "250",
+            "300",
+            "350",
+            "400",
+            "450",
+            "500",
+            "550",
+            "600",
+            "650",
+            "700",
+            "750",
+            "800",
+            "850",
+            "900",
+            "960"});
+            this.ComboBox6.Location = new System.Drawing.Point(175, 103);
+            this.ComboBox6.MaxLength = 4;
+            this.ComboBox6.Name = "ComboBox6";
+            this.ComboBox6.Size = new System.Drawing.Size(117, 24);
+            this.ComboBox6.TabIndex = 10;
+            // 
+            // Label36
+            // 
+            this.Label36.AutoSize = true;
+            this.Label36.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Label36.Location = new System.Drawing.Point(4, 100);
+            this.Label36.Name = "Label36";
+            this.Label36.Size = new System.Drawing.Size(164, 32);
+            this.Label36.TabIndex = 9;
+            this.Label36.Text = "Encode Bitrate";
+            this.Label36.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // Label21
+            // 
+            this.Label21.AutoSize = true;
+            this.Label21.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Label21.Location = new System.Drawing.Point(4, 232);
+            this.Label21.Name = "Label21";
+            this.Label21.Size = new System.Drawing.Size(164, 35);
+            this.Label21.TabIndex = 13;
+            this.Label21.Text = "Permanent AirLink";
+            this.Label21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // Button6
+            // 
+            this.Button6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button6.Location = new System.Drawing.Point(175, 235);
+            this.Button6.Name = "Button6";
+            this.Button6.Size = new System.Drawing.Size(117, 29);
+            this.Button6.TabIndex = 14;
+            this.Button6.Text = "Enable";
+            this.Button6.UseVisualStyleBackColor = true;
+            this.Button6.Click += new System.EventHandler(this.Button6_Click);
             // 
             // FrmMain
             // 
