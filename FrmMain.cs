@@ -1184,7 +1184,12 @@ namespace OculusTrayTool
     {
         new frmHotKeys().ShowDialog();
     }
-    private void ClearLogToolStripMenuItem_Click(object sender, EventArgs e) { }
+    private void ClearLogToolStripMenuItem_Click(object sender, EventArgs e) 
+    {
+        Log.ClearLog();
+        if (_logListBox != null) _logListBox.Items.Clear();
+        else this.ListBox1.Items.Clear();
+    }
     private void OpenLogToolStripMenuItem_Click(object sender, EventArgs e) { }
     private void BtnLibrary_Click(object sender, EventArgs e)
     {
@@ -1439,7 +1444,7 @@ namespace OculusTrayTool
             // --- QUEST LINK REPLACEMENT ---
             ReplaceQuestLinkControls();
 
-            Log.WriteToLog("ReplaceCorruptedControls: Successfully replaced controls.");
+
             _controlsReplaced = true;
             
             // --- FIX RESET BUTTON ---
@@ -1452,7 +1457,7 @@ namespace OculusTrayTool
                     this.Button4.Click -= this.Button4_Click;
                     // Attach new handler
                     this.Button4.Click += (s, e) => ResetDefaults();
-                    Log.WriteToLog("ReplaceCorruptedControls: Wired up Reset button.");
+
                 }
             }
             catch (Exception ex)
@@ -1576,7 +1581,7 @@ namespace OculusTrayTool
                  return;
             }
            
-            Log.WriteToLog("ReplaceGameSettingsControls: Found panel " + settingsPanel.Name + " with " + settingsPanel.Controls.Count + " controls.");
+
 
             // Helper to find row by label text
             int GetRowForLabel(string labelText)
@@ -1586,7 +1591,7 @@ namespace OculusTrayTool
                     if (c is Label lbl && lbl.Text != null && lbl.Text.IndexOf(labelText, StringComparison.OrdinalIgnoreCase) >= 0)
                     {
                         var pos = settingsPanel.GetPositionFromControl(c);
-                        Log.WriteToLog("ReplaceGameSettingsControls: Mapped '" + labelText + "' to Row " + pos.Row);
+                        // Log.WriteToLog("ReplaceGameSettingsControls: Mapped '" + labelText + "' to Row " + pos.Row);
                         return pos.Row;
                     }
                 }
@@ -1665,7 +1670,7 @@ namespace OculusTrayTool
              // 10. Offset MipMap
              ReplaceCombo("Offset MipMap", "ComboBox9", new string[] { "0", "1", "2", "-1", "-2" }, "0");
 
-             Log.WriteToLog("ReplaceGameSettingsControls: Populated Game Settings defaults.");
+
         }
         catch (Exception ex)
         {
@@ -1707,7 +1712,7 @@ namespace OculusTrayTool
                 return;
             }
            
-            Log.WriteToLog("ReplaceQuestLinkControls: Found panel " + settingsPanel.Name + " with " + settingsPanel.Controls.Count + " controls.");
+
 
             int GetRowForLabel(string labelText)
             {
@@ -1716,7 +1721,7 @@ namespace OculusTrayTool
                     if (c is Label lbl && lbl.Text != null && lbl.Text.IndexOf(labelText, StringComparison.OrdinalIgnoreCase) >= 0)
                     {
                         var pos = settingsPanel.GetPositionFromControl(c);
-                        Log.WriteToLog("ReplaceQuestLinkControls: Mapped '" + labelText + "' to Row " + pos.Row);
+                        // Log.WriteToLog("ReplaceQuestLinkControls: Mapped '" + labelText + "' to Row " + pos.Row);
                         return pos.Row;
                     }
                 }
@@ -1781,7 +1786,7 @@ namespace OculusTrayTool
             // 6. Sharpening
             ReplaceCombo("Sharpening", "ComboLinkSharpening", new string[] { "Auto", "Normal", "Quality" }, "Auto");
 
-            Log.WriteToLog("ReplaceQuestLinkControls: Populated Quest Link defaults.");
+
         }
         catch (Exception ex)
         {
