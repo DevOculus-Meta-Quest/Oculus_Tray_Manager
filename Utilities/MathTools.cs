@@ -2,7 +2,7 @@
 using System;
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
   public class MathTools
   {

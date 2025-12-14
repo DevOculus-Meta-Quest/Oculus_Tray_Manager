@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Management;
 
-namespace OculusTrayTool.Forms
+namespace MetaQuestTrayTool.Forms
 {
     partial class frmCreateEditProfile
     {
@@ -545,7 +545,7 @@ protected override void Dispose(bool disposing)
       this.PictureBox8.Size = new Size(19, 20);
       this.PictureBox8.TabIndex = 40;
       this.PictureBox8.TabStop = false;
-      this.ToolTip1.SetToolTip(this.PictureBox8, "The path to the executable that OTT should monitor.");
+      this.ToolTip1.SetToolTip(this.PictureBox8, "The path to the executable that MQTT should monitor.");
       this.TextBoxPath.Font = new Font("Microsoft Sans Serif", 9f, FontStyle.Regular, GraphicsUnit.Point, (byte) 0);
       this.TextBoxPath.Location = new Point(104, 249);
       this.TextBoxPath.Name = "TextBoxPath";

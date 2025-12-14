@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Management;
 
-namespace OculusTrayTool.Forms
+namespace MetaQuestTrayTool.Forms
 {
     partial class frmDonate
     {
@@ -81,7 +81,7 @@ protected override void Dispose(bool disposing)
       this.Label5.TabIndex = 14;
       this.Label5.Text = "15 Euro";
       this.PictureBox4.Cursor = Cursors.Hand;
-      this.PictureBox4.Image = (Image) (System.Drawing.Image)OculusTrayTool.My.Resources.Resources.paypal;
+      this.PictureBox4.Image = (Image) (System.Drawing.Image)MetaQuestTrayTool.My.Resources.Resources.paypal;
       this.PictureBox4.Location = new Point(396, 113);
       this.PictureBox4.Name = "PictureBox4";
       this.PictureBox4.Size = new Size(87, 23);
@@ -125,7 +125,7 @@ protected override void Dispose(bool disposing)
       this.GroupBox4.TabIndex = 3;
       this.GroupBox4.TabStop = false;
       this.PictureBox3.Cursor = Cursors.Hand;
-      this.PictureBox3.Image = (Image) (System.Drawing.Image)OculusTrayTool.My.Resources.Resources.paypal;
+      this.PictureBox3.Image = (Image) (System.Drawing.Image)MetaQuestTrayTool.My.Resources.Resources.paypal;
       this.PictureBox3.Location = new Point(278, 113);
       this.PictureBox3.Name = "PictureBox3";
       this.PictureBox3.Size = new Size(87, 22);
@@ -133,7 +133,7 @@ protected override void Dispose(bool disposing)
       this.PictureBox3.TabIndex = 9;
       this.PictureBox3.TabStop = false;
       this.PictureBox1.Cursor = Cursors.Hand;
-      this.PictureBox1.Image = (Image) (System.Drawing.Image)OculusTrayTool.My.Resources.Resources.paypal;
+      this.PictureBox1.Image = (Image) (System.Drawing.Image)MetaQuestTrayTool.My.Resources.Resources.paypal;
       this.PictureBox1.Location = new Point(31, 113);
       this.PictureBox1.Name = "PictureBox1";
       this.PictureBox1.Size = new Size(87, 22);
@@ -141,7 +141,7 @@ protected override void Dispose(bool disposing)
       this.PictureBox1.TabIndex = 7;
       this.PictureBox1.TabStop = false;
       this.PictureBox2.Cursor = Cursors.Hand;
-      this.PictureBox2.Image = (Image) (System.Drawing.Image)OculusTrayTool.My.Resources.Resources.paypal;
+      this.PictureBox2.Image = (Image) (System.Drawing.Image)MetaQuestTrayTool.My.Resources.Resources.paypal;
       this.PictureBox2.Location = new Point(153, 113);
       this.PictureBox2.Name = "PictureBox2";
       this.PictureBox2.Size = new Size(87, 22);

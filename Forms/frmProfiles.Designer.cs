@@ -1,11 +1,11 @@
-using OculusTrayTool.MyNameSpace;
+using MetaQuestTrayTool.MyNameSpace;
 using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Management;
 
-namespace OculusTrayTool.Forms
+namespace MetaQuestTrayTool.Forms
 {
     partial class frmProfiles
     {
@@ -154,7 +154,7 @@ protected override void Dispose(bool disposing)
       this.ToolStripMenuItem2.Visible = false;
       this.ToolStripSeparator1.Name = "ToolStripSeparator1";
       this.ToolStripSeparator1.Size = new Size(238, 6);
-      this.LaunchAppToolStripMenuItem.Image = (Image) (System.Drawing.Image)OculusTrayTool.My.Resources.Resources.Service_Start;
+      this.LaunchAppToolStripMenuItem.Image = (Image) (System.Drawing.Image)MetaQuestTrayTool.My.Resources.Resources.Service_Start;
       this.LaunchAppToolStripMenuItem.Name = "LaunchAppToolStripMenuItem";
       this.LaunchAppToolStripMenuItem.Size = new Size(241, 22);
       this.LaunchAppToolStripMenuItem.Text = "Launch App";
@@ -163,25 +163,25 @@ protected override void Dispose(bool disposing)
       this.LaunchAppWithOptionsToolStripMenuItem.Text = "Launch App with options..";
       this.ToolStripSeparator2.Name = "ToolStripSeparator2";
       this.ToolStripSeparator2.Size = new Size(238, 6);
-      this.ToolStripMenuItem3.Image = (Image) (System.Drawing.Image)OculusTrayTool.My.Resources.Resources.Icon_Edit;
+      this.ToolStripMenuItem3.Image = (Image) (System.Drawing.Image)MetaQuestTrayTool.My.Resources.Resources.Icon_Edit;
       this.ToolStripMenuItem3.Name = "ToolStripMenuItem3";
       this.ToolStripMenuItem3.Size = new Size(241, 22);
       this.ToolStripMenuItem3.Text = "Create New Profile...";
-      this.ToolStripMenuItem4.Image = (Image) (System.Drawing.Image)OculusTrayTool.My.Resources.Resources.Icon_Edit;
+      this.ToolStripMenuItem4.Image = (Image) (System.Drawing.Image)MetaQuestTrayTool.My.Resources.Resources.Icon_Edit;
       this.ToolStripMenuItem4.Name = "ToolStripMenuItem4";
       this.ToolStripMenuItem4.Size = new Size(241, 22);
       this.ToolStripMenuItem4.Text = "Edit highlighted profile...";
-      this.ToolStripMenuItem6.Image = (Image) (System.Drawing.Image)OculusTrayTool.My.Resources.Resources.Icon_Edit;
+      this.ToolStripMenuItem6.Image = (Image) (System.Drawing.Image)MetaQuestTrayTool.My.Resources.Resources.Icon_Edit;
       this.ToolStripMenuItem6.Name = "ToolStripMenuItem6";
       this.ToolStripMenuItem6.Size = new Size(241, 22);
       this.ToolStripMenuItem6.Text = "Edit all selected...";
       this.ToolStripSeparator3.Name = "ToolStripSeparator3";
       this.ToolStripSeparator3.Size = new Size(238, 6);
-      this.ToolStripMenuItem5.Image = (Image) (System.Drawing.Image)OculusTrayTool.My.Resources.Resources.Icon_Delete;
+      this.ToolStripMenuItem5.Image = (Image) (System.Drawing.Image)MetaQuestTrayTool.My.Resources.Resources.Icon_Delete;
       this.ToolStripMenuItem5.Name = "ToolStripMenuItem5";
       this.ToolStripMenuItem5.Size = new Size(241, 22);
       this.ToolStripMenuItem5.Text = "Remove highlighted Profile";
-      this.RemoveAllSelectedProfilesToolStripMenuItem.Image = (Image) (System.Drawing.Image)OculusTrayTool.My.Resources.Resources.Icon_Delete;
+      this.RemoveAllSelectedProfilesToolStripMenuItem.Image = (Image) (System.Drawing.Image)MetaQuestTrayTool.My.Resources.Resources.Icon_Delete;
       this.RemoveAllSelectedProfilesToolStripMenuItem.Name = "RemoveAllSelectedProfilesToolStripMenuItem";
       this.RemoveAllSelectedProfilesToolStripMenuItem.Size = new Size(241, 22);
       this.RemoveAllSelectedProfilesToolStripMenuItem.Text = "Remove all selected Profiles";

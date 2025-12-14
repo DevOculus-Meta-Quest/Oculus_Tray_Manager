@@ -5,9 +5,9 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using OculusTrayTool.Forms;
+using MetaQuestTrayTool.Forms;
 
-namespace OculusTrayTool.My
+namespace MetaQuestTrayTool.My
 {
 
   internal sealed class MyProject

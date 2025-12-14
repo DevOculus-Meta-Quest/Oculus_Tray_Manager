@@ -1,6 +1,6 @@
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
   public enum SteamLaunchType
   {

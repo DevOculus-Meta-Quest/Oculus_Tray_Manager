@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Management;
 
-namespace OculusTrayTool.Forms
+namespace MetaQuestTrayTool.Forms
 {
     partial class frmStillRunningToast
     {
@@ -53,9 +53,9 @@ protected override void Dispose(bool disposing)
       this.Label1.Name = "Label1";
       this.Label1.Size = new Size(111, 17);
       this.Label1.TabIndex = 4;
-      this.Label1.Text = "Oculus Tray Tool";
+      this.Label1.Text = "Meta Quest Tray Tool";
       this.ToolTip1.SetToolTip(this.Label1, "Click to permanently suppress this message");
-      this.PictureBox1.Image = (Image) (System.Drawing.Image)OculusTrayTool.My.Resources.Resources.App_Blue_32;
+      this.PictureBox1.Image = (Image) (System.Drawing.Image)MetaQuestTrayTool.My.Resources.Resources.App_Blue_32;
       this.PictureBox1.Location = new Point(15, 18);
       this.PictureBox1.Name = "PictureBox1";
       this.PictureBox1.Size = new Size(32, 29);

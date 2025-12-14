@@ -1,13 +1,13 @@
-using OculusTrayTool.Forms;
+using MetaQuestTrayTool.Forms;
 
 
 using System;
-using OculusTrayTool.ResChanger;
+using MetaQuestTrayTool.ResChanger;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
   internal class Resolution
   {

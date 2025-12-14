@@ -5,7 +5,7 @@ using System;
 using System.IO;
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
   public class ACFReader
   {

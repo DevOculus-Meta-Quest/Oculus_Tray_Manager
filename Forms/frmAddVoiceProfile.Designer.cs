@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Management;
 
-namespace OculusTrayTool.Forms
+namespace MetaQuestTrayTool.Forms
 {
     partial class frmAddVoiceProfile
     {

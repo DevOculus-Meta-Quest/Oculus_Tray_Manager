@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Management;
 
-namespace OculusTrayTool.Forms
+namespace MetaQuestTrayTool.Forms
 {
     partial class frmAbout
     {
@@ -118,7 +118,7 @@ protected override void Dispose(bool disposing)
       this.Label1.Name = "Label1";
       this.Label1.Size = new Size(100, 13);
       this.Label1.TabIndex = 0;
-      this.Label1.Text = "Oculus Tray Tool";
+      this.Label1.Text = "Meta Quest Tray Tool";
       this.AutoScaleDimensions = new SizeF(96f, 96f);
       this.AutoScaleMode = AutoScaleMode.Dpi;
       this.BackColor = Color.White;

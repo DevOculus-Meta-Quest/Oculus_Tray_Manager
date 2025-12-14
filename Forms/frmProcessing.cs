@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 #nullable disable
-namespace OculusTrayTool.Forms
+namespace MetaQuestTrayTool.Forms
 {
 
   public partial class frmProcessing : Form

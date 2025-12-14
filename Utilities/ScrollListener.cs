@@ -3,7 +3,7 @@ using System;
 using System.Windows.Forms;
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
   public class ScrollListener : NativeWindow
   {

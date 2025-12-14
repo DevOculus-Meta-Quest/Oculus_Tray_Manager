@@ -1,10 +1,10 @@
 
 using CoreAudio;
-using OculusTrayTool.CoreAudioApi.Interfaces;
+using MetaQuestTrayTool.CoreAudioApi.Interfaces;
 using System.Runtime.InteropServices;
 
 #nullable disable
-namespace OculusTrayTool.PolicyClient
+namespace MetaQuestTrayTool.PolicyClient
 {
   public class PolicyConfigClient
   {

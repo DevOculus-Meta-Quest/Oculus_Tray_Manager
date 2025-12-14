@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using OculusTrayTool.My;
+using MetaQuestTrayTool.My;
 using SharpDX.DirectInput;
 using System.Linq;
-using OculusTrayTool.Forms;
+using MetaQuestTrayTool.Forms;
 
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
   internal sealed class GetControllers
   {

@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Management;
 
-namespace OculusTrayTool.Forms
+namespace MetaQuestTrayTool.Forms
 {
     partial class frmVoiceSettings
     {
@@ -244,7 +244,7 @@ protected override void Dispose(bool disposing)
       this.CheckBox1.UseVisualStyleBackColor = true;
       this.ButtonListen.Enabled = false;
       this.ButtonListen.FlatStyle = FlatStyle.Flat;
-      this.ButtonListen.Image = (Image) (System.Drawing.Image)OculusTrayTool.My.Resources.Resources.Very_Basic_Not_Listen_icon;
+      this.ButtonListen.Image = (Image) (System.Drawing.Image)MetaQuestTrayTool.My.Resources.Resources.Very_Basic_Not_Listen_icon;
       this.ButtonListen.Location = new Point(242, 313);
       this.ButtonListen.Name = "ButtonListen";
       this.ButtonListen.Size = new Size(56, 53);

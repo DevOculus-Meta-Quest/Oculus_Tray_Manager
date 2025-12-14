@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Management;
 
-namespace OculusTrayTool.Forms
+namespace MetaQuestTrayTool.Forms
 {
     partial class FrmSetFallback
     {
@@ -224,7 +224,7 @@ protected override void Dispose(bool disposing)
       this.ComboBox1.Items.AddRange(new object[5]
       {
         (object) "When Oculus Home starts/exits",
-        (object) "When Oculus Tray Tool starts/exits",
+        (object) "When Meta Quest Tray Tool starts/exits",
         (object) "When a Profile loads/exits",
         (object) "Never",
         (object) "When SteamVR starts/exits"
@@ -241,7 +241,7 @@ protected override void Dispose(bool disposing)
       this.ComboBox2.Items.AddRange(new object[5]
       {
         (object) "When Oculus Home starts/exits",
-        (object) "When Oculus Tray Tool starts/exits",
+        (object) "When Meta Quest Tray Tool starts/exits",
         (object) "When a Profile loads/exits",
         (object) "Never",
         (object) "When SteamVR starts/exits"

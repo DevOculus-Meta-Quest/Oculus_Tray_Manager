@@ -4,7 +4,7 @@ using System;
 using System.Net;
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
 
   internal sealed class CheckConnection

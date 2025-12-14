@@ -1,10 +1,10 @@
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
   public enum PlatformType
   {
-    Oculus,
+    Meta,
     Steam,
   }
 }

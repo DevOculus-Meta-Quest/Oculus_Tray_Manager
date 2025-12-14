@@ -1,4 +1,4 @@
-using OculusTrayTool.Forms;
+using MetaQuestTrayTool.Forms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.IO;
 using System.Media;
 using System.Globalization;
 
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
     internal static class MyProject
     {

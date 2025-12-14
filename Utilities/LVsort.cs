@@ -4,7 +4,7 @@ using System.Collections;
 using System.Windows.Forms;
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
 
   internal sealed class LVsort

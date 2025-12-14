@@ -1,7 +1,7 @@
-using OculusTrayTool.Forms;
+using MetaQuestTrayTool.Forms;
 
 
-using OculusTrayTool.My;
+using MetaQuestTrayTool.My;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 using System.Timers;
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
 
   internal sealed class HomeToTray

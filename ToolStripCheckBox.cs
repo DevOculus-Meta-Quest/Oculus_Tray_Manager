@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using System.Windows.Forms.Design;
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
   [ToolStripItemDesignerAvailability(ToolStripItemDesignerAvailability.ToolStrip | ToolStripItemDesignerAvailability.StatusStrip)]
   public class ToolStripCheckBox : MyCustomToolStripControlHost

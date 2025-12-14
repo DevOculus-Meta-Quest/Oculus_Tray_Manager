@@ -1,12 +1,12 @@
 
 using CoreAudio;
 
-using OculusTrayTool.My;
-using OculusTrayTool.PolicyClient;
+using MetaQuestTrayTool.My;
+using MetaQuestTrayTool.PolicyClient;
 using System;
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
 
   internal sealed class RiftDefault

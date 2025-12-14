@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 #nullable disable
-namespace OculusTrayTool.Forms
+namespace MetaQuestTrayTool.Forms
 {
 
   public partial class frmAddCustomVoice : Form

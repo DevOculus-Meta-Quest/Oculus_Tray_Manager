@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 
 #nullable disable
-namespace OculusTrayTool.MyNameSpace
+namespace MetaQuestTrayTool.MyNameSpace
 {
   public class DBLayoutPanel : TableLayoutPanel
   {

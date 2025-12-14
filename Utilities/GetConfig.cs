@@ -1,8 +1,8 @@
-using OculusTrayTool.Forms;
+using MetaQuestTrayTool.Forms;
 
 using System.Speech.Recognition;
 
-using OculusTrayTool.My;
+using MetaQuestTrayTool.My;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -15,7 +15,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
   
   internal sealed class GetConfig
@@ -87,10 +87,10 @@ namespace OculusTrayTool
         }
         if (Globals.dbg)
           Log.WriteToLog("Reading setting StartHomeDelay");
-        OculusTrayTool.GetConfig.StartHomeDelay = MySettingsProperty.Settings.StartHomeDelay;
+        MetaQuestTrayTool.GetConfig.StartHomeDelay = MySettingsProperty.Settings.StartHomeDelay;
         if (Globals.dbg)
           Log.WriteToLog("Reading setting UseVoiceCommands");
-        OculusTrayTool.GetConfig.useVoiceCommands = MySettingsProperty.Settings.UseVoiceCommands;
+        MetaQuestTrayTool.GetConfig.useVoiceCommands = MySettingsProperty.Settings.UseVoiceCommands;
         if (MySettingsProperty.Settings.UseVoiceCommands)
         {
           FrmMain.fmain.ComboVoice.Text = "Enabled";
@@ -111,7 +111,7 @@ namespace OculusTrayTool
         FrmMain.fmain.CheckBoxCheckForUpdates.Checked = MySettingsProperty.Settings.AutomaticUpdateCheck;
         if (Globals.dbg)
           Log.WriteToLog("Reading setting HideAltTab");
-        OculusTrayTool.GetConfig.hideAltTab = MySettingsProperty.Settings.HideAltTab;
+        MetaQuestTrayTool.GetConfig.hideAltTab = MySettingsProperty.Settings.HideAltTab;
         FrmMain.fmain.CheckBoxAltTab.Checked = MySettingsProperty.Settings.HideAltTab;
         if (Globals.dbg)
           Log.WriteToLog("Reading setting StartAppwatcherOnStart");
@@ -129,7 +129,7 @@ namespace OculusTrayTool
           while (index < strArray.Length)
           {
             string str = strArray[index];
-            if (OculusTrayTool.GetConfig.CountCharacter(str, ':') > 1)
+            if (MetaQuestTrayTool.GetConfig.CountCharacter(str, ':') > 1)
             {
               flag = true;
               break;
@@ -148,7 +148,7 @@ namespace OculusTrayTool
             FrmMain.fmain.hasWarning = true;
           }
           Log.WriteToLog("Retrieving and cross-checking Oculus Library paths from the registry");
-          List<string> oculusSoftwarePaths = (List<string>) OculusPath.GetOculusSoftwarePaths();
+          List<string> oculusSoftwarePaths = (List<string>) MetaPath.GetOculusSoftwarePaths();
           if (oculusSoftwarePaths.Count > 0)
           {
 
@@ -190,8 +190,8 @@ namespace OculusTrayTool
         }
         if (Globals.dbg)
           Log.WriteToLog("Reading setting PPDPStartup");
-        OculusTrayTool.GetConfig.ppdpstartup = MySettingsProperty.Settings.PPDPStartup;
-        FrmMain.fmain.ComboSSstart.Text = OculusTrayTool.GetConfig.ppdpstartup;
+        MetaQuestTrayTool.GetConfig.ppdpstartup = MySettingsProperty.Settings.PPDPStartup;
+        FrmMain.fmain.ComboSSstart.Text = MetaQuestTrayTool.GetConfig.ppdpstartup;
         if (Globals.dbg)
           Log.WriteToLog("Reading setting StopOVR");
         FrmMain.fmain.CheckStopService.Checked = MySettingsProperty.Settings.StopOVR;
@@ -200,9 +200,9 @@ namespace OculusTrayTool
           Log.WriteToLog("Reading setting StartHomeOnServiceStart");
         FrmMain.fmain.CheckLaunchHome.Checked = MySettingsProperty.Settings.StartHomeOnServiceStart;
         if (Globals.dbg)
-          Log.WriteToLog("Reading setting OculusPath");
-        if (string.IsNullOrEmpty(FrmMain.fmain.OculusPath))
-          FrmMain.fmain.OculusPath = MySettingsProperty.Settings.OculusPath;
+          Log.WriteToLog("Reading setting MetaPath");
+        if (string.IsNullOrEmpty(FrmMain.fmain.MetaPath))
+          FrmMain.fmain.MetaPath = MySettingsProperty.Settings.MetaPath;
         if (Globals.dbg)
           Log.WriteToLog("Reading setting ApplyPowerPlan");
         FrmMain.fmain.ComboApplyPlan.SelectedIndex = MySettingsProperty.Settings.ApplyPowerPlan;
@@ -217,7 +217,7 @@ namespace OculusTrayTool
         FrmMain.fmain.CheckCloseHome.Checked = MySettingsProperty.Settings.CloseHomeOnExit;
         if (Globals.dbg)
           Log.WriteToLog("Reading setting SetRiftAsDefault");
-        OculusTrayTool.GetConfig.SetRiftDefault = MySettingsProperty.Settings.SetRiftAsDefault;
+        MetaQuestTrayTool.GetConfig.SetRiftDefault = MySettingsProperty.Settings.SetRiftAsDefault;
         if (MySettingsProperty.Settings.SetRiftAsDefault)
           FrmMain.fmain.CheckRiftAudio.Checked = true;
         if (Globals.dbg)
@@ -230,20 +230,20 @@ namespace OculusTrayTool
         {
           if (Globals.dbg)
             Log.WriteToLog("Reading setting HotKeyCombos");
-          OculusTrayTool.GetConfig.GetHotKeys();
+          MetaQuestTrayTool.GetConfig.GetHotKeys();
         }
         if (Globals.dbg)
           Log.WriteToLog("Reading setting UseHotKeys");
         if (MySettingsProperty.Settings.UseHotKeys && !string.IsNullOrEmpty(MySettingsProperty.Settings.HotKeyCombos))
         {
-          OculusTrayTool.GetConfig.UseHotKeys = true;
+          MetaQuestTrayTool.GetConfig.UseHotKeys = true;
           FrmMain.fmain.HotKeysCheckBox.Checked = true;
           FrmMain.fmain.BtnConfigureHotKeys.Enabled = true;
           FrmMain.fmain.AddToListboxAndScroll("HotKeys will be usabled once Oculus Home is running");
         }
         else
         {
-          OculusTrayTool.GetConfig.UseHotKeys = false;
+          MetaQuestTrayTool.GetConfig.UseHotKeys = false;
           FrmMain.fmain.HotKeysCheckBox.Checked = false;
           FrmMain.fmain.BtnConfigureHotKeys.Enabled = false;
         }
@@ -279,9 +279,9 @@ namespace OculusTrayTool
         if (MySettingsProperty.Settings.HomelessEnabled == 1)
         {
           FrmMain.fmain.BtnHomless.Enabled = true;
-          if (Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\OculusTrayTool\\Music"))
+          if (Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\MetaQuestTrayTool\\Music"))
           {
-            string[] files = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\OculusTrayTool\\Music", "*.mp3");
+            string[] files = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\MetaQuestTrayTool\\Music", "*.mp3");
             int index = 0;
             while (index < files.Length)
             {

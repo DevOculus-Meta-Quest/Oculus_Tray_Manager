@@ -10,7 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 
 #nullable disable
-namespace OculusTrayTool.My
+namespace MetaQuestTrayTool.My
 {
   [CompilerGenerated]
   [GeneratedCode("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0")]
@@ -632,10 +632,10 @@ namespace OculusTrayTool.My
     [UserScopedSetting]
     [DebuggerNonUserCode]
     [DefaultSettingValue("")]
-    public string OculusPath
+    public string MetaPath
     {
-      get => Convert.ToString(this[nameof (OculusPath)]);
-      set => this[nameof (OculusPath)] = (object) value;
+      get => Convert.ToString(this[nameof (MetaPath)]);
+      set => this[nameof (MetaPath)] = (object) value;
     }
 
     [UserScopedSetting]

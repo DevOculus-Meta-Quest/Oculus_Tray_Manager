@@ -3,7 +3,7 @@ using System;
 using System.Runtime.CompilerServices;
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
   public class DataDownloadEventArgs : EventArgs
   {

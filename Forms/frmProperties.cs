@@ -11,7 +11,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 #nullable disable
-namespace OculusTrayTool.Forms
+namespace MetaQuestTrayTool.Forms
 {
 
   public partial class frmProperties : Form
@@ -79,7 +79,7 @@ namespace OculusTrayTool.Forms
       if (!frmProperties.IsValidJson(this.RichTextBox1.Text))
           return;
 
-      if (MessageBox.Show("JSON formatting looks OK, do you want to save this file?", "Oculus Tray Tool", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+      if (MessageBox.Show("JSON formatting looks OK, do you want to save this file?", "Meta Quest Tray Tool", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
         return;
 
       using (StreamWriter streamWriter = new StreamWriter(this.fname))

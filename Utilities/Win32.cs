@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
   internal class Win32
   {

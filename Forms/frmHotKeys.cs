@@ -1,6 +1,6 @@
 
 
-using OculusTrayTool.My;
+using MetaQuestTrayTool.My;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 #nullable disable
-namespace OculusTrayTool.Forms
+namespace MetaQuestTrayTool.Forms
 {
 
   public partial class frmHotKeys : Form

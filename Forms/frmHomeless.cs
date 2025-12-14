@@ -1,6 +1,6 @@
 
 
-using OculusTrayTool.My;
+using MetaQuestTrayTool.My;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -11,7 +11,7 @@ using System.Threading;
 using System.Windows.Forms;
 
 #nullable disable
-namespace OculusTrayTool.Forms
+namespace MetaQuestTrayTool.Forms
 {
 
   public partial class frmHomeless : Form
@@ -59,24 +59,24 @@ namespace OculusTrayTool.Forms
         float num2 = (float) Math.Round((double) backColor.G / (double) byte.MaxValue, 2);
         float num3 = (float) Math.Round((double) backColor.B / (double) byte.MaxValue, 2);
         string str = num1.ToString().Replace(",", ".") + " " + num2.ToString().Replace(",", ".") + " " + num3.ToString().Replace(",", ".");
-        StreamWriter streamWriter1 = new StreamWriter(MyProject.Forms.FrmMain.OculusPath + "Support\\oculus-worlds\\Home2\\Binaries\\Win64\\background_color.txt");
+        StreamWriter streamWriter1 = new StreamWriter(MyProject.Forms.FrmMain.MetaPath + "Support\\oculus-worlds\\Home2\\Binaries\\Win64\\background_color.txt");
         streamWriter1.WriteLine(str);
         streamWriter1.Close();
         Log.WriteToLog("Homeless background color set to " + str);
         if (!String.Equals(this.ComboMusic.Text, "None", StringComparison.OrdinalIgnoreCase))
         {
-          if (File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\OculusTrayTool\\Music\\" + this.ComboMusic.Text))
+          if (File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\MetaQuestTrayTool\\Music\\" + this.ComboMusic.Text))
           {
-            StreamWriter streamWriter2 = new StreamWriter(MyProject.Forms.FrmMain.OculusPath + "Support\\oculus-worlds\\Home2\\Binaries\\Win64\\background_music.txt");
-            streamWriter2.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData).ToString().Replace("\\", "\\\\") + "\\\\OculusTrayTool\\\\Music\\\\" + this.ComboMusic.Text + "," + Decimal.Multiply(this.NumericVolume.Value, 10M).ToString());
+            StreamWriter streamWriter2 = new StreamWriter(MyProject.Forms.FrmMain.MetaPath + "Support\\oculus-worlds\\Home2\\Binaries\\Win64\\background_music.txt");
+            streamWriter2.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData).ToString().Replace("\\", "\\\\") + "\\\\MetaQuestTrayTool\\\\Music\\\\" + this.ComboMusic.Text + "," + Decimal.Multiply(this.NumericVolume.Value, 10M).ToString());
             streamWriter2.Close();
             Log.WriteToLog("Homeless background music set to " + this.ComboMusic.Text);
             Log.WriteToLog("Homeless background volume set to " + this.NumericVolume.Value.ToString() + "%");
           }
         }
-        else if (File.Exists(MyProject.Forms.FrmMain.OculusPath + "Support\\oculus-worlds\\Home2\\Binaries\\Win64\\background_music.txt"))
+        else if (File.Exists(MyProject.Forms.FrmMain.MetaPath + "Support\\oculus-worlds\\Home2\\Binaries\\Win64\\background_music.txt"))
         {
-          File.Delete(MyProject.Forms.FrmMain.OculusPath + "Support\\oculus-worlds\\Home2\\Binaries\\Win64\\background_music.txt");
+          File.Delete(MyProject.Forms.FrmMain.MetaPath + "Support\\oculus-worlds\\Home2\\Binaries\\Win64\\background_music.txt");
           Log.WriteToLog("Homeless background music disabled");
         }
         MySettingsProperty.Settings.HomlessColor = str;
@@ -102,7 +102,7 @@ namespace OculusTrayTool.Forms
           if (Process.GetProcessesByName("Home2-Win64-Shipping").Length == 0)
           {
             Log.WriteToLog("Restarting Home2-Win64-Shipping.exe");
-            Process.Start(MyProject.Forms.FrmMain.OculusPath + "Support\\oculus-worlds\\Home2\\Binaries\\Win64\\Home2-Win64-Shipping.exe");
+            Process.Start(MyProject.Forms.FrmMain.MetaPath + "Support\\oculus-worlds\\Home2\\Binaries\\Win64\\Home2-Win64-Shipping.exe");
           }
         }
         this.Cursor = Cursors.Default;
@@ -120,10 +120,10 @@ namespace OculusTrayTool.Forms
     {
       try
       {
-        if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\OculusTrayTool\\Music"))
+        if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\MetaQuestTrayTool\\Music"))
         {
-          Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\OculusTrayTool\\Music");
-          Log.WriteToLog("Created " + Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\OculusTrayTool\\Music");
+          Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\MetaQuestTrayTool\\Music");
+          Log.WriteToLog("Created " + Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\MetaQuestTrayTool\\Music");
         }
         OpenFileDialog openFileDialog = new OpenFileDialog();
         openFileDialog.Multiselect = true;
@@ -136,14 +136,14 @@ namespace OculusTrayTool.Forms
         while (index1 < fileNames.Length)
         {
           string str = fileNames[index1];
-          File.Copy(str, Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\OculusTrayTool\\Music\\" + Path.GetFileName(str).Replace(" ", ""));
-          Log.WriteToLog("Copied " + str + " to " + Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\OculusTrayTool\\Music");
+          File.Copy(str, Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\MetaQuestTrayTool\\Music\\" + Path.GetFileName(str).Replace(" ", ""));
+          Log.WriteToLog("Copied " + str + " to " + Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\MetaQuestTrayTool\\Music");
           checked { ++index1; }
         }
-        if (Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\OculusTrayTool\\Music"))
+        if (Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\MetaQuestTrayTool\\Music"))
         {
           this.ComboMusic.Items.Clear();
-          string[] files = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\OculusTrayTool\\Music", "*.mp3");
+          string[] files = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\MetaQuestTrayTool\\Music", "*.mp3");
           int index2 = 0;
           while (index2 < files.Length)
           {

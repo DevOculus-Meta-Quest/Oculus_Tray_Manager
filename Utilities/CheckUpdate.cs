@@ -1,7 +1,7 @@
-using OculusTrayTool.Forms;
+using MetaQuestTrayTool.Forms;
 
 
-using OculusTrayTool.My;
+using MetaQuestTrayTool.My;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -11,7 +11,7 @@ using System.Text;
 using System.Windows.Forms;
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
 
   internal sealed class CheckUpdate
@@ -111,23 +111,23 @@ namespace OculusTrayTool
         {
           using (Stream stream = CheckUpdate.wc.OpenRead(new Uri(url)))
           {
-            Log.WriteToLog("Downloading OTTSetup.exe from " + url + " to " + Path.GetTempPath());
-            using (Stream destination = (Stream) System.IO.File.Create(Path.GetTempPath() + "\\OTTSetup.exe"))
+            Log.WriteToLog("Downloading MQTTSetup.exe from " + url + " to " + Path.GetTempPath());
+            using (Stream destination = (Stream) System.IO.File.Create(Path.GetTempPath() + "\\MQTTSetup.exe"))
               stream.CopyTo(destination);
           }
           Log.WriteToLog("Download Complete");
           MyProject.Forms.FrmMain.LabelDownloadStatus.Text = "Download Complete!";
           MyProject.Forms.FrmMain.LabelDownloadStatus.Refresh();
           MyProject.Forms.FrmMain.Cursor = Cursors.Default;
-          Process.Start(Path.GetTempPath() + "\\OTTSetup.exe");
+          Process.Start(Path.GetTempPath() + "\\MQTTSetup.exe");
           Application.Exit();
         }
         else
         {
           using (Stream stream = CheckUpdate.wc.OpenRead(new Uri(url)))
           {
-            Log.WriteToLog("Downloading OTTSetup.exe from " + url + " to " + Path.GetTempPath());
-            using (Stream destination = (Stream) System.IO.File.Create(dir + "\\OTTSetup.exe"))
+            Log.WriteToLog("Downloading MQTTSetup.exe from " + url + " to " + Path.GetTempPath());
+            using (Stream destination = (Stream) System.IO.File.Create(dir + "\\MQTTSetup.exe"))
               stream.CopyTo(destination);
           }
           Log.WriteToLog("Download Complete");

@@ -5,10 +5,10 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Windows.Forms;
-using OculusTrayTool.Forms;
+using MetaQuestTrayTool.Forms;
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
   internal static class Log
   {
@@ -23,7 +23,7 @@ namespace OculusTrayTool
         try
         {
           Monitor.Enter(lockObject, ref lockTaken);
-          using (StreamWriter streamWriter = File.AppendText(Application.StartupPath + "\\ott_debug.log"))
+          using (StreamWriter streamWriter = File.AppendText(Application.StartupPath + "\\MQTT_debug.log"))
           {
             streamWriter.WriteLine(string.Format("{0}: {1}", (object) DateTime.Now, (object) string.Format(s)));
             streamWriter.Flush();
@@ -56,7 +56,7 @@ namespace OculusTrayTool
         {
           Monitor.Enter(lockObject, ref lockTaken);
           // Overwrite with empty content to clear the file
-          File.WriteAllText(Application.StartupPath + "\\ott_debug.log", string.Empty);
+          File.WriteAllText(Application.StartupPath + "\\MQTT_debug.log", string.Empty);
         }
         finally
         {

@@ -1,6 +1,6 @@
 
 
-using OculusTrayTool.My;
+using MetaQuestTrayTool.My;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 #nullable disable
-namespace OculusTrayTool.Forms
+namespace MetaQuestTrayTool.Forms
 {
 
   public partial class frmStartupType : Form
@@ -35,7 +35,7 @@ namespace OculusTrayTool.Forms
         {
           try
           {
-            Microsoft.Win32.Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true).SetValue(Application.ProductName, (object) (Application.StartupPath + "\\OculusTrayTool.exe"));
+            Microsoft.Win32.Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true).SetValue(Application.ProductName, (object) (Application.StartupPath + "\\MetaQuestTrayTool.exe"));
             MySettingsProperty.Settings.StartWithWindows = true;
             MySettingsProperty.Settings.Save();
             Log.WriteToLog("Enabled 'Start with Windows', startup type' Regular'");

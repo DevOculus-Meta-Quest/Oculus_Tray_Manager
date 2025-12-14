@@ -1,6 +1,6 @@
 
 
-using OculusTrayTool.My;
+using MetaQuestTrayTool.My;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -10,7 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 #nullable disable
-namespace OculusTrayTool.Forms
+namespace MetaQuestTrayTool.Forms
 {
 
   public partial class frmCreateEditProfile : Form
@@ -159,7 +159,7 @@ namespace OculusTrayTool.Forms
         string text7 = this.ComboBox8.Text;
         string text8 = this.ComboBox9.Text;
         string text9 = this.ComboBoxEnabled.Text;
-        OTTDB.AddProfile(text1, text2, text3, text4, pLaunchfile, pPath, text5, aswdelay, cpudelay, mirror, agps, text6, fov, text7, text8, text9);
+        MQTTDB.AddProfile(text1, text2, text3, text4, pLaunchfile, pPath, text5, aswdelay, cpudelay, mirror, agps, text6, fov, text7, text8, text9);
       }
       else
       {
@@ -195,17 +195,17 @@ namespace OculusTrayTool.Forms
           string text16 = this.ComboBox8.Text;
           string text17 = this.ComboBox9.Text;
           string text18 = this.ComboBoxEnabled.Text;
-          OTTDB.AddProfile(text10, text11, text12, text13, pLaunchfile, pPath, text14, aswdelay, cpudelay, mirror, agps, text15, fov, text16, text17, text18);
+          MQTTDB.AddProfile(text10, text11, text12, text13, pLaunchfile, pPath, text14, aswdelay, cpudelay, mirror, agps, text15, fov, text16, text17, text18);
           checked { ++index; }
         }
         this.Cursor = Cursors.Default;
       }
-      OTTDB.GetProfiles();
+      MQTTDB.GetProfiles();
       if (FrmMain.fmain.HomeIsRunning | MySettingsProperty.Settings.StartAppwatcherOnStart)
       {
-        if (OTTDB.numWMI > 0)
+        if (MQTTDB.numWMI > 0)
           FrmMain.fmain.CreateWatcher();
-        if (OTTDB.numTimer > 0)
+        if (MQTTDB.numTimer > 0)
           FrmMain.fmain.pTimer.Start();
       }
       this.ComboBox1.Items.Remove(this.ComboBox1.SelectedItem);
@@ -255,7 +255,7 @@ namespace OculusTrayTool.Forms
           openFileDialog.InitialDirectory = Path.GetDirectoryName(this.TextBoxPath.Text);
       }
       else
-        openFileDialog.InitialDirectory = FrmMain.fmain.OculusPath;
+        openFileDialog.InitialDirectory = FrmMain.fmain.MetaPath;
       openFileDialog.Filter = "Executable files (*.exe)|*.exe";
       if (openFileDialog.ShowDialog() != DialogResult.OK)
         return;
@@ -271,8 +271,8 @@ namespace OculusTrayTool.Forms
       this.ToolTip1.SetToolTip((Control) this.PictureBox2, "Sets the level of Super Sampling, or Pixel Density, to apply to the app when it is started.\r\nThis value acts as a multiplier, it is not the definitive value the app will get.\r\nThat depends on what the native Pixeld Density the app runs att.\r\nUse the Pixel Density Visual HUD to check what you actually get, and adjust this value to get the desired result.");
       this.ToolTip1.SetToolTip((Control) this.PictureBox3, "Sets the mode for Asynchronous Space Warp (ASW).\r\nThis should usualy be set to Auto unless you experience issues.");
       this.ToolTip1.SetToolTip((Control) this.PictureBox4, "Makes Windows give this app a bit higher priority over other system resources.\r\n Can improve performance.");
-      this.ToolTip1.SetToolTip((Control) this.PictureBox5, "Determines how OTT should detect this app. WMI is default and has less impact on CPU performace\r\nbut is less accurate in detecting games starts. Might not work for every game.\r\nThe Timer method consumes more CPU bit is a lot more accurate.\r\nUse Timer for the apps that do not work with WMI.");
-      this.ToolTip1.SetToolTip((Control) this.PictureBox8, "The path to the executable that OTT should monitor. This is usally correct and should in most\r\ncases not be touched. But in some cases it might be neccessary to modify this\r\nso OTT detects the right process.");
+      this.ToolTip1.SetToolTip((Control) this.PictureBox5, "Determines how MQTT should detect this app. WMI is default and has less impact on CPU performace\r\nbut is less accurate in detecting games starts. Might not work for every game.\r\nThe Timer method consumes more CPU bit is a lot more accurate.\r\nUse Timer for the apps that do not work with WMI.");
+      this.ToolTip1.SetToolTip((Control) this.PictureBox8, "The path to the executable that MQTT should monitor. This is usally correct and should in most\r\ncases not be touched. But in some cases it might be neccessary to modify this\r\nso MQTT detects the right process.");
       this.ToolTip1.SetToolTip((Control) this.PictureBox11, "Setting this to a value lower than 1, for example 0.8, will cause a lower FOV in the headset which\r\nwill increase the FPS due to less pixels being drawn.\r\nUsing a value higher than 1 will only affect the Mirror view on your desktop.");
     
       // Fix: Ensure something is selected if list is not empty

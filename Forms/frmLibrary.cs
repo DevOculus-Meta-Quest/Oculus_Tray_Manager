@@ -2,7 +2,7 @@
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using OculusTrayTool.My;
+using MetaQuestTrayTool.My;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -24,7 +24,7 @@ using System.Timers;
 using System.Windows.Forms;
 
 #nullable disable
-namespace OculusTrayTool.Forms
+namespace MetaQuestTrayTool.Forms
 {
 
   public partial class frmLibrary : Form
@@ -287,7 +287,7 @@ namespace OculusTrayTool.Forms
           string str2 = jobject.SelectToken("canonicalName").ToString();
           string Left = jobject.SelectToken("appId").ToString();
           string str3 = str1 + "\\" + str2 + "\\" + jobject.SelectToken("launchFile").ToString().Replace("/", "\\");
-          string str4 = MySettingsProperty.Settings.OculusPath.TrimEnd('\\') + "\\CoreData\\Software\\StoreAssets\\" + str2 + "_assets";
+          string str4 = MySettingsProperty.Settings.MetaPath.TrimEnd('\\') + "\\CoreData\\Software\\StoreAssets\\" + str2 + "_assets";
           string str5 = str4 + "\\small_landscape_image.jpg";
           if (!System.IO.File.Exists(str5))
           {
@@ -353,7 +353,7 @@ namespace OculusTrayTool.Forms
                     this.imageListLarge.Images.Add(str3, image);
                 }
                 else
-                  this.imageListLarge.Images.Add(str3, (Image) OculusTrayTool.My.Resources.Resources.removed_app);
+                  this.imageListLarge.Images.Add(str3, (Image) MetaQuestTrayTool.My.Resources.Resources.removed_app);
                 this.ListView1.Items.Add(new ListViewItem(text, str3)
                 {
                   Tag = (object) (Path.GetFileName(str3) + "," + str4 + "," + path.Replace(".mini", "") + "," + str3),
@@ -553,7 +553,7 @@ label_44:
         {
           bool flag = false;
           string str1 = p + "\\" + canonName + ".json";
-          string str2 = MySettingsProperty.Settings.OculusPath.TrimEnd('\\') + "\\CoreData\\Software\\StoreAssets\\" + canonName + "_assets";
+          string str2 = MySettingsProperty.Settings.MetaPath.TrimEnd('\\') + "\\CoreData\\Software\\StoreAssets\\" + canonName + "_assets";
           string str3 = str2 + "\\small_landscape_image.jpg";
           if (System.IO.File.Exists(str3))
           {
@@ -599,7 +599,7 @@ label_44:
             Log.WriteToLog("    iconFile: '" + str3 + "'");
           }
           string str4 = Path.GetFileName(LaunchFile) + "," + str2 + "," + str1 + ",3rdParty," + LaunchFile;
-          if (!OTTDB.CheckHiddenApp(LaunchFile, DisplayName, "Library") & !OTTDB.CheckHiddenApp(LaunchFile, DisplayName, "Both"))
+          if (!MQTTDB.CheckHiddenApp(LaunchFile, DisplayName, "Library") & !MQTTDB.CheckHiddenApp(LaunchFile, DisplayName, "Both"))
           {
             if (Globals.dbg)
               Log.WriteToLog("    Hidden: False");
@@ -616,7 +616,7 @@ label_44:
             {
               if (Globals.dbg)
                 Log.WriteToLog("AddThirdPartyGameToLibrary: Adding '" + DisplayName + "' (" + LaunchFile + ") to library with [???] icon");
-              this.imageListLarge.Images.Add(LaunchFile, (Image) OculusTrayTool.My.Resources.Resources.removed_app);
+              this.imageListLarge.Images.Add(LaunchFile, (Image) MetaQuestTrayTool.My.Resources.Resources.removed_app);
             }
             this.ListView1.Items.Add(new ListViewItem(DisplayName, LaunchFile)
             {
@@ -642,7 +642,7 @@ label_44:
     {
       if (this.changeMade && Process.GetProcessesByName("OculusClient").Length > 0)
       {
-        MessageBox.Show("You may need to restart oculus Home to see the new icons in VR.", "Oculus Tray Tool", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        MessageBox.Show("You may need to restart oculus Home to see the new icons in VR.", "Meta Quest Tray Tool", MessageBoxButtons.OK, MessageBoxIcon.Information);
       }
       MySettingsProperty.Settings.LibraryWindowLocation = this.Location;
       MySettingsProperty.Settings.LibraryWindowSize = this.Size;
@@ -689,7 +689,7 @@ label_44:
       this.rs.ResizeAllControls((Control) this, (float) MyProject.Forms.FrmMain.TrackBar1.Value);
       this.imageListLarge.ColorDepth = ColorDepth.Depth32Bit;
       this.ImgListOverlay.ColorDepth = ColorDepth.Depth32Bit;
-      this.ImgListOverlay.Images.Add((Image) OculusTrayTool.My.Resources.Resources.play2);
+      this.ImgListOverlay.Images.Add((Image) MetaQuestTrayTool.My.Resources.Resources.play2);
       this.PicturePlay.Visible = false;
       frmLibrary.icons.Images.Clear();
       frmLibrary.icons.ColorDepth = ColorDepth.Depth32Bit;
@@ -722,12 +722,12 @@ label_44:
       this.ListView1.View = View.LargeIcon;
       this.ContextMenuStrip1.Visible = true;
       this.ContextMenuStrip1.Close();
-      if (Directory.Exists(MyProject.Forms.FrmMain.OculusPath.TrimEnd('\\') + "\\Manifests"))
-        this.GetOculusLibrary(MyProject.Forms.FrmMain.OculusPath.TrimEnd('\\') + "\\Manifests");
-      if (Directory.Exists(MyProject.Forms.FrmMain.OculusPath.TrimEnd('\\') + "\\Software\\Manifests"))
-        this.GetOculusLibrary(MyProject.Forms.FrmMain.OculusPath.TrimEnd('\\') + "\\Software\\Manifests");
-      if (Directory.Exists(MyProject.Forms.FrmMain.OculusPath.TrimEnd('\\') + "\\CoreData\\Manifests"))
-        this.GetThirdPartyApps(MyProject.Forms.FrmMain.OculusPath.TrimEnd('\\') + "\\CoreData\\Manifests");
+      if (Directory.Exists(MyProject.Forms.FrmMain.MetaPath.TrimEnd('\\') + "\\Manifests"))
+        this.GetOculusLibrary(MyProject.Forms.FrmMain.MetaPath.TrimEnd('\\') + "\\Manifests");
+      if (Directory.Exists(MyProject.Forms.FrmMain.MetaPath.TrimEnd('\\') + "\\Software\\Manifests"))
+        this.GetOculusLibrary(MyProject.Forms.FrmMain.MetaPath.TrimEnd('\\') + "\\Software\\Manifests");
+      if (Directory.Exists(MyProject.Forms.FrmMain.MetaPath.TrimEnd('\\') + "\\CoreData\\Manifests"))
+        this.GetThirdPartyApps(MyProject.Forms.FrmMain.MetaPath.TrimEnd('\\') + "\\CoreData\\Manifests");
       if (String.Equals(MySettingsProperty.Settings.LibraryPath, "", StringComparison.OrdinalIgnoreCase))
       {
         string[] strArray = Convert.ToString(MySettingsProperty.Settings.LibraryPath).Split(',');
@@ -744,12 +744,12 @@ label_44:
       }
       MyProject.Forms.frmCreateEditProfile.ComboBox1.Items.Clear();
       GetGames.GameList.Clear();
-      if (Directory.Exists(MyProject.Forms.FrmMain.OculusPath.TrimEnd('\\') + "\\Manifests"))
-        GetGames.GetFiles(MyProject.Forms.FrmMain.OculusPath.TrimEnd('\\') + "\\Manifests");
-      if (Directory.Exists(MyProject.Forms.FrmMain.OculusPath.TrimEnd('\\') + "\\Software\\Manifests"))
-        GetGames.GetFiles(MyProject.Forms.FrmMain.OculusPath.TrimEnd('\\') + "\\Software\\Manifests");
-      if (Directory.Exists(MyProject.Forms.FrmMain.OculusPath.TrimEnd('\\') + "\\CoreData\\Manifests"))
-        GetGames.GetThirdPartyApps(MyProject.Forms.FrmMain.OculusPath.TrimEnd('\\') + "\\CoreData\\Manifests");
+      if (Directory.Exists(MyProject.Forms.FrmMain.MetaPath.TrimEnd('\\') + "\\Manifests"))
+        GetGames.GetFiles(MyProject.Forms.FrmMain.MetaPath.TrimEnd('\\') + "\\Manifests");
+      if (Directory.Exists(MyProject.Forms.FrmMain.MetaPath.TrimEnd('\\') + "\\Software\\Manifests"))
+        GetGames.GetFiles(MyProject.Forms.FrmMain.MetaPath.TrimEnd('\\') + "\\Software\\Manifests");
+      if (Directory.Exists(MyProject.Forms.FrmMain.MetaPath.TrimEnd('\\') + "\\CoreData\\Manifests"))
+        GetGames.GetThirdPartyApps(MyProject.Forms.FrmMain.MetaPath.TrimEnd('\\') + "\\CoreData\\Manifests");
       if (String.Equals(MySettingsProperty.Settings.LibraryPath, "", StringComparison.OrdinalIgnoreCase))
       {
         string[] strArray = Convert.ToString(MySettingsProperty.Settings.LibraryPath).Split(',');
@@ -946,13 +946,13 @@ if (Convert.ToString(this.ListView1.SelectedItems[0].Tag).Contains("3rdParty"))
 
     private void ToolStripMenuItem4_Click(object sender, EventArgs e)
     {
-      OTTDB.HideApp(this.ListView1.SelectedItems[0].Text, Convert.ToString(this.ListView1.SelectedItems[0].Tag).Split(',')[0], "Library");
+      MQTTDB.HideApp(this.ListView1.SelectedItems[0].Text, Convert.ToString(this.ListView1.SelectedItems[0].Tag).Split(',')[0], "Library");
       this.PopulateList();
     }
 
     private void ToolStripMenuItem5_Click(object sender, EventArgs e)
     {
-      OTTDB.HideApp(this.ListView1.SelectedItems[0].Text, Convert.ToString(this.ListView1.SelectedItems[0].Tag).Split(',')[0], "Both");
+      MQTTDB.HideApp(this.ListView1.SelectedItems[0].Text, Convert.ToString(this.ListView1.SelectedItems[0].Tag).Split(',')[0], "Both");
       this.PopulateList();
     }
 
@@ -988,7 +988,7 @@ if (Convert.ToString(this.ListView1.SelectedItems[0].Tag).Contains("3rdParty"))
           }
           if (this.ManualStartProfiles.ContainsKey(str1.ToLower()))
           {
-            Log.WriteToLog("Applying profile for " + OTTDB.GetDisplayName(str1));
+            Log.WriteToLog("Applying profile for " + MQTTDB.GetDisplayName(str1));
             this.ApplyProfile(str1.TrimStart().TrimEnd());
           }
           else
@@ -1373,7 +1373,7 @@ if (Convert.ToString(this.ListView1.SelectedItems[0].Tag).Contains("hidden"))
 
     private void ShowAppInLibraryAndProfilesToolStripMenuItem_Click(object sender, EventArgs e)
     {
-      OTTDB.UnHideApp(this.ListView1.SelectedItems[0].Text);
+      MQTTDB.UnHideApp(this.ListView1.SelectedItems[0].Text);
       this.ShowToolStripMenuItem.Checked = false;
       this.PopulateList();
     }
@@ -1416,7 +1416,7 @@ if (Convert.ToString(this.ListView1.SelectedItems[0].Tag).Contains("hidden"))
       else
       {
         string canonicalName = MyProject.Forms.FrmMain.steamvr.Replace(" ", "").Replace("\\", "_").Replace(":", "") + "bin_win32_assets";
-        string path = MyProject.Forms.FrmMain.OculusPath + "\\CoreData\\Software\\StoreAssets\\" + canonicalName;
+        string path = MyProject.Forms.FrmMain.MetaPath + "\\CoreData\\Software\\StoreAssets\\" + canonicalName;
         Dictionary<string, string> files1 = new Dictionary<string, string>();
         if (!Directory.Exists(path))
         {
@@ -1452,8 +1452,8 @@ if (Convert.ToString(this.ListView1.SelectedItems[0].Tag).Contains("hidden"))
 
           return;
         }
-        this.CreateManifest(canonicalName.Replace("_assets", ""), "SteamVR", MyProject.Forms.FrmMain.steamvr + "SteamVR.bat", MyProject.Forms.FrmMain.steamvr + "SteamVR.bat", MyProject.Forms.FrmMain.OculusPath + "\\CoreData\\Manifests");
-        this.CreateAssetManifest(canonicalName, "#060404", files1, "", MyProject.Forms.FrmMain.OculusPath + "\\CoreData\\Manifests");
+        this.CreateManifest(canonicalName.Replace("_assets", ""), "SteamVR", MyProject.Forms.FrmMain.steamvr + "SteamVR.bat", MyProject.Forms.FrmMain.steamvr + "SteamVR.bat", MyProject.Forms.FrmMain.MetaPath + "\\CoreData\\Manifests");
+        this.CreateAssetManifest(canonicalName, "#060404", files1, "", MyProject.Forms.FrmMain.MetaPath + "\\CoreData\\Manifests");
         this.PopulateList();
         if (MessageBox.Show("You need to restart the Oculus Service for SteamVR to be visible in Oculus Home. Restart it now?", "Restart Required", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
         {
@@ -1476,10 +1476,10 @@ if (Convert.ToString(this.ListView1.SelectedItems[0].Tag).Contains("hidden"))
         this.imageListLarge.ImageSize = new Size(250, 90);
         this.ListView1.LargeImageList = this.imageListLarge;
         this.ListView1.View = View.LargeIcon;
-        foreach (object hiddenApp in (IEnumerable) OTTDB.GetHiddenApps())
+        foreach (object hiddenApp in (IEnumerable) MQTTDB.GetHiddenApps())
         {
           string str = Convert.ToString(hiddenApp);
-          this.imageListLarge.Images.Add(str, (Image) OculusTrayTool.My.Resources.Resources.removed_app);
+          this.imageListLarge.Images.Add(str, (Image) MetaQuestTrayTool.My.Resources.Resources.removed_app);
           this.ListView1.Items.Add(new ListViewItem(str, str)
           {
             Tag = (object) (str + ",hidden")
@@ -1584,10 +1584,10 @@ if (Convert.ToString(this.ListView1.SelectedItems[0].Tag).Contains("hidden"))
         return;
       string str = Convert.ToString(this.ListView1.SelectedItems[0].Tag).Split(',')[2];
       string text = this.ListView1.SelectedItems[0].Text;
-      OTTDB.AddIgnoreApp(str);
-      OTTDB.RemoveIncludedApp(str);
-      MyProject.Forms.FrmMain.ignoredApps = (List<string>) OTTDB.GetIgnoredApps();
-      MyProject.Forms.FrmMain.includedApps = (List<string>) OTTDB.GetIncludedApps();
+      MQTTDB.AddIgnoreApp(str);
+      MQTTDB.RemoveIncludedApp(str);
+      MyProject.Forms.FrmMain.ignoredApps = (List<string>) MQTTDB.GetIgnoredApps();
+      MyProject.Forms.FrmMain.includedApps = (List<string>) MQTTDB.GetIncludedApps();
       MyProject.Forms.FrmMain.ignoredApps.Add(str);
       this.PopulateList();
       Log.WriteToLog("'" + text + "' is now being ignored");
@@ -1620,11 +1620,11 @@ if (Convert.ToString(this.ListView1.SelectedItems[0].Tag).Contains("hidden"))
       string Path = str1.Replace("\\\\", "\\").Replace("/", "\\");
       if (MessageBox.Show("Remove profile for '" + selectedItem.Text + "'?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
       {
-        OTTDB.RemoveProfile(Path);
-        OTTDB.GetProfiles();
-        if (OTTDB.numWMI > 0)
+        MQTTDB.RemoveProfile(Path);
+        MQTTDB.GetProfiles();
+        if (MQTTDB.numWMI > 0)
           MyProject.Forms.FrmMain.CreateWatcher();
-        if (OTTDB.numTimer > 0)
+        if (MQTTDB.numTimer > 0)
           MyProject.Forms.FrmMain.pTimer.Start();
       }
       MyProject.Forms.frmCreateEditProfile.ComboBox1.Items.Clear();

@@ -6,9 +6,9 @@ using System.Globalization;
 using System.IO;
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
-  public class SteamNode : OculusNode
+  public class SteamNode : MetaNode
   {
     public List<SteamScreenshotNode> ScreenshotList;
 

@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 
 #nullable disable
-namespace OculusTrayTool.ResChanger
+namespace MetaQuestTrayTool.ResChanger
 {
   public struct Devmode
   {

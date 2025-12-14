@@ -1,7 +1,7 @@
 
 
 using Newtonsoft.Json.Linq;
-using OculusTrayTool.My;
+using MetaQuestTrayTool.My;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 #nullable disable
-namespace OculusTrayTool.Forms
+namespace MetaQuestTrayTool.Forms
 {
 
   public partial class FrmIgnoredApps : Form
@@ -49,15 +49,15 @@ namespace OculusTrayTool.Forms
     {
         foreach (ListViewItem checkedItem in this.ListView1.CheckedItems)
         {
-          OTTDB.RemoveIgnoredApp(Convert.ToString(checkedItem.Tag));
-          OTTDB.AddIncludedApp(Convert.ToString(checkedItem.Tag));
+          MQTTDB.RemoveIgnoredApp(Convert.ToString(checkedItem.Tag));
+          MQTTDB.AddIncludedApp(Convert.ToString(checkedItem.Tag));
           Log.WriteToLog("'" + checkedItem.Text + "' is not being ignored anymore");
           MyProject.Forms.FrmMain.AddToListboxAndScroll("'" + checkedItem.Text + "' is not being ignored anymore");
         }
       this.Cursor = Cursors.WaitCursor;
       this.GetIgnoredApps();
-      MyProject.Forms.FrmMain.ignoredApps = (List<string>) OTTDB.GetIgnoredApps();
-      MyProject.Forms.FrmMain.includedApps = (List<string>) OTTDB.GetIncludedApps();
+      MyProject.Forms.FrmMain.ignoredApps = (List<string>) MQTTDB.GetIgnoredApps();
+      MyProject.Forms.FrmMain.includedApps = (List<string>) MQTTDB.GetIncludedApps();
       MyProject.Forms.frmLibrary.PopulateList();
       this.Cursor = Cursors.Default;
       this.Close();
@@ -74,7 +74,7 @@ namespace OculusTrayTool.Forms
     private void GetIgnoredApps()
     {
       this.ListView1.Items.Clear();
-      List<string> ignoredApps = (List<string>) OTTDB.GetIgnoredApps();
+      List<string> ignoredApps = (List<string>) MQTTDB.GetIgnoredApps();
 
         foreach (string path in ignoredApps)
         {

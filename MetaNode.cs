@@ -3,9 +3,9 @@ using System;
 using System.IO;
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
-  public class OculusNode
+  public class MetaNode
   {
     public string Manifest;
     public string AssetManifest;
@@ -17,7 +17,7 @@ namespace OculusTrayTool
     public object Tag;
     protected DateTime m_releaseDate;
 
-    public OculusNode(PlatformType _platform, ulong _appId)
+    public MetaNode(PlatformType _platform, ulong _appId)
     {
       this.Manifest = (string) null;
       this.AssetManifest = (string) null;
@@ -32,7 +32,7 @@ namespace OculusTrayTool
       this.AppId = _appId;
     }
 
-    public OculusNode(PlatformType _platform, ulong _appId, string _name)
+    public MetaNode(PlatformType _platform, ulong _appId, string _name)
     {
       this.Manifest = (string) null;
       this.AssetManifest = (string) null;
@@ -48,7 +48,7 @@ namespace OculusTrayTool
       this.Name = _name;
     }
 
-    public OculusNode(
+    public MetaNode(
       PlatformType _platform,
       ulong _appId,
       string _name,
@@ -75,7 +75,7 @@ namespace OculusTrayTool
       this.InstallDir = _installDir;
     }
 
-    public OculusNode(
+    public MetaNode(
       PlatformType _platform,
       ulong _appId,
       string _manifest,
@@ -134,7 +134,7 @@ namespace OculusTrayTool
     {
       get
       {
-        return this.Platform == PlatformType.Oculus ? "Resources/IconOculus.png" : "Resources/IconSteam.png";
+        return this.Platform == PlatformType.Meta ? "Resources/IconOculus.png" : "Resources/IconSteam.png";
       }
     }
 

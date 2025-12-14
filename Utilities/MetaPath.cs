@@ -1,8 +1,8 @@
-using OculusTrayTool.Forms;
+using MetaQuestTrayTool.Forms;
 
 
 using Newtonsoft.Json.Linq;
-using OculusTrayTool.My;
+using MetaQuestTrayTool.My;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,10 +12,10 @@ using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
   
-  internal sealed class OculusPath
+  internal sealed class MetaPath
   {
     public static object GetOculusSoftwarePaths()
     {
@@ -25,7 +25,7 @@ namespace OculusTrayTool
       {
         if (Globals.dbg)
           Log.WriteToLog("Entering GetOculusSoftwarePaths");
-        string explorerSid = OculusPath.GetExplorerUserSid().ToString();
+        string explorerSid = MetaPath.GetExplorerUserSid().ToString();
         string obj = explorerSid + "\\SOFTWARE\\Oculus VR, LLC\\Oculus\\Libraries\\";
         if (Globals.dbg)
           Log.WriteToLog("Looking in " + obj);
@@ -80,7 +80,7 @@ namespace OculusTrayTool
       {
         // ProjectData.SetProjectError(ex);
         Exception e = ex;
-        int num = (int) MessageBox.Show("Could not get Oculus Library paths from the registry. Add them manually on the Advanced tab and restart the application", "Oculus Tray Tool", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        int num = (int) MessageBox.Show("Could not get Oculus Library paths from the registry. Add them manually on the Advanced tab and restart the application", "Meta Quest Tray Tool", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         FrmMain.fmain.AddToListboxAndScroll("Could not get Oculus Library path: " + e.Message);
         Log.WriteToLog("WARNING TRIGGERED: GetOculusSoftwarePaths exception");
         MyProject.Forms.FrmMain.hasWarning = true;
@@ -114,33 +114,33 @@ namespace OculusTrayTool
       return (object) string.Empty;
     }
 
-    public static void GetOculusPath()
+    public static void GetMetaPath()
     {
       if (Globals.dbg)
-        Log.WriteToLog("Entering GetOculusPath");
+        Log.WriteToLog("Entering GetMetaPath");
       try
       {
         if (MyProject.Forms.FrmMain.isElevated)
         {
           if (Microsoft.Win32.Registry.LocalMachine.OpenSubKey("SOFTWARE\\WOW6432Node\\Oculus VR, LLC\\Oculus") != null)
           {
-            MyProject.Forms.FrmMain.OculusPath = Convert.ToString(Microsoft.Win32.Registry.LocalMachine.OpenSubKey("SOFTWARE\\WOW6432Node\\Oculus VR, LLC\\Oculus", false).GetValue("Base"));
-            Log.WriteToLog("Oculus path: " + MyProject.Forms.FrmMain.OculusPath);
-            if (!MyProject.Forms.FrmMain.OculusPath.EndsWith("\\"))
-              MyProject.Forms.FrmMain.OculusPath += "\\";
+            MyProject.Forms.FrmMain.MetaPath = Convert.ToString(Microsoft.Win32.Registry.LocalMachine.OpenSubKey("SOFTWARE\\WOW6432Node\\Oculus VR, LLC\\Oculus", false).GetValue("Base"));
+            Log.WriteToLog("Oculus path: " + MyProject.Forms.FrmMain.MetaPath);
+            if (!MyProject.Forms.FrmMain.MetaPath.EndsWith("\\"))
+              MyProject.Forms.FrmMain.MetaPath += "\\";
           }
           else if (Microsoft.Win32.Registry.LocalMachine.OpenSubKey("SOFTWARE\\Oculus VR, LLC\\Oculus") != null)
           {
-            MyProject.Forms.FrmMain.OculusPath = Convert.ToString(Microsoft.Win32.Registry.LocalMachine.OpenSubKey("SOFTWARE\\Oculus VR, LLC\\Oculus", true).GetValue("Base"));
-            Log.WriteToLog("Oculus path: " + MyProject.Forms.FrmMain.OculusPath);
-            if (!MyProject.Forms.FrmMain.OculusPath.EndsWith("\\"))
-              MyProject.Forms.FrmMain.OculusPath += "\\";
+            MyProject.Forms.FrmMain.MetaPath = Convert.ToString(Microsoft.Win32.Registry.LocalMachine.OpenSubKey("SOFTWARE\\Oculus VR, LLC\\Oculus", true).GetValue("Base"));
+            Log.WriteToLog("Oculus path: " + MyProject.Forms.FrmMain.MetaPath);
+            if (!MyProject.Forms.FrmMain.MetaPath.EndsWith("\\"))
+              MyProject.Forms.FrmMain.MetaPath += "\\";
           }
-          MySettingsProperty.Settings.OculusPath = MyProject.Forms.FrmMain.OculusPath;
+          MySettingsProperty.Settings.MetaPath = MyProject.Forms.FrmMain.MetaPath;
           MySettingsProperty.Settings.Save();
-          if (File.Exists(MyProject.Forms.FrmMain.OculusPath + "Support\\oculus-runtime\\OVRServer_x64.exe"))
+          if (File.Exists(MyProject.Forms.FrmMain.MetaPath + "Support\\oculus-runtime\\OVRServer_x64.exe"))
           {
-            FileVersionInfo versionInfo = FileVersionInfo.GetVersionInfo(MyProject.Forms.FrmMain.OculusPath + "Support\\oculus-runtime\\OVRServiceLauncher.exe");
+            FileVersionInfo versionInfo = FileVersionInfo.GetVersionInfo(MyProject.Forms.FrmMain.MetaPath + "Support\\oculus-runtime\\OVRServiceLauncher.exe");
             MyProject.Forms.FrmMain.OculusAppVersion = versionInfo.FileMajorPart.ToString() + versionInfo.FileMinorPart.ToString();
             Log.WriteToLog("Oculus App Version: " + versionInfo.FileVersion);
             if (versionInfo.FileMajorPart < 23)
@@ -154,20 +154,20 @@ namespace OculusTrayTool
         }
         else
           Log.WriteToLog("* Not running as Administrator, cannot get Oculus path");
-        if (string.Compare(FrmMain.fmain.OculusPath, (string) null, StringComparison.Ordinal) == 0)
+        if (string.Compare(FrmMain.fmain.MetaPath, (string) null, StringComparison.Ordinal) == 0)
           Log.WriteToLog("Could not get Oculus path from registry");
         if (!Globals.dbg)
           return;
-        Log.WriteToLog("Exiting GetOculusPath");
+        Log.WriteToLog("Exiting GetMetaPath");
       }
       catch (Exception ex)
       {
         // ProjectData.SetProjectError(ex);
         Exception e = ex;
-        Log.WriteToLog("WARNING TRIGGERED: GetOculusPath exception");
+        Log.WriteToLog("WARNING TRIGGERED: GetMetaPath exception");
         FrmMain.fmain.hasWarning = true;
         StackTrace stackTrace = new StackTrace(e, true);
-        Log.WriteToLog("GetOculusPath: " + e.ToString() + stackTrace.ToString());
+        Log.WriteToLog("GetMetaPath: " + e.ToString() + stackTrace.ToString());
         // ProjectData.ClearProjectError();
       }
     }

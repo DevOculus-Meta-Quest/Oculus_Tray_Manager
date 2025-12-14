@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
   public partial class ToolStripSpringTextBox : CueToolStripTextBox
   {

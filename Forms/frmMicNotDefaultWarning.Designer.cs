@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Management;
 
-namespace OculusTrayTool.Forms
+namespace MetaQuestTrayTool.Forms
 {
     partial class frmMicNotDefaultWarning
     {
@@ -65,7 +65,7 @@ protected override void Dispose(bool disposing)
       this.FormBorderStyle = FormBorderStyle.FixedDialog;
       this.Name = "frmMicNotDefaultWarning";
       this.StartPosition = FormStartPosition.CenterScreen;
-      this.Text = "Oculus Tray Tool";
+      this.Text = "Meta Quest Tray Tool";
       this.ResumeLayout(false);
       this.PerformLayout();
     

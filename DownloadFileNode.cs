@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
   public class DownloadFileNode : ICloneable
   {

@@ -1,11 +1,11 @@
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
   public class Globals
   {
     public static Steam steam = (Steam) null;
-    public static Oculus oculus = (Oculus) null;
+    public static Meta meta = (Meta) null;
     public static bool dbg = false;
   }
 }

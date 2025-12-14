@@ -6,7 +6,7 @@ using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
   public class DotNetBarTabcontrol : TabControl
   {

@@ -1,8 +1,8 @@
 
 
 using Newtonsoft.Json.Linq;
-using OculusTrayTool.My;
-using OculusTrayTool.MyNameSpace;
+using MetaQuestTrayTool.My;
+using MetaQuestTrayTool.MyNameSpace;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ using System.Timers;
 using System.Windows.Forms;
 
 #nullable disable
-namespace OculusTrayTool.Forms
+namespace MetaQuestTrayTool.Forms
 {
 
   public partial class frmProfiles : Form
@@ -211,7 +211,7 @@ namespace OculusTrayTool.Forms
       }
 
       this.Show();
-      OTTDB.GetProfiles();
+      MQTTDB.GetProfiles();
       this.ComboResolution.Focus();
     }
 
@@ -253,19 +253,19 @@ namespace OculusTrayTool.Forms
       {
         if (MessageBox.Show("Remove profile for '" + selectedItem.Text.Replace(" *", "") + "'?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
         {
-          OTTDB.RemoveProfile(this.TextBox1.Text);
+          MQTTDB.RemoveProfile(this.TextBox1.Text);
           this.ListView1.Items.Clear();
-          OTTDB.GetProfiles();
-          if (OTTDB.numWMI > 0)
+          MQTTDB.GetProfiles();
+          if (MQTTDB.numWMI > 0)
             MyProject.Forms.FrmMain.CreateWatcher();
-          if (OTTDB.numTimer > 0)
+          if (MQTTDB.numTimer > 0)
             MyProject.Forms.FrmMain.pTimer.Start();
         }
       }
 
       MyProject.Forms.frmCreateEditProfile.ComboBox1.Items.Clear();
-      if (Directory.Exists(MyProject.Forms.FrmMain.OculusPath.TrimEnd('\\') + "\\CoreData\\Manifests"))
-        GetGames.GetThirdPartyApps(MyProject.Forms.FrmMain.OculusPath.TrimEnd('\\') + "\\CoreData\\Manifests");
+      if (Directory.Exists(MyProject.Forms.FrmMain.MetaPath.TrimEnd('\\') + "\\CoreData\\Manifests"))
+        GetGames.GetThirdPartyApps(MyProject.Forms.FrmMain.MetaPath.TrimEnd('\\') + "\\CoreData\\Manifests");
       if (String.Equals(MySettingsProperty.Settings.LibraryPath, "", StringComparison.Ordinal) == false)
       {
         string[] strArray = MySettingsProperty.Settings.LibraryPath.Split(',');
@@ -421,7 +421,7 @@ namespace OculusTrayTool.Forms
                 try 
                 {
                     GetGames.GetSteamGames();
-                    string mainPath = MyProject.Forms.FrmMain.OculusPath.TrimEnd('\\');
+                    string mainPath = MyProject.Forms.FrmMain.MetaPath.TrimEnd('\\');
                     if (Directory.Exists(mainPath + "\\Manifests"))
                          GetGames.GetFiles(mainPath + "\\Manifests");
                     if (Directory.Exists(mainPath + "\\Software\\Manifests"))
@@ -544,7 +544,7 @@ namespace OculusTrayTool.Forms
               Thread.Sleep(3000);
               if (MyProject.Forms.frmLibrary.ManualStartProfiles.ContainsKey(str2.ToLower()))
               {
-                Log.WriteToLog("Applying profile for " + OTTDB.GetDisplayName(str2));
+                Log.WriteToLog("Applying profile for " + MQTTDB.GetDisplayName(str2));
                 this.ApplyProfile(str2.TrimStart().TrimEnd());
               }
               else
@@ -569,7 +569,7 @@ namespace OculusTrayTool.Forms
             if (!MyProject.Forms.FrmMain.HomeIsRunning)
               RunCommand.StartHome();
             Thread.Sleep(3000);
-            Log.WriteToLog("Applying profile for " + OTTDB.GetDisplayName(text));
+            Log.WriteToLog("Applying profile for " + MQTTDB.GetDisplayName(text));
             this.ApplyProfile(text.TrimStart().TrimEnd());
             Log.WriteToLog("Launching " + this.ListView1.SelectedItems[0].Text);
             Log.WriteToLog(" -> " + text.TrimStart().TrimEnd());
@@ -618,8 +618,8 @@ namespace OculusTrayTool.Forms
           new System.Media.SoundPlayer(Path.Combine(Application.StartupPath, "resources", "Sounds", "gamelaunchdetected.wav")).Play();
         }
         MyProject.Forms.FrmMain.runningApp = appName;
-        string displayName = OTTDB.GetDisplayName(appName);
-        MyProject.Forms.FrmMain.runningapp_displayname = OTTDB.GetDisplayName(appName);
+        string displayName = MQTTDB.GetDisplayName(appName);
+        MyProject.Forms.FrmMain.runningapp_displayname = MQTTDB.GetDisplayName(appName);
         Log.WriteToLog("Manual game launch detected: " + displayName + " (" + appName + ")");
         Log.WriteToLog(displayName + ": Super Sampling @ " + ss);
         if (Globals.dbg)
@@ -709,8 +709,8 @@ namespace OculusTrayTool.Forms
             Thread.Sleep(3000);
             if (MyProject.Forms.frmLibrary.ManualStartProfiles.ContainsKey(str2.ToLower()))
             {
-              Log.WriteToLog("Applying profile for " + OTTDB.GetDisplayName(str2));
-              FrmMain.fmain.AddToListboxAndScroll("Applying profile for " + OTTDB.GetDisplayName(str2));
+              Log.WriteToLog("Applying profile for " + MQTTDB.GetDisplayName(str2));
+              FrmMain.fmain.AddToListboxAndScroll("Applying profile for " + MQTTDB.GetDisplayName(str2));
               this.ApplyProfile(str2.TrimStart().TrimEnd());
             }
             else
@@ -736,7 +736,7 @@ namespace OculusTrayTool.Forms
           if (!MyProject.Forms.FrmMain.HomeIsRunning)
             RunCommand.StartHome();
           Thread.Sleep(3000);
-          Log.WriteToLog("Applying profile for " + OTTDB.GetDisplayName(text));
+          Log.WriteToLog("Applying profile for " + MQTTDB.GetDisplayName(text));
           this.ApplyProfile(text.TrimStart().TrimEnd());
           Log.WriteToLog("Launching " + this.ListView1.SelectedItems[0].Text);
           Log.WriteToLog(" -> " + text.TrimStart().TrimEnd());

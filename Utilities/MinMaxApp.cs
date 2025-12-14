@@ -1,4 +1,4 @@
-using OculusTrayTool.Forms;
+using MetaQuestTrayTool.Forms;
 
 
 using System;
@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
 
   internal sealed class MinMaxApp

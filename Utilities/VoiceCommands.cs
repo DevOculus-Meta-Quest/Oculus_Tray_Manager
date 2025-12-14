@@ -1,4 +1,4 @@
-using OculusTrayTool.Forms;
+using MetaQuestTrayTool.Forms;
 
 using CoreAudio;
 using System.Speech.Recognition;
@@ -12,7 +12,7 @@ using System.Threading;
 using System.Windows.Forms;
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
     internal sealed class VoiceCommands
   {
@@ -41,9 +41,9 @@ namespace OculusTrayTool
         Log.WriteToLog("Initializing voice recognition");
         VoiceCommands.sRecognizeStartStop = new SpeechRecognitionEngine(new CultureInfo(CultureInfo.CurrentUICulture.Name));
         VoiceCommands.sRecognizeStartStop.SetInputToDefaultAudioDevice();
-        Grammar grammar1 = new Grammar(new GrammarBuilder(new Choices(OculusTrayTool.My.MySettings.Default.StartVoice.Split(';'))));
+        Grammar grammar1 = new Grammar(new GrammarBuilder(new Choices(MetaQuestTrayTool.My.MySettings.Default.StartVoice.Split(';'))));
         grammar1.Name = "Start";
-        Grammar grammar2 = new Grammar(new GrammarBuilder(new Choices(OculusTrayTool.My.MySettings.Default.StopVoice.Split(';'))));
+        Grammar grammar2 = new Grammar(new GrammarBuilder(new Choices(MetaQuestTrayTool.My.MySettings.Default.StopVoice.Split(';'))));
         grammar2.Name = "Stop";
         VoiceCommands.sRecognizeStartStop.LoadGrammarAsync(grammar1);
         VoiceCommands.sRecognizeStartStop.LoadGrammarAsync(grammar2);
@@ -54,13 +54,13 @@ namespace OculusTrayTool
         MyProject.Forms.FrmMain.AddToListboxAndScroll("Voice recognition initialized, waiting for Oculus Home to start");
         MyProject.Forms.FrmMain.AddToListboxAndScroll("Input device: " + Convert.ToString(defaultAudioEndpoint.Properties.GetValue(1).Value) + " (" + defaultAudioEndpoint.FriendlyName + ")");
         MyProject.Forms.FrmMain.AddToListboxAndScroll("Input volume: " + (defaultAudioEndpoint.AudioEndpointVolume.MasterVolumeLevelScalar * 100f).ToString() + "%");
-        MyProject.Forms.FrmMain.AddToListboxAndScroll("Confidence level: " + Convert.ToString(OculusTrayTool.My.MySettings.Default.Confidence) + "%");
+        MyProject.Forms.FrmMain.AddToListboxAndScroll("Confidence level: " + Convert.ToString(MetaQuestTrayTool.My.MySettings.Default.Confidence) + "%");
         MyProject.Forms.FrmMain.AddToListboxAndScroll("Language: " + VoiceCommands.sRecognizeStartStop.RecognizerInfo.Culture.EnglishName);
         if (!defaultAudioEndpoint.FriendlyName.ToLower().Contains("rift"))
         {
           Log.WriteToLog("Rift microphone is not the default input device.");
           MyProject.Forms.FrmMain.AddToListboxAndScroll("Rift microphone is not the default input device");
-          if (OculusTrayTool.My.MySettings.Default.ShowMicNotDefaultWarning)
+          if (MetaQuestTrayTool.My.MySettings.Default.ShowMicNotDefaultWarning)
           {
             MyProject.Forms.frmMicNotDefaultWarning.TopMost = true;
             MyProject.Forms.frmMicNotDefaultWarning.Show();
@@ -83,29 +83,29 @@ namespace OculusTrayTool
     {
       if (Globals.dbg)
         Log.WriteToLog("Building Grammars for Voice recognition");
-      Grammar grammar1 = new Grammar(new GrammarBuilder(new Choices(OculusTrayTool.My.MySettings.Default.EnableASW.Split(';'))));
+      Grammar grammar1 = new Grammar(new GrammarBuilder(new Choices(MetaQuestTrayTool.My.MySettings.Default.EnableASW.Split(';'))));
       grammar1.Name = "EnableASW";
-      Grammar grammar2 = new Grammar(new GrammarBuilder(new Choices(OculusTrayTool.My.MySettings.Default.DisableASW.Split(';'))));
+      Grammar grammar2 = new Grammar(new GrammarBuilder(new Choices(MetaQuestTrayTool.My.MySettings.Default.DisableASW.Split(';'))));
       grammar2.Name = "DisableASW";
-      Grammar grammar3 = new Grammar(new GrammarBuilder(new Choices(OculusTrayTool.My.MySettings.Default.LockASWOn.Split(';'))));
+      Grammar grammar3 = new Grammar(new GrammarBuilder(new Choices(MetaQuestTrayTool.My.MySettings.Default.LockASWOn.Split(';'))));
       grammar3.Name = "LockASWOn";
-      Grammar grammar4 = new Grammar(new GrammarBuilder(new Choices(OculusTrayTool.My.MySettings.Default.ShowPerf.Split(';'))));
+      Grammar grammar4 = new Grammar(new GrammarBuilder(new Choices(MetaQuestTrayTool.My.MySettings.Default.ShowPerf.Split(';'))));
       grammar4.Name = "ShowPerf";
-      Grammar grammar5 = new Grammar(new GrammarBuilder(new Choices(OculusTrayTool.My.MySettings.Default.ShowPD.Split(';'))));
+      Grammar grammar5 = new Grammar(new GrammarBuilder(new Choices(MetaQuestTrayTool.My.MySettings.Default.ShowPD.Split(';'))));
       grammar5.Name = "ShowPD";
-      Grammar grammar6 = new Grammar(new GrammarBuilder(new Choices(OculusTrayTool.My.MySettings.Default.Close.Split(';'))));
+      Grammar grammar6 = new Grammar(new GrammarBuilder(new Choices(MetaQuestTrayTool.My.MySettings.Default.Close.Split(';'))));
       grammar6.Name = "Close";
-      Grammar grammar7 = new Grammar(new GrammarBuilder(new Choices(OculusTrayTool.My.MySettings.Default.ShowASW.Split(';'))));
+      Grammar grammar7 = new Grammar(new GrammarBuilder(new Choices(MetaQuestTrayTool.My.MySettings.Default.ShowASW.Split(';'))));
       grammar7.Name = "ShowASW";
-      Grammar grammar8 = new Grammar(new GrammarBuilder(new Choices(OculusTrayTool.My.MySettings.Default.ShowLatency.Split(';'))));
+      Grammar grammar8 = new Grammar(new GrammarBuilder(new Choices(MetaQuestTrayTool.My.MySettings.Default.ShowLatency.Split(';'))));
       grammar8.Name = "ShowLatency";
-      Grammar grammar9 = new Grammar(new GrammarBuilder(new Choices(OculusTrayTool.My.MySettings.Default.ShowApplicationRender.Split(';'))));
+      Grammar grammar9 = new Grammar(new GrammarBuilder(new Choices(MetaQuestTrayTool.My.MySettings.Default.ShowApplicationRender.Split(';'))));
       grammar9.Name = "ShowApplicationRender";
-      Grammar grammar10 = new Grammar(new GrammarBuilder(new Choices(OculusTrayTool.My.MySettings.Default.ShowCompositorRender.Split(';'))));
+      Grammar grammar10 = new Grammar(new GrammarBuilder(new Choices(MetaQuestTrayTool.My.MySettings.Default.ShowCompositorRender.Split(';'))));
       grammar10.Name = "ShowCompositorRender";
-      Grammar grammar11 = new Grammar(new GrammarBuilder(new Choices(OculusTrayTool.My.MySettings.Default.ShowVersion.Split(';'))));
+      Grammar grammar11 = new Grammar(new GrammarBuilder(new Choices(MetaQuestTrayTool.My.MySettings.Default.ShowVersion.Split(';'))));
       grammar11.Name = "ShowVersion";
-      Grammar grammar12 = new Grammar(new GrammarBuilder(new Choices(OculusTrayTool.My.MySettings.Default.LaunchSteam.Split(';'))));
+      Grammar grammar12 = new Grammar(new GrammarBuilder(new Choices(MetaQuestTrayTool.My.MySettings.Default.LaunchSteam.Split(';'))));
       grammar12.Name = "StartSteam";
       Choices alternateChoices1 = new Choices(new string[16]
       {
@@ -126,7 +126,7 @@ namespace OculusTrayTool
         "2.4",
         "2.5"
       });
-      Choices alternateChoices2 = new Choices(OculusTrayTool.My.MySettings.Default.SetPD.Split(';'));
+      Choices alternateChoices2 = new Choices(MetaQuestTrayTool.My.MySettings.Default.SetPD.Split(';'));
       GrammarBuilder builder = new GrammarBuilder();
       builder.Append(alternateChoices2);
       builder.Append(alternateChoices1);
@@ -139,31 +139,31 @@ namespace OculusTrayTool
         if (Globals.dbg)
           Log.WriteToLog("Loading Grammars");
         VoiceCommands.sRecognize.RequestRecognizerUpdate();
-        if (OculusTrayTool.My.MySettings.Default.EnableASWEnabled)
+        if (MetaQuestTrayTool.My.MySettings.Default.EnableASWEnabled)
           VoiceCommands.sRecognize.LoadGrammar(grammar1);
-        if (OculusTrayTool.My.MySettings.Default.DisableASWEnabled)
+        if (MetaQuestTrayTool.My.MySettings.Default.DisableASWEnabled)
           VoiceCommands.sRecognize.LoadGrammar(grammar2);
-        if (OculusTrayTool.My.MySettings.Default.LockASWOnEnabled)
+        if (MetaQuestTrayTool.My.MySettings.Default.LockASWOnEnabled)
           VoiceCommands.sRecognize.LoadGrammar(grammar3);
-        if (OculusTrayTool.My.MySettings.Default.ShowPerfEnabled)
+        if (MetaQuestTrayTool.My.MySettings.Default.ShowPerfEnabled)
           VoiceCommands.sRecognize.LoadGrammar(grammar4);
-        if (OculusTrayTool.My.MySettings.Default.ShowPDEnabled)
+        if (MetaQuestTrayTool.My.MySettings.Default.ShowPDEnabled)
           VoiceCommands.sRecognize.LoadGrammar(grammar5);
-        if (OculusTrayTool.My.MySettings.Default.CloseEnabled)
+        if (MetaQuestTrayTool.My.MySettings.Default.CloseEnabled)
           VoiceCommands.sRecognize.LoadGrammar(grammar6);
-        if (OculusTrayTool.My.MySettings.Default.SetPDEnabled)
+        if (MetaQuestTrayTool.My.MySettings.Default.SetPDEnabled)
           VoiceCommands.sRecognize.LoadGrammar(grammar13);
-        if (OculusTrayTool.My.MySettings.Default.ShowASWEnabled)
+        if (MetaQuestTrayTool.My.MySettings.Default.ShowASWEnabled)
           VoiceCommands.sRecognize.LoadGrammar(grammar7);
-        if (OculusTrayTool.My.MySettings.Default.ShowLatencyEnabled)
+        if (MetaQuestTrayTool.My.MySettings.Default.ShowLatencyEnabled)
           VoiceCommands.sRecognize.LoadGrammar(grammar8);
-        if (OculusTrayTool.My.MySettings.Default.ShowApplicationRenderEnabled)
+        if (MetaQuestTrayTool.My.MySettings.Default.ShowApplicationRenderEnabled)
           VoiceCommands.sRecognize.LoadGrammar(grammar9);
-        if (OculusTrayTool.My.MySettings.Default.ShowCompositorRenderEnabled)
+        if (MetaQuestTrayTool.My.MySettings.Default.ShowCompositorRenderEnabled)
           VoiceCommands.sRecognize.LoadGrammar(grammar10);
-        if (OculusTrayTool.My.MySettings.Default.ShowVersionEnabled)
+        if (MetaQuestTrayTool.My.MySettings.Default.ShowVersionEnabled)
           VoiceCommands.sRecognize.LoadGrammar(grammar11);
-        if (OculusTrayTool.My.MySettings.Default.LaunchSteamEnabled)
+        if (MetaQuestTrayTool.My.MySettings.Default.LaunchSteamEnabled)
           VoiceCommands.sRecognize.LoadGrammar(grammar12);
         VoiceCommands.sRecognize.RecognizeAsync(RecognizeMode.Multiple);
         if (Globals.dbg)

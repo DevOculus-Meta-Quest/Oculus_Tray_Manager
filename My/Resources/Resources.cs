@@ -9,7 +9,7 @@ using System.Resources;
 using System.Runtime.CompilerServices;
 
 #nullable disable
-namespace OculusTrayTool.My.Resources
+namespace MetaQuestTrayTool.My.Resources
 {
 
   [GeneratedCode("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
@@ -26,24 +26,24 @@ namespace OculusTrayTool.My.Resources
     {
       get
       {
-        if (object.ReferenceEquals((object) OculusTrayTool.My.Resources.Resources.resourceMan, (object) null))
-          OculusTrayTool.My.Resources.Resources.resourceMan = new ResourceManager("OculusTrayTool.Resources", typeof (OculusTrayTool.My.Resources.Resources).Assembly);
-        return OculusTrayTool.My.Resources.Resources.resourceMan;
+        if (object.ReferenceEquals((object) MetaQuestTrayTool.My.Resources.Resources.resourceMan, (object) null))
+          MetaQuestTrayTool.My.Resources.Resources.resourceMan = new ResourceManager("MetaQuestTrayTool.Resources", typeof (MetaQuestTrayTool.My.Resources.Resources).Assembly);
+        return MetaQuestTrayTool.My.Resources.Resources.resourceMan;
       }
     }
 
     [EditorBrowsable(EditorBrowsableState.Advanced)]
     public static CultureInfo Culture
     {
-      get => OculusTrayTool.My.Resources.Resources.resourceCulture;
-      set => OculusTrayTool.My.Resources.Resources.resourceCulture = value;
+      get => MetaQuestTrayTool.My.Resources.Resources.resourceCulture;
+      set => MetaQuestTrayTool.My.Resources.Resources.resourceCulture = value;
     }
 
     public static Bitmap App_Blue_16
     {
       get
       {
-        return (Bitmap) RuntimeHelpers.GetObjectValue(OculusTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (App_Blue_16), OculusTrayTool.My.Resources.Resources.resourceCulture));
+        return (Bitmap) RuntimeHelpers.GetObjectValue(MetaQuestTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (App_Blue_16), MetaQuestTrayTool.My.Resources.Resources.resourceCulture));
       }
     }
 
@@ -51,7 +51,7 @@ namespace OculusTrayTool.My.Resources
     {
       get
       {
-        return (Bitmap) RuntimeHelpers.GetObjectValue(OculusTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (App_Blue_256), OculusTrayTool.My.Resources.Resources.resourceCulture));
+        return (Bitmap) RuntimeHelpers.GetObjectValue(MetaQuestTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (App_Blue_256), MetaQuestTrayTool.My.Resources.Resources.resourceCulture));
       }
     }
 
@@ -59,7 +59,7 @@ namespace OculusTrayTool.My.Resources
     {
       get
       {
-        return (Bitmap) RuntimeHelpers.GetObjectValue(OculusTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (App_Blue_32), OculusTrayTool.My.Resources.Resources.resourceCulture));
+        return (Bitmap) RuntimeHelpers.GetObjectValue(MetaQuestTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (App_Blue_32), MetaQuestTrayTool.My.Resources.Resources.resourceCulture));
       }
     }
 
@@ -67,7 +67,7 @@ namespace OculusTrayTool.My.Resources
     {
       get
       {
-        return (Bitmap) RuntimeHelpers.GetObjectValue(OculusTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (close_16), OculusTrayTool.My.Resources.Resources.resourceCulture));
+        return (Bitmap) RuntimeHelpers.GetObjectValue(MetaQuestTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (close_16), MetaQuestTrayTool.My.Resources.Resources.resourceCulture));
       }
     }
 
@@ -75,7 +75,7 @@ namespace OculusTrayTool.My.Resources
     {
       get
       {
-        return (Bitmap) RuntimeHelpers.GetObjectValue(OculusTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (Icon_Delete), OculusTrayTool.My.Resources.Resources.resourceCulture));
+        return (Bitmap) RuntimeHelpers.GetObjectValue(MetaQuestTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (Icon_Delete), MetaQuestTrayTool.My.Resources.Resources.resourceCulture));
       }
     }
 
@@ -83,7 +83,7 @@ namespace OculusTrayTool.My.Resources
     {
       get
       {
-        return (Bitmap) RuntimeHelpers.GetObjectValue(OculusTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (Icon_Edit), OculusTrayTool.My.Resources.Resources.resourceCulture));
+        return (Bitmap) RuntimeHelpers.GetObjectValue(MetaQuestTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (Icon_Edit), MetaQuestTrayTool.My.Resources.Resources.resourceCulture));
       }
     }
 
@@ -91,7 +91,7 @@ namespace OculusTrayTool.My.Resources
     {
       get
       {
-        return (Bitmap) RuntimeHelpers.GetObjectValue(OculusTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (Icon_Exit), OculusTrayTool.My.Resources.Resources.resourceCulture));
+        return (Bitmap) RuntimeHelpers.GetObjectValue(MetaQuestTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (Icon_Exit), MetaQuestTrayTool.My.Resources.Resources.resourceCulture));
       }
     }
 
@@ -99,7 +99,7 @@ namespace OculusTrayTool.My.Resources
     {
       get
       {
-        return (Bitmap) RuntimeHelpers.GetObjectValue(OculusTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (Icon_Help), OculusTrayTool.My.Resources.Resources.resourceCulture));
+        return (Bitmap) RuntimeHelpers.GetObjectValue(MetaQuestTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (Icon_Help), MetaQuestTrayTool.My.Resources.Resources.resourceCulture));
       }
     }
 
@@ -107,7 +107,7 @@ namespace OculusTrayTool.My.Resources
     {
       get
       {
-        return (Bitmap) RuntimeHelpers.GetObjectValue(OculusTrayTool.My.Resources.Resources.ResourceManager.GetObject("Icon_Service&Startup2", OculusTrayTool.My.Resources.Resources.resourceCulture));
+        return (Bitmap) RuntimeHelpers.GetObjectValue(MetaQuestTrayTool.My.Resources.Resources.ResourceManager.GetObject("Icon_Service&Startup2", MetaQuestTrayTool.My.Resources.Resources.resourceCulture));
       }
     }
 
@@ -115,7 +115,7 @@ namespace OculusTrayTool.My.Resources
     {
       get
       {
-        return (Bitmap) RuntimeHelpers.GetObjectValue(OculusTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (Icon_View), OculusTrayTool.My.Resources.Resources.resourceCulture));
+        return (Bitmap) RuntimeHelpers.GetObjectValue(MetaQuestTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (Icon_View), MetaQuestTrayTool.My.Resources.Resources.resourceCulture));
       }
     }
 
@@ -123,7 +123,7 @@ namespace OculusTrayTool.My.Resources
     {
       get
       {
-        return (Bitmap) RuntimeHelpers.GetObjectValue(OculusTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (paypal), OculusTrayTool.My.Resources.Resources.resourceCulture));
+        return (Bitmap) RuntimeHelpers.GetObjectValue(MetaQuestTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (paypal), MetaQuestTrayTool.My.Resources.Resources.resourceCulture));
       }
     }
 
@@ -131,7 +131,7 @@ namespace OculusTrayTool.My.Resources
     {
       get
       {
-        return (Bitmap) RuntimeHelpers.GetObjectValue(OculusTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (play), OculusTrayTool.My.Resources.Resources.resourceCulture));
+        return (Bitmap) RuntimeHelpers.GetObjectValue(MetaQuestTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (play), MetaQuestTrayTool.My.Resources.Resources.resourceCulture));
       }
     }
 
@@ -139,7 +139,7 @@ namespace OculusTrayTool.My.Resources
     {
       get
       {
-        return (Bitmap) RuntimeHelpers.GetObjectValue(OculusTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (play2), OculusTrayTool.My.Resources.Resources.resourceCulture));
+        return (Bitmap) RuntimeHelpers.GetObjectValue(MetaQuestTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (play2), MetaQuestTrayTool.My.Resources.Resources.resourceCulture));
       }
     }
 
@@ -147,7 +147,7 @@ namespace OculusTrayTool.My.Resources
     {
       get
       {
-        return (Bitmap) RuntimeHelpers.GetObjectValue(OculusTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (refresh_16), OculusTrayTool.My.Resources.Resources.resourceCulture));
+        return (Bitmap) RuntimeHelpers.GetObjectValue(MetaQuestTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (refresh_16), MetaQuestTrayTool.My.Resources.Resources.resourceCulture));
       }
     }
 
@@ -155,7 +155,7 @@ namespace OculusTrayTool.My.Resources
     {
       get
       {
-        return (Bitmap) RuntimeHelpers.GetObjectValue(OculusTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (removed_app), OculusTrayTool.My.Resources.Resources.resourceCulture));
+        return (Bitmap) RuntimeHelpers.GetObjectValue(MetaQuestTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (removed_app), MetaQuestTrayTool.My.Resources.Resources.resourceCulture));
       }
     }
 
@@ -163,7 +163,7 @@ namespace OculusTrayTool.My.Resources
     {
       get
       {
-        return (Bitmap) RuntimeHelpers.GetObjectValue(OculusTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (Service_Restart), OculusTrayTool.My.Resources.Resources.resourceCulture));
+        return (Bitmap) RuntimeHelpers.GetObjectValue(MetaQuestTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (Service_Restart), MetaQuestTrayTool.My.Resources.Resources.resourceCulture));
       }
     }
 
@@ -171,7 +171,7 @@ namespace OculusTrayTool.My.Resources
     {
       get
       {
-        return (Bitmap) RuntimeHelpers.GetObjectValue(OculusTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (Service_Start), OculusTrayTool.My.Resources.Resources.resourceCulture));
+        return (Bitmap) RuntimeHelpers.GetObjectValue(MetaQuestTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (Service_Start), MetaQuestTrayTool.My.Resources.Resources.resourceCulture));
       }
     }
 
@@ -179,7 +179,7 @@ namespace OculusTrayTool.My.Resources
     {
       get
       {
-        return (Bitmap) RuntimeHelpers.GetObjectValue(OculusTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (Service_Stop), OculusTrayTool.My.Resources.Resources.resourceCulture));
+        return (Bitmap) RuntimeHelpers.GetObjectValue(MetaQuestTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (Service_Stop), MetaQuestTrayTool.My.Resources.Resources.resourceCulture));
       }
     }
 
@@ -187,7 +187,7 @@ namespace OculusTrayTool.My.Resources
     {
       get
       {
-        return (Bitmap) RuntimeHelpers.GetObjectValue(OculusTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (Untitled), OculusTrayTool.My.Resources.Resources.resourceCulture));
+        return (Bitmap) RuntimeHelpers.GetObjectValue(MetaQuestTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (Untitled), MetaQuestTrayTool.My.Resources.Resources.resourceCulture));
       }
     }
 
@@ -195,7 +195,7 @@ namespace OculusTrayTool.My.Resources
     {
       get
       {
-        return (Bitmap) RuntimeHelpers.GetObjectValue(OculusTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (Untitled1), OculusTrayTool.My.Resources.Resources.resourceCulture));
+        return (Bitmap) RuntimeHelpers.GetObjectValue(MetaQuestTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (Untitled1), MetaQuestTrayTool.My.Resources.Resources.resourceCulture));
       }
     }
 
@@ -203,7 +203,7 @@ namespace OculusTrayTool.My.Resources
     {
       get
       {
-        return (Bitmap) RuntimeHelpers.GetObjectValue(OculusTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (Untitled2), OculusTrayTool.My.Resources.Resources.resourceCulture));
+        return (Bitmap) RuntimeHelpers.GetObjectValue(MetaQuestTrayTool.My.Resources.Resources.ResourceManager.GetObject(nameof (Untitled2), MetaQuestTrayTool.My.Resources.Resources.resourceCulture));
       }
     }
 
@@ -211,7 +211,7 @@ namespace OculusTrayTool.My.Resources
     {
       get
       {
-        return (Bitmap) RuntimeHelpers.GetObjectValue(OculusTrayTool.My.Resources.Resources.ResourceManager.GetObject("Very-Basic-Not-Listen-icon", OculusTrayTool.My.Resources.Resources.resourceCulture));
+        return (Bitmap) RuntimeHelpers.GetObjectValue(MetaQuestTrayTool.My.Resources.Resources.ResourceManager.GetObject("Very-Basic-Not-Listen-icon", MetaQuestTrayTool.My.Resources.Resources.resourceCulture));
       }
     }
   }

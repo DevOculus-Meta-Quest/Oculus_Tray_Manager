@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
   public class TextProgressBar : ProgressBar
   {

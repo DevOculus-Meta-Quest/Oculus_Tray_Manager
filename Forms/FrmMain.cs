@@ -4,8 +4,8 @@ using System.Speech.Recognition;
 
 using System.Timers;
 using Newtonsoft.Json.Linq;
-using OculusTrayTool.My;
-using OculusTrayTool.MyNameSpace;
+using MetaQuestTrayTool.My;
+using MetaQuestTrayTool.MyNameSpace;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -29,7 +29,7 @@ using System.Reflection;
 using Microsoft.Win32;
 
 
-namespace OculusTrayTool.Forms
+namespace MetaQuestTrayTool.Forms
 {
   public partial class FrmMain : Form
   {
@@ -65,7 +65,7 @@ namespace OculusTrayTool.Forms
     public bool RiftAudioCanceled;
     public object scaleX;
     public object scaleY;
-    public string OculusPath;
+    public string MetaPath;
     public bool HomeIsRunning;
     private bool OVRIsRunning;
     public bool spoofid;
@@ -271,25 +271,25 @@ namespace OculusTrayTool.Forms
           string Left = commandLineArgs[index1];
           if (String.Equals(Left, "-r", StringComparison.OrdinalIgnoreCase))
           {
-            OculusTrayTool.My.MySettings.Default.Reset();
-            OculusTrayTool.My.MySettings.Default.Save();
+            MetaQuestTrayTool.My.MySettings.Default.Reset();
+            MetaQuestTrayTool.My.MySettings.Default.Save();
             this.Shutdown();
           }
           Globals.dbg = String.Equals(Left, "-d", StringComparison.OrdinalIgnoreCase);
           if (String.Equals(Left, "-u", StringComparison.OrdinalIgnoreCase))
-            OculusTrayTool.My.MySettings.Default.UpgradeRequired = true;
+            MetaQuestTrayTool.My.MySettings.Default.UpgradeRequired = true;
           checked { ++index1; }
         }
-        if (!Globals.dbg && OculusTrayTool.My.MySettings.Default.RunDebug)
+        if (!Globals.dbg && MetaQuestTrayTool.My.MySettings.Default.RunDebug)
         {
-          OculusTrayTool.My.MySettings.Default.RunDebug = false;
-          OculusTrayTool.My.MySettings.Default.Save();
+          MetaQuestTrayTool.My.MySettings.Default.RunDebug = false;
+          MetaQuestTrayTool.My.MySettings.Default.Save();
           Globals.dbg = true;
         }
         if (Globals.dbg)
         {
-          if (File.Exists(Application.StartupPath + "\\ott.log"))
-            File.Move(Application.StartupPath + "\\ott.log", "ott_" + DateTime.Now.ToString().Replace("/", "").Replace("\\", "").Replace("-", "").Replace(" ", "_").Replace(":", "") + ".log");
+          if (File.Exists(Application.StartupPath + "\\MQTT.log"))
+            File.Move(Application.StartupPath + "\\MQTT.log", "MQTT_" + DateTime.Now.ToString().Replace("/", "").Replace("\\", "").Replace("-", "").Replace(" ", "_").Replace(":", "") + ".log");
           Log.WriteToLog(":: Debug is ON ::");
         }
         Log.WriteToLog("Starting up...");
@@ -305,7 +305,7 @@ namespace OculusTrayTool.Forms
         this.isElevated = new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
         if (!this.isElevated)
         {
-          int num = (int) MessageBox.Show("You must run Oculus Tray Tool as Administrator.\r\nThe application will now exit.", "Oculus Tray Tool", MessageBoxButtons.OK, MessageBoxIcon.Error);
+          int num = (int) MessageBox.Show("You must run Meta Quest Tray Tool as Administrator.\r\nThe application will now exit.", "Meta Quest Tray Tool", MessageBoxButtons.OK, MessageBoxIcon.Error);
           this.Shutdown();
         }
         this.DotNetBarTabcontrol1.TabPages[0].ImageIndex = 0;
@@ -320,26 +320,26 @@ namespace OculusTrayTool.Forms
         if (!File.Exists(Application.StartupPath + "\\CoreAudio.dll"))
         {
           Log.WriteToLog("Missing dependency: CoreAudio.dll, cannot continue");
-          int num = (int) MessageBox.Show("Missing dependency: CoreAudio.dll, cannot continue", "Oculus Tray Tool", MessageBoxButtons.OK, MessageBoxIcon.Error);
+          int num = (int) MessageBox.Show("Missing dependency: CoreAudio.dll, cannot continue", "Meta Quest Tray Tool", MessageBoxButtons.OK, MessageBoxIcon.Error);
           this.Dispose();
         }
         else if (!File.Exists(Application.StartupPath + "\\Microsoft.Win32.TaskScheduler.dll"))
         {
           Log.WriteToLog("Missing dependency: Microsoft.Win32.TaskScheduler.dll, cannot continue");
-          int num = (int) MessageBox.Show("Missing dependency: Microsoft.Win32.TaskScheduler.dll, cannot continue", "Oculus Tray Tool", MessageBoxButtons.OK, MessageBoxIcon.Error);
+          int num = (int) MessageBox.Show("Missing dependency: Microsoft.Win32.TaskScheduler.dll, cannot continue", "Meta Quest Tray Tool", MessageBoxButtons.OK, MessageBoxIcon.Error);
           this.Dispose();
         }
         else if (!File.Exists(Application.StartupPath + "\\Newtonsoft.Json.dll"))
         {
           Log.WriteToLog("Missing dependency: Newtonsoft.Json.dll, cannot continue");
-          int num = (int) MessageBox.Show("Missing dependency: Newtonsoft.Json.dll, cannot continue", "Oculus Tray Tool", MessageBoxButtons.OK, MessageBoxIcon.Error);
+          int num = (int) MessageBox.Show("Missing dependency: Newtonsoft.Json.dll, cannot continue", "Meta Quest Tray Tool", MessageBoxButtons.OK, MessageBoxIcon.Error);
           this.Dispose();
         }
 
         else if (!File.Exists(Application.StartupPath + "\\System.Data.SQLite.dll"))
         {
           Log.WriteToLog("Missing dependency: System.Data.SQLite.dll, cannot continue");
-          int num = (int) MessageBox.Show("Missing dependency: System.Data.SQLite.dll, cannot continue", "Oculus Tray Tool", MessageBoxButtons.OK, MessageBoxIcon.Error);
+          int num = (int) MessageBox.Show("Missing dependency: System.Data.SQLite.dll, cannot continue", "Meta Quest Tray Tool", MessageBoxButtons.OK, MessageBoxIcon.Error);
           this.Dispose();
         }
         else
@@ -347,19 +347,19 @@ namespace OculusTrayTool.Forms
           if (Globals.dbg)
             Log.WriteToLog("Show Loading toast");
           MyProject.Forms.frmLoading.Show();
-          if (OculusTrayTool.My.MySettings.Default.UpgradeRequired)
+          if (MetaQuestTrayTool.My.MySettings.Default.UpgradeRequired)
           {
             Log.WriteToLog("Migrating user settings to new version");
-            OculusTrayTool.My.MySettings.Default.Upgrade();
-            OculusTrayTool.My.MySettings.Default.UpgradeRequired = false;
-            OculusTrayTool.My.MySettings.Default.StartWithWindows = false;
-            OculusTrayTool.My.MySettings.Default.Save();
+            MetaQuestTrayTool.My.MySettings.Default.Upgrade();
+            MetaQuestTrayTool.My.MySettings.Default.UpgradeRequired = false;
+            MetaQuestTrayTool.My.MySettings.Default.StartWithWindows = false;
+            MetaQuestTrayTool.My.MySettings.Default.Save();
           }
-          OTTDB.CheckDB();
-          this.TrackBar1.Value = checked ((int) Math.Round((double) OculusTrayTool.My.MySettings.Default.FontSize));
+          MQTTDB.CheckDB();
+          this.TrackBar1.Value = checked ((int) Math.Round((double) MetaQuestTrayTool.My.MySettings.Default.FontSize));
           this.Label14.Text = "Font Size: " + this.TrackBar1.Value.ToString();
           this.rs.ResizeAllControls((Control) this, (float) this.TrackBar1.Value);
-          MyProject.Forms.frmProfiles.ListView1.Font = new Font(MyProject.Forms.frmProfiles.ListView1.Font.Name, OculusTrayTool.My.MySettings.Default.FontSize, FontStyle.Regular);
+          MyProject.Forms.frmProfiles.ListView1.Font = new Font(MyProject.Forms.frmProfiles.ListView1.Font.Name, MetaQuestTrayTool.My.MySettings.Default.FontSize, FontStyle.Regular);
           MyProject.Forms.frmProfiles.ListView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
           this.UpdateTab = this.DotNetBarTabcontrol1.TabPages[6];
           this.colRemovedTabs.Add(this.TabPage6.Name, (TabPage)this.TabPage6);
@@ -368,21 +368,21 @@ namespace OculusTrayTool.Forms
             Log.WriteToLog("Checking .NET version");
           GetDotNetVersion.GetVersion();
           Point point;
-          if (OculusTrayTool.My.MySettings.Default.WindowLocation != new Point())
+          if (MetaQuestTrayTool.My.MySettings.Default.WindowLocation != new Point())
           {
             if (Globals.dbg)
             {
-              point = OculusTrayTool.My.MySettings.Default.WindowLocation;
+              point = MetaQuestTrayTool.My.MySettings.Default.WindowLocation;
               Log.WriteToLog("Setting GUI location to " + point.ToString());
             }
-            this.Location = OculusTrayTool.My.MySettings.Default.WindowLocation;
+            this.Location = MetaQuestTrayTool.My.MySettings.Default.WindowLocation;
           }
           else
           {
             Log.WriteToLog("Setting GUI location to Center Screen");
             this.CenterToScreen();
-            OculusTrayTool.My.MySettings.Default.WindowLocation = this.Location;
-            OculusTrayTool.My.MySettings.Default.Save();
+            MetaQuestTrayTool.My.MySettings.Default.WindowLocation = this.Location;
+            MetaQuestTrayTool.My.MySettings.Default.Save();
           }
           point = this.Location;
           int num1 = point.X < 0 ? 1 : 0;
@@ -392,11 +392,11 @@ namespace OculusTrayTool.Forms
           {
             Log.WriteToLog("GUI location has negative number, adjusting");
             this.CenterToScreen();
-            OculusTrayTool.My.MySettings.Default.WindowLocation = this.Location;
-            OculusTrayTool.My.MySettings.Default.Save();
+            MetaQuestTrayTool.My.MySettings.Default.WindowLocation = this.Location;
+            MetaQuestTrayTool.My.MySettings.Default.Save();
           }
-          if (OculusTrayTool.My.MySettings.Default.GuiSize != new Size())
-            this.Size = OculusTrayTool.My.MySettings.Default.GuiSize;
+          if (MetaQuestTrayTool.My.MySettings.Default.GuiSize != new Size())
+            this.Size = MetaQuestTrayTool.My.MySettings.Default.GuiSize;
           Graphics graphics = Graphics.FromHwnd(IntPtr.Zero);
           this.scaleX = (object) (float) ((double) graphics.DpiX / 96.0);
           this.scaleY = (object) (float) ((double) graphics.DpiY / 96.0);
@@ -458,25 +458,25 @@ namespace OculusTrayTool.Forms
               return;
             }
           }
-          OculusTrayTool.OculusPath.GetOculusPath();
+          MetaQuestTrayTool.MetaPath.GetMetaPath();
           GetConfig.IsReading = true;
           
           
-          OTTDB.OpenOttDB();
+          MQTTDB.OpenMQTTDB();
           PowerPlans.GetPowerPlans();
           this.LoadPowerPlansDirectly();
            
           
           GetConfig.Load();
-          bool isLibPathEmpty = (string.Compare(OculusTrayTool.My.MySettings.Default.LibraryPath, "", StringComparison.Ordinal) == 0 | string.IsNullOrWhiteSpace(OculusTrayTool.My.MySettings.Default.LibraryPath.ToString()));
+          bool isLibPathEmpty = (string.Compare(MetaQuestTrayTool.My.MySettings.Default.LibraryPath, "", StringComparison.Ordinal) == 0 | string.IsNullOrWhiteSpace(MetaQuestTrayTool.My.MySettings.Default.LibraryPath.ToString()));
           bool noSoftwarePaths = (this.OculusSoftwarePaths.Count == 0);
 
           if (isLibPathEmpty && noSoftwarePaths)
           {
-            OculusTrayTool.My.MySettings.Default.LibraryPath = "";
-            OculusTrayTool.My.MySettings.Default.Save();
+            MetaQuestTrayTool.My.MySettings.Default.LibraryPath = "";
+            MetaQuestTrayTool.My.MySettings.Default.Save();
             Log.WriteToLog("Oculus Library paths not set, retrieving them from the registry");
-            this.OculusSoftwarePaths = (List<string>) OculusTrayTool.OculusPath.GetOculusSoftwarePaths();
+            this.OculusSoftwarePaths = (List<string>) MetaQuestTrayTool.MetaPath.GetOculusSoftwarePaths();
             Log.WriteToLog("Found " + this.OculusSoftwarePaths.Count.ToString() + " library paths");
             if (this.OculusSoftwarePaths.Count > 0)
             {
@@ -486,8 +486,8 @@ namespace OculusTrayTool.Forms
                 {
                   Log.WriteToLog("Oculus Library path: " + oculusSoftwarePath.TrimEnd('\\'));
                   MySettings settings;
-                  (settings = OculusTrayTool.My.MySettings.Default).LibraryPath = settings.LibraryPath + oculusSoftwarePath + ",";
-                  OculusTrayTool.My.MySettings.Default.Save();
+                  (settings = MetaQuestTrayTool.My.MySettings.Default).LibraryPath = settings.LibraryPath + oculusSoftwarePath + ",";
+                  MetaQuestTrayTool.My.MySettings.Default.Save();
                 }
               }
               catch (Exception ex)
@@ -495,15 +495,15 @@ namespace OculusTrayTool.Forms
                    Log.WriteToLog("Error processing Oculus Library Paths: " + ex.Message);
               }
               
-              OculusTrayTool.My.MySettings.Default.LibraryPath = OculusTrayTool.My.MySettings.Default.LibraryPath.TrimEnd(',');
-              OculusTrayTool.My.MySettings.Default.Save();
+              MetaQuestTrayTool.My.MySettings.Default.LibraryPath = MetaQuestTrayTool.My.MySettings.Default.LibraryPath.TrimEnd(',');
+              MetaQuestTrayTool.My.MySettings.Default.Save();
             }
             else
             {
               Log.WriteToLog("No library paths returned from registry! You may need to add them manually.");
-              Log.WriteToLog("Using " + this.OculusPath + " as default library path");
+              Log.WriteToLog("Using " + this.MetaPath + " as default library path");
               this.AddToListboxAndScroll("No library paths returned from registry! You may need to add them manually.");
-              this.AddToListboxAndScroll("Using " + this.OculusPath + " as default library path");
+              this.AddToListboxAndScroll("Using " + this.MetaPath + " as default library path");
               Log.WriteToLog("WARNING TRIGGERED: No library paths found in registry");
               this.hasWarning = true;
             }
@@ -519,12 +519,12 @@ namespace OculusTrayTool.Forms
             "30",
             "Adaptive"
           });
-          OTTDB.GetProfiles();
-          this.ignoredApps = (List<string>) OTTDB.GetIgnoredApps();
-          this.includedApps = (List<string>) OTTDB.GetIncludedApps();
+          MQTTDB.GetProfiles();
+          this.ignoredApps = (List<string>) MQTTDB.GetIgnoredApps();
+          this.includedApps = (List<string>) MQTTDB.GetIncludedApps();
           if (this.ignoredApps.Count > 0)
             Log.WriteToLog(this.ignoredApps.Count.ToString() + " apps are being ignored");
-          if (OculusTrayTool.My.MySettings.Default.UseLocalDebugTool)
+          if (MetaQuestTrayTool.My.MySettings.Default.UseLocalDebugTool)
           {
             if (File.Exists(Application.StartupPath + "\\OculusDebugToolCLI.exe"))
             {
@@ -540,9 +540,9 @@ namespace OculusTrayTool.Forms
               this.hasError = true;
             }
           }
-          else if (File.Exists(this.OculusPath + "Support\\oculus-diagnostics\\OculusDebugToolCLI.exe"))
+          else if (File.Exists(this.MetaPath + "Support\\oculus-diagnostics\\OculusDebugToolCLI.exe"))
           {
-            RunCommand.debug_tool_path = this.OculusPath + "Support\\oculus-diagnostics\\OculusDebugToolCLI.exe";
+            RunCommand.debug_tool_path = this.MetaPath + "Support\\oculus-diagnostics\\OculusDebugToolCLI.exe";
             Log.WriteToLog("Using " + RunCommand.debug_tool_path);
           }
           else
@@ -553,42 +553,42 @@ namespace OculusTrayTool.Forms
           RunCommand.CloseDebugTool();
           if (Globals.dbg)
             Log.WriteToLog("Reading setting ASW");
-          if (OculusTrayTool.My.MySettings.Default.ASW == 0)
+          if (MetaQuestTrayTool.My.MySettings.Default.ASW == 0)
             FrmMain.fmain.ComboBox1.Text = "Auto";
-          if (OculusTrayTool.My.MySettings.Default.ASW == 1)
+          if (MetaQuestTrayTool.My.MySettings.Default.ASW == 1)
             FrmMain.fmain.ComboBox1.Text = "Off";
-          if (OculusTrayTool.My.MySettings.Default.ASW == 2)
+          if (MetaQuestTrayTool.My.MySettings.Default.ASW == 2)
             FrmMain.fmain.ComboBox1.Text = "45 Hz";
-          if (OculusTrayTool.My.MySettings.Default.ASW == 3)
+          if (MetaQuestTrayTool.My.MySettings.Default.ASW == 3)
             FrmMain.fmain.ComboBox1.Text = "30 Hz";
-          if (OculusTrayTool.My.MySettings.Default.ASW == 4)
+          if (MetaQuestTrayTool.My.MySettings.Default.ASW == 4)
             FrmMain.fmain.ComboBox1.Text = "18 Hz";
-          if (OculusTrayTool.My.MySettings.Default.ASW == 5)
+          if (MetaQuestTrayTool.My.MySettings.Default.ASW == 5)
             FrmMain.fmain.ComboBox1.Text = "45 Hz forced";
-          if (OculusTrayTool.My.MySettings.Default.ASW == 6)
+          if (MetaQuestTrayTool.My.MySettings.Default.ASW == 6)
             FrmMain.fmain.ComboBox1.Text = "Adaptive";
           FrmMain.fmain.ComboVisualHUD.Text = "None";
           this.CheckStartWithWindowsLogic();
           PowerPlans.CheckPowerState(false);
-          if (!this.spoofid && OculusTrayTool.My.MySettings.Default.StartOVR & !this.OVRIsRunning && this.OculusServiceFound)
+          if (!this.spoofid && MetaQuestTrayTool.My.MySettings.Default.StartOVR & !this.OVRIsRunning && this.OculusServiceFound)
             this.StartOVR();
           if (Globals.dbg)
             Log.WriteToLog("Reading setting SpoofCPU");
-          FrmMain.fmain.spoofid = OculusTrayTool.My.MySettings.Default.SpoofCPU;
-          if (OculusTrayTool.My.MySettings.Default.SpoofCPU)
+          FrmMain.fmain.spoofid = MetaQuestTrayTool.My.MySettings.Default.SpoofCPU;
+          if (MetaQuestTrayTool.My.MySettings.Default.SpoofCPU)
           {
             FrmMain.fmain.CheckSpoofCPU.Checked = true;
-            OculusTrayTool.My.MySettings.Default.OldCPUID = "";
+            MetaQuestTrayTool.My.MySettings.Default.OldCPUID = "";
             FrmMain.fmain.GetCPUid();
           }
           else
             FrmMain.fmain.CheckSpoofCPU.Checked = false;
-          if (!OculusTrayTool.My.MySettings.Default.StartOVR & !OculusTrayTool.My.MySettings.Default.SpoofCPU)
+          if (!MetaQuestTrayTool.My.MySettings.Default.StartOVR & !MetaQuestTrayTool.My.MySettings.Default.SpoofCPU)
             this.CheckOculusService();
-          string str1 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "OTT");
+          string str1 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MQTT");
           Directory.CreateDirectory(str1);
           Globals.steam = new Steam(str1);
-          Globals.oculus = new Oculus(str1, Globals.steam);
+          Globals.meta = new Meta(str1, Globals.steam);
           this.SteamPath = this.GetSteamPath();
           this.GetSteamVR();
           if (string.Compare(this.SteamPath, "", StringComparison.Ordinal) != 0)
@@ -606,15 +606,15 @@ namespace OculusTrayTool.Forms
           }
           if (this.OculusServiceFound)
           {
-            if (Directory.Exists(this.OculusPath.TrimEnd('\\') + "\\CoreData\\Manifests"))
-              GetGames.GetThirdPartyApps(this.OculusPath.TrimEnd('\\') + "\\CoreData\\Manifests");
-            if (Directory.Exists(this.OculusPath.TrimEnd('\\') + "\\Manifests"))
-              GetGames.GetFiles(this.OculusPath.TrimEnd('\\') + "\\Manifests");
-            if (Directory.Exists(this.OculusPath.TrimEnd('\\') + "\\Software\\Manifests"))
-              GetGames.GetFiles(this.OculusPath.TrimEnd('\\') + "\\Software\\Manifests");
-            if (string.Compare(OculusTrayTool.My.MySettings.Default.LibraryPath, "", StringComparison.Ordinal) != 0 & !string.IsNullOrWhiteSpace(OculusTrayTool.My.MySettings.Default.LibraryPath.ToString()))
+            if (Directory.Exists(this.MetaPath.TrimEnd('\\') + "\\CoreData\\Manifests"))
+              GetGames.GetThirdPartyApps(this.MetaPath.TrimEnd('\\') + "\\CoreData\\Manifests");
+            if (Directory.Exists(this.MetaPath.TrimEnd('\\') + "\\Manifests"))
+              GetGames.GetFiles(this.MetaPath.TrimEnd('\\') + "\\Manifests");
+            if (Directory.Exists(this.MetaPath.TrimEnd('\\') + "\\Software\\Manifests"))
+              GetGames.GetFiles(this.MetaPath.TrimEnd('\\') + "\\Software\\Manifests");
+            if (string.Compare(MetaQuestTrayTool.My.MySettings.Default.LibraryPath, "", StringComparison.Ordinal) != 0 & !string.IsNullOrWhiteSpace(MetaQuestTrayTool.My.MySettings.Default.LibraryPath.ToString()))
             {
-              string[] strArray = OculusTrayTool.My.MySettings.Default.LibraryPath.Split(',');
+              string[] strArray = MetaQuestTrayTool.My.MySettings.Default.LibraryPath.Split(',');
               int index2 = 0;
               while (index2 < strArray.Length)
               {
@@ -627,7 +627,7 @@ namespace OculusTrayTool.Forms
               }
             }
           }
-          if (OTTDB.numTimer > 0)
+          if (MQTTDB.numTimer > 0)
           {
             if (Globals.dbg)
               Log.WriteToLog("Creating EventHandler for Timer AppWatcher");
@@ -638,16 +638,16 @@ namespace OculusTrayTool.Forms
           }
           if (this.OVRIsRunning)
             this.ComboVisualHUD.SelectedIndex = 0;
-          if (this.OculusServiceFound & !OculusTrayTool.My.MySettings.Default.StartAppwatcherOnStart)
+          if (this.OculusServiceFound & !MetaQuestTrayTool.My.MySettings.Default.StartAppwatcherOnStart)
           {
             Log.WriteToLog("Oculus Home/SteamVR required, waiting for either to start");
             this.OculusHomeWatcher.Start();
           }
-          if (this.OculusServiceFound & OculusTrayTool.My.MySettings.Default.StartAppwatcherOnStart)
+          if (this.OculusServiceFound & MetaQuestTrayTool.My.MySettings.Default.StartAppwatcherOnStart)
           {
-            if (OTTDB.numWMI > 0)
+            if (MQTTDB.numWMI > 0)
               this.CreateWatcher();
-            if (OTTDB.numTimer > 0)
+            if (MQTTDB.numTimer > 0)
             {
               Log.WriteToLog("Start Appwatcher On Start is True, starting Timer AppWatcher");
               this.pTimer.Start();
@@ -655,18 +655,18 @@ namespace OculusTrayTool.Forms
           }
           if (this.OVRIsRunning && this.CheckLaunchHomeTool.Checked)
           {
-            if (File.Exists(this.OculusPath + "Support\\oculus-client\\OculusClient.exe"))
+            if (File.Exists(this.MetaPath + "Support\\oculus-client\\OculusClient.exe"))
             {
               RunCommand.StartHome();
             }
             else
             {
-              Log.WriteToLog("Could not locate OculusClient in " + this.OculusPath);
-              this.AddToListboxAndScroll("Could not locate OculusClient in " + this.OculusPath);
+              Log.WriteToLog("Could not locate OculusClient in " + this.MetaPath);
+              this.AddToListboxAndScroll("Could not locate OculusClient in " + this.MetaPath);
               this.hasWarning = true;
             }
           }
-          if (OculusTrayTool.My.MySettings.Default.AutomaticUpdateCheck)
+          if (MetaQuestTrayTool.My.MySettings.Default.AutomaticUpdateCheck)
           {
             this.UpdateTimer.Start();
           }
@@ -677,34 +677,34 @@ namespace OculusTrayTool.Forms
           }
           if (Globals.dbg)
             this.PrintSettings(false);
-          if (OculusTrayTool.My.MySettings.Default.StartMinimized)
+          if (MetaQuestTrayTool.My.MySettings.Default.StartMinimized)
             this.WindowState = FormWindowState.Minimized;
           try
           {
           if (GetConfig.SetRiftDefault)
           {
-            if (OculusTrayTool.My.MySettings.Default.SetRiftAudioDefault == 1)
+            if (MetaQuestTrayTool.My.MySettings.Default.SetRiftAudioDefault == 1)
             {
-              if (OculusTrayTool.My.MySettings.Default.SetAudioOnStartGuid != null)
+              if (MetaQuestTrayTool.My.MySettings.Default.SetAudioOnStartGuid != null)
                 AudioSwitcher.SetDefaultAudioDeviceOnStart(false);
-              if (OculusTrayTool.My.MySettings.Default.SetAudioCommOnStartGuid != null)
+              if (MetaQuestTrayTool.My.MySettings.Default.SetAudioCommOnStartGuid != null)
                 AudioSwitcher.SetDefaultAudioCommDeviceOnStart();
             }
-            if (OculusTrayTool.My.MySettings.Default.SetRiftMicDefault == 1)
+            if (MetaQuestTrayTool.My.MySettings.Default.SetRiftMicDefault == 1)
             {
-              if (OculusTrayTool.My.MySettings.Default.SetMicOnStartGuid != null)
+              if (MetaQuestTrayTool.My.MySettings.Default.SetMicOnStartGuid != null)
                 AudioSwitcher.SetDefaultMicDeviceOnStart();
-              if (OculusTrayTool.My.MySettings.Default.SetMicCommOnStartGuid != null)
+              if (MetaQuestTrayTool.My.MySettings.Default.SetMicCommOnStartGuid != null)
                 AudioSwitcher.SetDefaultMicCommDeviceOnStart();
             }
           }
           else if (GetConfig.useVoiceCommands)
             this.EnableDisableVoice(true);
-          if (OculusTrayTool.My.MySettings.Default.HomelessEnabled == 1 & OculusTrayTool.My.MySettings.Default.HomelessAutoPatch)
+          if (MetaQuestTrayTool.My.MySettings.Default.HomelessEnabled == 1 & MetaQuestTrayTool.My.MySettings.Default.HomelessAutoPatch)
           {
             Log.WriteToLog("Oculus Homeless is installed, generating hash of 'Home2-Win64-Shipping.exe'");
             string Right = this.GenerateSHA256Hash(Application.StartupPath + "\\Homeless\\Home2-Win64-Shipping.exe").ToString();
-            if (string.Compare(this.GenerateSHA256Hash(this.OculusPath + "Support\\oculus-worlds\\Home2\\Binaries\\Win64\\Home2-Win64-Shipping.exe").ToString(), Right, StringComparison.Ordinal) != 0)
+            if (string.Compare(this.GenerateSHA256Hash(this.MetaPath + "Support\\oculus-worlds\\Home2\\Binaries\\Win64\\Home2-Win64-Shipping.exe").ToString(), Right, StringComparison.Ordinal) != 0)
             {
               Log.WriteToLog("'Home2-Win64-Shipping.exe' has been updated. Automatically re-applying Oculus Homeless");
               this.InstallHomeless();
@@ -722,15 +722,15 @@ namespace OculusTrayTool.Forms
             this.hasWarning = true;
             ProjectData.ClearProjectError();
           }
-          if (OculusTrayTool.My.MySettings.Default.RestartServiceAfterSleep)
+          if (MetaQuestTrayTool.My.MySettings.Default.RestartServiceAfterSleep)
           {
             if (Globals.dbg)
               Log.WriteToLog("Adding eventhandler for PowerModeChanged");
             SystemEvents.PowerModeChanged += new PowerModeChangedEventHandler(this.PowerModeChanged);
           }
-          if (OculusTrayTool.My.MySettings.Default.SendHomeToTrayOnStart)
+          if (MetaQuestTrayTool.My.MySettings.Default.SendHomeToTrayOnStart)
             this.StartMinimizeHomeWatcher();
-          OTTDB.GetLinkPresetNames();
+          MQTTDB.GetLinkPresetNames();
           this.GetOculusLinkValues();
           this.CheckWarnings();
           this.AddToListboxAndScroll(this.AllAppsList.Count.ToString() + " apps are being monitored");
@@ -842,13 +842,13 @@ namespace OculusTrayTool.Forms
               Log.WriteToLog("'Minimize Home on Start' event arrived");
             if (((IEnumerable<Process>) Process.GetProcessesByName("OculusClient")).Count<Process>() >= 3)
             {
-              Log.WriteToLog("Oculus Home seems to have started up fully. Sleeping " + OculusTrayTool.My.MySettings.Default.SleepAfterHomeStart + "ms before attempting to minimize to tray");
-              Thread.Sleep(Convert.ToInt32(OculusTrayTool.My.MySettings.Default.SleepAfterHomeStart));
+              Log.WriteToLog("Oculus Home seems to have started up fully. Sleeping " + MetaQuestTrayTool.My.MySettings.Default.SleepAfterHomeStart + "ms before attempting to minimize to tray");
+              Thread.Sleep(Convert.ToInt32(MetaQuestTrayTool.My.MySettings.Default.SleepAfterHomeStart));
               HomeToTray.SendHomeToTrayOnStart();
               if (HomeToTray.HomeIsMinimized)
               {
                 this.EnableShowHomeMenu();
-                if (OculusTrayTool.My.MySettings.Default.ShowHomeToast & !HomeToTray.ToastShown)
+                if (MetaQuestTrayTool.My.MySettings.Default.ShowHomeToast & !HomeToTray.ToastShown)
                 {
                   HomeToTray.ToastShown = true;
                   new Thread(() => MyProject.Forms.frmHomeTrayToast.ShowDialog()).Start();
@@ -865,26 +865,26 @@ namespace OculusTrayTool.Forms
 
      private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
      {
-       OculusTrayTool.My.MySettings.Default.GuiSize = this.Size;
-      OculusTrayTool.My.MySettings.Default.Save();
+       MetaQuestTrayTool.My.MySettings.Default.GuiSize = this.Size;
+      MetaQuestTrayTool.My.MySettings.Default.Save();
       if (e.CloseReason == CloseReason.WindowsShutDown)
       {
         Log.WriteToLog("Windows shutdown detected, performing quick cleanup");
-        if (OTTDB.ott_cnn.State == ConnectionState.Open)
-          OTTDB.ott_cnn.Close();
-        if (!String.Equals(OculusTrayTool.My.MySettings.Default.PowerPlanExit, "Not Used", StringComparison.OrdinalIgnoreCase) && OculusTrayTool.My.MySettings.Default.ApplyPowerPlan == 0)
+        if (MQTTDB.MQTT_cnn.State == ConnectionState.Open)
+          MQTTDB.MQTT_cnn.Close();
+        if (!String.Equals(MetaQuestTrayTool.My.MySettings.Default.PowerPlanExit, "Not Used", StringComparison.OrdinalIgnoreCase) && MetaQuestTrayTool.My.MySettings.Default.ApplyPowerPlan == 0)
         {
-          PowerPlans.SetActivePowerPlan(OculusTrayTool.My.MySettings.Default.PowerPlanExit);
+          PowerPlans.SetActivePowerPlan(MetaQuestTrayTool.My.MySettings.Default.PowerPlanExit);
           PowerPlans.GetSetUsbSuspend(PowerPlans.filter, false);
         }
         if (GetConfig.SetRiftDefault)
         {
-          if (OculusTrayTool.My.MySettings.Default.SetRiftAudioDefault == 1)
+          if (MetaQuestTrayTool.My.MySettings.Default.SetRiftAudioDefault == 1)
           {
             AudioSwitcher.SetFallbackAudioDevice();
             AudioSwitcher.SetFallbackCommAudioDevice();
           }
-          if (OculusTrayTool.My.MySettings.Default.SetRiftMicDefault == 1)
+          if (MetaQuestTrayTool.My.MySettings.Default.SetRiftMicDefault == 1)
           {
             AudioSwitcher.SetFallbackMicDevice();
             AudioSwitcher.SetFallbackCommMicDevice();
@@ -895,14 +895,14 @@ namespace OculusTrayTool.Forms
       }
       if (e.CloseReason == CloseReason.UserClosing)
       {
-        if (!OculusTrayTool.My.MySettings.Default.CloseOnX)
+        if (!MetaQuestTrayTool.My.MySettings.Default.CloseOnX)
         {
           e.Cancel = true;
-          if (OculusTrayTool.My.MySettings.Default.ShowStillRunning)
+          if (MetaQuestTrayTool.My.MySettings.Default.ShowStillRunning)
             MyProject.Forms.frmStillRunningToast.Show();
           this.WindowState = FormWindowState.Minimized;
         }
-        else if (MessageBox.Show("Oculus Tray Tool needs to be running to work its magic!\r\n\r\nAre you sure you want to exit?", "Confirm Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+        else if (MessageBox.Show("Meta Quest Tray Tool needs to be running to work its magic!\r\n\r\nAre you sure you want to exit?", "Confirm Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
           e.Cancel = true;
         else
           this.Shutdown();
@@ -929,8 +929,8 @@ namespace OculusTrayTool.Forms
       {
         if (!GetConfig.IsReading)
         {
-          OculusTrayTool.My.MySettings.Default.PPDPStartup = this.ComboSSstart.Text;
-          OculusTrayTool.My.MySettings.Default.Save();
+          MetaQuestTrayTool.My.MySettings.Default.PPDPStartup = this.ComboSSstart.Text;
+          MetaQuestTrayTool.My.MySettings.Default.Save();
           GetConfig.ppdpstartup = this.ComboSSstart.Text;
           new Thread(() => RunCommand.Run_debug_tool(GetConfig.ppdpstartup)).Start();
         }
@@ -945,8 +945,8 @@ namespace OculusTrayTool.Forms
       {
         if (GetConfig.IsReading)
           return;
-        OculusTrayTool.My.MySettings.Default.StopOVRHome = this.CheckStopServiceHome.Checked;
-        OculusTrayTool.My.MySettings.Default.Save();
+        MetaQuestTrayTool.My.MySettings.Default.StopOVRHome = this.CheckStopServiceHome.Checked;
+        MetaQuestTrayTool.My.MySettings.Default.Save();
       }
       catch (Exception ex)
       {
@@ -1283,7 +1283,7 @@ namespace OculusTrayTool.Forms
             using (RegistryKey key = Registry.CurrentUser.OpenSubKey(keyName, true))
             {
                 if (key == null) return;
-                object val = key.GetValue("OculusTrayTool");
+                object val = key.GetValue("MetaQuestTrayTool");
                 if (val != null)
                 {
                     if (this.CheckStartWithWindows != null)
@@ -1418,8 +1418,8 @@ namespace OculusTrayTool.Forms
             this.ComboApplyPlan.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             this.ComboApplyPlan.Height = 21;
             // Populate Items
-            this.ComboApplyPlan.Items.AddRange(new object[] { "OTT Start/Exit", "Oculus Home Start/Exit" });
-            this.ComboApplyPlan.SelectedIndex = 0; // Default: OTT Start/Exit
+            this.ComboApplyPlan.Items.AddRange(new object[] { "MQTT Start/Exit", "Oculus Home Start/Exit" });
+            this.ComboApplyPlan.SelectedIndex = 0; // Default: MQTT Start/Exit
             this.ComboApplyPlan.SelectedIndexChanged += new EventHandler(this.ComboApplyPlan_SelectedIndexChanged);
 
             parentPanel.Controls.Add(this.ComboApplyPlan, 1, 2);
@@ -1860,7 +1860,7 @@ namespace OculusTrayTool.Forms
             container.Controls.Add(_logListBox); // Fill
             container.Controls.Add(btnClear);    // Bottom (added last = processed first in dock layout?? No, standard Forms docking: Last added is closest to edge usually, or z-order matters. Let's try adding button first, then listbox)
             // Correction: In WinForms, the LAST control added to collection is at the START of the Z-order.
-            // Dock=Fill takes remaining space. Dock=Bottom takes bottom slice.
+            // Dock=Fill takes remaining space. Dock=Bottom takes Bottom slice.
             // If I add ListBox (Fill) first, it might take everything.
             // Safest: Add Button (Dock=Bottom), THEN ListBox (Dock=Fill) with BringToFront().
             

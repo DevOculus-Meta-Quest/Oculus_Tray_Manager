@@ -1,7 +1,7 @@
-using OculusTrayTool.Forms;
+using MetaQuestTrayTool.Forms;
 
 
-using OculusTrayTool.My;
+using MetaQuestTrayTool.My;
 using System;
 using System.Drawing;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ using System.Windows.Forms;
 using System.Text.RegularExpressions;
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
   internal sealed class PowerPlans
   {
@@ -219,7 +219,7 @@ namespace OculusTrayTool
           Log.WriteToLog("Entering SetActivePowerPlan");
         if (string.Equals(name, "Not Used", StringComparison.Ordinal))
         {
-          Log.WriteToLog("No power plan set for OTT start");
+          Log.WriteToLog("No power plan set for MQTT start");
         }
         else
         {

@@ -1,7 +1,7 @@
-using OculusTrayTool.Forms;
+using MetaQuestTrayTool.Forms;
 
 using Newtonsoft.Json.Linq;
-using OculusTrayTool.My;
+using MetaQuestTrayTool.My;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,7 +16,7 @@ using System.Windows.Forms;
 using System.Xml;
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
   internal sealed class MigrateSettings
   {
@@ -102,16 +102,16 @@ namespace OculusTrayTool
           XmlNode xmlNode11 = xmlDocument.SelectSingleNode("/Config/StartHomeOnServiceStart");
           MySettingsProperty.Settings.StartHomeOnServiceStart = xmlNode11.InnerText == "False";
         }
-        if (xmlNode1["OculusPath"] != null)
+        if (xmlNode1["MetaPath"] != null)
         {
-          XmlNode xmlNode12 = xmlDocument.SelectSingleNode("/Config/OculusPath");
+          XmlNode xmlNode12 = xmlDocument.SelectSingleNode("/Config/MetaPath");
           if (xmlNode12.InnerText != "")
           {
-            if (MyProject.Forms.FrmMain.OculusPath == "")
-              MySettingsProperty.Settings.OculusPath = xmlNode12.InnerText;
+            if (MyProject.Forms.FrmMain.MetaPath == "")
+              MySettingsProperty.Settings.MetaPath = xmlNode12.InnerText;
           }
-          else if (MyProject.Forms.FrmMain.OculusPath != "")
-            MySettingsProperty.Settings.OculusPath = MyProject.Forms.FrmMain.OculusPath;
+          else if (MyProject.Forms.FrmMain.MetaPath != "")
+            MySettingsProperty.Settings.MetaPath = MyProject.Forms.FrmMain.MetaPath;
         }
         if (xmlNode1["StartOVR"] != null)
         {
@@ -370,7 +370,7 @@ namespace OculusTrayTool
                   string ppdp = strArray[0];
                   string asw = strArray[1];
                   string priority = strArray[2];
-                  OTTDB.AddProfile(displayname, asw, ppdp, priority, str2, path2, "WMI", "5", "5", "0", "1", "", "0.00 0.00", "False", "0", "Yes");
+                  MQTTDB.AddProfile(displayname, asw, ppdp, priority, str2, path2, "WMI", "5", "5", "0", "1", "", "0.00 0.00", "False", "0", "Yes");
                 }
               }
             }

@@ -4,7 +4,7 @@ using System;
 using Microsoft.Win32;
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
   public class GetDotNetVersion
   {

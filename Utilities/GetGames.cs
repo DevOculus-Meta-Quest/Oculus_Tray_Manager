@@ -1,4 +1,4 @@
-using OculusTrayTool.Forms;
+using MetaQuestTrayTool.Forms;
 
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ using Newtonsoft.Json.Linq;
 using System.Windows.Forms;
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
   internal sealed class GetGames
   {
@@ -38,7 +38,7 @@ namespace OculusTrayTool
           Log.WriteToLog("Updating list of Steam games..");
         Log.WriteToLog("GetSteamGames: Start. dbg=" + Globals.dbg);
         List<SteamNode> steamList = (List<SteamNode>) null;
-        if (!Globals.oculus.TryRefresh() || !Globals.steam.TryRefresh() || !Globals.steam.TryGetVRManifest(ref steamList))
+        if (!Globals.meta.TryRefresh() || !Globals.steam.TryRefresh() || !Globals.steam.TryGetVRManifest(ref steamList))
         {
            Log.WriteToLog("GetSteamGames: Failed to refresh or get manifest.");
            return;
@@ -99,14 +99,14 @@ namespace OculusTrayTool
     public static void GetThirdPartyApps(string p)
     {
       Log.WriteToLog("Parsing Third-Party Manifests in " + p);
-      string oculusPath = OculusTrayTool.My.MySettings.Default.OculusPath;
-      string assetPath = Path.Combine(oculusPath, "CoreData\\Software\\StoreAssets");
+      string MetaPath = MetaQuestTrayTool.My.MySettings.Default.MetaPath;
+      string assetPath = Path.Combine(MetaPath, "CoreData\\Software\\StoreAssets");
       string str1 = "";
       string otherAssetPath = "";
-      if (!string.IsNullOrEmpty(OculusTrayTool.My.MySettings.Default.LibraryPath) && !string.IsNullOrWhiteSpace(OculusTrayTool.My.MySettings.Default.LibraryPath))
-        otherAssetPath = Path.Combine(OculusTrayTool.My.MySettings.Default.LibraryPath.Split(',')[0], "Software\\StoreAssets");
+      if (!string.IsNullOrEmpty(MetaQuestTrayTool.My.MySettings.Default.LibraryPath) && !string.IsNullOrWhiteSpace(MetaQuestTrayTool.My.MySettings.Default.LibraryPath))
+        otherAssetPath = Path.Combine(MetaQuestTrayTool.My.MySettings.Default.LibraryPath.Split(',')[0], "Software\\StoreAssets");
       else
-        str1 = oculusPath;
+        str1 = MetaPath;
       string[] files = Directory.GetFiles(p, "*.json");
       for (int index = 0; index < files.Length; index++)
       {
@@ -146,7 +146,7 @@ namespace OculusTrayTool
                 {
                     if (Globals.dbg)
                         Log.WriteToLog("GetThirdPartyApps:  -> App is not a VR app, adding to ignore list");
-                    OTTDB.AddIgnoreApp(str2);
+                    MQTTDB.AddIgnoreApp(str2);
                     FrmMain.fmain.ignoredApps.Add(str2);
                     continue;
                 }
@@ -204,7 +204,7 @@ namespace OculusTrayTool
                     {
                       if (Globals.dbg)
                         Log.WriteToLog("GetThirdPartyApps:  -> App is not a VR app, adding to ignore list");
-                      OTTDB.AddIgnoreApp(str2);
+                      MQTTDB.AddIgnoreApp(str2);
                       FrmMain.fmain.ignoredApps.Add(str2);
                       continue;
                     }
@@ -238,7 +238,7 @@ namespace OculusTrayTool
                           {
                             if (Globals.dbg)
                                 Log.WriteToLog("GetThirdPartyApps:  -> App is not a VR app, adding to ignore list");
-                            OTTDB.AddIgnoreApp(str2);
+                            MQTTDB.AddIgnoreApp(str2);
                             FrmMain.fmain.ignoredApps.Add(str2);
                           }
                           continue;
@@ -288,7 +288,7 @@ namespace OculusTrayTool
       }
       if (Globals.dbg)
         Log.WriteToLog("AddThirdPartyGameToList: Game found, checking for hidden attribute");
-      if (!OTTDB.CheckHiddenApp(LaunchFile, DisplayName, "Both"))
+      if (!MQTTDB.CheckHiddenApp(LaunchFile, DisplayName, "Both"))
       {
         if (Globals.dbg)
           Log.WriteToLog("AddThirdPartyGameToList: Game is not hidden");
@@ -341,15 +341,15 @@ namespace OculusTrayTool
        try
       {
         SQLiteConnection connection = new SQLiteConnection();
-        string[] strArray = OculusTrayTool.My.MySettings.Default.LibraryPath.Split(',');
-        string oculusPath = OculusTrayTool.My.MySettings.Default.OculusPath;
+        string[] strArray = MetaQuestTrayTool.My.MySettings.Default.LibraryPath.Split(',');
+        string MetaPath = MetaQuestTrayTool.My.MySettings.Default.MetaPath;
         string str1 = "";
         string str2 = "";
-        string str3 = Path.Combine(oculusPath, "CoreData\\Software\\StoreAssets");
-        if (!string.IsNullOrEmpty(OculusTrayTool.My.MySettings.Default.LibraryPath) && !string.IsNullOrWhiteSpace(OculusTrayTool.My.MySettings.Default.LibraryPath))
+        string str3 = Path.Combine(MetaPath, "CoreData\\Software\\StoreAssets");
+        if (!string.IsNullOrEmpty(MetaQuestTrayTool.My.MySettings.Default.LibraryPath) && !string.IsNullOrWhiteSpace(MetaQuestTrayTool.My.MySettings.Default.LibraryPath))
           str2 = Path.Combine(strArray[0], "Software\\StoreAssets");
         else
-          str1 = oculusPath;
+          str1 = MetaPath;
         if (Globals.dbg)
           Log.WriteToLog("GetApps: Looking for Oculus database");
         if (File.Exists(Application.StartupPath + "\\data.sqlite"))
@@ -445,7 +445,7 @@ namespace OculusTrayTool
                     {
                       if (Globals.dbg)
                         Log.WriteToLog("GetApps:  ->  App does not appear to be a VR app, adding to ignore list");
-                      OTTDB.AddIgnoreApp(str4);
+                      MQTTDB.AddIgnoreApp(str4);
                       FrmMain.fmain.ignoredApps.Add(str4);
                       continue;
                     }
@@ -473,7 +473,7 @@ namespace OculusTrayTool
                           if (Globals.dbg)
                             Log.WriteToLog("All Apps List: Added Oculus Store App '" + str11 + "' with path '" + str6 + "'");
                         }
-                        if (!OTTDB.CheckHiddenApp(launchfile, str11, "Both"))
+                        if (!MQTTDB.CheckHiddenApp(launchfile, str11, "Both"))
                         {
                           lock(_lock)
                           {

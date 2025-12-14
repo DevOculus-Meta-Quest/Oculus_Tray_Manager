@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Management;
 
-namespace OculusTrayTool.Forms
+namespace MetaQuestTrayTool.Forms
 {
     partial class frmStartupType
     {
@@ -40,7 +40,7 @@ protected override void Dispose(bool disposing)
       this.Label1.Name = "Label1";
       this.Label1.Size = new Size(395, 15);
       this.Label1.TabIndex = 0;
-      this.Label1.Text = "Select the method for launching Oculus Tray Tool when Windows starts.";
+      this.Label1.Text = "Select the method for launching Meta Quest Tray Tool when Windows starts.";
       this.RadioButton1.AutoSize = true;
       this.RadioButton1.Location = new Point(46, 58);
       this.RadioButton1.Name = "RadioButton1";

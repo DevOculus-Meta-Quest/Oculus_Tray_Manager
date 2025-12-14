@@ -1,4 +1,4 @@
-using OculusTrayTool.Forms;
+using MetaQuestTrayTool.Forms;
 
 
 using System;
@@ -11,67 +11,67 @@ using System.Windows.Forms;
 
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
 
-  internal sealed class OTTDB
+  internal sealed class MQTTDB
   {
-    public static SQLiteConnection ott_cnn = new SQLiteConnection();
+    public static SQLiteConnection MQTT_cnn = new SQLiteConnection();
     public static string updatedProfile = "";
     public static int numWMI = 0;
     public static int numTimer = 0;
 
-    public static void OpenOttDB()
+    public static void OpenMQTTDB()
     {
       try
       {
         bool flag1 = false;
         bool flag2 = false;
-        if (File.Exists(Application.StartupPath + "\\ott.db"))
+        if (File.Exists(Application.StartupPath + "\\MQTT.db"))
           flag1 = true;
         if (!flag1)
         {
-          Log.WriteToLog("ott.db not found, creating..");
-          OTTDB.ott_cnn = new SQLiteConnection("Data Source=" + Application.StartupPath + "\\ott.db");
-          OTTDB.ott_cnn.Open();
-          new SQLiteCommand(OTTDB.ott_cnn)
+          Log.WriteToLog("MQTT.db not found, creating..");
+          MQTTDB.MQTT_cnn = new SQLiteConnection("Data Source=" + Application.StartupPath + "\\MQTT.db");
+          MQTTDB.MQTT_cnn.Open();
+          new SQLiteCommand(MQTTDB.MQTT_cnn)
           {
             CommandText = "CREATE TABLE `profiles` (`ID` Integer PRIMARY KEY AUTOINCREMENT,`DisplayName` TEXT,`PPDP`\tTEXT DEFAULT '0',`ASW` TEXT Default 'Inherit',`Priority` TEXT Default 'Normal',`LaunchFile` TEXT,`Path` TEXT,`Method` TEXT,`ASWDelay`\tTEXT DEFAULT '5',`CPUDelay` TEXT DEFAULT '5',`Mirror` TEXT DEFAULT '0',`GPUScaling` TEXT DEFAULT '1',`Comment` TEXT DEFAULT '',`FOV` TEXT DEFAULT '0.0 0.0',`ForceMipMap` TEXT DEFAULT 'False',`OffsetMipMap` TEXT DEFAULT '0',`Enabled` TEXT DEFAULT 'Yes');"
           }.ExecuteNonQuery();
-          new SQLiteCommand(OTTDB.ott_cnn)
+          new SQLiteCommand(MQTTDB.MQTT_cnn)
           {
             CommandText = "CREATE TABLE `hiddenApps` (`ID` Integer PRIMARY KEY AUTOINCREMENT,`DisplayName` TEXT,`LaunchFile` TEXT,`Location` TEXT);"
           }.ExecuteNonQuery();
-          new SQLiteCommand(OTTDB.ott_cnn)
+          new SQLiteCommand(MQTTDB.MQTT_cnn)
           {
             CommandText = "CREATE TABLE `ignoredApps` (`ID` Integer PRIMARY KEY AUTOINCREMENT,`FileName` TEXT);"
           }.ExecuteNonQuery();
-          new SQLiteCommand(OTTDB.ott_cnn)
+          new SQLiteCommand(MQTTDB.MQTT_cnn)
           {
             CommandText = "CREATE TABLE `knownApps` (`ID` Integer PRIMARY KEY AUTOINCREMENT,`FileName` TEXT,`DisplayName` TEXT,`LaunchFile` TEXT,`CompletePath` TEXT,`AssetFile` TEXT);"
           }.ExecuteNonQuery();
-          new SQLiteCommand(OTTDB.ott_cnn)
+          new SQLiteCommand(MQTTDB.MQTT_cnn)
           {
             CommandText = "CREATE TABLE `customVoice` (`ID` Integer PRIMARY KEY AUTOINCREMENT,`Type` TEXT,`Action` TEXT,`Command` TEXT,`Enabled` INTEGER);"
           }.ExecuteNonQuery();
-          new SQLiteCommand(OTTDB.ott_cnn)
+          new SQLiteCommand(MQTTDB.MQTT_cnn)
           {
             CommandText = "CREATE TABLE `includedApps` (`ID` Integer PRIMARY KEY AUTOINCREMENT,`FileName` TEXT);"
           }.ExecuteNonQuery();
-          new SQLiteCommand(OTTDB.ott_cnn)
+          new SQLiteCommand(MQTTDB.MQTT_cnn)
           {
             CommandText = "CREATE TABLE `LinkPresets` (`ID` Integer PRIMARY KEY AUTOINCREMENT,`Name` TEXT,`Curve` TEXT,`Encoding` TEXT,`Bitrate` TEXT,`Sharpening` TEXT,`DBR` TEXT);"
           }.ExecuteNonQuery();
         }
         else
         {
-          if (OTTDB.ott_cnn.State == ConnectionState.Closed)
+          if (MQTTDB.MQTT_cnn.State == ConnectionState.Closed)
           {
-            Log.WriteToLog("Opening connection to ott.db");
-            OTTDB.ott_cnn = new SQLiteConnection("Data Source=" + Application.StartupPath + "\\ott.db");
-            OTTDB.ott_cnn.Open();
+            Log.WriteToLog("Opening connection to MQTT.db");
+            MQTTDB.MQTT_cnn = new SQLiteConnection("Data Source=" + Application.StartupPath + "\\MQTT.db");
+            MQTTDB.MQTT_cnn.Open();
           }
-          SQLiteCommand sqLiteCommand1 = new SQLiteCommand(OTTDB.ott_cnn);
+          SQLiteCommand sqLiteCommand1 = new SQLiteCommand(MQTTDB.MQTT_cnn);
           sqLiteCommand1.CommandText = "SELECT name FROM sqlite_master WHERE type='table' AND name='ignoredApps'";
           using (SQLiteDataReader sqLiteDataReader = sqLiteCommand1.ExecuteReader())
           {
@@ -91,7 +91,7 @@ namespace OculusTrayTool
               }
             }
           }
-          SQLiteCommand sqLiteCommand2 = new SQLiteCommand(OTTDB.ott_cnn);
+          SQLiteCommand sqLiteCommand2 = new SQLiteCommand(MQTTDB.MQTT_cnn);
           sqLiteCommand2.CommandText = "SELECT name FROM sqlite_master WHERE type='table' AND name='knownApps'";
           using (SQLiteDataReader sqLiteDataReader = sqLiteCommand2.ExecuteReader())
           {
@@ -111,7 +111,7 @@ namespace OculusTrayTool
               }
             }
           }
-          SQLiteCommand sqLiteCommand3 = new SQLiteCommand(OTTDB.ott_cnn);
+          SQLiteCommand sqLiteCommand3 = new SQLiteCommand(MQTTDB.MQTT_cnn);
           sqLiteCommand3.CommandText = "SELECT name FROM sqlite_master WHERE type='table' AND name='profiles'";
           using (SQLiteDataReader sqLiteDataReader = sqLiteCommand3.ExecuteReader())
           {
@@ -134,9 +134,9 @@ namespace OculusTrayTool
             {
               try
               {
-                if (!OTTDB.CheckIfColumnExists("profiles", "ASWDelay", OTTDB.ott_cnn))
+                if (!MQTTDB.CheckIfColumnExists("profiles", "ASWDelay", MQTTDB.MQTT_cnn))
                 {
-                  new SQLiteCommand(OTTDB.ott_cnn)
+                  new SQLiteCommand(MQTTDB.MQTT_cnn)
                   {
                     CommandText = "ALTER TABLE profiles ADD COLUMN ASWDelay Default 5"
                   }.ExecuteNonQuery();
@@ -149,9 +149,9 @@ namespace OculusTrayTool
               }
               try
               {
-                if (!OTTDB.CheckIfColumnExists("profiles", "CPUDelay", OTTDB.ott_cnn))
+                if (!MQTTDB.CheckIfColumnExists("profiles", "CPUDelay", MQTTDB.MQTT_cnn))
                 {
-                  new SQLiteCommand(OTTDB.ott_cnn)
+                  new SQLiteCommand(MQTTDB.MQTT_cnn)
                   {
                     CommandText = "ALTER TABLE profiles ADD COLUMN CPUDelay Default 5"
                   }.ExecuteNonQuery();
@@ -164,9 +164,9 @@ namespace OculusTrayTool
               }
               try
               {
-                if (!OTTDB.CheckIfColumnExists("profiles", "Mirror", OTTDB.ott_cnn))
+                if (!MQTTDB.CheckIfColumnExists("profiles", "Mirror", MQTTDB.MQTT_cnn))
                 {
-                  new SQLiteCommand(OTTDB.ott_cnn)
+                  new SQLiteCommand(MQTTDB.MQTT_cnn)
                   {
                     CommandText = "ALTER TABLE profiles ADD COLUMN Mirror Default 0"
                   }.ExecuteNonQuery();
@@ -179,9 +179,9 @@ namespace OculusTrayTool
               }
               try
               {
-                if (!OTTDB.CheckIfColumnExists("profiles", "GPUScaling", OTTDB.ott_cnn))
+                if (!MQTTDB.CheckIfColumnExists("profiles", "GPUScaling", MQTTDB.MQTT_cnn))
                 {
-                  new SQLiteCommand(OTTDB.ott_cnn)
+                  new SQLiteCommand(MQTTDB.MQTT_cnn)
                   {
                     CommandText = "ALTER TABLE profiles ADD COLUMN GPUScaling Default 1"
                   }.ExecuteNonQuery();
@@ -194,9 +194,9 @@ namespace OculusTrayTool
               }
               try
               {
-                if (!OTTDB.CheckIfColumnExists("profiles", "Comment", OTTDB.ott_cnn))
+                if (!MQTTDB.CheckIfColumnExists("profiles", "Comment", MQTTDB.MQTT_cnn))
                 {
-                  new SQLiteCommand(OTTDB.ott_cnn)
+                  new SQLiteCommand(MQTTDB.MQTT_cnn)
                   {
                     CommandText = "ALTER TABLE profiles ADD COLUMN Comment Default ''"
                   }.ExecuteNonQuery();
@@ -209,9 +209,9 @@ namespace OculusTrayTool
               }
               try
               {
-                if (!OTTDB.CheckIfColumnExists("profiles", "FOV", OTTDB.ott_cnn))
+                if (!MQTTDB.CheckIfColumnExists("profiles", "FOV", MQTTDB.MQTT_cnn))
                 {
-                  new SQLiteCommand(OTTDB.ott_cnn)
+                  new SQLiteCommand(MQTTDB.MQTT_cnn)
                   {
                     CommandText = "ALTER TABLE profiles ADD COLUMN FOV Default '0.0 0.0'"
                   }.ExecuteNonQuery();
@@ -224,9 +224,9 @@ namespace OculusTrayTool
               }
               try
               {
-                if (!OTTDB.CheckIfColumnExists("profiles", "ForceMipMap", OTTDB.ott_cnn))
+                if (!MQTTDB.CheckIfColumnExists("profiles", "ForceMipMap", MQTTDB.MQTT_cnn))
                 {
-                  new SQLiteCommand(OTTDB.ott_cnn)
+                  new SQLiteCommand(MQTTDB.MQTT_cnn)
                   {
                     CommandText = "ALTER TABLE profiles ADD COLUMN ForceMipMap Default 'False'"
                   }.ExecuteNonQuery();
@@ -239,9 +239,9 @@ namespace OculusTrayTool
               }
               try
               {
-                if (!OTTDB.CheckIfColumnExists("profiles", "OffsetMipMap", OTTDB.ott_cnn))
+                if (!MQTTDB.CheckIfColumnExists("profiles", "OffsetMipMap", MQTTDB.MQTT_cnn))
                 {
-                  new SQLiteCommand(OTTDB.ott_cnn)
+                  new SQLiteCommand(MQTTDB.MQTT_cnn)
                   {
                     CommandText = "ALTER TABLE profiles ADD COLUMN OffsetMipMap Default '0'"
                   }.ExecuteNonQuery();
@@ -254,9 +254,9 @@ namespace OculusTrayTool
               }
               try
               {
-                if (!OTTDB.CheckIfColumnExists("profiles", "Enabled", OTTDB.ott_cnn))
+                if (!MQTTDB.CheckIfColumnExists("profiles", "Enabled", MQTTDB.MQTT_cnn))
                 {
-                  new SQLiteCommand(OTTDB.ott_cnn)
+                  new SQLiteCommand(MQTTDB.MQTT_cnn)
                   {
                     CommandText = "ALTER TABLE profiles ADD COLUMN Enabled Default 'Yes'"
                   }.ExecuteNonQuery();
@@ -269,7 +269,7 @@ namespace OculusTrayTool
               }
             }
           }
-          SQLiteCommand sqLiteCommand4 = new SQLiteCommand(OTTDB.ott_cnn);
+          SQLiteCommand sqLiteCommand4 = new SQLiteCommand(MQTTDB.MQTT_cnn);
           sqLiteCommand4.CommandText = "SELECT name FROM sqlite_master WHERE type='table' AND name='hiddenApps'";
           using (SQLiteDataReader sqLiteDataReader = sqLiteCommand4.ExecuteReader())
           {
@@ -289,7 +289,7 @@ namespace OculusTrayTool
               }
             }
           }
-          SQLiteCommand sqLiteCommand5 = new SQLiteCommand(OTTDB.ott_cnn);
+          SQLiteCommand sqLiteCommand5 = new SQLiteCommand(MQTTDB.MQTT_cnn);
           sqLiteCommand5.CommandText = "SELECT name FROM sqlite_master WHERE type='table' AND name='customVoice'";
           using (SQLiteDataReader sqLiteDataReader = sqLiteCommand5.ExecuteReader())
           {
@@ -309,7 +309,7 @@ namespace OculusTrayTool
               }
             }
           }
-          SQLiteCommand sqLiteCommand6 = new SQLiteCommand(OTTDB.ott_cnn);
+          SQLiteCommand sqLiteCommand6 = new SQLiteCommand(MQTTDB.MQTT_cnn);
           sqLiteCommand6.CommandText = "SELECT name FROM sqlite_master WHERE type='table' AND name='includedApps'";
           using (SQLiteDataReader sqLiteDataReader = sqLiteCommand6.ExecuteReader())
           {
@@ -329,7 +329,7 @@ namespace OculusTrayTool
               }
             }
           }
-          SQLiteCommand sqLiteCommand7 = new SQLiteCommand(OTTDB.ott_cnn);
+          SQLiteCommand sqLiteCommand7 = new SQLiteCommand(MQTTDB.MQTT_cnn);
           sqLiteCommand7.CommandText = "SELECT name FROM sqlite_master WHERE type='table' AND name='LinkPresets'";
           using (SQLiteDataReader sqLiteDataReader = sqLiteCommand7.ExecuteReader())
           {
@@ -350,9 +350,9 @@ namespace OculusTrayTool
             }
             try
             {
-              if (!OTTDB.CheckIfColumnExists("LinkPresets", "Bitrate", OTTDB.ott_cnn))
+              if (!MQTTDB.CheckIfColumnExists("LinkPresets", "Bitrate", MQTTDB.MQTT_cnn))
               {
-                new SQLiteCommand(OTTDB.ott_cnn)
+                new SQLiteCommand(MQTTDB.MQTT_cnn)
                 {
                   CommandText = "ALTER TABLE LinkPresets ADD COLUMN Bitrate Default 150"
                 }.ExecuteNonQuery();
@@ -365,9 +365,9 @@ namespace OculusTrayTool
             }
             try
             {
-              if (!OTTDB.CheckIfColumnExists("LinkPresets", "Sharpening", OTTDB.ott_cnn))
+              if (!MQTTDB.CheckIfColumnExists("LinkPresets", "Sharpening", MQTTDB.MQTT_cnn))
               {
-                new SQLiteCommand(OTTDB.ott_cnn)
+                new SQLiteCommand(MQTTDB.MQTT_cnn)
                 {
                   CommandText = "ALTER TABLE LinkPresets ADD COLUMN Sharpening Default 0"
                 }.ExecuteNonQuery();
@@ -380,9 +380,9 @@ namespace OculusTrayTool
             }
             try
             {
-              if (!OTTDB.CheckIfColumnExists("LinkPresets", "DBR", OTTDB.ott_cnn))
+              if (!MQTTDB.CheckIfColumnExists("LinkPresets", "DBR", MQTTDB.MQTT_cnn))
               {
-                new SQLiteCommand(OTTDB.ott_cnn)
+                new SQLiteCommand(MQTTDB.MQTT_cnn)
                 {
                   CommandText = "ALTER TABLE LinkPresets ADD COLUMN DBR Default 0"
                 }.ExecuteNonQuery();
@@ -399,7 +399,7 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        Log.WriteToLog("OpenOttDb " + ex.Message);
+        Log.WriteToLog("OpenMQTTDB " + ex.Message);
       }
     }
 
@@ -424,7 +424,7 @@ namespace OculusTrayTool
     {
       Log.WriteToLog("Reading voice profiles");
       FrmMain.fmain.voiceProfileNames.Clear();
-      using (SQLiteDataReader sqLiteDataReader = new SQLiteCommand(OTTDB.ott_cnn)
+      using (SQLiteDataReader sqLiteDataReader = new SQLiteCommand(MQTTDB.MQTT_cnn)
       {
         CommandText = "select distinct Name from userVoice"
       }.ExecuteReader())
@@ -438,7 +438,7 @@ namespace OculusTrayTool
 
     public static object GetVoiceProfileCommands(string profileName)
     {
-      SQLiteCommand sqLiteCommand = new SQLiteCommand(OTTDB.ott_cnn);
+      SQLiteCommand sqLiteCommand = new SQLiteCommand(MQTTDB.MQTT_cnn);
       List<string> voiceProfileCommands = new List<string>();
       sqLiteCommand.CommandText = "select SpokenCommand,Actions,GameProfile from userVoice where Name = \"" + profileName + "\"";
       using (SQLiteDataReader sqLiteDataReader = sqLiteCommand.ExecuteReader())
@@ -458,7 +458,7 @@ namespace OculusTrayTool
       string spoken,
       string actions)
     {
-      new SQLiteCommand(OTTDB.ott_cnn)
+      new SQLiteCommand(MQTTDB.MQTT_cnn)
       {
         CommandText = ("insert Or replace into userVoice (ID, Name, SpokenCommand, Actions, GameProfile) values ((select ID from userVoice where SpokenCommand = \"" + spoken + "\"), \"" + voiceProfile + "\",\"" + spoken + "\",\"" + actions + "\")")
       }.ExecuteNonQuery();
@@ -486,9 +486,9 @@ namespace OculusTrayTool
       // MyProject.Forms.frmLibrary.DisplayNameList.Clear();  // Needs reference to FrmLibrary instance
       GetConfig.numprofiles = 0;
       int num = 0;
-      OTTDB.numWMI = 0;
-      OTTDB.numTimer = 0;
-      SQLiteCommand sqLiteCommand = new SQLiteCommand(OTTDB.ott_cnn);
+      MQTTDB.numWMI = 0;
+      MQTTDB.numTimer = 0;
+      SQLiteCommand sqLiteCommand = new SQLiteCommand(MQTTDB.MQTT_cnn);
       try
       {
         sqLiteCommand.CommandText = "select * from profiles";
@@ -541,12 +541,12 @@ namespace OculusTrayTool
                 if (String.Compare(Left, "WMI", false) == 0)
                 {
                   FrmMain.fmain.profileList.Add(str3.ToLower(), text2);
-                  checked { ++OTTDB.numWMI; }
+                  checked { ++MQTTDB.numWMI; }
                 }
                 if (String.Compare(Left, "Timer", false) == 0)
                 {
                   FrmMain.fmain.profileTimerList.Add(str3, text2);
-                  checked { ++OTTDB.numTimer; }
+                  checked { ++MQTTDB.numTimer; }
                 }
                 // MyProject.Forms.frmLibrary.ManualStartProfiles.Add(str3.ToLower(), text2);
                 FrmMain.fmain.profileASWList.Add(str3.ToLower(), text3);
@@ -569,8 +569,8 @@ namespace OculusTrayTool
         }
         Log.WriteToLog(GetConfig.numprofiles.ToString() + " profiles found");
         Log.WriteToLog(num.ToString() + " profiles are disabled");
-        Log.WriteToLog("  " + OTTDB.numWMI.ToString() + " monitored using WMI");
-        Log.WriteToLog("  " + OTTDB.numTimer.ToString() + " monitored using Timer");
+        Log.WriteToLog("  " + MQTTDB.numWMI.ToString() + " monitored using WMI");
+        Log.WriteToLog("  " + MQTTDB.numTimer.ToString() + " monitored using Timer");
       }
       catch (Exception ex)
       {
@@ -598,7 +598,7 @@ namespace OculusTrayTool
     {
       try
       {
-        new SQLiteCommand(OTTDB.ott_cnn)
+        new SQLiteCommand(MQTTDB.MQTT_cnn)
         {
           CommandText = ("insert Or replace into profiles (ID, DisplayName, PPDP, ASW, Priority, LaunchFile, Path, Method, ASWDelay, CPUDelay, Mirror, GPUScaling, Comment, FOV, ForceMipMap, OffsetMipMap, Enabled) values ((select ID from Profiles where Path = \"" + path + "\"), \"" + displayname + "\",\"" + ppdp + "\",\"" + asw + "\",\"" + priority + "\",\"" + LaunchFile + "\",\"" + path + "\",\"" + method + "\",\"" + aswdelay + "\",\"" + cpudelay + "\",\"" + mirror + "\",\"" + agps + "\",\"" + comment + "\",\"" + fov + "\",\"" + forcemipmap + "\",\"" + offsetmipmap + "\",\"" + enabled + "\")")
         }.ExecuteNonQuery();
@@ -630,7 +630,7 @@ namespace OculusTrayTool
     {
       try
       {
-        SQLiteCommand sqLiteCommand = new SQLiteCommand(OTTDB.ott_cnn);
+        SQLiteCommand sqLiteCommand = new SQLiteCommand(MQTTDB.MQTT_cnn);
         if (asw != null)
         {
           sqLiteCommand.CommandText = "UPDATE profiles SET ASW=" + asw + " WHERE Path = \"" + path + "\"";
@@ -653,8 +653,8 @@ namespace OculusTrayTool
     {
       try
       {
-        SQLiteCommand sqLiteCommand = new SQLiteCommand(OTTDB.ott_cnn);
-        string displayName = OTTDB.GetDisplayName(Path);
+        SQLiteCommand sqLiteCommand = new SQLiteCommand(MQTTDB.MQTT_cnn);
+        string displayName = MQTTDB.GetDisplayName(Path);
         sqLiteCommand.CommandText = "delete from profiles where path = \"" + Path + "\"";
         sqLiteCommand.ExecuteNonQuery();
         Log.WriteToLog("Profile for '" + displayName + "' has been removed");
@@ -670,14 +670,14 @@ namespace OculusTrayTool
     {
       try
       {
-        new SQLiteCommand(OTTDB.ott_cnn)
+        new SQLiteCommand(MQTTDB.MQTT_cnn)
         {
           CommandText = "delete from profiles"
         }.ExecuteNonQuery();
         Log.WriteToLog("All Profiles have been removed");
         FrmMain.fmain.AddToListboxAndScroll("All Profiles have been removed");
         // MyProject.Forms.frmProfiles.ListView1.Items.Clear(); // Needs ref
-        OTTDB.GetProfiles();
+        MQTTDB.GetProfiles();
       }
       catch (Exception ex)
       {
@@ -689,7 +689,7 @@ namespace OculusTrayTool
     {
       try
       {
-        new SQLiteCommand(OTTDB.ott_cnn)
+        new SQLiteCommand(MQTTDB.MQTT_cnn)
         {
           CommandText = ("insert or replace into hiddenApps (ID, DisplayName, LaunchFile, Location) values ((select ID from hiddenApps where LaunchFile = \"" + launchfile + "\" AND DisplayName = \"" + displayname + "\"), \"" + displayname + "\",\"" + launchfile + "\",\"" + location + "\")")
         }.ExecuteNonQuery();
@@ -705,7 +705,7 @@ namespace OculusTrayTool
     {
       try
       {
-        new SQLiteCommand(OTTDB.ott_cnn)
+        new SQLiteCommand(MQTTDB.MQTT_cnn)
         {
           CommandText = ("DELETE from hiddenApps where DisplayName = \"" + displayname + "\"")
         }.ExecuteNonQuery();
@@ -719,7 +719,7 @@ namespace OculusTrayTool
 
     public static bool CheckHiddenApp(string launchfile, string displayname, string location)
     {
-      object result = new SQLiteCommand(OTTDB.ott_cnn)
+      object result = new SQLiteCommand(MQTTDB.MQTT_cnn)
       {
         CommandText = ("select * from hiddenApps where DisplayName = \"" + displayname + "\" AND Location = \"" + location + "\" AND LaunchFile = \"" + launchfile + "\"")
       }.ExecuteScalar();
@@ -729,7 +729,7 @@ namespace OculusTrayTool
 
     public static object GetHiddenApps()
     {
-      SQLiteCommand sqLiteCommand = new SQLiteCommand(OTTDB.ott_cnn);
+      SQLiteCommand sqLiteCommand = new SQLiteCommand(MQTTDB.MQTT_cnn);
       List<string> hiddenApps = new List<string>();
       sqLiteCommand.CommandText = "select DisplayName from hiddenApps";
       using (SQLiteDataReader sqLiteDataReader = sqLiteCommand.ExecuteReader())
@@ -745,7 +745,7 @@ namespace OculusTrayTool
 
     public static object GetIgnoredApps()
     {
-      SQLiteCommand sqLiteCommand = new SQLiteCommand(OTTDB.ott_cnn);
+      SQLiteCommand sqLiteCommand = new SQLiteCommand(MQTTDB.MQTT_cnn);
       List<string> ignoredApps = new List<string>();
       sqLiteCommand.CommandText = "select FileName from ignoredApps";
       using (SQLiteDataReader sqLiteDataReader = sqLiteCommand.ExecuteReader())
@@ -756,7 +756,7 @@ namespace OculusTrayTool
           {
             ignoredApps.Add(Convert.ToString(sqLiteDataReader[0]));
             if (!File.Exists(Convert.ToString(sqLiteDataReader[0])))
-              OTTDB.RemoveIgnoredApp(Convert.ToString(sqLiteDataReader[0]));
+              MQTTDB.RemoveIgnoredApp(Convert.ToString(sqLiteDataReader[0]));
           }
         }
       }
@@ -765,7 +765,7 @@ namespace OculusTrayTool
 
     public static object GetIncludedApps()
     {
-      SQLiteCommand sqLiteCommand = new SQLiteCommand(OTTDB.ott_cnn);
+      SQLiteCommand sqLiteCommand = new SQLiteCommand(MQTTDB.MQTT_cnn);
       List<string> includedApps = new List<string>();
       sqLiteCommand.CommandText = "select FileName from includedApps";
       using (SQLiteDataReader sqLiteDataReader = sqLiteCommand.ExecuteReader())
@@ -776,7 +776,7 @@ namespace OculusTrayTool
           {
             includedApps.Add(Convert.ToString(sqLiteDataReader[0]));
             if (!File.Exists(Convert.ToString(sqLiteDataReader[0])))
-              OTTDB.RemoveIncludedApp(Convert.ToString(sqLiteDataReader[0]));
+              MQTTDB.RemoveIncludedApp(Convert.ToString(sqLiteDataReader[0]));
           }
         }
       }
@@ -785,7 +785,7 @@ namespace OculusTrayTool
 
     public static void RemoveIgnoredApp(string name)
     {
-      new SQLiteCommand(OTTDB.ott_cnn)
+      new SQLiteCommand(MQTTDB.MQTT_cnn)
       {
         CommandText = ("delete from ignoredApps where FileName = \"" + name + "\"")
       }.ExecuteNonQuery();
@@ -793,7 +793,7 @@ namespace OculusTrayTool
 
     public static void RemoveIncludedApp(string name)
     {
-      new SQLiteCommand(OTTDB.ott_cnn)
+      new SQLiteCommand(MQTTDB.MQTT_cnn)
       {
         CommandText = ("delete from includedApps where FileName = \"" + name + "\"")
       }.ExecuteNonQuery();
@@ -801,7 +801,7 @@ namespace OculusTrayTool
 
     public static object GetknownApps()
     {
-      SQLiteCommand sqLiteCommand = new SQLiteCommand(OTTDB.ott_cnn);
+      SQLiteCommand sqLiteCommand = new SQLiteCommand(MQTTDB.MQTT_cnn);
       List<string> stringList = new List<string>();
       sqLiteCommand.CommandText = "select FileName from knownApps";
       using (SQLiteDataReader sqLiteDataReader = sqLiteCommand.ExecuteReader())
@@ -818,7 +818,7 @@ namespace OculusTrayTool
     public static object GetknownAppDetails(string filename)
     {
       string str = null;
-      using (SQLiteDataReader sqLiteDataReader = new SQLiteCommand(OTTDB.ott_cnn)
+      using (SQLiteDataReader sqLiteDataReader = new SQLiteCommand(MQTTDB.MQTT_cnn)
       {
         CommandText = ("select DisplayName, LaunchFile, CompletePath, AssetFile from knownApps where FileName = \"" + filename + "\"")
       }.ExecuteReader())
@@ -841,7 +841,7 @@ namespace OculusTrayTool
     {
       try
       {
-        new SQLiteCommand(OTTDB.ott_cnn)
+        new SQLiteCommand(MQTTDB.MQTT_cnn)
         {
           CommandText = ("insert into knownApps (FileName, DisplayName, LaunchFile, CompletePath, AssetFile) values (\"" + filename + "\",\"" + displayname + "\",\"" + launchfile + "\",\"" + completepath + "\",\"" + assetfile + "\")")
         }.ExecuteNonQuery();
@@ -856,7 +856,7 @@ namespace OculusTrayTool
     {
       try
       {
-        new SQLiteCommand(OTTDB.ott_cnn)
+        new SQLiteCommand(MQTTDB.MQTT_cnn)
         {
           CommandText = ("insert into ignoredApps (FileName) values (\"" + filename + "\")")
         }.ExecuteNonQuery();
@@ -871,7 +871,7 @@ namespace OculusTrayTool
     {
       try
       {
-        new SQLiteCommand(OTTDB.ott_cnn)
+        new SQLiteCommand(MQTTDB.MQTT_cnn)
         {
           CommandText = ("insert into includedApps (FileName) values (\"" + filename + "\")")
         }.ExecuteNonQuery();
@@ -887,7 +887,7 @@ namespace OculusTrayTool
       string displayName = null;
       try
       {
-        using (SQLiteDataReader sqLiteDataReader = new SQLiteCommand(OTTDB.ott_cnn)
+        using (SQLiteDataReader sqLiteDataReader = new SQLiteCommand(MQTTDB.MQTT_cnn)
         {
           CommandText = ("select DisplayName from Profiles where Path = \"" + path + "\" COLLATE NOCASE")
         }.ExecuteReader())
@@ -920,7 +920,7 @@ label_10:
     {
       try
       {
-        new SQLiteCommand(OTTDB.ott_cnn)
+        new SQLiteCommand(MQTTDB.MQTT_cnn)
         {
           CommandText = ("insert or replace into LinkPresets (ID, Name, Curve, Encoding, Bitrate, Sharpening, DBR) values ((select ID from LinkPresets where Name = \"" + name + "\"), \"" + name + "\",\"" + curve + "\",\"" + encoding + "\",\"" + bitrate + "\",\"" + sharpening + "\",\"" + dbr + "\")")
         }.ExecuteNonQuery();
@@ -936,7 +936,7 @@ label_10:
       string presetValueByName = null;
       try
       {
-        using (SQLiteDataReader sqLiteDataReader = new SQLiteCommand(OTTDB.ott_cnn)
+        using (SQLiteDataReader sqLiteDataReader = new SQLiteCommand(MQTTDB.MQTT_cnn)
         {
           CommandText = ("select " + value + " from LinkPresets where Name = \"" + name + "\" COLLATE NOCASE")
         }.ExecuteReader())
@@ -969,7 +969,7 @@ label_10:
       string presetValueByValues = null;
       try
       {
-        using (SQLiteDataReader sqLiteDataReader = new SQLiteCommand(OTTDB.ott_cnn)
+        using (SQLiteDataReader sqLiteDataReader = new SQLiteCommand(MQTTDB.MQTT_cnn)
         {
           CommandText = ("select Name from LinkPresets where Curve = \"" + curve + "\" AND Encoding = \"" + encoding + "\" AND Bitrate = \"" + bitrate + "\" AND Sharpening = \"" + sharpening + "\" AND DBR = \"" + dbr + "\"")
         }.ExecuteReader())
@@ -996,7 +996,7 @@ label_10:
     {
       try
       {
-        new SQLiteCommand(OTTDB.ott_cnn)
+        new SQLiteCommand(MQTTDB.MQTT_cnn)
         {
           CommandText = ("delete from LinkPresets where Name = \"" + name + "\"")
         }.ExecuteNonQuery();
@@ -1015,7 +1015,7 @@ label_10:
       List<string> stringList = new List<string>();
       try
       {
-        using (SQLiteDataReader sqLiteDataReader = new SQLiteCommand(OTTDB.ott_cnn)
+        using (SQLiteDataReader sqLiteDataReader = new SQLiteCommand(MQTTDB.MQTT_cnn)
         {
           CommandText = "select Name from LinkPresets"
         }.ExecuteReader())
@@ -1031,22 +1031,22 @@ label_10:
         }
         if (!stringList.Contains("GTX 970+"))
         {
-          OTTDB.AddLinkPreset("GTX 970+", "Default", "2016", "300", "Auto", "0");
+          MQTTDB.AddLinkPreset("GTX 970+", "Default", "2016", "300", "Auto", "0");
           FrmMain.fmain.ComboBox4.Items.Add((object) "GTX 970+");
         }
         if (!stringList.Contains("GTX 1070+"))
         {
-          OTTDB.AddLinkPreset("GTX 1070+", "High", "2352", "350", "Auto", "0");
+          MQTTDB.AddLinkPreset("GTX 1070+", "High", "2352", "350", "Auto", "0");
           FrmMain.fmain.ComboBox4.Items.Add((object) "GTX 1070+");
         }
         if (!stringList.Contains("RTX 2070+"))
         {
-          OTTDB.AddLinkPreset("RTX 2070+", "Low", "2912", "400", "Auto", "0");
+          MQTTDB.AddLinkPreset("RTX 2070+", "Low", "2912", "400", "Auto", "0");
           FrmMain.fmain.ComboBox4.Items.Add((object) "RTX 2070+");
         }
         if (!stringList.Contains("GTX 1080Ti/RTX 2080+"))
         {
-          OTTDB.AddLinkPreset("GTX 1080Ti/RTX 2080+", "Low", "3648", "450", "Auto", "0");
+          MQTTDB.AddLinkPreset("GTX 1080Ti/RTX 2080+", "Low", "3648", "450", "Auto", "0");
           FrmMain.fmain.ComboBox4.Items.Add((object) "GTX 1080Ti/RTX 2080+");
         }
       }
@@ -1063,12 +1063,12 @@ label_10:
       FrmMain.fmain.AddToListboxAndScroll("Performing database consistency check...");
       try
       {
-        if (OTTDB.ott_cnn.State == ConnectionState.Closed)
+        if (MQTTDB.MQTT_cnn.State == ConnectionState.Closed)
         {
-          OTTDB.ott_cnn = new SQLiteConnection("Data Source=" + Application.StartupPath + "\\ott.db");
-          OTTDB.ott_cnn.Open();
+          MQTTDB.MQTT_cnn = new SQLiteConnection("Data Source=" + Application.StartupPath + "\\MQTT.db");
+          MQTTDB.MQTT_cnn.Open();
         }
-        SQLiteCommand sqLiteCommand1 = new SQLiteCommand(OTTDB.ott_cnn);
+        SQLiteCommand sqLiteCommand1 = new SQLiteCommand(MQTTDB.MQTT_cnn);
         List<string> stringList = new List<string>();
         int num1 = 0;
         int num2 = 0;
@@ -1091,7 +1091,7 @@ label_10:
                   if (File.Exists(path))
                   {
                     Log.WriteToLog(str1 + " has incorrect path in knownApps, correcting it");
-                    SQLiteCommand sqLiteCommand2 = new SQLiteCommand(OTTDB.ott_cnn);
+                    SQLiteCommand sqLiteCommand2 = new SQLiteCommand(MQTTDB.MQTT_cnn);
                     sqLiteCommand2.CommandText = "UPDATE knownApps SET CompletePath = '" + path + "' WHERE CompletePath = '" + str2 + "'";
                     sqLiteCommand2.ExecuteNonQuery();
                     sqLiteCommand2.Dispose();
@@ -1125,7 +1125,7 @@ label_10:
                   if (File.Exists(path2))
                   {
                     Log.WriteToLog(str + " has incorrect path in profiles, correcting it");
-                    SQLiteCommand sqLiteCommand3 = new SQLiteCommand(OTTDB.ott_cnn);
+                    SQLiteCommand sqLiteCommand3 = new SQLiteCommand(MQTTDB.MQTT_cnn);
                     sqLiteCommand3.CommandText = "UPDATE profiles SET Path = '" + path2 + "' WHERE Path = '" + path1 + "'";
                     sqLiteCommand3.ExecuteNonQuery();
                     sqLiteCommand3.Dispose();
@@ -1169,7 +1169,7 @@ label_10:
                 {
                   Log.WriteToLog(str + " has incorrect value for 'Mirror' in profiles, correcting it");
                   MyProject.Forms.FrmMain.AddToListboxAndScroll(str + " has incorrect value for 'Mirror' in profiles, correcting it");
-                  SQLiteCommand sqLiteCommand4 = new SQLiteCommand(OTTDB.ott_cnn);
+                  SQLiteCommand sqLiteCommand4 = new SQLiteCommand(MQTTDB.MQTT_cnn);
                   sqLiteCommand4.CommandText = "UPDATE profiles SET Mirror = '0' WHERE ID = '" + Convert.ToString(integer2) + "'";
                   sqLiteCommand4.ExecuteNonQuery();
                   sqLiteCommand4.Dispose();
@@ -1196,12 +1196,12 @@ label_10:
         }
         My.MySettings.Default.DBCheck = false;
         My.MySettings.Default.Save();
-        OTTDB.ott_cnn.Close();
+        MQTTDB.MQTT_cnn.Close();
       }
       catch (Exception ex)
       {
         Exception exception = ex;
-        OTTDB.ott_cnn.Close();
+        MQTTDB.MQTT_cnn.Close();
         My.MySettings.Default.DBCheck = false;
         My.MySettings.Default.Save();
         Log.WriteToLog("CheckDB: " + exception.Message);

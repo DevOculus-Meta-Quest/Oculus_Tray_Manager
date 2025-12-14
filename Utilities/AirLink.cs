@@ -1,4 +1,4 @@
-using OculusTrayTool.Forms;
+using MetaQuestTrayTool.Forms;
 
     using System;
     using System.Diagnostics;
@@ -6,7 +6,7 @@ using OculusTrayTool.Forms;
 
 
 #nullable disable
-    namespace OculusTrayTool
+    namespace MetaQuestTrayTool
     {
         internal sealed class AirLink
         {
@@ -29,7 +29,7 @@ using OculusTrayTool.Forms;
                 }
                 else
                 {
-                    string cmd4 = "Add-Content \"" + MyProject.Forms.FrmMain.OculusPath + "Support\\oculus-client\\resources\\app\\output\\main.js\" (New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/pd29/oculus-airlink-enabler/main/airlink.js')";
+                    string cmd4 = "Add-Content \"" + MyProject.Forms.FrmMain.MetaPath + "Support\\oculus-client\\resources\\app\\output\\main.js\" (New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/pd29/oculus-airlink-enabler/main/airlink.js')";
                     MyProject.Forms.FrmMain.AddToListboxAndScroll("Checking for chocolatey");
                     Log.WriteToLinkLog("Checking for chocolatey");
                     if (Equals(Packages.CheckPackage(AirLink.choco_check, ""), 0))
@@ -100,13 +100,13 @@ using OculusTrayTool.Forms;
                         AirLink.RunPSCommand(cmd3);
                         MyProject.Forms.FrmMain.AddToListboxAndScroll("Backing up current app.asar to app.asar." + str);
                         Log.WriteToLinkLog("Backing up current app.asar to app.asar." + str);
-                        File.Copy(MyProject.Forms.FrmMain.OculusPath + "Support\\oculus-client\\resources\\app.asar", MyProject.Forms.FrmMain.OculusPath + "Support\\oculus-client\\resources\\app.asar." + str);
+                        File.Copy(MyProject.Forms.FrmMain.MetaPath + "Support\\oculus-client\\resources\\app.asar", MyProject.Forms.FrmMain.MetaPath + "Support\\oculus-client\\resources\\app.asar." + str);
                         MyProject.Forms.FrmMain.AddToListboxAndScroll("Extracting app.asar");
-                        Log.WriteToLinkLog("Extracting app.asar to " + MyProject.Forms.FrmMain.OculusPath + "Support\\oculus-client\\resources\\app");
-                        AirLink.RunCMDCommand("/C asar extract \"" + MyProject.Forms.FrmMain.OculusPath + "Support\\oculus-client\\resources\\app.asar\" \"" + MyProject.Forms.FrmMain.OculusPath + "Support\\oculus-client\\resources\\app\"");
+                        Log.WriteToLinkLog("Extracting app.asar to " + MyProject.Forms.FrmMain.MetaPath + "Support\\oculus-client\\resources\\app");
+                        AirLink.RunCMDCommand("/C asar extract \"" + MyProject.Forms.FrmMain.MetaPath + "Support\\oculus-client\\resources\\app.asar\" \"" + MyProject.Forms.FrmMain.MetaPath + "Support\\oculus-client\\resources\\app\"");
                         MyProject.Forms.FrmMain.AddToListboxAndScroll("Verifying...");
                         Log.WriteToLinkLog("Verifying...");
-                        if (!File.ReadAllText(MyProject.Forms.FrmMain.OculusPath + "Support\\oculus-client\\resources\\app\\output\\main.js").Contains("setTimeout(function enable() {"))
+                        if (!File.ReadAllText(MyProject.Forms.FrmMain.MetaPath + "Support\\oculus-client\\resources\\app\\output\\main.js").Contains("setTimeout(function enable() {"))
                         {
                             MyProject.Forms.FrmMain.AddToListboxAndScroll("AirLink is not patched, continuing");
                             Log.WriteToLinkLog("AirLink is not patched, continuing");
@@ -115,11 +115,11 @@ using OculusTrayTool.Forms;
                             AirLink.RunPSCommand(cmd4);
                             MyProject.Forms.FrmMain.AddToListboxAndScroll("Compressing app.asar");
                             Log.WriteToLinkLog("Re-compressing app.asar");
-                            AirLink.RunCMDCommand("/C asar pack \"" + MyProject.Forms.FrmMain.OculusPath + "Support\\oculus-client\\resources\\app\" \"" + MyProject.Forms.FrmMain.OculusPath + "Support\\oculus-client\\resources\\app.asar\"");
-                            if (Directory.Exists(MyProject.Forms.FrmMain.OculusPath + "Support\\oculus-client\\resources\\app"))
+                            AirLink.RunCMDCommand("/C asar pack \"" + MyProject.Forms.FrmMain.MetaPath + "Support\\oculus-client\\resources\\app\" \"" + MyProject.Forms.FrmMain.MetaPath + "Support\\oculus-client\\resources\\app.asar\"");
+                            if (Directory.Exists(MyProject.Forms.FrmMain.MetaPath + "Support\\oculus-client\\resources\\app"))
                             {
-                                Log.WriteToLinkLog("Removing temporary directory " + MyProject.Forms.FrmMain.OculusPath + "Support\\oculus-client\\resources\\app");
-                                Directory.Delete(MyProject.Forms.FrmMain.OculusPath + "Support\\oculus-client\\resources\\app", true);
+                                Log.WriteToLinkLog("Removing temporary directory " + MyProject.Forms.FrmMain.MetaPath + "Support\\oculus-client\\resources\\app");
+                                Directory.Delete(MyProject.Forms.FrmMain.MetaPath + "Support\\oculus-client\\resources\\app", true);
                             }
                             MyProject.Forms.FrmMain.AddToListboxAndScroll("AirLink is patched!");
                             Log.WriteToLinkLog("AirLink is patched!");
@@ -128,15 +128,15 @@ using OculusTrayTool.Forms;
                         {
                             MyProject.Forms.FrmMain.AddToListboxAndScroll("AirLink is already patched, aborting");
                             Log.WriteToLinkLog("AirLink is already patched, aborting");
-                            if (Directory.Exists(MyProject.Forms.FrmMain.OculusPath + "Support\\oculus-client\\resources\\app"))
+                            if (Directory.Exists(MyProject.Forms.FrmMain.MetaPath + "Support\\oculus-client\\resources\\app"))
                             {
-                                Log.WriteToLinkLog("Removing temporary directory " + MyProject.Forms.FrmMain.OculusPath + "Support\\oculus-client\\resources\\app");
-                                Directory.Delete(MyProject.Forms.FrmMain.OculusPath + "Support\\oculus-client\\resources\\app", true);
+                                Log.WriteToLinkLog("Removing temporary directory " + MyProject.Forms.FrmMain.MetaPath + "Support\\oculus-client\\resources\\app");
+                                Directory.Delete(MyProject.Forms.FrmMain.MetaPath + "Support\\oculus-client\\resources\\app", true);
                             }
-                            if (!File.Exists(MyProject.Forms.FrmMain.OculusPath + "Support\\oculus-client\\resources\\app.asar." + str))
+                            if (!File.Exists(MyProject.Forms.FrmMain.MetaPath + "Support\\oculus-client\\resources\\app.asar." + str))
                                 return;
-                            Log.WriteToLinkLog("Removing backup " + MyProject.Forms.FrmMain.OculusPath + "Support\\oculus-client\\resources\\app.asar." + str);
-                            File.Delete(MyProject.Forms.FrmMain.OculusPath + "Support\\oculus-client\\resources\\app.asar." + str);
+                            Log.WriteToLinkLog("Removing backup " + MyProject.Forms.FrmMain.MetaPath + "Support\\oculus-client\\resources\\app.asar." + str);
+                            File.Delete(MyProject.Forms.FrmMain.MetaPath + "Support\\oculus-client\\resources\\app.asar." + str);
                         }
                     }
                 }

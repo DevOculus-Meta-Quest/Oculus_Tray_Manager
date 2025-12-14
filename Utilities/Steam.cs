@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading;
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
   public class Steam
   {

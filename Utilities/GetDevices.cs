@@ -1,13 +1,13 @@
-using OculusTrayTool.Forms;
+using MetaQuestTrayTool.Forms;
 
 using CoreAudio;
 
-using OculusTrayTool.My;
+using MetaQuestTrayTool.My;
 using System;
 using System.Windows.Forms;
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
 
   internal sealed class GetDevices

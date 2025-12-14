@@ -1,6 +1,6 @@
 
 
-using OculusTrayTool.My;
+using MetaQuestTrayTool.My;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 #nullable disable
-namespace OculusTrayTool.Forms
+namespace MetaQuestTrayTool.Forms
 {
 
   public partial class frmImportSteamApps : Form
@@ -121,7 +121,7 @@ namespace OculusTrayTool.Forms
       {
         if (Globals.dbg)
           Log.WriteToLog("Updating list of Steam games");
-        if (!Globals.oculus.TryRefresh() || !Globals.steam.TryRefresh())
+        if (!Globals.meta.TryRefresh() || !Globals.steam.TryRefresh())
           return;
         List<SteamNode> steamList = (List<SteamNode>) null;
         if (this.tscbVrManifest.Checked)
@@ -144,7 +144,7 @@ namespace OculusTrayTool.Forms
 
           foreach (SteamNode steamNode in steamList)
           {
-            bool flag = Globals.oculus.IsAppInstalled((OculusNode) steamNode);
+            bool flag = Globals.meta.IsAppInstalled((MetaNode) steamNode);
             if (string.IsNullOrEmpty(this.tstbSearch.Text) || steamNode.Name.IndexOf(this.tstbSearch.Text, StringComparison.CurrentCultureIgnoreCase) != -1)
               listViewItemList.Add(new ListViewItem(new string[14]
               {
@@ -229,21 +229,21 @@ namespace OculusTrayTool.Forms
     private void tsbStartService_Click(object sender, EventArgs e)
     {
       this.Cursor = Cursors.WaitCursor;
-      Globals.oculus.TryStartOculusService();
+      Globals.meta.TryStartOculusService();
       this.Cursor = Cursors.Default;
     }
 
     private void tsbStopService_Click(object sender, EventArgs e)
     {
       this.Cursor = Cursors.WaitCursor;
-      Globals.oculus.TryStopOculusService();
+      Globals.meta.TryStopOculusService();
       this.Cursor = Cursors.Default;
     }
 
     private void tsbRestartService_Click(object sender, EventArgs e)
     {
       this.Cursor = Cursors.WaitCursor;
-      Globals.oculus.TryRestartOculusService();
+      Globals.meta.TryRestartOculusService();
       this.Cursor = Cursors.Default;
     }
 
@@ -301,7 +301,7 @@ namespace OculusTrayTool.Forms
           }
 
         this.UpdateAppListView();
-        Globals.oculus.TryRestartOculusService();
+        Globals.meta.TryRestartOculusService();
       }
       catch (Exception ex)
       {
@@ -390,7 +390,7 @@ namespace OculusTrayTool.Forms
     {
       if (this.lvwAppList.SelectedItems.Count <= 0)
         return;
-      string fullPath = ((OculusNode) this.lvwAppList.SelectedItems[0].Tag).FullPath;
+      string fullPath = ((MetaNode) this.lvwAppList.SelectedItems[0].Tag).FullPath;
       if (string.IsNullOrEmpty(fullPath) || !File.Exists(fullPath))
         return;
       Process.Start("explorer.exe", string.Format("/select,\"{0}\"", (object) fullPath));
@@ -403,7 +403,7 @@ namespace OculusTrayTool.Forms
       {
         List<string> manifestFileList = null;
         List<string> assetDirectoryList = null;
-        if (Globals.oculus.TryGetManifestFileNameAndAssetFolderList((OculusNode) steamNode, ref manifestFileList, ref assetDirectoryList))
+        if (Globals.meta.TryGetManifestFileNameAndAssetFolderList((MetaNode) steamNode, ref manifestFileList, ref assetDirectoryList))
         {
           DialogResult result = (DialogResult)control.Invoke( new Func<DialogResult>(() => 
           {

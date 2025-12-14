@@ -3,7 +3,7 @@ using System;
 using System.Drawing;
 using Microsoft.Win32;
 
-namespace OculusTrayTool.Forms
+namespace MetaQuestTrayTool.Forms
 {
     public partial class FrmMain
     {

@@ -1,10 +1,10 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Oculus Tray Tool")]
+[assembly: AssemblyTitle("Meta Quest Tray Tool")]
 [assembly: AssemblyDescription("https://apollyonvr.wixsite.com/vrtools")]
 [assembly: AssemblyCompany("ApollyonVR")]
-[assembly: AssemblyProduct("Oculus Tray Tool")]
+[assembly: AssemblyProduct("Meta Quest Tray Tool")]
 [assembly: AssemblyCopyright("Copyright ApollyonVR ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: ComVisible(false)]

@@ -1,13 +1,13 @@
-using OculusTrayTool.Forms;
+using MetaQuestTrayTool.Forms;
 
 
-    using OculusTrayTool.My;
+    using MetaQuestTrayTool.My;
     using System;
     using System.Diagnostics;
     using System.IO;
 
 #nullable disable
-    namespace OculusTrayTool
+    namespace MetaQuestTrayTool
     {
 
         internal sealed class Packages

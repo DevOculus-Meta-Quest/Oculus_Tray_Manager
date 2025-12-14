@@ -1,6 +1,6 @@
 
 
-using OculusTrayTool.My;
+using MetaQuestTrayTool.My;
 using System;
 using System.Collections;
 using System.ComponentModel;
@@ -11,7 +11,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 #nullable disable
-namespace OculusTrayTool.Forms
+namespace MetaQuestTrayTool.Forms
 {
 
   public partial class frmEditAllSelected : Form
@@ -188,9 +188,9 @@ namespace OculusTrayTool.Forms
             string text6 = this.ComboBox8.Text;
             string text7 = this.ComboBox9.Text;
             string text8 = this.ComboBoxEnabled.Text;
-            OTTDB.AddProfile(displayname, asw, ppdp, priority, fileName, path2, method, aswdelay, cpudelay, mirror, agps, comment, fov, text6, text7, text8);
+            MQTTDB.AddProfile(displayname, asw, ppdp, priority, fileName, path2, method, aswdelay, cpudelay, mirror, agps, comment, fov, text6, text7, text8);
           }
-        OTTDB.GetProfiles();
+        MQTTDB.GetProfiles();
       }
       catch (Exception ex)
       {

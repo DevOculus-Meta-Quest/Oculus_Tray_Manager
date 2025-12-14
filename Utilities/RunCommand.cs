@@ -1,7 +1,7 @@
-using OculusTrayTool.Forms;
+using MetaQuestTrayTool.Forms;
 
 
-using OculusTrayTool.My;
+using MetaQuestTrayTool.My;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +11,7 @@ using System.Threading;
 using System.Windows.Forms;
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
   internal sealed class RunCommand
   {
@@ -387,10 +387,10 @@ namespace OculusTrayTool
         Log.WriteToLog("Launching Oculus Home");
         Thread.Sleep(checked (GetConfig.StartHomeDelay * 1000));
         if (Globals.dbg)
-          Log.WriteToLog("Starting process " + MyProject.Forms.FrmMain.OculusPath + "Support\\oculus-client\\OculusClient.exe");
+          Log.WriteToLog("Starting process " + MyProject.Forms.FrmMain.MetaPath + "Support\\oculus-client\\OculusClient.exe");
         new Process()
         {
-          StartInfo = new ProcessStartInfo(MyProject.Forms.FrmMain.OculusPath + "Support\\oculus-client\\OculusClient.exe")
+          StartInfo = new ProcessStartInfo(MyProject.Forms.FrmMain.MetaPath + "Support\\oculus-client\\OculusClient.exe")
           {
             UseShellExecute = true
           }

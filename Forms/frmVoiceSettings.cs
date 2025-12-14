@@ -1,6 +1,6 @@
 
 
-using OculusTrayTool.My;
+using MetaQuestTrayTool.My;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 #nullable disable
-namespace OculusTrayTool.Forms
+namespace MetaQuestTrayTool.Forms
 {
 
   public partial class frmVoiceSettings : Form
@@ -200,7 +200,7 @@ namespace OculusTrayTool.Forms
       if (this.CheckBox1.Checked)
       {
         this.CheckBox2.Checked = false;
-        this.LabelExplain.Text = "Oculus Tray Tool will start listening on startup, but it will only recognize the phrase set for 'Enable Voice Control'. After that phrase is spoken and understood, the rest of the voice commands become active and will remain so until the prhase set for 'Disable Voice Control' is spoken.";
+        this.LabelExplain.Text = "Meta Quest Tray Tool will start listening on startup, but it will only recognize the phrase set for 'Enable Voice Control'. After that phrase is spoken and understood, the rest of the voice commands become active and will remain so until the prhase set for 'Disable Voice Control' is spoken.";
         MySettingsProperty.Settings.VoiceActivationVoiceContinous = true;
       }
       else
@@ -215,7 +215,7 @@ namespace OculusTrayTool.Forms
       if (this.CheckBox2.Checked)
       {
         this.CheckBox1.Checked = false;
-        this.LabelExplain.Text = "Oculus Tray Tool will start listening on startup, but it will only recognize the phrase set for 'Enable Voice Control'. After that phrase is spoken and understood, the rest of the voice commands become active. After a voice command has been spoken, Oculus Tray Tool will stop listening for more commands, and the prhase set for 'Enable Voice Control' must once again be spoken to activate commands.";
+        this.LabelExplain.Text = "Meta Quest Tray Tool will start listening on startup, but it will only recognize the phrase set for 'Enable Voice Control'. After that phrase is spoken and understood, the rest of the voice commands become active. After a voice command has been spoken, Meta Quest Tray Tool will stop listening for more commands, and the prhase set for 'Enable Voice Control' must once again be spoken to activate commands.";
         MySettingsProperty.Settings.VoiceActivationVoiceRepeated = true;
       }
       else
@@ -231,7 +231,7 @@ namespace OculusTrayTool.Forms
       {
         this.ComboDevice.Enabled = true;
         this.CheckBox4.Checked = false;
-        this.LabelExplain.Text = "Oculus Tray Tool will start listening for commands when a key is pressed. It will keep listening until the same key is pressed again";
+        this.LabelExplain.Text = "Meta Quest Tray Tool will start listening for commands when a key is pressed. It will keep listening until the same key is pressed again";
         MySettingsProperty.Settings.VoiceActivationKeyContinous = true;
       }
       else
@@ -255,7 +255,7 @@ namespace OculusTrayTool.Forms
       {
         this.ComboDevice.Enabled = true;
         this.CheckBox3.Checked = false;
-        this.LabelExplain.Text = "Oculus Tray Tool will start listening for commands while a key is pressed, and stop listening when it is released.";
+        this.LabelExplain.Text = "Meta Quest Tray Tool will start listening for commands while a key is pressed, and stop listening when it is released.";
         MySettingsProperty.Settings.VoiceActivationKeyPush = true;
       }
       else
@@ -341,7 +341,7 @@ namespace OculusTrayTool.Forms
       {
         this.ComboDevice.Enabled = true;
         this.CheckBox6.Checked = false;
-        this.LabelExplain.Text = "Oculus Tray Tool will start listening for commands when a joystick button is pressed. It will keep listening until the same joystick button is pressed again";
+        this.LabelExplain.Text = "Meta Quest Tray Tool will start listening for commands when a joystick button is pressed. It will keep listening until the same joystick button is pressed again";
         MySettingsProperty.Settings.JoystickActivationKeyContinous = true;
       }
       else
@@ -365,7 +365,7 @@ namespace OculusTrayTool.Forms
       {
         this.ComboDevice.Enabled = true;
         this.CheckBox5.Checked = false;
-        this.LabelExplain.Text = "Oculus Tray Tool will start listening for commands while a joystick button is pressed, and stop listening when it is released.";
+        this.LabelExplain.Text = "Meta Quest Tray Tool will start listening for commands while a joystick button is pressed, and stop listening when it is released.";
         MySettingsProperty.Settings.JoystickActivationKeyPush = true;
       }
       else
@@ -395,37 +395,37 @@ namespace OculusTrayTool.Forms
 
     private void CheckBox1_MouseHover(object sender, EventArgs e)
     {
-      this.LabelExplain.Text = "Oculus Tray Tool will start listening on startup, but it will only recognize the phrase set for 'Enable Voice Control'. After that phrase is spoken and understood, the rest of the voice commands become active and will remain so until the phrase set for 'Disable Voice Control' is spoken.";
+      this.LabelExplain.Text = "Meta Quest Tray Tool will start listening on startup, but it will only recognize the phrase set for 'Enable Voice Control'. After that phrase is spoken and understood, the rest of the voice commands become active and will remain so until the phrase set for 'Disable Voice Control' is spoken.";
       this.LabelExplain.Refresh();
     }
 
     private void CheckBox2_MouseHover(object sender, EventArgs e)
     {
-      this.LabelExplain.Text = "Oculus Tray Tool will start listening on startup, but it will only recognize the phrase set for 'Enable Voice Control'. After that phrase is spoken and understood, the rest of the voice commands become active. After a voice command has been spoken, Oculus Tray Tool will stop listening for more commands, and the phrase set for 'Enable Voice Control' must once again be spoken.";
+      this.LabelExplain.Text = "Meta Quest Tray Tool will start listening on startup, but it will only recognize the phrase set for 'Enable Voice Control'. After that phrase is spoken and understood, the rest of the voice commands become active. After a voice command has been spoken, Meta Quest Tray Tool will stop listening for more commands, and the phrase set for 'Enable Voice Control' must once again be spoken.";
       this.LabelExplain.Refresh();
     }
 
     private void CheckBox3_MouseHover(object sender, EventArgs e)
     {
-      this.LabelExplain.Text = "Oculus Tray Tool will start listening for commands when a key is pressed. It will keep listening until the same key is pressed again.";
+      this.LabelExplain.Text = "Meta Quest Tray Tool will start listening for commands when a key is pressed. It will keep listening until the same key is pressed again.";
       this.LabelExplain.Refresh();
     }
 
     private void CheckBox4_MouseHover(object sender, EventArgs e)
     {
-      this.LabelExplain.Text = "Oculus Tray Tool will start listening for commands while a key is pressed, and stop listening when it is released.";
+      this.LabelExplain.Text = "Meta Quest Tray Tool will start listening for commands while a key is pressed, and stop listening when it is released.";
       this.LabelExplain.Refresh();
     }
 
     private void CheckBox5_MouseHover(object sender, EventArgs e)
     {
-      this.LabelExplain.Text = "Oculus Tray Tool will start listening for commands when a joystick button is pressed. It will keep listening until the same joystick button is pressed again.";
+      this.LabelExplain.Text = "Meta Quest Tray Tool will start listening for commands when a joystick button is pressed. It will keep listening until the same joystick button is pressed again.";
       this.LabelExplain.Refresh();
     }
 
     private void CheckBox6_MouseHover(object sender, EventArgs e)
     {
-      this.LabelExplain.Text = "Oculus Tray Tool will start listening for commands while a joystick button is pressed, and stop listening when it is released.";
+      this.LabelExplain.Text = "Meta Quest Tray Tool will start listening for commands while a joystick button is pressed, and stop listening when it is released.";
       this.LabelExplain.Refresh();
     }
 
@@ -474,7 +474,7 @@ namespace OculusTrayTool.Forms
       {
         this.Button2.Enabled = true;
         List<string> stringList = new List<string>();
-        List<string> voiceProfileCommands = (List<string>) OTTDB.GetVoiceProfileCommands(this.ComboBox1.SelectedItem.ToString());
+        List<string> voiceProfileCommands = (List<string>) MQTTDB.GetVoiceProfileCommands(this.ComboBox1.SelectedItem.ToString());
         foreach (string Expression in voiceProfileCommands)
         {
           string[] strArray1 = Expression.Split('|');

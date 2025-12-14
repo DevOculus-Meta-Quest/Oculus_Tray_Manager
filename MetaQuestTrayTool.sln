@@ -1,7 +1,8 @@
-
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OculusTrayTool", "OculusTrayTool.csproj", "{DA117AB4-2D28-4C3B-BAFB-CE19C8E6B285}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.3.11310.294 d18.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaQuestTrayTool", "MetaQuestTrayTool.csproj", "{DA117AB4-2D28-4C3B-BAFB-CE19C8E6B285}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

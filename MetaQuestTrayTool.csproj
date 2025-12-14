@@ -5,11 +5,10 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{DA117AB4-2D28-4C3B-BAFB-CE19C8E6B285}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <AssemblyName>OculusTrayTool</AssemblyName>
+    <AssemblyName>MetaQuestTrayTool</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <ApplicationVersion>0.87.8.0</ApplicationVersion>
-    <RootNamespace>OculusTrayTool</RootNamespace>
-    <RootNamespace>OculusTrayTool</RootNamespace>
+    <RootNamespace>MetaQuestTrayTool</RootNamespace>
     <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
@@ -179,11 +178,11 @@
     <Compile Include="Utilities\MigrateSettings.cs" />
     <Compile Include="Utilities\MinMaxApp.cs" />
     <Compile Include="SteamLaunchType.cs" />
-    <Compile Include="Utilities\Oculus.cs" />
+    <Compile Include="Utilities\Meta.cs" />
     <Compile Include="PlatformType.cs" />
-    <Compile Include="OculusNode.cs" />
-    <Compile Include="Utilities\OculusPath.cs" />
-    <Compile Include="Utilities\OTTDB.cs" />
+    <Compile Include="MetaNode.cs" />
+    <Compile Include="Utilities\MetaPath.cs" />
+    <Compile Include="Utilities\MQTTDB.cs" />
     <Compile Include="Forms\frmProperties.cs">
       <SubType>Form</SubType>
     </Compile>

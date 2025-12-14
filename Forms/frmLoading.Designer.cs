@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Management;
 
-namespace OculusTrayTool.Forms
+namespace MetaQuestTrayTool.Forms
 {
     partial class frmLoading
     {
@@ -40,7 +40,7 @@ protected override void Dispose(bool disposing)
       this.Label1.Name = "Label1";
       this.Label1.Size = new Size(111, 17);
       this.Label1.TabIndex = 1;
-      this.Label1.Text = "Oculus Tray Tool";
+      this.Label1.Text = "Meta Quest Tray Tool";
       this.Label2.AutoSize = true;
       this.Label2.Font = new Font("Segoe UI", 9.75f, FontStyle.Bold, GraphicsUnit.Point, (byte) 0);
       this.Label2.ForeColor = Color.DarkGray;
@@ -49,7 +49,7 @@ protected override void Dispose(bool disposing)
       this.Label2.Size = new Size(166, 17);
       this.Label2.TabIndex = 2;
       this.Label2.Text = "Starting up, please wait...";
-      this.PictureBox2.Image = (Image) (System.Drawing.Image)OculusTrayTool.My.Resources.Resources.App_Blue_32;
+      this.PictureBox2.Image = (Image) (System.Drawing.Image)MetaQuestTrayTool.My.Resources.Resources.App_Blue_32;
       this.PictureBox2.Location = new Point(15, 18);
       this.PictureBox2.Name = "PictureBox2";
       this.PictureBox2.Size = new Size(32, 29);

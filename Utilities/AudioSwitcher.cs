@@ -1,8 +1,8 @@
 using System;
 using System.Diagnostics;
-using OculusTrayTool.PolicyClient;
+using MetaQuestTrayTool.PolicyClient;
 
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
     public static class AudioSwitcher
     {

@@ -7,7 +7,7 @@ using System.IO;
 using System.Net;
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
   public class FileDownloader : IDisposable
   {

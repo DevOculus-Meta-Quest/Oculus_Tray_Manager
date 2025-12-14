@@ -19,11 +19,11 @@ using System.Text.RegularExpressions;
 using System.Threading;
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
-  public class Oculus
+  public class Meta
   {
-    private string m_oculusPath;
+    private string m_MetaPath;
     private string m_appDataPath;
     private List<string> m_softwarePathList;
     private string m_databasePath;
@@ -31,7 +31,7 @@ namespace OculusTrayTool
     private List<DirectoryInfo> m_assetDirectoryList;
     private Steam m_steam;
 
-    public Oculus(string appDataPath, Steam steam)
+    public Meta(string appDataPath, Steam steam)
     {
       this.m_appDataPath = appDataPath;
       this.m_steam = steam;
@@ -42,12 +42,12 @@ namespace OculusTrayTool
 
     public bool TryRefresh()
     {
-      return this.TryGetOculusPath(ref this.m_oculusPath) && this.TryGetOculusSoftwarePathList(ref this.m_softwarePathList) && this.TryGetManifestFileNameAndAssetFolderList(ref this.m_manifestFileList, ref this.m_assetDirectoryList) && this.TryCopyAppDatabase();
+      return this.TryGetMetaPath(ref this.m_MetaPath) && this.TryGetOculusSoftwarePathList(ref this.m_softwarePathList) && this.TryGetManifestFileNameAndAssetFolderList(ref this.m_manifestFileList, ref this.m_assetDirectoryList) && this.TryCopyAppDatabase();
     }
 
-    private bool TryGetOculusPath(ref string oculusPath)
+    private bool TryGetMetaPath(ref string MetaPath)
     {
-      oculusPath = null;
+      MetaPath = null;
       try
       {
         RegistryKey registryKey = Registry.LocalMachine.OpenSubKey("Software\\WOW6432Node\\Oculus VR, LLC\\Oculus", false) 
@@ -55,14 +55,14 @@ namespace OculusTrayTool
 
         if (registryKey != null)
         {
-            oculusPath = registryKey.GetValue("Base")?.ToString();
+            MetaPath = registryKey.GetValue("Base")?.ToString();
         }
 
-        return !string.IsNullOrEmpty(oculusPath);
+        return !string.IsNullOrEmpty(MetaPath);
       }
       catch (Exception ex)
       {
-        Log.WriteToLog("TryGetOculusPath: " + ex.Message);
+        Log.WriteToLog("TryGetMetaPath: " + ex.Message);
         return false;
       }
     }
@@ -151,11 +151,11 @@ namespace OculusTrayTool
       return System.IO.File.Exists(databasePath);
     }
 
-    public bool IsAppInstalled(OculusNode oculusNode)
+    public bool IsAppInstalled(MetaNode MetaNode)
     {
       List<string> manifestFileList = (List<string>) null;
       List<string> assetDirectoryList = (List<string>) null;
-      return this.TryGetManifestFileNameAndAssetFolderList(oculusNode, ref manifestFileList, ref assetDirectoryList);
+      return this.TryGetManifestFileNameAndAssetFolderList(MetaNode, ref manifestFileList, ref assetDirectoryList);
     }
 
     public bool TryGetManifestFileNameAndAssetFolderList(
@@ -166,8 +166,8 @@ namespace OculusTrayTool
       assetFolderList = new List<DirectoryInfo>();
       try
       {
-        string pathLimit = Path.Combine(this.m_oculusPath, "CoreData\\Manifests");
-        string pathAssets = Path.Combine(this.m_oculusPath, "CoreData\\Software\\StoreAssets");
+        string pathLimit = Path.Combine(this.m_MetaPath, "CoreData\\Manifests");
+        string pathAssets = Path.Combine(this.m_MetaPath, "CoreData\\Software\\StoreAssets");
         List<FileInfo> fileInfoList = new List<FileInfo>();
         
         if (Directory.Exists(pathLimit))
@@ -210,7 +210,7 @@ namespace OculusTrayTool
     }
 
     public bool TryGetManifestFileNameAndAssetFolderList(
-      OculusNode oculusNode,
+      MetaNode MetaNode,
       ref List<string> manifestFileList,
       ref List<string> assetDirectoryList)
     {
@@ -218,7 +218,7 @@ namespace OculusTrayTool
       assetDirectoryList = new List<string>();
       try
       {
-        string shortCanonicalName = oculusNode.ShortCanonicalName;
+        string shortCanonicalName = MetaNode.ShortCanonicalName;
         if (shortCanonicalName == null)
         {
           return false;
@@ -258,7 +258,7 @@ namespace OculusTrayTool
         else
         {
           JObject jobject = JObject.Parse(System.IO.File.ReadAllText(path1));
-          string path1_1 = Path.Combine(this.m_oculusPath, "CoreData\\Manifests");
+          string path1_1 = Path.Combine(this.m_MetaPath, "CoreData\\Manifests");
           string canonicalName = steamNode.CanonicalName;
           string name = steamNode.Name;
           string path2 = Path.Combine(path1_1, canonicalName + ".json");
@@ -313,8 +313,8 @@ label_10:
         {
           JObject jobject = JObject.Parse(System.IO.File.ReadAllText(path1));
           string path2 = steamNode.CanonicalName + "_assets";
-          string str1 = Path.Combine(Path.Combine(this.m_oculusPath, "CoreData\\Software\\StoreAssets"), path2);
-          string path3 = Path.Combine(Path.Combine(this.m_oculusPath, "CoreData\\Manifests"), path2 + ".json");
+          string str1 = Path.Combine(Path.Combine(this.m_MetaPath, "CoreData\\Software\\StoreAssets"), path2);
+          string path3 = Path.Combine(Path.Combine(this.m_MetaPath, "CoreData\\Manifests"), path2 + ".json");
           if (!Directory.Exists(str1))
             Directory.CreateDirectory(str1);
           string str2 = Path.Combine(str1, "cover_landscape_image.jpg");
@@ -398,10 +398,10 @@ label_12:
       SteamNode steamNode,
       DownloadProgressChangedEventHandler downloadProgressChanged)
     {
-      Oculus oculus = this;
+      Meta meta = this;
       SteamNode steamNode1 = steamNode;
       string str = Path.Combine(Path.GetTempPath(), "icon.png");
-      return this.m_steam.TryDownloadAppHeader(steamNode1.AppId, (object) "header.jpg", downloadProgressChanged, (EventHandler<DataDownloadEventArgs>) ((sender, e) => oculus.TryCreateAssetManifest(steamNode1, e.FileName))) || this.TryExtractExeIcon(steamNode1.FullPath, str) && this.TryCreateAssetManifest(steamNode1, str);
+      return this.m_steam.TryDownloadAppHeader(steamNode1.AppId, (object) "header.jpg", downloadProgressChanged, (EventHandler<DataDownloadEventArgs>) ((sender, e) => meta.TryCreateAssetManifest(steamNode1, e.FileName))) || this.TryExtractExeIcon(steamNode1.FullPath, str) && this.TryCreateAssetManifest(steamNode1, str);
     }
 
 
@@ -422,18 +422,18 @@ label_12:
       }
     }
 
-    public bool TryGetApps(ref List<OculusNode> allAppList, bool includeThirdParty)
+    public bool TryGetApps(ref List<MetaNode> allAppList, bool includeThirdParty)
     {
-      allAppList = new List<OculusNode>();
+      allAppList = new List<MetaNode>();
       bool apps;
       try
       {
-        List<OculusNode> appList = new List<OculusNode>();
+        List<MetaNode> appList = new List<MetaNode>();
         if (includeThirdParty)
         {
-          string str = Path.Combine(this.m_oculusPath, "CoreData\\Manifests");
+          string str = Path.Combine(this.m_MetaPath, "CoreData\\Manifests");
           if (Directory.Exists(str) && this.TryGetThirdPartyApps(str, ref appList))
-            allAppList.AddRange((IEnumerable<OculusNode>) appList);
+            allAppList.AddRange((IEnumerable<MetaNode>) appList);
         }
         List<string> softwarePathList = (List<string>) null;
         if (!this.TryGetOculusSoftwarePathList(ref softwarePathList))
@@ -447,12 +447,12 @@ label_12:
             {
               string str1 = Path.Combine(path1, "Manifests");
               if (Directory.Exists(str1) && this.TryGetApps(str1, ref appList))
-                allAppList.AddRange((IEnumerable<OculusNode>) appList);
+                allAppList.AddRange((IEnumerable<MetaNode>) appList);
               if (includeThirdParty)
               {
                 string str2 = Path.Combine(path1, "CoreData\\Manifests");
                 if (Directory.Exists(str2) && this.TryGetThirdPartyApps(str2, ref appList))
-                  allAppList.AddRange((IEnumerable<OculusNode>) appList);
+                  allAppList.AddRange((IEnumerable<MetaNode>) appList);
               }
             }
         }
@@ -468,9 +468,9 @@ label_19:
       return apps;
     }
 
-    public bool TryGetApps(string manifestPath, ref List<OculusNode> appList)
+    public bool TryGetApps(string manifestPath, ref List<MetaNode> appList)
     {
-      appList = new List<OculusNode>();
+      appList = new List<MetaNode>();
       string _assetFileName = (string) null;
       bool _hasUserAppPlayTime = false;
       SQLiteConnection connection = new SQLiteConnection(string.Format("Data Source={0}", (object) this.m_databasePath));
@@ -479,7 +479,7 @@ label_19:
       bool apps;
       try
       {
-        string path1_1 = Path.Combine(this.m_oculusPath, "CoreData\\Software\\StoreAssets");
+        string path1_1 = Path.Combine(this.m_MetaPath, "CoreData\\Software\\StoreAssets");
         string path1_2 = this.m_softwarePathList.Count > 0 ? Path.Combine(this.m_softwarePathList[0], "Software\\StoreAssets") : (string) null;
         string[] files = Directory.GetFiles(manifestPath, "*.mini");
         int index = 0;
@@ -544,8 +544,8 @@ label_19:
             if (num1 > -1 && num2 > -1)
             {
               string _name = str7.Substring(checked (num1 + str8.Length), checked (num2 - num1 - str8.Length - 1)).Replace(":", " ").TrimEnd(':', ' ');
-              OculusNode oculusNode = new OculusNode(PlatformType.Oculus, result, str1, str4, _name, _executable, _parameters, directoryName, fileName, str3, _assetFileName, _isFlat, _hasUserAppPlayTime, false);
-              appList.Add(oculusNode);
+              MetaNode MetaNode = new MetaNode(PlatformType.Meta, result, str1, str4, _name, _executable, _parameters, directoryName, fileName, str3, _assetFileName, _isFlat, _hasUserAppPlayTime, false);
+              appList.Add(MetaNode);
             }
           }
           checked { ++index; }
@@ -564,10 +564,10 @@ label_19:
       return apps;
     }
 
-    public bool TryGetThirdPartyApps(string manifestPath, ref List<OculusNode> appList)
+    public bool TryGetThirdPartyApps(string manifestPath, ref List<MetaNode> appList)
     {
-      appList = new List<OculusNode>();
-      string path1_1 = Path.Combine(this.m_oculusPath, "CoreData\\Software\\StoreAssets");
+      appList = new List<MetaNode>();
+      string path1_1 = Path.Combine(this.m_MetaPath, "CoreData\\Software\\StoreAssets");
       string path1_2 = this.m_softwarePathList.Count > 0 ? Path.Combine(this.m_softwarePathList[0], "Software\\StoreAssets") : (string) null;
       string[] files = Directory.GetFiles(manifestPath, "*.json");
       string _name = (string) null;
@@ -673,8 +673,8 @@ label_19:
                   sqLiteCommand = (SQLiteCommand) null;
                 }
               }
-              OculusNode oculusNode = new OculusNode(PlatformType.Oculus, 0UL, str3, str5, _name, str1, _parameters, _libraryFolder, _installDir, str4, _assetFileName, _isFlat, _hasUserAppPlayTime, true);
-              appList.Add(oculusNode);
+              MetaNode MetaNode = new MetaNode(PlatformType.Meta, 0UL, str3, str5, _name, str1, _parameters, _libraryFolder, _installDir, str4, _assetFileName, _isFlat, _hasUserAppPlayTime, true);
+              appList.Add(MetaNode);
             }
           }
           checked { ++index; }
@@ -785,8 +785,8 @@ label_4:
         new Process()
         {
           StartInfo = {
-            WorkingDirectory = this.m_oculusPath,
-            FileName = Path.Combine(this.m_oculusPath, "Support\\oculus-client\\OculusClient.exe"),
+            WorkingDirectory = this.m_MetaPath,
+            FileName = Path.Combine(this.m_MetaPath, "Support\\oculus-client\\OculusClient.exe"),
             Arguments = ((string) null),
             UseShellExecute = false,
             CreateNoWindow = false
@@ -822,7 +822,7 @@ label_4:
     {
       try
       {
-        OculusTrayTool.Win32.WINDOWPLACEMENT lpwndpl = new OculusTrayTool.Win32.WINDOWPLACEMENT();
+        MetaQuestTrayTool.Win32.WINDOWPLACEMENT lpwndpl = new MetaQuestTrayTool.Win32.WINDOWPLACEMENT();
         Process[] processesByName = Process.GetProcessesByName("OculusClient");
         int index = 0;
         while (index < processesByName.Length)
@@ -831,10 +831,10 @@ label_4:
           if (!(process.MainWindowHandle == IntPtr.Zero))
           {
             IntPtr mainWindowHandle = process.MainWindowHandle;
-            OculusTrayTool.Win32.GetWindowPlacement(process.MainWindowHandle, ref lpwndpl);
+            MetaQuestTrayTool.Win32.GetWindowPlacement(process.MainWindowHandle, ref lpwndpl);
             if (lpwndpl.showCmd == 2)
             {
-              OculusTrayTool.Win32.ShowWindow(process.MainWindowHandle, 0);
+              MetaQuestTrayTool.Win32.ShowWindow(process.MainWindowHandle, 0);
               return true;
             }
           }
@@ -852,7 +852,7 @@ label_4:
     {
       try
       {
-        OculusTrayTool.Win32.WINDOWPLACEMENT lpwndpl = new OculusTrayTool.Win32.WINDOWPLACEMENT();
+        MetaQuestTrayTool.Win32.WINDOWPLACEMENT lpwndpl = new MetaQuestTrayTool.Win32.WINDOWPLACEMENT();
         Process[] processesByName = Process.GetProcessesByName("OculusClient");
         int index = 0;
         while (index < processesByName.Length)
@@ -860,10 +860,10 @@ label_4:
           Process process = processesByName[index];
           if (!(process.MainWindowHandle == IntPtr.Zero))
           {
-            OculusTrayTool.Win32.GetWindowPlacement(process.MainWindowHandle, ref lpwndpl);
+            MetaQuestTrayTool.Win32.GetWindowPlacement(process.MainWindowHandle, ref lpwndpl);
             if (lpwndpl.showCmd == 1)
             {
-              OculusTrayTool.Win32.ShowWindow(process.MainWindowHandle, 0);
+              MetaQuestTrayTool.Win32.ShowWindow(process.MainWindowHandle, 0);
               return true;
             }
           }
@@ -889,8 +889,8 @@ label_4:
           Process process = processesByName[index];
           if (!(process.MainWindowHandle == IntPtr.Zero))
           {
-            OculusTrayTool.Win32.ShowWindow(process.MainWindowHandle, 9);
-            OculusTrayTool.Win32.SetForegroundWindow(process.MainWindowHandle);
+            MetaQuestTrayTool.Win32.ShowWindow(process.MainWindowHandle, 9);
+            MetaQuestTrayTool.Win32.SetForegroundWindow(process.MainWindowHandle);
             flag = true;
             goto label_8;
           }

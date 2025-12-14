@@ -4,9 +4,9 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Management;
-using OculusTrayTool.MyNameSpace;
+using MetaQuestTrayTool.MyNameSpace;
 
-namespace OculusTrayTool.Forms
+namespace MetaQuestTrayTool.Forms
 {
     partial class FrmMain
     {
@@ -90,10 +90,10 @@ protected override void Dispose(bool disposing)
             this.UpdateTimer = new System.Windows.Forms.Timer(this.components);
             this.NotifyIcon3 = new System.Windows.Forms.NotifyIcon(this.components);
             this.PowerPlanTimer = new System.Windows.Forms.Timer(this.components);
-            this.DotNetBarTabcontrol1 = new OculusTrayTool.DotNetBarTabcontrol();
+            this.DotNetBarTabcontrol1 = new MetaQuestTrayTool.DotNetBarTabcontrol();
             this.TabPage1 = new System.Windows.Forms.TabPage();
             this.GroupBox14 = new System.Windows.Forms.GroupBox();
-            this.DbLayoutPanel2 = new OculusTrayTool.MyNameSpace.DBLayoutPanel(this.components);
+            this.DbLayoutPanel2 = new MetaQuestTrayTool.MyNameSpace.DBLayoutPanel(this.components);
             this.Label19 = new System.Windows.Forms.Label();
             this.Label7 = new System.Windows.Forms.Label();
             this.BtnProfiles = new System.Windows.Forms.Button();
@@ -116,7 +116,7 @@ protected override void Dispose(bool disposing)
             this.Label37 = new System.Windows.Forms.Label();
             this.TabPage2 = new System.Windows.Forms.TabPage();
             this.GroupBox1 = new System.Windows.Forms.GroupBox();
-            this.DbLayoutPanel4 = new OculusTrayTool.MyNameSpace.DBLayoutPanel(this.components);
+            this.DbLayoutPanel4 = new MetaQuestTrayTool.MyNameSpace.DBLayoutPanel(this.components);
             this.CheckStartWithWindows = new System.Windows.Forms.CheckBox();
             this.CheckStartMin = new System.Windows.Forms.CheckBox();
             this.CheckMinimizeOnX = new System.Windows.Forms.CheckBox();
@@ -129,7 +129,7 @@ protected override void Dispose(bool disposing)
             this.TrackBar1 = new System.Windows.Forms.TrackBar();
             this.TabPage3 = new System.Windows.Forms.TabPage();
             this.GroupBox2 = new System.Windows.Forms.GroupBox();
-            this.DbLayoutPanel5 = new OculusTrayTool.MyNameSpace.DBLayoutPanel(this.components);
+            this.DbLayoutPanel5 = new MetaQuestTrayTool.MyNameSpace.DBLayoutPanel(this.components);
             this.ComboApplyPlan = new System.Windows.Forms.ComboBox();
             this.Label4 = new System.Windows.Forms.Label();
             this.ComboPowerPlanExit = new System.Windows.Forms.ComboBox();
@@ -141,9 +141,9 @@ protected override void Dispose(bool disposing)
             this.CheckSensorPower = new System.Windows.Forms.CheckBox();
             this.ComboUSBsusp = new System.Windows.Forms.ComboBox();
             this.TabPage4 = new System.Windows.Forms.TabPage();
-            this.DbLayoutPanel7 = new OculusTrayTool.MyNameSpace.DBLayoutPanel(this.components);
+            this.DbLayoutPanel7 = new MetaQuestTrayTool.MyNameSpace.DBLayoutPanel(this.components);
             this.GroupBox6 = new System.Windows.Forms.GroupBox();
-            this.DbLayoutPanel8 = new OculusTrayTool.MyNameSpace.DBLayoutPanel(this.components);
+            this.DbLayoutPanel8 = new MetaQuestTrayTool.MyNameSpace.DBLayoutPanel(this.components);
             this.CheckStartService = new System.Windows.Forms.CheckBox();
             this.CheckStopService = new System.Windows.Forms.CheckBox();
             this.CheckSendHomeToTrayOnStart = new System.Windows.Forms.CheckBox();
@@ -154,7 +154,7 @@ protected override void Dispose(bool disposing)
             this.CheckRestartSleep = new System.Windows.Forms.CheckBox();
             this.CheckStopServiceHome = new System.Windows.Forms.CheckBox();
             this.GroupBox4 = new System.Windows.Forms.GroupBox();
-            this.DbLayoutPanel6 = new OculusTrayTool.MyNameSpace.DBLayoutPanel(this.components);
+            this.DbLayoutPanel6 = new MetaQuestTrayTool.MyNameSpace.DBLayoutPanel(this.components);
             this.LabelServiceStatus = new System.Windows.Forms.Label();
             this.Label11 = new System.Windows.Forms.Label();
             this.TabPage5 = new System.Windows.Forms.TabPage();
@@ -162,7 +162,7 @@ protected override void Dispose(bool disposing)
             this.ListBox1 = new System.Windows.Forms.ListBox();
             this.TabPage7 = new System.Windows.Forms.TabPage();
             this.GroupBox7 = new System.Windows.Forms.GroupBox();
-            this.DbLayoutPanel1 = new OculusTrayTool.MyNameSpace.DBLayoutPanel(this.components);
+            this.DbLayoutPanel1 = new MetaQuestTrayTool.MyNameSpace.DBLayoutPanel(this.components);
             this.BtnLibrary = new System.Windows.Forms.Button();
             this.BtnSteamImport = new System.Windows.Forms.Button();
             this.Label24 = new System.Windows.Forms.Label();
@@ -174,7 +174,7 @@ protected override void Dispose(bool disposing)
             this.GroupBox5 = new System.Windows.Forms.GroupBox();
             this.Button3 = new System.Windows.Forms.Button();
             this.Button12 = new System.Windows.Forms.Button();
-            this.DbLayoutPanel3 = new OculusTrayTool.MyNameSpace.DBLayoutPanel(this.components);
+            this.DbLayoutPanel3 = new MetaQuestTrayTool.MyNameSpace.DBLayoutPanel(this.components);
             this.ComboBox11 = new System.Windows.Forms.ComboBox();
             this.ComboBox6 = new System.Windows.Forms.ComboBox();
             this.Label32 = new System.Windows.Forms.Label();
@@ -249,7 +249,7 @@ protected override void Dispose(bool disposing)
             // 
             this.NotifyIcon1.ContextMenuStrip = this.ContextMenuStrip1;
             this.NotifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("NotifyIcon1.Icon")));
-            this.NotifyIcon1.Text = "Oculus Tray Tool";
+            this.NotifyIcon1.Text = "Meta Quest Tray Tool";
             this.NotifyIcon1.DoubleClick += new System.EventHandler(this.NotifyIcon1_DoubleClick);
             // 
             // ContextMenuStrip1
@@ -702,8 +702,8 @@ protected override void Dispose(bool disposing)
             this.CheckLocalDebug.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.CheckLocalDebug.Size = new System.Drawing.Size(156, 41);
             this.CheckLocalDebug.TabIndex = 0;
-            this.CheckLocalDebug.Text = "Use OTT Local";
-            this.ToolTip.SetToolTip(this.CheckLocalDebug, "Use the Oculus Debug Tool shipped with OTT. Don\'t check this box unless you know " +
+            this.CheckLocalDebug.Text = "Use MQTT Local";
+            this.ToolTip.SetToolTip(this.CheckLocalDebug, "Use the Oculus Debug Tool shipped with MQTT. Don\'t check this box unless you know " +
         "what you are doing as it could potantially break functionality.");
             this.CheckLocalDebug.UseVisualStyleBackColor = true;
             this.CheckLocalDebug.CheckedChanged += new System.EventHandler(this.CheckLocalDebug_CheckedChanged);
@@ -716,7 +716,7 @@ protected override void Dispose(bool disposing)
             this.CheckStartWatcher.Name = "CheckStartWatcher";
             this.CheckStartWatcher.Size = new System.Drawing.Size(156, 41);
             this.CheckStartWatcher.TabIndex = 4;
-            this.CheckStartWatcher.Text = "Start on OTT Start";
+            this.CheckStartWatcher.Text = "Start on MQTT Start";
             this.ToolTip.SetToolTip(this.CheckStartWatcher, resources.GetString("CheckStartWatcher.ToolTip"));
             this.CheckStartWatcher.UseVisualStyleBackColor = true;
             this.CheckStartWatcher.CheckedChanged += new System.EventHandler(this.CheckStartWatcher_CheckedChanged);
@@ -731,7 +731,7 @@ protected override void Dispose(bool disposing)
             this.Label13.TabIndex = 31;
             this.Label13.Text = "Oculus Debug Tool";
             this.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ToolTip.SetToolTip(this.Label13, "Use the Oculus Debug Tool shipped with OTT. Don\'t check this box unless you know " +
+            this.ToolTip.SetToolTip(this.Label13, "Use the Oculus Debug Tool shipped with MQTT. Don\'t check this box unless you know " +
         "what you are doing as it could potantially break functionality.");
             // 
             // Label18
@@ -1592,7 +1592,7 @@ protected override void Dispose(bool disposing)
             this.ComboApplyPlan.ForeColor = System.Drawing.Color.Black;
             this.ComboApplyPlan.FormattingEnabled = true;
             this.ComboApplyPlan.Items.AddRange(new object[] {
-            "OTT Start/Exit",
+            "MQTT Start/Exit",
             "Oculus Home Start/Exit"});
             this.ComboApplyPlan.Location = new System.Drawing.Point(190, 186);
             this.ComboApplyPlan.Name = "ComboApplyPlan";
@@ -2586,7 +2586,7 @@ protected override void Dispose(bool disposing)
             this.Name = "FrmMain";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "Oculus Tray Tool";
+            this.Text = "Meta Quest Tray Tool";
             this.ContextMenuStrip1.ResumeLayout(false);
             this.ContextMenuStrip2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).EndInit();
@@ -2702,10 +2702,10 @@ protected override void Dispose(bool disposing)
     public System.Windows.Forms.Timer UpdateTimer;
     public NotifyIcon NotifyIcon3;
     public System.Windows.Forms.Timer PowerPlanTimer;
-    public global::OculusTrayTool.DotNetBarTabcontrol DotNetBarTabcontrol1;
+    public global::MetaQuestTrayTool.DotNetBarTabcontrol DotNetBarTabcontrol1;
     public TabPage TabPage1;
     public GroupBox GroupBox14;
-    public global::OculusTrayTool.MyNameSpace.DBLayoutPanel DbLayoutPanel2;
+    public global::MetaQuestTrayTool.MyNameSpace.DBLayoutPanel DbLayoutPanel2;
     public Label Label19;
     public Label Label7;
     public Button BtnProfiles;
@@ -2728,7 +2728,7 @@ protected override void Dispose(bool disposing)
     public Label Label37;
     public TabPage TabPage2;
     public GroupBox GroupBox1;
-    public global::OculusTrayTool.MyNameSpace.DBLayoutPanel DbLayoutPanel4;
+    public global::MetaQuestTrayTool.MyNameSpace.DBLayoutPanel DbLayoutPanel4;
     public CheckBox CheckStartWindows;
     public CheckBox CheckStartMin;
     public CheckBox CheckMinimizeOnX;
@@ -2741,7 +2741,7 @@ protected override void Dispose(bool disposing)
     public TrackBar TrackBar1;
     public TabPage TabPage3;
     public GroupBox GroupBox2;
-    public global::OculusTrayTool.MyNameSpace.DBLayoutPanel DbLayoutPanel5;
+    public global::MetaQuestTrayTool.MyNameSpace.DBLayoutPanel DbLayoutPanel5;
     public ComboBox ComboApplyPlan;
     public Label Label4;
     public ComboBox ComboPowerPlanExit;
@@ -2753,9 +2753,9 @@ protected override void Dispose(bool disposing)
     public CheckBox CheckSensorPower;
     public ComboBox ComboUSBsusp;
     public TabPage TabPage4;
-    public global::OculusTrayTool.MyNameSpace.DBLayoutPanel DbLayoutPanel7;
+    public global::MetaQuestTrayTool.MyNameSpace.DBLayoutPanel DbLayoutPanel7;
     public GroupBox GroupBox6;
-    public global::OculusTrayTool.MyNameSpace.DBLayoutPanel DbLayoutPanel8;
+    public global::MetaQuestTrayTool.MyNameSpace.DBLayoutPanel DbLayoutPanel8;
     public CheckBox CheckStartService;
     public CheckBox CheckStopService;
     public CheckBox CheckSendHomeToTrayOnStart;
@@ -2766,7 +2766,7 @@ protected override void Dispose(bool disposing)
     public CheckBox CheckRestartSleep;
     public CheckBox CheckStopServiceHome;
     public GroupBox GroupBox4;
-    public global::OculusTrayTool.MyNameSpace.DBLayoutPanel DbLayoutPanel6;
+    public global::MetaQuestTrayTool.MyNameSpace.DBLayoutPanel DbLayoutPanel6;
     public Label LabelServiceStatus;
     public Label Label11;
     public TabPage TabPage5;
@@ -2774,7 +2774,7 @@ protected override void Dispose(bool disposing)
     public ListBox ListBox1;
     public TabPage TabPage7;
     public GroupBox GroupBox7;
-    public global::OculusTrayTool.MyNameSpace.DBLayoutPanel DbLayoutPanel1;
+    public global::MetaQuestTrayTool.MyNameSpace.DBLayoutPanel DbLayoutPanel1;
     public Button BtnLibrary;
     public Button BtnSteamImport;
     public Label Label24;
@@ -2786,7 +2786,7 @@ protected override void Dispose(bool disposing)
     public GroupBox GroupBox5;
     public Button Button3;
     public Button Button12;
-    public global::OculusTrayTool.MyNameSpace.DBLayoutPanel DbLayoutPanel3;
+    public global::MetaQuestTrayTool.MyNameSpace.DBLayoutPanel DbLayoutPanel3;
     public ComboBox ComboBox11;
     public ComboBox ComboBox6;
     public Label Label32;

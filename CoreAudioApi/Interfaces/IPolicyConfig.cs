@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 #nullable disable
-namespace OculusTrayTool.CoreAudioApi.Interfaces
+namespace MetaQuestTrayTool.CoreAudioApi.Interfaces
 {
   [Guid("f8679f50-850a-41cf-9c72-430f290290c8")]
   [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]

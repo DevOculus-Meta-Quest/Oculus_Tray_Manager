@@ -1,14 +1,14 @@
-using OculusTrayTool.Forms;
+using MetaQuestTrayTool.Forms;
 
 
 using Microsoft.Win32.TaskScheduler;
-using OculusTrayTool.My;
+using MetaQuestTrayTool.My;
 using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 
 #nullable disable
-namespace OculusTrayTool
+namespace MetaQuestTrayTool
 {
 
   internal sealed class CreateTask
@@ -22,7 +22,7 @@ namespace OculusTrayTool
         using (TaskService taskService = new TaskService())
         {
           TaskDefinition definition = taskService.NewTask();
-          definition.RegistrationInfo.Description = "Oculus Tray Tool";
+          definition.RegistrationInfo.Description = "Meta Quest Tray Tool";
           definition.RegistrationInfo.Author = "ApollyonVR";
           definition.Settings.DisallowStartIfOnBatteries = false;
           definition.Settings.StopIfGoingOnBatteries = false;
@@ -34,8 +34,8 @@ namespace OculusTrayTool
             unboundTrigger.UserId = Environment.UserName;
           unboundTrigger.Enabled = true;
           definition.Triggers.Add<LogonTrigger>(unboundTrigger);
-          definition.Actions.Add<ExecAction>(new ExecAction(Application.StartupPath + "\\OculusTrayTool.exe"));
-          taskService.RootFolder.RegisterTaskDefinition("Oculus Tray Tool", definition);
+          definition.Actions.Add<ExecAction>(new ExecAction(Application.StartupPath + "\\MetaQuestTrayTool.exe"));
+          taskService.RootFolder.RegisterTaskDefinition("Meta Quest Tray Tool", definition);
         }
         MySettingsProperty.Settings.StartWithWindows = true;
         MySettingsProperty.Settings.Save();
