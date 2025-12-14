@@ -1169,7 +1169,13 @@ namespace MetaQuestTrayTool.Forms
     private void ComboApplyPlan_SelectedIndexChanged(object sender, EventArgs e) { }
     private void Button9_Click(object sender, EventArgs e) { }
     private void Button8_Click(object sender, EventArgs e) { }
-    private void PictureBox2_Click(object sender, EventArgs e) { }
+    private void PictureBox2_Click(object sender, EventArgs e)
+    {
+      using (frmAbout about = new frmAbout())
+      {
+         about.ShowDialog(this);
+      }
+    }
     private void CheckBoxCheckForUpdates_CheckedChanged(object sender, EventArgs e) { }
     private void Button2_Click(object sender, EventArgs e) { }
     private void ComboHomless_SelectedIndexChanged(object sender, EventArgs e) { }
