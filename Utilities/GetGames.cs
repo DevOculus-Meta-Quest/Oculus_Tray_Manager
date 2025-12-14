@@ -38,7 +38,7 @@ namespace MetaQuestTrayTool
           Log.WriteToLog("Updating list of Steam games..");
         Log.WriteToLog("GetSteamGames: Start. dbg=" + Globals.dbg);
         List<SteamNode> steamList = (List<SteamNode>) null;
-        if (!Globals.meta.TryRefresh() || !Globals.steam.TryRefresh() || !Globals.steam.TryGetVRManifest(ref steamList))
+        if (!Globals.meta.TryRefresh() || !Globals.steam.TryRefresh() || !Globals.steam.TryGetSteamGames(ref steamList))
         {
            Log.WriteToLog("GetSteamGames: Failed to refresh or get manifest.");
            return;

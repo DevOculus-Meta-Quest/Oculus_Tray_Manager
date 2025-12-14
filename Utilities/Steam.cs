@@ -11,6 +11,8 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 
+using System.Text.RegularExpressions;
+
 #nullable disable
 namespace MetaQuestTrayTool
 {
@@ -433,41 +435,134 @@ label_13:
       return openVrPathsEntry;
     }
 
-    public bool TryGetVRManifest(ref List<SteamNode> steamList)
+    public bool TryGetSteamGames(ref List<SteamNode> steamList)
     {
-      steamList = new List<SteamNode>();
-      string path = Path.Combine(this.m_installPath, "config\\steamapps.vrmanifest");
-      bool vrManifest;
-      if (!System.IO.File.Exists(path))
+      if (steamList == null) steamList = new List<SteamNode>();
+      else steamList.Clear();
+
+      bool success = false;
+      try
       {
-        vrManifest = false;
+        List<string> libraryFolderList = new List<string>();
+        if (!this.TryGetLibraryPathList(ref libraryFolderList))
+        {
+             Log.WriteToLog("TryGetSteamGames: Could not get library paths.");
+             return false;
+        }
+
+        foreach (string libraryPath in libraryFolderList)
+        {
+             string steamAppsPath = Path.Combine(libraryPath, "steamapps");
+             if (!Directory.Exists(steamAppsPath)) continue;
+
+             string[] acfFiles = Directory.GetFiles(steamAppsPath, "appmanifest_*.acf");
+             foreach (string acfFile in acfFiles)
+             {
+                 try 
+                 {
+                     string content = System.IO.File.ReadAllText(acfFile);
+                     // Simple regex parsing to avoid complex VDF/JSON dependencies for this
+                     string appIdStr = Regex.Match(content, "\"appid\"\\s*\"(\\d+)\"").Groups[1].Value;
+                     string name = Regex.Match(content, "\"name\"\\s*\"([^\"]+)\"").Groups[1].Value;
+                     string installDir = Regex.Match(content, "\"installdir\"\\s*\"([^\"]+)\"").Groups[1].Value;
+
+                     if (!string.IsNullOrEmpty(appIdStr) && !string.IsNullOrEmpty(name))
+                     {
+                         ulong appId = ulong.Parse(appIdStr);
+                         // Construct full install path
+                         string fullInstallPath = Path.Combine(steamAppsPath, "common", installDir);
+                         
+                         // Heuristic to find executable since ACF doesn't have it
+                         string executable = FindGameExecutable(fullInstallPath, name);
+                         string exeName = (executable != null) ? Path.GetFileName(executable) : null;
+
+                         // Create SteamNode
+                         SteamNode node = new SteamNode(appId, name, "vr", "Unknown", "Unknown", exeName, "", "windows", libraryPath, installDir);
+                         
+                         // Mark valid if we found an EXE (or even if we didn't, maybe we list it anyway?)
+                         // GetGames.cs checks for non-null Executable.
+                         if (executable != null) 
+                         {
+                             steamList.Add(node);
+                             success = true;
+                         }
+                         else 
+                         {
+                             Log.WriteToLog("TryGetSteamGames: Skipped " + name + " (No EXE found in " + fullInstallPath + ")");
+                         }
+                     }
+                 }
+                 catch (Exception ex)
+                 {
+                     Log.WriteToLog("TryGetSteamGames: Error parsing " + acfFile + ": " + ex.Message);
+                 }
+             }
+        }
       }
-      else
+      catch (Exception ex)
       {
-        try
-        {
-          JToken jtoken1 = JObject.Parse(System.IO.File.ReadAllText(path)).SelectToken("applications");
-          foreach (JToken jtoken2 in (IEnumerable<JToken>) jtoken1)
-          {
-            ulong result = 0;
-            string str = jtoken2[(object) "app_key"].ToString();
-            string _name = jtoken2[(object) "strings"][(object) "en_us"][(object) "name"].ToString();
-            string _url = jtoken2[(object) "url"].ToString();
-            ulong.TryParse(str.Replace("steam.app.", ""), out result);
-            SteamNode steamNode = new SteamNode(result, _name, _url);
-            steamList.Add(steamNode);
-          }
-        }
-        catch (Exception ex)
-        {
-          Log.WriteToLog("TryGetVRManifest: " + ex.Message);
-          vrManifest = false;
-          goto label_11;
-        }
-        vrManifest = true;
+        Log.WriteToLog("TryGetSteamGames: " + ex.Message);
+        return false;
       }
-label_11:
-      return vrManifest;
+      return success; // Return true if we found at least one game or successfully ran? 
+                      // Use flag 'success' to indicate valid run, or just true.
+                      // Legacy returned list.Count > 0 maybe? Steam.cs usually returns bool.
+    }
+
+    private string FindGameExecutable(string installPath, string gameName)
+    {
+        if (!Directory.Exists(installPath)) return null;
+
+        try 
+        {
+            // 1. Sanitize game name for search (remove special chars)
+            string cleanName = Regex.Replace(gameName, "[^a-zA-Z0-9]", "");
+            
+            var exeFiles = Directory.GetFiles(installPath, "*.exe", SearchOption.TopDirectoryOnly); // TopDir or Recursive? Usually TopDir or bin
+            // Some games are in bin/win64... let's do recursive but limited depth? 
+            // Standard Steam games usually have exe in root or one level down.
+            // Let's stick to TopDirectory for safety first, maybe Recursive if Top fails.
+            
+            if (exeFiles.Length == 0) 
+            {
+                 // Try one level deep?
+                 exeFiles = Directory.GetFiles(installPath, "*.exe", SearchOption.AllDirectories);
+            }
+
+            if (exeFiles.Length == 0) return null;
+
+            // 2. Exact/Close Match
+            foreach (string file in exeFiles)
+            {
+                string fileName = Path.GetFileNameWithoutExtension(file);
+                // Check if filename contains game name parts
+                if (cleanName.IndexOf(fileName, StringComparison.OrdinalIgnoreCase) >= 0 || fileName.IndexOf(cleanName, StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    // Exclude common utility exes
+                    if (fileName.ToLower().Contains("unitycrashhandler")) continue;
+                    if (fileName.ToLower().Contains("ue4prereq")) continue;
+                    return file;
+                }
+            }
+
+            // 3. Fallback: Largest EXE
+            string bestExe = null;
+            long maxBytes = 0;
+            foreach (string file in exeFiles)
+            {
+                string fileName = Path.GetFileNameWithoutExtension(file).ToLower();
+                 if (fileName.Contains("crash") || fileName.Contains("setup") || fileName.Contains("install") || fileName.Contains("ue4")) continue;
+
+                FileInfo fi = new FileInfo(file);
+                if (fi.Length > maxBytes)
+                {
+                    maxBytes = fi.Length;
+                    bestExe = file;
+                }
+            }
+            return bestExe;
+        }
+        catch { return null; }
     }
 
     public void TryGetAppDetails(List<SteamNode> steamList)
@@ -493,45 +588,10 @@ label_11:
 
     public bool TryGetAppInfo(List<SteamNode> steamList, bool windowsOnly, bool vrOnly)
     {
-      bool appInfo;
-      try
-      {
-        Dictionary<ulong, SteamNode> appInfoDictionary = (Dictionary<ulong, SteamNode>) null;
-        List<SteamNode> appInfoList = (List<SteamNode>) null;
-        if (!this.TryGetAppInfo(windowsOnly, vrOnly, ref appInfoDictionary, ref appInfoList))
-        {
-          appInfo = false;
-          goto label_11;
-        }
-        else
-        {
-          foreach (SteamNode steam in steamList)
-          {
-            SteamNode steamNode = (SteamNode) null;
-            if (appInfoDictionary.TryGetValue(steam.AppId, out steamNode))
-            {
-              steam.Type = steamNode.Type;
-              steam.Publisher = steamNode.Publisher;
-              steam.Developer = steamNode.Developer;
-              steam.Executable = steamNode.Executable;
-              steam.Parameters = steamNode.Parameters;
-              steam.OSList = steamNode.OSList;
-              steam.LibraryFolder = steamNode.LibraryFolder;
-              steam.InstallDir = steamNode.InstallDir;
-              steam.CanonicalName = steamNode.CanonicalName;
-            }
-          }
-        }
-      }
-      catch (Exception ex)
-      {
-        Log.WriteToLog("TryGetAppInfo: " + ex.Message);
-        appInfo = false;
-        goto label_11;
-      }
-      appInfo = true;
-label_11:
-      return appInfo;
+      // Since TryGetSteamGames (ACF parsing) already populates the list with installed games, 
+      // Name, AppID, InstallDir, and Executable (launchable path), we don't need to parse appinfo.vdf anymore.
+      // This method is kept for compatibility with existing calls.
+      return true;
     }
 
     private bool TryGetAppLaunchInfo(

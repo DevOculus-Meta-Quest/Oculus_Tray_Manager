@@ -126,14 +126,22 @@ namespace MetaQuestTrayTool.Forms
         List<SteamNode> steamList = (List<SteamNode>) null;
         if (this.tscbVrManifest.Checked)
         {
-          if (!Globals.steam.TryGetVRManifest(ref steamList) || !Globals.steam.TryGetAppInfo(steamList, true, true))
+          // Updated to use the new robust detection method
+          if (!Globals.steam.TryGetSteamGames(ref steamList))
             return;
+             
+          // Ensure AppInfo is populated (mostly no-op now but keeps flow)
+          if (!Globals.steam.TryGetAppInfo(steamList, true, true))
+             return;
         }
         else
         {
-          Dictionary<ulong, SteamNode> appInfoDictionary = (Dictionary<ulong, SteamNode>) null;
-          if (!Globals.steam.TryGetAppInfo(true, true, ref appInfoDictionary, ref steamList))
+          // Fallback or alternative path - map to same logic for now to ensure games are found
+          if (!Globals.steam.TryGetSteamGames(ref steamList))
             return;
+          
+          if (!Globals.steam.TryGetAppInfo(steamList, true, true))
+             return;
         }
         this.m_lvwColumnSorter = new ListViewColumnSorter();
         this.m_lvwColumnSorter.SortColumn = 2;
