@@ -1008,11 +1008,11 @@ protected override void Dispose(bool disposing)
             this.DbLayoutPanel2.Controls.Add(this.Label1, 0, 1);
             this.DbLayoutPanel2.Controls.Add(this.Label6, 0, 2);
             this.DbLayoutPanel2.Controls.Add(this.Label9, 0, 8);
-            this.DbLayoutPanel2.Controls.Add(this.Label17, 0, 7);
-            this.DbLayoutPanel2.Controls.Add(this.ComboMirrorHome, 1, 7);
-            this.DbLayoutPanel2.Controls.Add(this.Label16, 0, 6);
-            this.DbLayoutPanel2.Controls.Add(this.ComboHomless, 1, 6);
-            this.DbLayoutPanel2.Controls.Add(this.BtnHomless, 2, 6);
+            // this.DbLayoutPanel2.Controls.Add(this.Label17, 0, 7);
+            // this.DbLayoutPanel2.Controls.Add(this.ComboMirrorHome, 1, 7);
+            // this.DbLayoutPanel2.Controls.Add(this.Label16, 0, 6);
+            // this.DbLayoutPanel2.Controls.Add(this.ComboHomless, 1, 6);
+            // this.DbLayoutPanel2.Controls.Add(this.BtnHomless, 2, 6);
             this.DbLayoutPanel2.Controls.Add(this.Label5, 0, 5);
             this.DbLayoutPanel2.Controls.Add(this.ComboVoice, 1, 5);
             this.DbLayoutPanel2.Controls.Add(this.BtnVoice, 2, 5);
@@ -1504,6 +1504,7 @@ protected override void Dispose(bool disposing)
             this.CheckBoxCheckForUpdates.Size = new System.Drawing.Size(150, 32);
             this.CheckBoxCheckForUpdates.TabIndex = 30;
             this.CheckBoxCheckForUpdates.Text = "Check for updates on startup";
+            this.CheckBoxCheckForUpdates.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.CheckBoxCheckForUpdates.UseVisualStyleBackColor = true;
             this.CheckBoxCheckForUpdates.CheckedChanged += new System.EventHandler(this.CheckBoxCheckForUpdates_CheckedChanged);
             // 
@@ -2180,14 +2181,14 @@ protected override void Dispose(bool disposing)
             this.DbLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 58.33333F));
             this.DbLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.66667F));
             this.DbLayoutPanel3.Controls.Add(this.ComboBox11, 1, 5);
-            this.DbLayoutPanel3.Controls.Add(this.ComboBox6, 1, 3);
+            // this.DbLayoutPanel3.Controls.Add(this.ComboBox6, 1, 3);
             this.DbLayoutPanel3.Controls.Add(this.Label32, 0, 0);
             this.DbLayoutPanel3.Controls.Add(this.Label30, 0, 1);
             this.DbLayoutPanel3.Controls.Add(this.Label31, 0, 2);
             this.DbLayoutPanel3.Controls.Add(this.ComboBox4, 1, 0);
             this.DbLayoutPanel3.Controls.Add(this.ComboBox3, 1, 2);
             this.DbLayoutPanel3.Controls.Add(this.ComboBox2, 1, 1);
-            this.DbLayoutPanel3.Controls.Add(this.Label36, 0, 3);
+            // this.DbLayoutPanel3.Controls.Add(this.Label36, 0, 3);
             this.DbLayoutPanel3.Controls.Add(this.Label38, 0, 4);
             this.DbLayoutPanel3.Controls.Add(this.ComboBox10, 1, 4);
             this.DbLayoutPanel3.Controls.Add(this.Label21, 0, 7);
