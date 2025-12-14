@@ -180,9 +180,12 @@ namespace OculusTrayTool
           else
           {
             Log.WriteToLog("Warning: No library paths returned from registry!");
-            FrmMain.fmain.AddToListboxAndScroll("Warning: No library paths returned from registry!");
-            Log.WriteToLog("WARNING TRIGGERED: No library paths returned from registry");
-            FrmMain.fmain.hasWarning = true;
+            if (FrmMain.fmain.OculusSoftwarePaths.Count == 0)
+            {
+                FrmMain.fmain.AddToListboxAndScroll("Warning: No library paths returned from registry!");
+                Log.WriteToLog("WARNING TRIGGERED: No library paths returned from registry");
+                FrmMain.fmain.hasWarning = true;
+            }
           }
         }
         if (Globals.dbg)

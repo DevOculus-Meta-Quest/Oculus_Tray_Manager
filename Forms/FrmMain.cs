@@ -468,7 +468,10 @@ namespace OculusTrayTool.Forms
            
           
           GetConfig.Load();
-          if (string.Compare(OculusTrayTool.My.MySettings.Default.LibraryPath, "", StringComparison.Ordinal) == 0 | string.IsNullOrWhiteSpace(OculusTrayTool.My.MySettings.Default.LibraryPath.ToString()))
+          bool isLibPathEmpty = (string.Compare(OculusTrayTool.My.MySettings.Default.LibraryPath, "", StringComparison.Ordinal) == 0 | string.IsNullOrWhiteSpace(OculusTrayTool.My.MySettings.Default.LibraryPath.ToString()));
+          bool noSoftwarePaths = (this.OculusSoftwarePaths.Count == 0);
+
+          if (isLibPathEmpty && noSoftwarePaths)
           {
             OculusTrayTool.My.MySettings.Default.LibraryPath = "";
             OculusTrayTool.My.MySettings.Default.Save();
@@ -491,7 +494,7 @@ namespace OculusTrayTool.Forms
               {
                    Log.WriteToLog("Error processing Oculus Library Paths: " + ex.Message);
               }
-              }
+              
               OculusTrayTool.My.MySettings.Default.LibraryPath = OculusTrayTool.My.MySettings.Default.LibraryPath.TrimEnd(',');
               OculusTrayTool.My.MySettings.Default.Save();
             }
@@ -504,6 +507,7 @@ namespace OculusTrayTool.Forms
               Log.WriteToLog("WARNING TRIGGERED: No library paths found in registry");
               this.hasWarning = true;
             }
+          }
           }
           this.NextASW.AddRange((IEnumerable<string>) new string[7]
           {
