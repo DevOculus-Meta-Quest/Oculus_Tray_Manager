@@ -48,7 +48,11 @@ namespace MetaQuestTrayTool.Forms
 
     private void RichTextBox1_KeyPress(object sender, KeyPressEventArgs e) => e.Handled = true;
 
-    private void readme_Load(object sender, EventArgs e) => this.PictureBox1.Focus();
+    private void readme_Load(object sender, EventArgs e)
+    {
+      this.Label4.Text = Application.ProductVersion;
+      this.PictureBox1.Focus();
+    }
 
     private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
     {

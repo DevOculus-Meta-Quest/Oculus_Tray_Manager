@@ -300,6 +300,9 @@ namespace MetaQuestTrayTool.Forms
         VoiceCommands.Initialize();
         if (Globals.dbg)
           Log.WriteToLog("Checking Administrator privileges");
+          
+        this.NotificationTimer.Interval = 3000;
+        this.NotificationTimer.Start();
         Log.WriteToLog("Form1_Load: fmain is " + (fmain == null ? "null" : "set") + ", matching this: " + (fmain == this));
         this.Shown += new EventHandler(this.Form1_Shown); // Ensure refresh happens after UI is visible
         this.isElevated = new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
@@ -1173,6 +1176,7 @@ namespace MetaQuestTrayTool.Forms
     {
       using (frmAbout about = new frmAbout())
       {
+         about.Label4.Text = Application.ProductVersion;
          about.ShowDialog(this);
       }
     }
