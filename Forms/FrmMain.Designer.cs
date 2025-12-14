@@ -1498,7 +1498,7 @@ protected override void Dispose(bool disposing)
             // CheckBoxCheckForUpdates
             // 
             this.CheckBoxCheckForUpdates.AutoSize = true;
-            this.CheckBoxCheckForUpdates.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CheckBoxCheckForUpdates.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.CheckBoxCheckForUpdates.Location = new System.Drawing.Point(4, 262);
             this.CheckBoxCheckForUpdates.Name = "CheckBoxCheckForUpdates";
             this.CheckBoxCheckForUpdates.Size = new System.Drawing.Size(150, 32);
@@ -2191,8 +2191,8 @@ protected override void Dispose(bool disposing)
             // this.DbLayoutPanel3.Controls.Add(this.Label36, 0, 3);
             this.DbLayoutPanel3.Controls.Add(this.Label38, 0, 4);
             this.DbLayoutPanel3.Controls.Add(this.ComboBox10, 1, 4);
-            this.DbLayoutPanel3.Controls.Add(this.Label21, 0, 7);
-            this.DbLayoutPanel3.Controls.Add(this.Button6, 1, 7);
+            // this.DbLayoutPanel3.Controls.Add(this.Label21, 0, 7);
+            // this.DbLayoutPanel3.Controls.Add(this.Button6, 1, 7);
             this.DbLayoutPanel3.Controls.Add(this.Label20, 0, 6);
             this.DbLayoutPanel3.Controls.Add(this.ComboBox7, 1, 6);
             this.DbLayoutPanel3.Controls.Add(this.Label39, 0, 5);
