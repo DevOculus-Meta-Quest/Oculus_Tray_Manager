@@ -267,3 +267,4 @@ ASALocalRun/
 
 # Other temporary files
 ott.log
+build_output*.txt
