@@ -34,17 +34,27 @@ jobs:
       run: |
         Compress-Archive -Path bin\Release\* -DestinationPath OculusTrayTool.zip -Force
 
-    - name: Upload Build Artifact
+    - name: Setup Inno Setup
+      run: choco install innosetup
+
+    - name: Compile Installer
+      run: '& "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" setup.iss'
+
+    - name: Upload Build Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: OculusTrayTool-Build
-        path: OculusTrayTool.zip
+        name: Build-Artifacts
+        path: |
+          OculusTrayTool.zip
+          OculusTrayTool_Setup.exe
         if-no-files-found: error
 
     - name: Create Release
       if: startsWith(github.ref, 'refs/tags/')
       uses: softprops/action-gh-release@v2
       with:
-        files: OculusTrayTool.zip
+        files: |
+          OculusTrayTool.zip
+          OculusTrayTool_Setup.exe
         draft: true
         generate_release_notes: true
