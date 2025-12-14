@@ -615,7 +615,7 @@ namespace OculusTrayTool.Forms
         }
         if (MySettingsProperty.Settings.VoiceConfirmProfile)
         {
-          new System.Media.SoundPlayer(Application.StartupPath + "\\Sounds\\gamelaunchdetected.wav").Play();
+          new System.Media.SoundPlayer(Path.Combine(Application.StartupPath, "resources", "Sounds", "gamelaunchdetected.wav")).Play();
         }
         MyProject.Forms.FrmMain.runningApp = appName;
         string displayName = OTTDB.GetDisplayName(appName);

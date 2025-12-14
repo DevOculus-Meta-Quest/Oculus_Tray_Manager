@@ -52,9 +52,10 @@ namespace OculusTrayTool.Forms
 
     private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
     {
-      if (!File.Exists(Application.StartupPath + "\\User Guide.pdf"))
+      string userGuidePath = Path.Combine(Application.StartupPath, "resources", "User Guide.pdf");
+      if (!File.Exists(userGuidePath))
         return;
-      Process.Start(Application.StartupPath + "\\User Guide.pdf");
+      Process.Start(userGuidePath);
     }
 
     private void PictureBox1_Click(object sender, EventArgs e)
