@@ -18,7 +18,6 @@ namespace OculusTrayTool
       try
       {
         object lockObject = Log.lockObject;
-        object lockObject = Log.lockObject;
         bool lockTaken = false;
         try
         {
@@ -43,9 +42,6 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-      catch (Exception ex)
-      {
-      }
       }
     }
 
@@ -69,9 +65,6 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-      catch (Exception ex)
-      {
-      }
       }
     }
 
@@ -79,7 +72,6 @@ namespace OculusTrayTool
     {
       try
       {
-        object lockObject = Log.lockObject;
         object lockObject = Log.lockObject;
         bool lockTaken = false;
         try
@@ -99,9 +91,6 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-      catch (Exception ex)
-      {
-      }
       }
     }
 
@@ -109,7 +98,6 @@ namespace OculusTrayTool
     {
       try
       {
-        object lockObject = Log.lockObject;
         object lockObject = Log.lockObject;
         bool lockTaken = false;
         try
@@ -129,9 +117,6 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-      catch (Exception ex)
-      {
-      }
       }
     }
   }

@@ -187,11 +187,11 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        FrmMain.fmain.AddToListboxAndScroll("Error migrating configurarion parameters: " + e.Message);
+        FrmMain.fmain.AddToListboxAndScroll("Error migrating configurarion parameters: " + ex.Message);
         MyProject.Forms.FrmMain.hasError = true;
-        StackTrace stackTrace = new StackTrace(e, true);
-        Log.WriteToLog(e.ToString() + stackTrace.ToString());
-        Log.WriteToMigrateLog(e.ToString() + stackTrace.ToString());
+        StackTrace stackTrace = new StackTrace(ex, true);
+        Log.WriteToLog(ex.ToString() + stackTrace.ToString());
+        Log.WriteToMigrateLog(ex.ToString() + stackTrace.ToString());
       }
     }
 
@@ -229,9 +229,9 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        StackTrace stackTrace = new StackTrace(e, true);
-        Log.WriteToLog("GetOldProfiles: " + e.ToString() + stackTrace.ToString());
-        Log.WriteToMigrateLog("GetOldProfiles: " + e.ToString() + stackTrace.ToString());
+        StackTrace stackTrace = new StackTrace(ex, true);
+        Log.WriteToLog("GetOldProfiles: " + ex.ToString() + stackTrace.ToString());
+        Log.WriteToMigrateLog("GetOldProfiles: " + ex.ToString() + stackTrace.ToString());
       }
       finally
       {
@@ -255,8 +255,8 @@ namespace OculusTrayTool
       }
       catch (Exception ex)
       {
-        Log.WriteToLog("MigrateThirdPartyApps: " + exception.Message);
-        Log.WriteToMigrateLog("MigrateThirdPartyApps: " + exception.Message);
+        Log.WriteToLog("MigrateThirdPartyApps: " + ex.Message);
+        Log.WriteToMigrateLog("MigrateThirdPartyApps: " + ex.Message);
       }
     }
 
@@ -276,9 +276,9 @@ namespace OculusTrayTool
         }
         catch (Exception ex)
         {
-          Log.WriteToMigrateLog("Failed to create database copy: " + exception.Message);
-          MessageBox.Show("Failed to create database copy: " + exception.Message, "Error copying database", MessageBoxButtons.OK, MessageBoxIcon.Error);
-          FrmMain.fmain.AddToListboxAndScroll("Failed to create database copy: " + exception.Message);
+          Log.WriteToMigrateLog("Failed to create database copy: " + ex.Message);
+          MessageBox.Show("Failed to create database copy: " + ex.Message, "Error copying database", MessageBoxButtons.OK, MessageBoxIcon.Error);
+          FrmMain.fmain.AddToListboxAndScroll("Failed to create database copy: " + ex.Message);
           MyProject.Forms.FrmMain.hasError = true;
           return;
         }
@@ -294,10 +294,10 @@ namespace OculusTrayTool
         }
         catch (Exception ex)
         {
-          Log.WriteToLog("Failed to open database copy: " + exception.Message);
-          Log.WriteToMigrateLog("Failed to open database copy: " + exception.Message);
-          MessageBox.Show("Failed to open database copy: " + exception.Message, "Error opening database", MessageBoxButtons.OK, MessageBoxIcon.Error);
-          FrmMain.fmain.AddToListboxAndScroll("Failed to open database copy: " + exception.Message);
+          Log.WriteToLog("Failed to open database copy: " + ex.Message);
+          Log.WriteToMigrateLog("Failed to open database copy: " + ex.Message);
+          MessageBox.Show("Failed to open database copy: " + ex.Message, "Error opening database", MessageBoxButtons.OK, MessageBoxIcon.Error);
+          FrmMain.fmain.AddToListboxAndScroll("Failed to open database copy: " + ex.Message);
           MyProject.Forms.FrmMain.hasError = true;
           return;
         }
@@ -343,9 +343,9 @@ namespace OculusTrayTool
               }
               catch (Exception ex)
               {
-                Log.WriteToMigrateLog("Failed to read database entry for appId '" + appId + "': " + exception.Message);
-                MessageBox.Show("Failed to read database entry for appId '" + appId + "': " + exception.Message, "Error reading database", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                FrmMain.fmain.AddToListboxAndScroll("Failed to read database entry for appId '" + appId + "': " + exception.Message);
+                Log.WriteToMigrateLog("Failed to read database entry for appId '" + appId + "': " + ex.Message);
+                MessageBox.Show("Failed to read database entry for appId '" + appId + "': " + ex.Message, "Error reading database", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                FrmMain.fmain.AddToListboxAndScroll("Failed to read database entry for appId '" + appId + "': " + ex.Message);
                 MyProject.Forms.FrmMain.hasError = true;
                 return;
               }
@@ -380,9 +380,9 @@ namespace OculusTrayTool
         }
         catch (Exception ex)
         {
-          Log.WriteToMigrateLog("Failed to open manifest file: " + exception.Message);
-          MessageBox.Show("Failed to open manifest file: " + exception.Message, "Error reading mainfest", MessageBoxButtons.OK, MessageBoxIcon.Error);
-          FrmMain.fmain.AddToListboxAndScroll("Failed to open manifest file: " + exception.Message);
+          Log.WriteToMigrateLog("Failed to open manifest file: " + ex.Message);
+          MessageBox.Show("Failed to open manifest file: " + ex.Message, "Error reading mainfest", MessageBoxButtons.OK, MessageBoxIcon.Error);
+          FrmMain.fmain.AddToListboxAndScroll("Failed to open manifest file: " + ex.Message);
           MyProject.Forms.FrmMain.hasError = true;
           sqLiteCommand.Dispose();
           connection.Close();

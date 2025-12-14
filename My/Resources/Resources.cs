@@ -15,7 +15,7 @@ namespace OculusTrayTool.My.Resources
   [GeneratedCode("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
   [DebuggerNonUserCode]
   [CompilerGenerated]
-  [HideModuleName]
+
   public sealed class Resources
   {
     private static ResourceManager resourceMan;

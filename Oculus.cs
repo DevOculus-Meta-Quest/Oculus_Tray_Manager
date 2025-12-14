@@ -401,7 +401,7 @@ label_12:
       Oculus oculus = this;
       SteamNode steamNode1 = steamNode;
       string str = Path.Combine(Path.GetTempPath(), "icon.png");
-      return this.m_steam.TryDownloadAppHeader(steamNode1.AppId, (object) "header.jpg", downloadProgressChanged, (EventHandler<DataDownloadEventArgs>) ([SpecialName] (sender, e) => oculus.TryCreateAssetManifest(steamNode1, e.FileName))) || this.TryExtractExeIcon(steamNode1.FullPath, str) && this.TryCreateAssetManifest(steamNode1, str);
+      return this.m_steam.TryDownloadAppHeader(steamNode1.AppId, (object) "header.jpg", downloadProgressChanged, (EventHandler<DataDownloadEventArgs>) ((sender, e) => oculus.TryCreateAssetManifest(steamNode1, e.FileName))) || this.TryExtractExeIcon(steamNode1.FullPath, str) && this.TryCreateAssetManifest(steamNode1, str);
     }
 
 

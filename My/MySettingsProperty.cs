@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 namespace OculusTrayTool.My
 {
 
-    [HideModuleName]
+
     [DebuggerNonUserCode]
     [CompilerGenerated]
     internal sealed class MySettingsProperty

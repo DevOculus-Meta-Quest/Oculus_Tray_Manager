@@ -926,7 +926,7 @@ label_21:
               if (lockTaken)
                 Monitor.Exit(Expression);
             }
-          });
+          };
           Uri address = new Uri(url);
           object objectValue = new object();
           object Expression1 = objectValue;
@@ -934,10 +934,7 @@ label_21:
           try
           {
             Monitor.Enter(Expression1, ref lockTaken1);
-            webClient.DownloadDataAsync(address, (object) new object[3]
-            {
-              (object) address,
-            });
+            webClient.DownloadDataAsync(address, new object[] { address });
             Monitor.Wait(objectValue);
           }
           finally
@@ -984,7 +981,7 @@ label_21:
             System.IO.File.WriteAllBytes(str2, e.Result);
             if (downloadComplete != null)
               downloadComplete((object) null, new DataDownloadEventArgs(str2, tag));
-          });
+          };
           webClient.DownloadDataAsync(address, tag);
         }
         return true;
@@ -1016,7 +1013,7 @@ label_21:
             System.IO.File.WriteAllBytes(str, e.Result);
             if (downloadComplete != null)
               downloadComplete((object) null, new DataDownloadEventArgs(str, tag));
-          });
+          };
           webClient.DownloadDataAsync(address);
         }
         return true;

@@ -267,7 +267,7 @@ namespace OculusTrayTool
 
           Exception exception = ex;
           Log.WriteToLog("Failed to open database copy: " + exception.Message);
-          MessageBox.Show("Failed to open database copy: " + exception.Message, "Error opening database", MessageBoxButtons.OK, MessageBoxIcon.Critical);
+          MessageBox.Show("Failed to open database copy: " + exception.Message, "Error opening database", MessageBoxButtons.OK, MessageBoxIcon.Error);
           FrmMain.fmain.AddToListboxAndScroll("Failed to open database copy: " + exception.Message);
           MyProject.Forms.FrmMain.hasError = true;
 
@@ -1025,7 +1025,7 @@ if (Convert.ToString(this.ListView1.SelectedItems[0].Tag).Contains("3rdParty"))
       {
         if (!this.ManualStartProfiles.TryGetValue(appName.ToLower(), out ss))
           return;
-        new Thread((ThreadStart) ([SpecialName] () => RunCommand.Run_debug_tool(ss))).Start();
+        new Thread((ThreadStart) (() => RunCommand.Run_debug_tool(ss))).Start();
         Log.WriteToLog("Manual game launch detected: " + displayName + " (" + appName + ")");
         Log.WriteToLog(displayName + ": Super Sampling @ " + ss);
         if (Globals.dbg)
@@ -1411,7 +1411,7 @@ if (Convert.ToString(this.ListView1.SelectedItems[0].Tag).Contains("hidden"))
     {
       if (String.Equals(MyProject.Forms.FrmMain.steamvr, "", StringComparison.OrdinalIgnoreCase))
       {
-        MessageBox.Show("Could not locate Steam VR path", "Error", MessageBoxButtons.OK, MessageBoxIcon.Critical);
+        MessageBox.Show("Could not locate Steam VR path", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
       }
       else
       {
@@ -1551,7 +1551,7 @@ if (Convert.ToString(this.ListView1.SelectedItems[0].Tag).Contains("hidden"))
 
           Exception exception = ex;
           Log.WriteToLog("Failed to create database copy: " + exception.Message);
-          MessageBox.Show("Failed to create database copy: " + exception.Message, "Error copying database", MessageBoxButtons.OK, MessageBoxIcon.Critical);
+          MessageBox.Show("Failed to create database copy: " + exception.Message, "Error copying database", MessageBoxButtons.OK, MessageBoxIcon.Error);
           FrmMain.fmain.AddToListboxAndScroll("Failed to create database copy: " + exception.Message);
           MyProject.Forms.FrmMain.hasError = true;
 
