@@ -1,36 +1,84 @@
 using System;
 using System.Collections.Generic;
 using OculusTrayTool.My;
+using SharpDX.DirectInput;
+using System.Linq;
+using OculusTrayTool.Forms;
 
 namespace OculusTrayTool
 {
   internal sealed class GetControllers
   {
     public static Dictionary<string, Guid> joysticks = new Dictionary<string, Guid>();
-    private static object joystickGuid = (object) Guid.Empty;
+    private static DirectInput directInput = new DirectInput();
     public static bool ControllersFound = false;
     public static string selectedDevice;
-    public static object joy; 
+    public static Joystick joy; 
     public static bool joyAquired = false;
 
     public static void GetAllControllers()
     {
-        Log.WriteToLog("GetAllControllers: Functionality disabled due to missing SharpDX.dll dependency.");
-        ControllersFound = false;
+        try 
+        {
+            joysticks.Clear();
+            var devices = directInput.GetDevices(DeviceClass.GameControl, DeviceEnumerationFlags.AttachedOnly);
+            
+            foreach (var deviceInstance in devices)
+            {
+                if (!joysticks.ContainsKey(deviceInstance.InstanceName))
+                {
+                    joysticks.Add(deviceInstance.InstanceName, deviceInstance.InstanceGuid);
+                }
+            }
+
+            if (joysticks.Count > 0)
+            {
+                ControllersFound = true;
+                Log.WriteToLog("Found " + joysticks.Count + " controllers");
+            }
+            else
+            {
+                ControllersFound = false;
+                Log.WriteToLog("No controllers found");
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.WriteToLog("Error enumerating controllers: " + ex.Message);
+            ControllersFound = false;
+        }
     }
 
     public static void SelectController()
     {
+        try
+        {
+            if (string.IsNullOrEmpty(selectedDevice) || !joysticks.ContainsKey(selectedDevice)) return;
+
+            joy = new Joystick(directInput, joysticks[selectedDevice]);
+            joy.Acquire();
+            joyAquired = true;
+        }
+        catch (Exception ex)
+        {
+            Log.WriteToLog("Error acquiring controller: " + ex.Message);
+            joyAquired = false;
+        }
     }
 
     public static void CaptureSelectedButton()
     {
-         Log.WriteToLog("CaptureSelectedButton: Functionality disabled due to missing SharpDX.dll dependency.");
+         // Stub: polling logic would go here, usually run in a timer or separate thread
+         // For now, we just ensure the device is acquired
+         if (!joyAquired && !string.IsNullOrEmpty(selectedDevice))
+         {
+             SelectController();
+         }
     }
 
     public static void CaptureButtonPushToTalk()
     {
-         Log.WriteToLog("CaptureButtonPushToTalk: Functionality disabled due to missing SharpDX.dll dependency.");
+         // Stub: similar to above
     }
   }
 }
