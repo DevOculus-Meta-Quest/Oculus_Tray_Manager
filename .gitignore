@@ -14,6 +14,7 @@
 
 # TEMP FOLDERS
 Functions/
+*build_*
 
 # Build results
 [Dd]ebug/
