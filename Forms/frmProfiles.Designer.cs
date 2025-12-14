@@ -577,7 +577,7 @@ protected override void Dispose(bool disposing)
       this.Controls.Add(this.Button2);
       this.Controls.Add(this.ListView1);
       this.FormBorderStyle = FormBorderStyle.FixedSingle;
-      this.Icon = (Icon) resources.GetObject("$this.Icon");
+
       this.KeyPreview = true;
       this.MinimumSize = new Size(946, 613);
       this.Name = "frmProfiles";
