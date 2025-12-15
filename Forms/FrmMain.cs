@@ -756,7 +756,7 @@ namespace MetaQuestTrayTool.Forms
               Log.WriteToLog("hasError=" + this.hasError.ToString());
             MyProject.Forms.frmLoading.Label2.Text = "Not Ready (Error)";
             MyProject.Forms.frmLoading.Label2.Refresh();
-            this.NotificationTimer.Interval = 1500;
+            this.NotificationTimer.Interval = 8000;
             this.NotificationTimer.Start();
             Log.WriteToLog("Startup Complete");
           }
@@ -766,7 +766,7 @@ namespace MetaQuestTrayTool.Forms
               Log.WriteToLog("hasWarning=" + this.hasWarning.ToString());
             MyProject.Forms.frmLoading.Label2.Text = "Ready (Warnings)";
             MyProject.Forms.frmLoading.Label2.Refresh();
-            this.NotificationTimer.Interval = 3000;
+            this.NotificationTimer.Interval = 6000;
             this.NotificationTimer.Start();
             Log.WriteToLog("Startup Complete");
           }
@@ -776,7 +776,7 @@ namespace MetaQuestTrayTool.Forms
               Log.WriteToLog("No warnings or errors");
             MyProject.Forms.frmLoading.Label2.Text = "Ready";
             MyProject.Forms.frmLoading.Label2.Refresh();
-            this.NotificationTimer.Interval = 3000;
+            this.NotificationTimer.Interval = 6000;
             this.NotificationTimer.Start();
             Log.WriteToLog("Startup Complete");
           }
