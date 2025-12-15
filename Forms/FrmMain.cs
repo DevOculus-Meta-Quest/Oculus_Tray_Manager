@@ -1184,8 +1184,17 @@ namespace MetaQuestTrayTool.Forms
     {
         StartOVR();
     }
-    private void ToolStripMenuItem1_Click(object sender, EventArgs e) { }
-    private void ToolStripMenuItem2_Click(object sender, EventArgs e) { }
+    private void ToolStripMenuItem1_Click(object sender, EventArgs e)
+    {
+        Application.Exit();
+    }
+    private void ToolStripMenuItem2_Click(object sender, EventArgs e)
+    {
+        this.Show();
+        this.WindowState = FormWindowState.Normal;
+        this.ShowInTaskbar = true;
+        this.Activate();
+    }
     private void ButtonStopOVR_Click(object sender, EventArgs e)
     {
         StopOVR();
@@ -1226,7 +1235,10 @@ namespace MetaQuestTrayTool.Forms
         StartOVR();
     }
     private void ToolStripMenuItem4_Click(object sender, EventArgs e) { }
-    private void DotNetBarTabcontrol1_SelectedIndexChanged(object sender, EventArgs e) { }
+    private void DotNetBarTabcontrol1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        // Handle Tab selection if needed
+    }
     private void BtnVoice_Click(object sender, EventArgs e)
     {
         new frmVoiceSettings().ShowDialog();
@@ -1241,7 +1253,8 @@ namespace MetaQuestTrayTool.Forms
     private void ComboUSBsusp_SelectedIndexChanged(object sender, EventArgs e) { }
         private void ComboPowerPlan_SelectedIndexChanged(object sender, EventArgs e) 
     { 
-
+        if (this.ComboPowerPlan.SelectedIndex == -1) return;
+        // Logic for power plan change if needed
     }
     private void CheckMinimizeOnX_CheckedChanged(object sender, EventArgs e)
     {
