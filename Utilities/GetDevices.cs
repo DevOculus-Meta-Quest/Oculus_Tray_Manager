@@ -18,22 +18,23 @@ namespace MetaQuestTrayTool
     public static int AudioDevCount = 0;
     public static int MicdevCount = 0;
 
-    public static void GetAllAudioDevices()
+    public static void GetAllAudioDevices(FrmSetFallback form = null)
     {
+      FrmSetFallback gui = form ?? MyProject.Forms.FrmSetFallback;
       try
       {
         Log.WriteToLog("Getting list of available audio devices");
         GetDevices.AudioDevices = GetDevices.devenum.EnumerateAudioEndPoints(EDataFlow.eRender, DEVICE_STATE.DEVICE_STATE_ACTIVE);
         GetDevices.AudioDevCount = GetDevices.AudioDevices.Count;
-        MyProject.Forms.FrmSetFallback.ComboAudioFallback.DataSource = (object) null;
-        MyProject.Forms.FrmSetFallback.ComboAudioFallbackSource.Clear();
-        MyProject.Forms.FrmSetFallback.ComboAudioFallback.Items.Clear();
-        MyProject.Forms.FrmSetFallback.ComboCommFallback.DataSource = (object) null;
-        MyProject.Forms.FrmSetFallback.ComboCommFallback.Items.Clear();
-        MyProject.Forms.FrmSetFallback.ComboBox4.DataSource = (object) null;
-        MyProject.Forms.FrmSetFallback.ComboBox4.Items.Clear();
-        MyProject.Forms.FrmSetFallback.ComboBox6.DataSource = (object) null;
-        MyProject.Forms.FrmSetFallback.ComboBox6.Items.Clear();
+        gui.ComboAudioFallback.DataSource = (object) null;
+        gui.ComboAudioFallbackSource.Clear();
+        gui.ComboAudioFallback.Items.Clear();
+        gui.ComboCommFallback.DataSource = (object) null;
+        gui.ComboCommFallback.Items.Clear();
+        gui.ComboBox4.DataSource = (object) null;
+        gui.ComboBox4.Items.Clear();
+        gui.ComboBox6.DataSource = (object) null;
+        gui.ComboBox6.Items.Clear();
         if (GetDevices.AudioDevices.Count > 0)
         {
           int num = checked (GetDevices.AudioDevices.Count - 1);
@@ -43,27 +44,27 @@ namespace MetaQuestTrayTool
             if (GetDevices.AudioDevices[index].Properties[checked (GetDevices.AudioDevices[index].Properties.Count - 3)].Value.ToString().ToLower().Contains("rift"))
             {
               MySettingsProperty.Settings.RiftAudioGuid = GetDevices.AudioDevices[index].ID.ToString();
-              MySettingsProperty.Settings.Save();
+             MySettingsProperty.Settings.Save();
               Log.WriteToLog("Rift Audio ID: " + GetDevices.AudioDevices[index].ID.ToString().Replace("{", "[").Replace("}", "]"));
             }
-            MyProject.Forms.FrmSetFallback.ComboAudioFallbackSource.Add(GetDevices.AudioDevices[index].ID.ToString(), GetDevices.AudioDevices[index].Properties[checked (GetDevices.AudioDevices[index].Properties.Count - 3)].Value.ToString());
+            gui.ComboAudioFallbackSource.Add(GetDevices.AudioDevices[index].ID.ToString(), GetDevices.AudioDevices[index].Properties[checked (GetDevices.AudioDevices[index].Properties.Count - 3)].Value.ToString());
             checked { ++index; }
           }
           if (GetDevices.AudioDevices.Count > 1)
           {
-            MyProject.Forms.FrmSetFallback.ComboAudioFallbackSource.Add("1", "Use current default");
-            MyProject.Forms.FrmSetFallback.ComboAudioFallback.DataSource = (object) new BindingSource((object) MyProject.Forms.FrmSetFallback.ComboAudioFallbackSource, (string) null);
-            MyProject.Forms.FrmSetFallback.ComboAudioFallback.DisplayMember = "Value";
-            MyProject.Forms.FrmSetFallback.ComboAudioFallback.ValueMember = "Key";
-            MyProject.Forms.FrmSetFallback.ComboCommFallback.DataSource = (object) new BindingSource((object) MyProject.Forms.FrmSetFallback.ComboAudioFallbackSource, (string) null);
-            MyProject.Forms.FrmSetFallback.ComboCommFallback.DisplayMember = "Value";
-            MyProject.Forms.FrmSetFallback.ComboCommFallback.ValueMember = "Key";
-            MyProject.Forms.FrmSetFallback.ComboBox4.DataSource = (object) new BindingSource((object) MyProject.Forms.FrmSetFallback.ComboAudioFallbackSource, (string) null);
-            MyProject.Forms.FrmSetFallback.ComboBox4.DisplayMember = "Value";
-            MyProject.Forms.FrmSetFallback.ComboBox4.ValueMember = "Key";
-            MyProject.Forms.FrmSetFallback.ComboBox6.DataSource = (object) new BindingSource((object) MyProject.Forms.FrmSetFallback.ComboAudioFallbackSource, (string) null);
-            MyProject.Forms.FrmSetFallback.ComboBox6.DisplayMember = "Value";
-            MyProject.Forms.FrmSetFallback.ComboBox6.ValueMember = "Key";
+            gui.ComboAudioFallbackSource.Add("1", "Use current default");
+            gui.ComboAudioFallback.DataSource = (object) new BindingSource((object) gui.ComboAudioFallbackSource, (string) null);
+            gui.ComboAudioFallback.DisplayMember = "Value";
+            gui.ComboAudioFallback.ValueMember = "Key";
+            gui.ComboCommFallback.DataSource = (object) new BindingSource((object) gui.ComboAudioFallbackSource, (string) null);
+            gui.ComboCommFallback.DisplayMember = "Value";
+            gui.ComboCommFallback.ValueMember = "Key";
+            gui.ComboBox4.DataSource = (object) new BindingSource((object) gui.ComboAudioFallbackSource, (string) null);
+            gui.ComboBox4.DisplayMember = "Value";
+            gui.ComboBox4.ValueMember = "Key";
+            gui.ComboBox6.DataSource = (object) new BindingSource((object) gui.ComboAudioFallbackSource, (string) null);
+            gui.ComboBox6.DisplayMember = "Value";
+            gui.ComboBox6.ValueMember = "Key";
           }
           else
           {
@@ -95,22 +96,24 @@ namespace MetaQuestTrayTool
       }
     }
 
-    public static void GetAllMicDevices()
+    public static void GetAllMicDevices(FrmSetFallback form = null)
     {
+      FrmSetFallback gui = form ?? MyProject.Forms.FrmSetFallback;
       try
       {
         Log.WriteToLog("Getting list of available microphone devices");
         GetDevices.MicDevices = GetDevices.devenum.EnumerateAudioEndPoints(EDataFlow.eCapture, DEVICE_STATE.DEVICE_STATE_ACTIVE);
         GetDevices.MicdevCount = GetDevices.MicDevices.Count;
-        MyProject.Forms.FrmSetFallback.ComboMicFallback.DataSource = (object) null;
-        MyProject.Forms.FrmSetFallback.ComboMicFallbackSource.Clear();
-        MyProject.Forms.FrmSetFallback.ComboMicFallback.Items.Clear();
-        MyProject.Forms.FrmSetFallback.ComboCommMicFallback.DataSource = (object) null;
-        MyProject.Forms.FrmSetFallback.ComboCommMicFallback.Items.Clear();
-        MyProject.Forms.FrmSetFallback.ComboBox3.DataSource = (object) null;
-        MyProject.Forms.FrmSetFallback.ComboBox3.Items.Clear();
-        MyProject.Forms.FrmSetFallback.ComboBox5.DataSource = (object) null;
-        MyProject.Forms.FrmSetFallback.ComboBox5.Items.Clear();
+        GetDevices.MicdevCount = GetDevices.MicDevices.Count;
+        gui.ComboMicFallback.DataSource = (object) null;
+        gui.ComboMicFallbackSource.Clear();
+        gui.ComboMicFallback.Items.Clear();
+        gui.ComboCommMicFallback.DataSource = (object) null;
+        gui.ComboCommMicFallback.Items.Clear();
+        gui.ComboBox3.DataSource = (object) null;
+        gui.ComboBox3.Items.Clear();
+        gui.ComboBox5.DataSource = (object) null;
+        gui.ComboBox5.Items.Clear();
         if (GetDevices.MicDevices.Count > 0)
         {
           int num = checked (GetDevices.MicDevices.Count - 1);
@@ -123,7 +126,7 @@ namespace MetaQuestTrayTool
               MySettingsProperty.Settings.Save();
               Log.WriteToLog("Rift Microphone ID: " + GetDevices.MicDevices[index].ID.ToString().Replace("{", "[").Replace("}", "]"));
             }
-            MyProject.Forms.FrmSetFallback.ComboMicFallbackSource.Add(GetDevices.MicDevices[index].ID.ToString(), GetDevices.MicDevices[index].Properties[checked (GetDevices.MicDevices[index].Properties.Count - 3)].Value.ToString());
+            gui.ComboMicFallbackSource.Add(GetDevices.MicDevices[index].ID.ToString(), GetDevices.MicDevices[index].Properties[checked (GetDevices.MicDevices[index].Properties.Count - 3)].Value.ToString());
             checked { ++index; }
           }
           Log.WriteToLog("Found " + Convert.ToString(checked (GetDevices.MicDevices.Count - 1)) + " non-Rift input devices");
@@ -145,19 +148,19 @@ namespace MetaQuestTrayTool
         }
         if (GetDevices.MicDevices.Count > 1)
         {
-          MyProject.Forms.FrmSetFallback.ComboMicFallbackSource.Add("1", "Use current default");
-          MyProject.Forms.FrmSetFallback.ComboMicFallback.DataSource = (object) new BindingSource((object) MyProject.Forms.FrmSetFallback.ComboMicFallbackSource, (string) null);
-          MyProject.Forms.FrmSetFallback.ComboMicFallback.DisplayMember = "Value";
-          MyProject.Forms.FrmSetFallback.ComboMicFallback.ValueMember = "Key";
-          MyProject.Forms.FrmSetFallback.ComboCommMicFallback.DataSource = (object) new BindingSource((object) MyProject.Forms.FrmSetFallback.ComboMicFallbackSource, (string) null);
-          MyProject.Forms.FrmSetFallback.ComboCommMicFallback.DisplayMember = "Value";
-          MyProject.Forms.FrmSetFallback.ComboCommMicFallback.ValueMember = "Key";
-          MyProject.Forms.FrmSetFallback.ComboBox3.DataSource = (object) new BindingSource((object) MyProject.Forms.FrmSetFallback.ComboMicFallbackSource, (string) null);
-          MyProject.Forms.FrmSetFallback.ComboBox3.DisplayMember = "Value";
-          MyProject.Forms.FrmSetFallback.ComboBox3.ValueMember = "Key";
-          MyProject.Forms.FrmSetFallback.ComboBox5.DataSource = (object) new BindingSource((object) MyProject.Forms.FrmSetFallback.ComboMicFallbackSource, (string) null);
-          MyProject.Forms.FrmSetFallback.ComboBox5.DisplayMember = "Value";
-          MyProject.Forms.FrmSetFallback.ComboBox5.ValueMember = "Key";
+          gui.ComboMicFallbackSource.Add("1", "Use current default");
+          gui.ComboMicFallback.DataSource = (object) new BindingSource((object) gui.ComboMicFallbackSource, (string) null);
+          gui.ComboMicFallback.DisplayMember = "Value";
+          gui.ComboMicFallback.ValueMember = "Key";
+          gui.ComboCommMicFallback.DataSource = (object) new BindingSource((object) gui.ComboMicFallbackSource, (string) null);
+          gui.ComboCommMicFallback.DisplayMember = "Value";
+          gui.ComboCommMicFallback.ValueMember = "Key";
+          gui.ComboBox3.DataSource = (object) new BindingSource((object) gui.ComboMicFallbackSource, (string) null);
+          gui.ComboBox3.DisplayMember = "Value";
+          gui.ComboBox3.ValueMember = "Key";
+          gui.ComboBox5.DataSource = (object) new BindingSource((object) gui.ComboMicFallbackSource, (string) null);
+          gui.ComboBox5.DisplayMember = "Value";
+          gui.ComboBox5.ValueMember = "Key";
         }
         else
         {

@@ -230,8 +230,8 @@ namespace MetaQuestTrayTool.Forms
 
     private void SetFallback_Load(object sender, EventArgs e)
     {
-      GetDevices.GetAllAudioDevices();
-      GetDevices.GetAllMicDevices();
+      GetDevices.GetAllAudioDevices(this);
+      GetDevices.GetAllMicDevices(this);
       GetConfig.IsReading = true;
       this.ComboBox1.SelectedIndex = MySettingsProperty.Settings.SetRiftAudioDefault;
       this.ComboBox2.SelectedIndex = MySettingsProperty.Settings.SetRiftMicDefault;
@@ -277,8 +277,8 @@ namespace MetaQuestTrayTool.Forms
       MySettingsProperty.Settings.SetRiftMicDefault = 0;
       MySettingsProperty.Settings.SetRiftAudioDefault = 0;
       MySettingsProperty.Settings.Save();
-      GetDevices.GetAllAudioDevices();
-      GetDevices.GetAllMicDevices();
+      GetDevices.GetAllAudioDevices(this);
+      GetDevices.GetAllMicDevices(this);
       this.Cursor = Cursors.Default;
     }
 
