@@ -67,9 +67,19 @@ namespace MetaQuestTrayTool
             Log.WriteToLog("Update found! Version " + str2.Trim());
             FrmMain.fmain.AddToListboxAndScroll("Update found! Version " + str2.Trim());
             FrmMain.fmain.UpdateTabPage();
-            FrmMain.fmain.ShowUpdateToast();
-            if (CheckUpdate.manualCheck)
-              FrmMain.fmain.DotNetBarTabcontrol1.SelectedIndex = 6;
+            if (manual)
+            {
+               DialogResult result = MessageBox.Show("Update found! Version " + str2 + "\n\nDo you want to go to the download page?", "Update Found", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+               if (result == DialogResult.Yes)
+               {
+                   FrmMain.fmain.DotNetBarTabcontrol1.SelectedIndex = 6;
+               }
+            }
+            else
+            {
+               FrmMain.fmain.ShowUpdateToast();
+            }
+
             FrmMain.fmain.LabelVer.Text = "New version: " + str2;
             CheckUpdate.updateFound = true;
             Application.UseWaitCursor = false;
