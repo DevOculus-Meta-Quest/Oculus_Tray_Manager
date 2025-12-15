@@ -1215,7 +1215,11 @@ namespace MetaQuestTrayTool.Forms
     private void Button4_Click(object sender, EventArgs e) { }
     private void CheckLocalDebug_CheckedChanged(object sender, EventArgs e) { }
     private void CheckStartWatcher_CheckedChanged(object sender, EventArgs e) { }
-    private void Button1_Click(object sender, EventArgs e) { }
+    private void Button1_Click(object sender, EventArgs e)
+    {
+        Log.WriteToLog("Button1 (Check for updates) clicked");
+        CheckUpdate.CheckForUpdate(true);
+    }
     private void Button5_Click(object sender, EventArgs e) { }
     private void CheckSensorPower_CheckedChanged(object sender, EventArgs e) { }
     private void ComboPowerPlanExit_SelectedIndexChanged(object sender, EventArgs e) { }
@@ -1235,6 +1239,7 @@ namespace MetaQuestTrayTool.Forms
       }
     }
     private void CheckBoxCheckForUpdates_CheckedChanged(object sender, EventArgs e) { }
+
     private void Button2_Click(object sender, EventArgs e) { }
     private void ComboHomless_SelectedIndexChanged(object sender, EventArgs e) { }
     private void BtnHomless_Click(object sender, EventArgs e)
