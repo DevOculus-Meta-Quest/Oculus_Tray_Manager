@@ -50,7 +50,6 @@ protected override void Dispose(bool disposing)
             this.OpenLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.PictureBox1 = new System.Windows.Forms.PictureBox();
-            this.PictureBox2 = new System.Windows.Forms.PictureBox();
             this.ComboSSstart = new System.Windows.Forms.ComboBox();
             this.ComboBox1 = new System.Windows.Forms.ComboBox();
             this.Label1 = new System.Windows.Forms.Label();
@@ -186,6 +185,11 @@ protected override void Dispose(bool disposing)
             this.Button10 = new System.Windows.Forms.Button();
             this.Label10 = new System.Windows.Forms.Label();
             this.TabPage6 = new System.Windows.Forms.TabPage();
+            this.TabPageAbout = new System.Windows.Forms.TabPage();
+            this.LabelAboutTitle = new System.Windows.Forms.Label();
+            this.LabelAboutVersion = new System.Windows.Forms.Label();
+            this.LabelAboutAuthor = new System.Windows.Forms.Label();
+            this.LabelAboutCredits = new System.Windows.Forms.Label();
             this.GroupBox9 = new System.Windows.Forms.GroupBox();
             this.LabelDownloadStatus = new System.Windows.Forms.Label();
             this.LabelVer = new System.Windows.Forms.Label();
@@ -203,7 +207,7 @@ protected override void Dispose(bool disposing)
             this.ContextMenuStrip1.SuspendLayout();
             this.ContextMenuStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBox2)).BeginInit();
+
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox6)).BeginInit();
@@ -392,20 +396,7 @@ protected override void Dispose(bool disposing)
             this.PictureBox1.TabStop = false;
             this.ToolTip.SetToolTip(this.PictureBox1, "Donate to the project");
             this.PictureBox1.Click += new System.EventHandler(this.PictureBox1_Click);
-            // 
-            // PictureBox2
-            // 
-            this.PictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.PictureBox2.BackColor = System.Drawing.Color.Transparent;
-            this.PictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.PictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("PictureBox2.Image")));
-            this.PictureBox2.Location = new System.Drawing.Point(58, 405);
-            this.PictureBox2.Name = "PictureBox2";
-            this.PictureBox2.Size = new System.Drawing.Size(19, 20);
-            this.PictureBox2.TabIndex = 32;
-            this.PictureBox2.TabStop = false;
-            this.ToolTip.SetToolTip(this.PictureBox2, "About");
-            this.PictureBox2.Click += new System.EventHandler(this.PictureBox2_Click);
+
             // 
             // ComboSSstart
             // 
@@ -957,6 +948,7 @@ protected override void Dispose(bool disposing)
             this.DotNetBarTabcontrol1.Controls.Add(this.TabPage7);
             this.DotNetBarTabcontrol1.Controls.Add(this.TabPage8);
             this.DotNetBarTabcontrol1.Controls.Add(this.TabPage6);
+            this.DotNetBarTabcontrol1.Controls.Add(this.TabPageAbout);
             this.DotNetBarTabcontrol1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DotNetBarTabcontrol1.ImageList = this.ImageList1;
             this.DotNetBarTabcontrol1.ItemSize = new System.Drawing.Size(43, 135);
@@ -2371,6 +2363,61 @@ protected override void Dispose(bool disposing)
             this.TabPage6.TabIndex = 5;
             this.TabPage6.Text = "Update Found!";
             // 
+            // TabPageAbout
+            // 
+            this.TabPageAbout.BackColor = System.Drawing.Color.White;
+            this.TabPageAbout.Controls.Add(this.LabelAboutCredits);
+            this.TabPageAbout.Controls.Add(this.LabelAboutAuthor);
+            this.TabPageAbout.Controls.Add(this.LabelAboutVersion);
+            this.TabPageAbout.Controls.Add(this.LabelAboutTitle);
+            this.TabPageAbout.Location = new System.Drawing.Point(139, 4);
+            this.TabPageAbout.Name = "TabPageAbout";
+            this.TabPageAbout.Padding = new System.Windows.Forms.Padding(3);
+            this.TabPageAbout.Size = new System.Drawing.Size(365, 425);
+            this.TabPageAbout.TabIndex = 8;
+            this.TabPageAbout.Text = "About";
+            // 
+            // LabelAboutTitle
+            // 
+            this.LabelAboutTitle.AutoSize = true;
+            this.LabelAboutTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelAboutTitle.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.LabelAboutTitle.Location = new System.Drawing.Point(20, 20);
+            this.LabelAboutTitle.Name = "LabelAboutTitle";
+            this.LabelAboutTitle.Size = new System.Drawing.Size(206, 24);
+            this.LabelAboutTitle.TabIndex = 0;
+            this.LabelAboutTitle.Text = "Meta Quest Tray Tool";
+            // 
+            // LabelAboutVersion
+            // 
+            this.LabelAboutVersion.AutoSize = true;
+            this.LabelAboutVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelAboutVersion.Location = new System.Drawing.Point(21, 60);
+            this.LabelAboutVersion.Name = "LabelAboutVersion";
+            this.LabelAboutVersion.Size = new System.Drawing.Size(54, 16);
+            this.LabelAboutVersion.TabIndex = 1;
+            this.LabelAboutVersion.Text = "Version";
+            // 
+            // LabelAboutAuthor
+            // 
+            this.LabelAboutAuthor.AutoSize = true;
+            this.LabelAboutAuthor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelAboutAuthor.Location = new System.Drawing.Point(21, 90);
+            this.LabelAboutAuthor.Name = "LabelAboutAuthor";
+            this.LabelAboutAuthor.Size = new System.Drawing.Size(188, 16);
+            this.LabelAboutAuthor.TabIndex = 2;
+            this.LabelAboutAuthor.Text = "Original Developer: ApolyonVR";
+            // 
+            // LabelAboutCredits
+            // 
+            this.LabelAboutCredits.AutoSize = true;
+            this.LabelAboutCredits.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelAboutCredits.Location = new System.Drawing.Point(21, 120);
+            this.LabelAboutCredits.Name = "LabelAboutCredits";
+            this.LabelAboutCredits.Size = new System.Drawing.Size(185, 16);
+            this.LabelAboutCredits.TabIndex = 3;
+            this.LabelAboutCredits.Text = "Maintained by: Eliminater74";
+            // 
             // GroupBox9
             // 
             this.GroupBox9.Controls.Add(this.LabelDownloadStatus);
@@ -2564,7 +2611,6 @@ protected override void Dispose(bool disposing)
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(508, 433);
-            this.Controls.Add(this.PictureBox2);
             this.Controls.Add(this.PictureBox1);
             this.Controls.Add(this.Label8);
             this.Controls.Add(this.DotNetBarTabcontrol1);
@@ -2580,7 +2626,7 @@ protected override void Dispose(bool disposing)
             this.ContextMenuStrip1.ResumeLayout(false);
             this.ContextMenuStrip2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBox2)).EndInit();
+
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox6)).EndInit();
@@ -2654,7 +2700,11 @@ protected override void Dispose(bool disposing)
     public ToolStripMenuItem OpenLogToolStripMenuItem;
     public ToolTip ToolTip;
     public PictureBox PictureBox1;
-    public PictureBox PictureBox2;
+    public TabPage TabPageAbout;
+    public Label LabelAboutTitle;
+    public Label LabelAboutVersion;
+    public Label LabelAboutAuthor;
+    public Label LabelAboutCredits;
     public ComboBox ComboSSstart;
     public ComboBox ComboBox1;
     public Label Label1;

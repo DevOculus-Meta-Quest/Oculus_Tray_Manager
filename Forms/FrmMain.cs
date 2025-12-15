@@ -264,7 +264,9 @@ namespace MetaQuestTrayTool.Forms
         FrmMain.fmain = this;
         FrmMain.lockObject = RuntimeHelpers.GetObjectValue(new object());
         this.rs.FindAllControls((Control) this);
-        string[] commandLineArgs = Environment.GetCommandLineArgs();
+    if (this.LabelAboutVersion != null)
+        this.LabelAboutVersion.Text = "Version: " + Application.ProductVersion;
+    string[] commandLineArgs = Environment.GetCommandLineArgs();
         int index1 = 0;
         while (index1 < commandLineArgs.Length)
         {
@@ -1253,7 +1255,7 @@ namespace MetaQuestTrayTool.Forms
     private void ComboUSBsusp_SelectedIndexChanged(object sender, EventArgs e) { }
         private void ComboPowerPlan_SelectedIndexChanged(object sender, EventArgs e) 
     { 
-        if (this.ComboPowerPlan.SelectedIndex == -1) return;
+        if (this.ComboPowerPlanStart.SelectedIndex == -1) return;
         // Logic for power plan change if needed
     }
     private void CheckMinimizeOnX_CheckedChanged(object sender, EventArgs e)
@@ -1299,14 +1301,7 @@ namespace MetaQuestTrayTool.Forms
     private void ComboApplyPlan_SelectedIndexChanged(object sender, EventArgs e) { }
     private void Button9_Click(object sender, EventArgs e) { }
     private void Button8_Click(object sender, EventArgs e) { }
-    private void PictureBox2_Click(object sender, EventArgs e)
-    {
-      using (frmAbout about = new frmAbout())
-      {
-         about.Label4.Text = Application.ProductVersion;
-         about.ShowDialog(this);
-      }
-    }
+
     private void CheckBoxCheckForUpdates_CheckedChanged(object sender, EventArgs e) { }
 
     private void Button2_Click(object sender, EventArgs e) { }
