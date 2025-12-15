@@ -1850,7 +1850,7 @@ namespace MetaQuestTrayTool.Forms
             ReplaceCombo("Encode Resolution", "ComboLinkResolution", new string[] { "0", "1832", "2048", "2352", "2784", "3648", "3664" }, "0"); 
 
             // 3. Encode Bitrate
-            // ReplaceCombo("Encode Bitrate", "ComboLinkBitrate", new string[] { "0", "100", "150", "200", "250", "300", "350", "400", "500" }, "0");
+            ReplaceCombo("Encode Bitrate", "ComboLinkBitrate", new string[] { "0", "100", "150", "200", "250", "300", "350", "400", "500" }, "0");
 
             // 4. Encode Dynamic Bitrate
             ReplaceCombo("Encode Dynamic Bitrate", "ComboLinkDynamicBitrate", new string[] { "Default", "Enabled", "Disabled" }, "Default");
