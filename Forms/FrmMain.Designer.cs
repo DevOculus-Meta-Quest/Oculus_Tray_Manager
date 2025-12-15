@@ -384,7 +384,7 @@ protected override void Dispose(bool disposing)
             this.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.PictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("PictureBox1.Image")));
-            this.PictureBox1.Location = new System.Drawing.Point(30, 401);
+            this.PictureBox1.Location = new System.Drawing.Point(18, 365);
             this.PictureBox1.Name = "PictureBox1";
             this.PictureBox1.Size = new System.Drawing.Size(99, 31);
             this.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -399,7 +399,7 @@ protected override void Dispose(bool disposing)
             this.PictureBox2.BackColor = System.Drawing.Color.Transparent;
             this.PictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.PictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("PictureBox2.Image")));
-            this.PictureBox2.Location = new System.Drawing.Point(5, 408);
+            this.PictureBox2.Location = new System.Drawing.Point(58, 405);
             this.PictureBox2.Name = "PictureBox2";
             this.PictureBox2.Size = new System.Drawing.Size(19, 20);
             this.PictureBox2.TabIndex = 32;

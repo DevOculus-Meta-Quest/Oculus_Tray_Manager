@@ -50,7 +50,11 @@ namespace MetaQuestTrayTool.Forms
 
     private void readme_Load(object sender, EventArgs e)
     {
-      this.Label4.Text = Application.ProductVersion;
+      this.Label4.Text = "Version: " + Application.ProductVersion;
+      this.Label2.Text = "Original Author: ApolyonVR\nNew Author: Eliminater74\nContributors: [Reserved]";
+      this.Label5.Visible = false; // Hide old labels avoiding overlap
+      this.Label6.Visible = false;
+      this.Label2.AutoSize = true; 
       this.PictureBox1.Focus();
     }
 

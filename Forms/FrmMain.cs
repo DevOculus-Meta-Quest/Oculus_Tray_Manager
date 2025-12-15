@@ -1092,6 +1092,11 @@ namespace MetaQuestTrayTool.Forms
 
     private void Form1_Resize(object sender, EventArgs e)
     {
+        if (this.WindowState == FormWindowState.Minimized)
+        {
+            this.Hide();
+            this.ShowInTaskbar = false;
+        }
     }
 
     private string GetSteamPath() { return ""; }
@@ -1143,8 +1148,38 @@ namespace MetaQuestTrayTool.Forms
     private void EnableShowHomeMenu() { }
     private void DisableShowHomeMenu() { }
     
-    private void CheckStartWindows_CheckedChanged(object sender, EventArgs e) { }
-    private void NotifyIcon1_DoubleClick(object sender, EventArgs e) { }
+    private void CheckStartWindows_CheckedChanged(object sender, EventArgs e)
+    {
+        if (GetConfig.IsReading) return;
+        try
+        {
+            string keyName = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
+            using (RegistryKey key = Registry.CurrentUser.OpenSubKey(keyName, true))
+            {
+                if (this.CheckStartWithWindows.Checked)
+                {
+                    key.SetValue("MetaQuestTrayTool", Application.ExecutablePath);
+                    Log.WriteToLog("Added to Windows Startup");
+                }
+                else
+                {
+                    key.DeleteValue("MetaQuestTrayTool", false);
+                     Log.WriteToLog("Removed from Windows Startup");
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.WriteToLog("Error changing start with windows setting: " + ex.Message);
+        }
+    }
+    private void NotifyIcon1_DoubleClick(object sender, EventArgs e)
+    {
+        this.Show();
+        this.WindowState = FormWindowState.Normal;
+        this.ShowInTaskbar = true;
+        this.Activate();
+    }
     private void ButtonStartOVR_Click(object sender, EventArgs e)
     {
         StartOVR();
@@ -1165,7 +1200,12 @@ namespace MetaQuestTrayTool.Forms
         StartOVR();
     }
     private void CheckLaunchHomeTool_CheckedChanged(object sender, EventArgs e) { }
-    private void CheckCloseHome_CheckedChanged(object sender, EventArgs e) { }
+    private void CheckCloseHome_CheckedChanged(object sender, EventArgs e)
+    {
+        if (GetConfig.IsReading) return;
+        MySettingsProperty.Settings.CloseHomeOnExit = this.CheckCloseHome.Checked;
+        MySettingsProperty.Settings.Save();
+    }
     private void CheckBoxAltTab_CheckedChanged(object sender, EventArgs e) { }
     private void CheckRiftAudio_CheckedChanged(object sender, EventArgs e) { }
     private void OculusHomeWatcher_Tick(object sender, EventArgs e) { }
@@ -1203,15 +1243,31 @@ namespace MetaQuestTrayTool.Forms
     { 
 
     }
-    private void CheckMinimizeOnX_CheckedChanged(object sender, EventArgs e) { }
+    private void CheckMinimizeOnX_CheckedChanged(object sender, EventArgs e)
+    {
+        if (GetConfig.IsReading) return;
+        MySettingsProperty.Settings.CloseOnX = !this.CheckMinimizeOnX.Checked; 
+        MySettingsProperty.Settings.Save();
+        Log.WriteToLog("Setting CloseOnX saved: " + (!this.CheckMinimizeOnX.Checked));
+    }
     private void PictureBox1_Click(object sender, EventArgs e)
     {
       MyProject.Forms.frmDonate.ShowDialog();
     }
     private void TrackBar1_Scroll(object sender, EventArgs e) { }
     private void HometoTrayTimer_Tick(object sender, EventArgs e) { }
-    private void CheckSendHomeToTray_CheckedChanged(object sender, EventArgs e) { }
-    private void CheckSendHomeToTrayOnStart_CheckedChanged(object sender, EventArgs e) { }
+    private void CheckSendHomeToTray_CheckedChanged(object sender, EventArgs e)
+    {
+        if (GetConfig.IsReading) return;
+        MySettingsProperty.Settings.SendHomeToTray = this.CheckSendHomeToTray.Checked;
+        MySettingsProperty.Settings.Save();
+    }
+    private void CheckSendHomeToTrayOnStart_CheckedChanged(object sender, EventArgs e)
+    {
+        if (GetConfig.IsReading) return;
+        MySettingsProperty.Settings.SendHomeToTrayOnStart = this.CheckSendHomeToTrayOnStart.Checked;
+        MySettingsProperty.Settings.Save();
+    }
     private void Button4_Click(object sender, EventArgs e) { }
     private void CheckLocalDebug_CheckedChanged(object sender, EventArgs e) { }
     private void CheckStartWatcher_CheckedChanged(object sender, EventArgs e) { }
@@ -1289,7 +1345,13 @@ namespace MetaQuestTrayTool.Forms
     private void Button6_Click(object sender, EventArgs e) { }
     private void ComboBox8_SelectedIndexChanged(object sender, EventArgs e) { }
     private void ComboBox9_SelectedIndexChanged(object sender, EventArgs e) { }
-    private void CheckStartMin_CheckedChanged(object sender, EventArgs e) { }
+    private void CheckStartMin_CheckedChanged(object sender, EventArgs e)
+    {
+        if (GetConfig.IsReading) return;
+        MySettingsProperty.Settings.StartMinimized = this.CheckStartMin.Checked;
+        MySettingsProperty.Settings.Save();
+        Log.WriteToLog("Setting StartMinimized saved: " + this.CheckStartMin.Checked);
+    }
     private string GetCPUid() { return ""; }
 
     private string SplitToolTip(string tip)
@@ -1391,12 +1453,18 @@ namespace MetaQuestTrayTool.Forms
         }
     }
 
-        private void Form1_Shown(object sender, EventArgs e)
+    private void Form1_Shown(object sender, EventArgs e)
+    {
+        if (Globals.dbg)
+            Log.WriteToLog("Form1_Shown: Refreshing Power Plan Comboboxes");
+        
+        if (MetaQuestTrayTool.My.MySettings.Default.StartMinimized)
         {
-            if (Globals.dbg)
-                Log.WriteToLog("Form1_Shown: Refreshing Power Plan Comboboxes");
-             // Removed redundant call as it is called in Form1_Load
+            this.WindowState = FormWindowState.Minimized;
+            this.Hide();
+            this.ShowInTaskbar = false;
         }
+    }
 
     private bool _controlsReplaced = false;
 

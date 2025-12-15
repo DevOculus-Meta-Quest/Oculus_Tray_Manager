@@ -373,9 +373,7 @@
     <EmbeddedResource Include="Forms\frmLinkPresets.resx" />
     <EmbeddedResource Include="Forms\frmLoading.resx" />
     <EmbeddedResource Include="Forms\FrmMain.resx" />
-    <EmbeddedResource Include="Forms\FrmMain_Methods.resx">
-      <DependentUpon>FrmMain_Methods.cs</DependentUpon>
-    </EmbeddedResource>
+
     <EmbeddedResource Include="Forms\frmMicNotDefaultWarning.resx" />
     <EmbeddedResource Include="Forms\frmProcessing.resx" />
     <EmbeddedResource Include="Forms\frmProfiles.resx" />
@@ -389,6 +387,9 @@
     <EmbeddedResource Include="Forms\frmUpdateToast.resx" />
     <EmbeddedResource Include="Forms\frmVoiceSettings.resx" />
     <EmbeddedResource Include="Resources.resx" />
+    <EmbeddedResource Include="TextProgressBar.resx">
+      <DependentUpon>TextProgressBar.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="resources\readme.txt">
